@@ -1,0 +1,182 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;700&display=swap');
+
+:root {
+    --side-panel-bg: #eff4f5;
+    --side-panel-border: #cfd4d5;
+    --side-panel-selected: #dfe4e5;
+}
+
+body {
+    font-family: "Source Sans 3", sans-serif;
+}
+
+p {
+    max-width: 75ch;
+}
+
+/* Perhaps fix the exact responsiveness later? */
+@media (min-width: 1200px) {
+    .side-panel {
+        height: 100vh;
+        width: 25vw; /* 350px; */
+        position: fixed !important;
+
+        background: var(--side-panel-bg);
+
+        border-radius: 10px;
+
+        margin-right: 25%;
+        padding: none;
+
+        top: 0;
+        left: 0;
+    }
+
+    .content {
+        padding-left: 25vw;
+    }
+
+    .spacer {
+        width: 100%;
+        top: 5vh;
+        height: 90vh;
+
+        border-radius: 2px;
+        border-right-width: 3px;
+        border-right-style: solid;
+        border-right-color: var(--side-panel-border);
+
+        background-clip: content-box;
+
+        padding-right: 10px;
+
+        z-index: -1;
+
+        position: absolute;
+    }
+
+    .navigation-container a {
+        display: block;
+    }
+}
+
+@media (max-width: 1200px) {
+    .side-panel {
+        /* display: none; */
+        background: var(--side-panel-bg);
+        width: 100vw;
+
+        position: absolute;
+
+        border-radius: 10px;
+
+        top: 0;
+        left: 0;
+
+        margin: none;
+        padding-bottom: 50px;
+    }
+
+    .navigation-container a {
+        display: inline;
+
+        padding-left: 5%;
+        padding-right: 5%;
+    }
+}
+
+.panel-content {
+    margin-top: 40px;
+    margin-bottom: none;
+    margin-left: 40px;
+    margin-right: 40px;
+
+    height: 100%;
+    
+    display: flex;
+    align-content: flex-start;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.navigation-container {
+    /* margin-top: auto; */
+    align-self: flex-end;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.navigation-container a {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 15px;
+
+    padding-top: 3px;
+    padding-bottom: 3px;
+
+    color: black;
+    font-weight: bold;
+    font-size: ;
+    text-decoration: none;
+
+    font-size: 1.1em;
+}
+
+.navigation-container .selected {
+    background: var(--side-panel-selected);
+    border-radius: 5px;
+
+}
+
+.panel-content h1 {
+    font-size: 1.2em;
+}
+
+.panel-grid {
+    max-width: 100%;
+
+    display: grid;
+    grid-template-columns: 35px max-content;
+    grid-template-rows: 1.2em 1em 20px 20px;
+    column-gap: 10px;
+    row-gap: 0px;
+}
+
+.panel-grid .grid-pfp {
+    grid-column: 1;
+    grid-row: 2;
+
+    width: 35px;
+    height: 35px;
+
+    padding: none;
+    margin: none;
+}
+
+.panel-grid .grid-title {
+    grid-column: 2;
+    grid-row: 1;
+
+    padding: none;
+    margin: none;
+}
+
+.panel-grid .grid-email {
+    grid-column: 2;
+    grid-row: 2;
+    
+    padding: none;
+    margin: none;
+}
+
+.panel-grid .grid-icons {
+    grid-column: 2;
+    grid-row: 4;
+
+    margin: none;
+}
+
+.panel-grid .grid-icons a {
+    color: black;
+    padding-right: 5px;
+}
