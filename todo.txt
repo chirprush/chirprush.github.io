@@ -1,0 +1,13 @@
+Tasks:
+- Put the sidebar in one file and make it included in all other html files so I
+don't have to worry about changing every single file.
+- Figure out the whole pipeline for rendering articles and such. (Note: this probably goes in tandem with the above task)
+    - I probably want to use pandoc for converting markdown with latex (I decided that this would mesh better than solely just latex) to html
+    - A simple python script can be made to manage the articles?
+    - Probably we don't need to look into filters right now right surely
+        - In the case that eventually we do have to use filters, just use https://scorreia.com/software/panflute/
+          because flipping between Lua and Python probably doesn't make too much sense
+        - Although if things take too long to figure out/debug, just go with Lua idk
+- Probably use the libertine font for actual article writing since it's basically a signature
+    - https://github.com/iliakonnov/linlibertine (using the woff2 file)
+    - https://css-tricks.com/snippets/css/using-font-face-in-css/

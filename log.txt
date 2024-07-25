@@ -1,0 +1,7 @@
+Rendering article at 'articles/first-article'
+Command: pandoc -f markdown-smart+tex_math_single_backslash --standalone --mathjax --template=templates/template.html --metadata-file=articles/first-article/meta.yaml -o articles/first-article/index.html articles/first-article/article.md
+Return code: 0
+Stdout:
+
+Stderr:
+
