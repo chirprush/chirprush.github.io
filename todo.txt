@@ -11,3 +11,4 @@ don't have to worry about changing every single file.
 - Probably use the libertine font for actual article writing since it's basically a signature
     - https://github.com/iliakonnov/linlibertine (using the woff2 file)
     - https://css-tricks.com/snippets/css/using-font-face-in-css/
+- Fix the CSS and stuff because unfortunately the website is not responsive and doesn't look the greatest greatest
