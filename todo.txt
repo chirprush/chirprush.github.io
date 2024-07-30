@@ -1,18 +1,23 @@
 Tasks:
-- Put the sidebar in one file and make it included in all other html files so I
+- [X] Put the sidebar in one file and make it included in all other html files so I
 don't have to worry about changing every single file.
-- Figure out the whole pipeline for rendering articles and such. (Note: this probably goes in tandem with the above task)
+- [X] Figure out the whole pipeline for rendering articles and such. (Note: this probably goes in tandem with the above task)
     - I probably want to use pandoc for converting markdown with latex (I decided that this would mesh better than solely just latex) to html
     - A simple python script can be made to manage the articles?
     - Probably we don't need to look into filters right now right surely
         - In the case that eventually we do have to use filters, just use https://scorreia.com/software/panflute/
           because flipping between Lua and Python probably doesn't make too much sense
         - Although if things take too long to figure out/debug, just go with Lua idk
-- Probably use the libertine font for actual article writing since it's basically a signature
+- [ ] Probably use the libertine font for actual article writing since it's basically a signature
     - https://github.com/iliakonnov/linlibertine (using the woff2 file)
     - https://css-tricks.com/snippets/css/using-font-face-in-css/
     - Actually I might keep Source Sans because it is nice and fits the rest of the page
-- Fix the CSS and stuff because unfortunately the website is not responsive and doesn't look the greatest greatest
-- Get some better styling potentially for tags and such
-- Fix the main web pages (articles, tags, about me) and get integration working with render.py
-- Port all the things I've written and have fun :D
+- [X] Fix the CSS and stuff because unfortunately the website is not responsive and doesn't look the greatest greatest
+- [X] Check that this works on other browsers (chromium, safari if I can get like port forwarding or whatever it is working)
+- [X] Add box styling so that amsthm stuff from latex has a natural port
+- [X] Get some better styling potentially for tags and such
+- [X] Fix the main web pages (articles, tags, about me) and get integration working with render.py
+- [ ] Port all the things I've written and have fun :D
+- [ ] Set up Github Pages
+- [ ] Maybe download the Source Sans font locally so it doesn't take a long time to load? (wait shouldn't it cache though)
+- [ ] Probably cache a previous version of each article to quickly compare to so that we can skip rerendering something that hasn't changed

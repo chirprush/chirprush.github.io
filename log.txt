@@ -1,12 +1,12 @@
 Rendering article at 'articles/first-article'
-Command: pandoc -f markdown-smart+tex_math_single_backslash --standalone --toc --mathjax --template=templates/template.html --metadata-file=articles/first-article/meta.yaml -o articles/first-article/index.html articles/first-article/article.md
+Command: pandoc -f markdown-smart+tex_math_single_backslash --standalone --toc --mathjax --template=templates/article.html --metadata-file=articles/first-article/meta.yaml -o articles/first-article/index.html articles/first-article/article.md
 Return code: 0
 Stdout:
 
 Stderr:
 
 Rendering article at 'articles/gradient-ascent-eigenvectors'
-Command: pandoc -f markdown-smart+tex_math_single_backslash --standalone --toc --mathjax --template=templates/template.html --metadata-file=articles/gradient-ascent-eigenvectors/meta.yaml -o articles/gradient-ascent-eigenvectors/index.html articles/gradient-ascent-eigenvectors/article.md
+Command: pandoc -f markdown-smart+tex_math_single_backslash --standalone --toc --mathjax --template=templates/article.html --metadata-file=articles/gradient-ascent-eigenvectors/meta.yaml -o articles/gradient-ascent-eigenvectors/index.html articles/gradient-ascent-eigenvectors/article.md
 Return code: 0
 Stdout:
 

@@ -23,6 +23,10 @@ musings or just what I like about the grammar.
     \textrm{Sugar} \longrightarrow \textrm{Me} \longrightarrow \textrm{Writing}
 .\]
 
+<div class="side-box">
+**Fact.** For integers \( x, y \) such that \( x \equiv y \pmod{2^n} \), \( 2^n \mid x \oplus y \), where \( \oplus \) denotes bitwise XOR.
+</div>
+
 ## Conclusion
 
 No promises on when I write stuff; I'd like to ideally strike a balance between

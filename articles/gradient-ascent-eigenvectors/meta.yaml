@@ -1,6 +1,6 @@
 ---
 title: "Gradient Ascent Eigenvectors"
-tags: ["linear algebra", "gradient descent"]
+tags: ["linear-algebra", "gradient-descent"]
 publish-date: "May 13, 2024"
 description: |
   Finding real eigenvectors of an arbitrary matrix using geometric intuition and gradient ascent.

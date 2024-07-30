@@ -3,6 +3,7 @@
 import subprocess
 import yaml
 from pathlib import Path
+from dateutil import parser
 
 # TODO: Allow for specifying templates within the yaml file
 # (doesn't take long at all to implement; this is just a note)
@@ -24,11 +25,41 @@ class Article:
                 self.data = yaml.safe_load(stream)
 
                 self.name = self.data["title"]
+
+                # Useful for sorting based on time
+                self.epoch = parser.parse(self.data["publish-date"]).timestamp()
             except yaml.YAMLError as e:
                 raise ValueError("   Error in parsing yaml:\n\n" + str(e))
             except KeyError as e:
                 raise ValueError("   Title not listed for article")
 
+    def thumbnail(self):
+        # Ex.
+        # <div class="thumbnail" onclick="location.href='/articles/first-article/index.html';">
+        #     <h3>First Article</h3>
+        #     <div class="info-holder">
+        #         <span class="info-value"><b>Author:</b> Rushil Surti</span>
+        #         <span class="info-value"><b>Date:</b> July 24, 2024</span>
+        #         <span class="info-value"><b>Tags:</b>  <a href="/tags.html#meta"><span class="info-tag">meta</span></a>  <a href="/tags.html#website"><span class="info-tag">website</span></a> </span>
+        #     </div>
+        #     <p>The first (and hopefully not the last) article for this website, created mainly for testing purposes.</p>
+        # </div>
+        heading_tag = f"<h3>{self.name}</h3>"
+        description_tag = f"<p>{self.data['description'].strip()}</p>"
+
+        tags = " ".join(f'<a href="/tags.html#{tag}"><span class="info-tag">{tag}</span></a>' for tag in self.data["tags"])
+
+        info_tag = '<div class="info-holder">\n'
+
+        info_tag += f'        <span class="info-value"><b>Author:</b> Rushil</span>\n'
+        info_tag += f'        <span class="info-value"><b>Date:</b> {self.data["publish-date"]}</span>\n'
+        info_tag += f'        <span class="info-value"><b>Tags:</b> {tags}</span>\n'
+
+        info_tag += "    </div>"
+
+        thumbnail_tag = f"""<div class="thumbnail" onclick="location.href='{"/" + str(self.result)}';">\n    {heading_tag}\n    {info_tag}\n    {description_tag}\n</div>"""
+
+        return thumbnail_tag
 
     def render(self, log):
         # Tweaking the options to get the correct arrangement for Katex to actually render
@@ -39,7 +70,7 @@ class Article:
         # Yeah unfortunately even though we're using Katex to do the actual rendering,
         # if you use the katex flag instead of the mathjax flag, it won't work :(
         # Thank you pandoc, very cool
-        cmd = ["pandoc", "-f", "markdown-smart+tex_math_single_backslash", "--standalone", "--toc", "--mathjax", "--template=templates/template.html", "--metadata-file=" + str(self.metadata), "-o", str(self.result), str(self.article)]
+        cmd = ["pandoc", "-f", "markdown-smart+tex_math_single_backslash", "--standalone", "--toc", "--mathjax", "--template=templates/article.html", "--metadata-file=" + str(self.metadata), "-o", str(self.result), str(self.article)]
         print()
         print("   " + " ".join(cmd[:3]))
         print("   " + " ".join(cmd[3:]))
@@ -74,7 +105,7 @@ class Article:
 # things look I suppose
 
 articles_dir = Path("./articles")
-articles = [Article(d) for d in articles_dir.iterdir() if d.is_dir()]
+articles = []
 
 with open("log.txt", "w") as log:
     for d in articles_dir.iterdir():
@@ -85,6 +116,7 @@ with open("log.txt", "w") as log:
 
         try:
             article = Article(d)
+            articles.append(article)
         except ValueError as e:
             print(e)
             print("   Skipping..")
@@ -96,3 +128,52 @@ with open("log.txt", "w") as log:
         article.render(log)
 
         print()
+
+    print("Rendering index.html")
+
+    articles.sort(key = lambda a: a.epoch, reverse=True)
+
+    index_body = ""
+    for article in articles:
+        index_body += article.thumbnail()
+        index_body += "\n"
+
+    with open("templates/index.html") as ind:
+        index_template = ind.read()
+
+    with open("index.html", "w") as ind:
+        ind.write(index_template.format(body=index_body))
+
+    print("Finished rendering index.html")
+
+    print()
+
+    print("Rendering tags.html")
+
+    tagged_articles = {}
+
+    for article in articles:
+        for tag in article.data["tags"]:
+            if tag in tagged_articles:
+                tagged_articles[tag].append(article)
+            else:
+                tagged_articles[tag] = [article]
+
+    tags_body = ""
+
+    for tag in tagged_articles:
+        tags_body += f'<h2 id="{tag}">{tag}</h2>\n'
+
+        for article in tagged_articles[tag]:
+            tags_body += article.thumbnail()
+            tags_body += "\n"
+
+    with open("templates/tags.html") as tags:
+        tags_template = tags.read()
+
+    with open("tags.html", "w") as tags:
+        tags.write(tags_template.format(body=tags_body))
+
+    print("Finished rendering tags.html")
+    
+    print()
