@@ -21,28 +21,59 @@
     </head>
 
     <body>
-        <div id="main">
-            <div id="side-nav" class="side-panel">
-                <div class="panel-content">
-                    <div class="panel-grid">
-                        <img class="grid-pfp" src="/assets/images/pfp.svg"></img>
-                        <h1 class="grid-title">Rushil Surti</h1>
-                        <p class="grid-email">rush040507@gmail.com</p>
-                        <div class="grid-icons"><a href="https://www.github.com/chirprush/" target="_blank"><i class="fa-brands fa-github"></i></a> <a href="https://www.youtube.com/channel/UCSc-MTo8KGPDMLszD6jYjxA" target="_blank"><i class="fa-brands fa-youtube"></i></a></div>
-                    </div>
+        <div id="side-nav" class="side-panel">
+            <div class="panel-content">
+                <div class="panel-grid">
+                    <img class="grid-pfp" src="/assets/images/pfp.svg"></img>
+                    <h2 class="grid-title">Rushil Surti</h1>
+                    <p class="grid-email">rush040507@gmail.com</p>
+                    <div class="grid-icons"><a href="https://www.github.com/chirprush/" target="_blank"><i class="fa-brands fa-github"></i></a> <a href="https://www.youtube.com/channel/UCSc-MTo8KGPDMLszD6jYjxA" target="_blank"><i class="fa-brands fa-youtube"></i></a></div>
+                </div>
 
-                    <div class="navigation-container">
-                        <a href="/index.html">Home</a>
-                        <a href="/pages/projects.html">My Projects</a>
-                        <a href="/pages/about.html">About Me</a>
+                <hr class="separator" />
+
+                <div class="description">
+                    <h2>Description</h2>
+                    <div class="side-line">
+                        <p>$description$</p>
                     </div>
                 </div>
 
-                <div class="spacer">
+                <div class="contents">
+                    <h2>Contents</h2>
+                    <div class="side-line">
+                        $toc$
+                        <!--
+                        <ul>
+                            <li><b>Section 1.</b> Sample text</li>
+                            <li><ul>
+                                <li><b>Section 1.1.</b> Some stuff</li>
+                            </ul></li>
+                            <li><b>Section 2.</b> More sample text</li>
+                        </ul>
+                        -->
+                    </div>
+                </div>
+
+                <div class="navigation-container">
+                    <a href="/index.html">Articles</a>
+                    <a href="/pages/tags.html">Tags</a>
+                    <a href="/pages/about.html">About Me</a>
                 </div>
             </div>
+        </div>
 
+        <div class="content-wrapper">
             <div class="content">
+                <h1>$title$</h1>
+
+                <hr class="separator" />
+                <div class="info-holder">
+                    <span class="info-value"><b>Author:</b> Rushil Surti</span>
+                    <span class="info-value"><b>Date:</b> $publish-date$</span>
+                    <span class="info-value"><b>Tags:</b> $for(tags)$ <span class="info-tag">$tags$</span> $endfor$</span>
+                </div>
+
                 $body$
             </div>
         </div>

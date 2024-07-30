@@ -39,7 +39,7 @@ class Article:
         # Yeah unfortunately even though we're using Katex to do the actual rendering,
         # if you use the katex flag instead of the mathjax flag, it won't work :(
         # Thank you pandoc, very cool
-        cmd = ["pandoc", "-f", "markdown-smart+tex_math_single_backslash", "--standalone", "--mathjax", "--template=templates/template.html", "--metadata-file=" + str(self.metadata), "-o", str(self.result), str(self.article)]
+        cmd = ["pandoc", "-f", "markdown-smart+tex_math_single_backslash", "--standalone", "--toc", "--mathjax", "--template=templates/template.html", "--metadata-file=" + str(self.metadata), "-o", str(self.result), str(self.article)]
         print()
         print("   " + " ".join(cmd[:3]))
         print("   " + " ".join(cmd[3:]))

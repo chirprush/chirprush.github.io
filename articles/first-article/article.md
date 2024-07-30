@@ -1,9 +1,9 @@
-# First Article
-
 This is mainly just a test article to see if my custom static website generator
 (a wrapper over Pandoc, how unique) works!
 
-But since you're here, I might as well lay out what I intend to write here:
+## Future Writings
+
+Since you're here, though, I might as well lay out what I intend to write here:
 
 - **Math stuff**: There's much to explore and learn in the realm of
 mathematics, and I've barely scratched the surface when it comes to the higher
@@ -22,6 +22,8 @@ musings or just what I like about the grammar.
 \[
     \textrm{Sugar} \longrightarrow \textrm{Me} \longrightarrow \textrm{Writing}
 .\]
+
+## Conclusion
 
 No promises on when I write stuff; I'd like to ideally strike a balance between
 not feeling pressured to write but also at the very least writing a bit every

@@ -1,7 +1,8 @@
+/* Large screens */
 @media screen and (min-width: 1200px) {
     .side-panel {
         height: 100vh;
-        width: 25vw; /* 350px; */
+        width: 400px; /* 25vw */
         position: fixed !important;
 
         background: var(--side-panel-bg);
@@ -15,37 +16,56 @@
         left: 0;
     }
 
-    .spacer {
-        width: 100%;
-        top: 5vh;
-        height: 90vh;
-
-        border-radius: 2px;
-        border-right-width: 3px;
-        border-right-style: solid;
-        border-right-color: var(--side-panel-border);
-
-        background-clip: content-box;
-
-        padding-right: 10px;
-
-        z-index: -1;
-
-        position: absolute;
-    }
-
     .navigation-container a {
         display: block;
     }
+
+    .panel-content {
+        padding-top: 40px;
+        padding-bottom: 0px;
+        padding-left: 40px;
+        padding-right: 40px;
+    }
 }
 
+/* Small screens */
 @media screen and (max-width: 1200px) {
     .side-panel {
-        /* display: none; */
+        width: 100vw;
+
+        background: var(--side-panel-bg);
+
+        border-radius: 10px;
+
+        padding: none;
+        top: 0;
+        left: 0;
+    }
+
+    .description, .contents {
+        display: none;
+    }
+
+    .navigation-container {
+        display: flex;
+    }
+
+    .navigation-container a {
+        display: inline;
+    }
+
+    .panel-content {
+        padding-top: 5px;
+        padding-bottom: 0px;
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+    /*
+    .side-panel {
         background: var(--side-panel-bg);
         width: 100vw;
 
-        /* position: absolute; */
 
         border-radius: 10px;
 
@@ -53,7 +73,6 @@
         left: 0;
 
         margin: none;
-        /* padding-bottom: 50px; */
     }
 
     .navigation-container a {
@@ -62,16 +81,12 @@
         padding-left: 5%;
         padding-right: 5%;
     }
+    */
 }
 
 /* Might have to vary this depending on whether mobile or not */
 .panel-content {
-    padding-top: 40px;
-    padding-bottom: 0px;
-    padding-left: 40px;
-    padding-right: 40px;
-
-    height: 100%;
+    height: 90%;
     
     display: flex;
     align-content: flex-start;
@@ -83,7 +98,7 @@
     /* margin-top: auto; */
     align-self: flex-end;
     width: 100%;
-    margin-top: 20px;
+    margin-top: auto;
 }
 
 .navigation-container a {
@@ -96,7 +111,6 @@
 
     color: black;
     font-weight: bold;
-    font-size: ;
     text-decoration: none;
 
     font-size: 1.1em;
@@ -116,9 +130,55 @@
     background: var(--side-panel-selected);
 }
 
-/* Maybe change this to an h2 later */
-.panel-content h1 {
-    font-size: 1.2em;
+.panel-content h2 {
+    font-size: 1.1em;
+}
+
+.separator {
+    width: 100%;
+    height: 0;
+    border: 0;
+    /* Probably tweak this later but it works for now */
+    border-top: 2px solid var(--side-panel-selected);
+}
+
+.description h2 {
+    margin-bottom: 5px;
+    font-size: 1.3em;
+}
+
+.description p {
+    margin-top: 0px;
+}
+
+.contents h2 {
+    margin-bottom: 5px;
+    font-size: 1.3em;
+}
+
+.contents a {
+    text-decoration: none;
+    font-weight: bold;
+    color: black;
+}
+
+.side-line {
+    border-left: solid 4px var(--side-panel-border);
+    margin-left: 2px;
+}
+
+.side-line > * {
+    margin-left: 10px;
+}
+
+.contents ul {
+    margin-top: 0px;
+    list-style-type: none;
+    padding-left: 0px;
+}
+
+.contents li ul {
+    margin-left: 10px;
 }
 
 /* This stuff looks fine */

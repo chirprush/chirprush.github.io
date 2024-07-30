@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>chirprush - Gradient Ascent Eigenvectors</title>
+
+        <link rel="stylesheet" href="/assets/css/style.css">
+        <link rel="stylesheet" href="/assets/css/panel.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Katex -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+
+        
+        <meta charset="utf-8">
+    </head>
+
+    <body>
+        <div id="side-nav" class="side-panel">
+            <div class="panel-content">
+                <div class="panel-grid">
+                    <img class="grid-pfp" src="/assets/images/pfp.svg"></img>
+                    <h2 class="grid-title">Rushil Surti</h1>
+                    <p class="grid-email">rush040507@gmail.com</p>
+                    <div class="grid-icons"><a href="https://www.github.com/chirprush/" target="_blank"><i class="fa-brands fa-github"></i></a> <a href="https://www.youtube.com/channel/UCSc-MTo8KGPDMLszD6jYjxA" target="_blank"><i class="fa-brands fa-youtube"></i></a></div>
+                </div>
+
+                <hr class="separator" />
+
+                <div class="description">
+                    <h2>Description</h2>
+                    <div class="side-line">
+                        <p>Finding real eigenvectors of an arbitrary matrix using geometric intuition and gradient ascent.</p>
+                    </div>
+                </div>
+
+                <div class="contents">
+                    <h2>Contents</h2>
+                    <div class="side-line">
+                        <ul>
+                        <li><a href="#preface">Preface</a></li>
+                        <li><a href="#ideas">Ideas</a></li>
+                        <li><a href="#results">Results</a></li>
+                        </ul>
+                        <!--
+                        <ul>
+                            <li><b>Section 1.</b> Sample text</li>
+                            <li><ul>
+                                <li><b>Section 1.1.</b> Some stuff</li>
+                            </ul></li>
+                            <li><b>Section 2.</b> More sample text</li>
+                        </ul>
+                        -->
+                    </div>
+                </div>
+
+                <div class="navigation-container">
+                    <a href="/index.html">Articles</a>
+                    <a href="/pages/tags.html">Tags</a>
+                    <a href="/pages/about.html">About Me</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="content">
+                <h1>Gradient Ascent Eigenvectors</h1>
+
+                <hr class="separator" />
+                <div class="info-holder">
+                    <span class="info-value"><b>Author:</b> Rushil Surti</span>
+                    <span class="info-value"><b>Date:</b> May 13, 2024</span>
+                    <span class="info-value"><b>Tags:</b>  <span class="info-tag">linear algebra</span>  <span class="info-tag">gradient descent</span> </span>
+                </div>
+
+                <h2 id="preface">Preface</h2>
+                <p>I'm not quite familiar with many of the high-spec current algorithms that are used to find eigenvalues and eigenvectors with numeric stability, but I suppose they make great use of the characteristic polynomial and other math shenanigans that I probably am not all too familiar with nor sound all too interesting. Thus, it would seem fun to circumvent all that and create a highly scuffed algorithm to locate an eigenvector (potentially multiple?) using geometrical intuition, which seems far more easy to work with.</p>
+                <p><span class="math display">\[
+                    \gdef\grad{\operatorname{grad}}
+                    \gdef\vvec#1{\mathbf{#1}}
+                \]</span></p>
+                <h2 id="ideas">Ideas</h2>
+                <p>Suppose we have a real matrix <span class="math inline">\(A\)</span> (with non-zero determinant) which we wish to find an eigenvector of. Traditionally, an eigenvector of <span class="math inline">\(A\)</span> is defined to be any vector <span class="math inline">\(\vvec{v}\)</span> such that <span class="math display">\[
+                    A \vvec{v} = \lambda \vvec{v}
+                ,\]</span> where <span class="math inline">\(\lambda\)</span> is the corresponding eigenvalue. In geometric terms, the origin, the point described by <span class="math inline">\(\vvec{v}\)</span>, and the image of <span class="math inline">\(\vvec{v}\)</span> under <span class="math inline">\(A\)</span> must be collinear. Motivated by this, we can instead characterize an eigenvector of <span class="math inline">\(A\)</span> differently. Observe that <span class="math display">\[
+                    \cos{\theta} = \frac{A\vvec{v} \cdot \vvec{v}}{\| A \vvec{v} \| \| \vvec{v} \|}
+                .\]</span> Principally, this value is <span class="math inline">\(-1\)</span> or <span class="math inline">\(1\)</span> whenever <span class="math inline">\(\vvec{v}\)</span> is an eigenvector. To simplify this, we shall take <span class="math display">\[
+                    \cos^2{\theta} = \frac{( A\vvec{v} \cdot \vvec{v} )^2}{\| A \vvec{v} \|^2 \| \vvec{v} \|^2}
+                \]</span> as our metric for how "close", <span class="math inline">\(\vvec{v}\)</span> is to being an eigenvector, with <span class="math inline">\(0\)</span> representing that <span class="math inline">\(\vvec{v}\)</span> is orthogonal to an (all?) eigenvector and <span class="math inline">\(1\)</span> representing that <span class="math inline">\(\vvec{v}\)</span> is in fact an eigenvector.</p>
+                <p>In order to simplify matters slightly, we shall want to take <span class="math inline">\(\| \vvec{v} \| = 1\)</span>. This would guarantee that each <span class="math inline">\(\vvec{v}\)</span> that we find such that <span class="math inline">\(\cos^2{\theta} = 1\)</span> is part of a different family (I wonder what the right term is for this) of eigenvectors. Since we want to travel around in space however and doing so is cumbersome on a sphere, we will leave the magnitude unfixed for now. Thus, our metric is given by <span class="math display">\[
+                    \Gamma_A (\vvec{v}) := \frac{(A \vvec{v} \cdot \vvec{v})^2}{\| A \vvec{v} \|^2 \| \vvec{v} \|^2}
+                ,\]</span> and this is differentiable, meaning it naturally emits a gradient which we shall now hope to derive. Consider the partial derivative taken for some component <span class="math inline">\(v_k\)</span>. Observe that (using shorthand notation for partial derivatives for typing convenience) <span class="math display">\[
+                    \partial_{v_k} \Gamma_A (\vvec{v}) = \frac{\| A \vvec{v} \|^2 \| \vvec{v} \|^2 \partial_{v_k} (A \vvec{v} \cdot \vvec{v})^2 - (A\vvec{v} \cdot \vvec{v})^2 \partial_{v_k} \| A \vvec{v} \|^2 \| \vvec{v} \|^2}{\| A \vvec{v} \|^4 \| \vvec{v} \|^4}
+                .\]</span> So now we must find some expressions for the following <span class="math display">\[
+                    \partial_{v_k} (A\vvec{v} \cdot \vvec{v})^2, \quad \partial_{v_k} \| A \vvec{v} \|^2 \| \vvec{v} \|^2
+                .\]</span> We shall tackle these in parts. We first note that <span class="math display">\[
+                    A \vvec{v} = \begin{bmatrix} \vvec{u}_1 &amp; \vvec{u}_2 &amp; \cdots &amp; \vvec{u}_n \end{bmatrix} \vvec{v} = \begin{bmatrix} \vvec{w}_1 \\ \vvec{w}_2 \\ \vdots \\ \vvec{w}_n \end{bmatrix} \vvec{v} = \begin{bmatrix}
+                        \vvec{w}_1 \cdot \vvec{v} \\
+                        \vvec{w}_2 \cdot \vvec{v} \\
+                        \vdots \\
+                        \vvec{w}_n \cdot \vvec{v} \\
+                    \end{bmatrix} = \begin{bmatrix}
+                        A_{11} v_1 + A_{12} v_2 + \cdots + A_{1n} v_n \\
+                        A_{21} v_1 + A_{22} v_2 + \cdots + A_{2n} v_n \\
+                        \vdots \\
+                        A_{n1} v_1 + A_{n2} v_2 + \cdots + A_{nn} v_n
+                    \end{bmatrix}
+                .\]</span> By basic rules of derivatives, we have that <span class="math display">\[
+                \begin{align*}
+                    \partial_{v_k} (A \vvec{v} \cdot \vvec{v})^2 &amp;= 2 (A \vvec{v} \cdot \vvec{v}) \, \partial_{v_k} (A \vvec{v} \cdot \vvec{v}) \\
+                    &amp;= 2 (A \vvec{v} \cdot \vvec{v}) (A \vvec{v} \cdot \partial_{v_k} (\vvec{v}) + \partial_{v_k} (A \vvec{v}) \cdot \vvec{v}) \\
+                    &amp;= 2 (A \vvec{v} \cdot \vvec{v}) (\vvec{w}_k \cdot \vvec{v} + \vvec{u}_k \cdot \vvec{v}) \\
+                    &amp;= 2 (A \vvec{v} \cdot \vvec{v}) ((\vvec{w}_k + \vvec{u}_k) \cdot \vvec{v})
+                .\end{align*}
+                \]</span> Similarly, for the second expression, we have <span class="math display">\[
+                \begin{align*}
+                    \partial_{v_k} \| A \vvec{v} \|^2 \| \vvec{v} \|^2 &amp;= \| A \vvec{v} \|^2 \, \partial_{v_k} \left( \| \vvec{v} \|^2 \right) + \partial_{v_k} \left( \| A \vvec{v} \|^2 \right) \| \vvec{v} \|^2 \\
+                    &amp;= 2 v_k \| A \vvec{v} \|^2 + \| \vvec{v} \|^2 \sum_{i = 1}^{n} \partial_{v_k} (\vvec{w}_i \cdot \vvec{v})^2 \\
+                    &amp;= 2 v_k \| A \vvec{v} \|^2 + 2 \| \vvec{v} \|^2 \sum_{i = 1}^{n} (\vvec{w}_i \cdot \vvec{v}) \, \partial_{v_k} (\vvec{w}_i \cdot \vvec{v}) \\
+                    &amp;= 2 v_k \| A \vvec{v} \|^2 + 2 \| \vvec{v} \|^2 \sum_{i = 1}^{n} A_{ik} \, (\vvec{w}_i \cdot \vvec{v}) \\
+                    &amp;= 2 v_k \| A \vvec{v} \|^2 + 2 \| \vvec{v} \|^2 (A \vvec{v} \cdot \vvec{u}_k)
+                .\end{align*}
+                \]</span> I've no doubt that these values are terribly inefficient to compute, but it's interesting that the expression isn't entirely intractable.</p>
+                <p>With the general expression for the partial derivative determined, we can now calculate the gradient as per usual: <span class="math display">\[
+                    \grad \Gamma_A (\vvec{v}) = \begin{bmatrix}
+                        \partial_{v_1} \Gamma_A (\vvec{v}) \\
+                        \partial_{v_2} \Gamma_A (\vvec{v}) \\
+                        \vdots \\
+                        \partial_{v_n} \Gamma_A (\vvec{v})
+                    \end{bmatrix}
+                .\]</span> This allows us to define a sequence of converging guesses <span class="math inline">\(\vvec{g}_1, \vvec{g}_2, \cdots\)</span> where <span class="math inline">\(\vvec{g}_1\)</span> is determined by some intial choice and subsequent values in the sequence are determined by the recursion <span class="math display">\[
+                    \vvec{g}_n = \operatorname{normalize} \bigl(\vvec{g}_{n-1} + \gamma_n \grad \Gamma_A (\vvec{g}_{n-1}) \bigr)
+                ,\]</span> where <span class="math inline">\(\gamma_n\)</span> is some sequence that denotes a learning rate for steps of the gradient ascent process. In total, each calculation of <span class="math inline">\(\grad \Gamma_A (\vvec{g}_n)\)</span> takes <span class="math inline">\(O(n^2)\)</span> time.</p>
+                <h2 id="results">Results</h2>
+                <p>Actually this works with surpising success. One can probably uniformly distribute points around the unit ball and then run the process, although that is another order of magnitude slower probably.</p>
+                <p>An interesting exercise would be to determine the convergence rate of this algorithm generally.</p>
+            </div>
+        </div>
+    </body>
+</html>
