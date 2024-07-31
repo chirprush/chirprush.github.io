@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>chirprush - Matrices Over Modular Arithmetic</title>
+
+        <link rel="stylesheet" href="/assets/css/style.css">
+        <link rel="stylesheet" href="/assets/css/panel.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Katex -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+
+        
+        <meta charset="utf-8">
+    </head>
+
+    <body>
+        <div id="side-nav" class="side-panel">
+            <div class="panel-content">
+                <div class="panel-grid">
+                    <img class="grid-pfp" src="/assets/images/pfp.svg"></img>
+                    <h2 class="grid-title">Rushil Surti</h1>
+                    <p class="grid-email">rush040507@gmail.com</p>
+                    <div class="grid-icons"><a href="https://www.github.com/chirprush/" target="_blank"><i class="fa-brands fa-github"></i></a> <a href="https://www.youtube.com/channel/UCSc-MTo8KGPDMLszD6jYjxA" target="_blank"><i class="fa-brands fa-youtube"></i></a> <a href="https://www.instagram.com/chirprush/" target="_blank"><i class="fa-brands fa-instagram"></i></a></div>
+                </div>
+
+                <hr class="separator" />
+
+                <div class="description">
+                    <h2>Description</h2>
+                    <div class="side-line">
+                        <p>Exploring properties of powers of matrices who have entries in the ring of integers modulo some integer.</p>
+                    </div>
+                </div>
+
+                <div class="contents">
+                    <h2>Contents</h2>
+                    <div class="side-line">
+                        <ul>
+                        <li><a href="#background">Background</a></li>
+                        <li><a href="#counting-matrices">Counting Matrices</a></li>
+                        </ul>
+                        <!--
+                        <ul>
+                            <li><b>Section 1.</b> Sample text</li>
+                            <li><ul>
+                                <li><b>Section 1.1.</b> Some stuff</li>
+                            </ul></li>
+                            <li><b>Section 2.</b> More sample text</li>
+                        </ul>
+                        -->
+                    </div>
+                </div>
+
+                <div class="navigation-container">
+                    <a href="/index.html">Articles</a>
+                    <a href="/tags.html">Tags</a>
+                    <a href="/about.html">About Me</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="content">
+                <h1>Matrices Over Modular Arithmetic</h1>
+
+                <hr class="separator" />
+                <div class="info-holder">
+                    <span class="info-value"><b>Author:</b> Rushil Surti</span>
+                    <span class="info-value"><b>Date:</b> July 11, 2024</span>
+                    <span class="info-value"><b>Tags:</b>  <a href="/tags.html#matrices"><span class="info-tag">matrices</span></a>  <a href="/tags.html#linear-algebra"><span class="info-tag">linear-algebra</span></a>  <a href="/tags.html#number-theory"><span class="info-tag">number-theory</span></a>  <a href="/tags.html#combinatorics"><span class="info-tag">combinatorics</span></a> </span>
+                </div>
+
+                <h2 id="background">Background</h2>
+                <p>Consider matrices from the set <span class="math inline">\(M_{k \times k}(\mathbb{Z}_m)\)</span>, where <span class="math inline">\(\mathbb{Z}_m\)</span> denotes the ring of integers modulo <span class="math inline">\(m\)</span>. We wish to explore the properties of such matrices, especially when taken to integer powers. For shorthand, we call such a matrix a <em>modular matrix</em>.</p>
+                <p><strong>Example.</strong> One such matrix is <span class="math display">\[
+                    \begin{bmatrix}
+                        1 &amp; 3 &amp; 2 \\
+                        0 &amp; 6 &amp; 5 \\
+                        4 &amp; 4 &amp; 2
+                    \end{bmatrix} \in M_{3 \times 3}(\mathbb{Z}_{7})
+                .\]</span></p>
+                <div class="side-box">
+                <p><strong>Theorem.</strong> Let <span class="math inline">\(A\)</span> be any modular matrix of dimension <span class="math inline">\(k\)</span> and modulus <span class="math inline">\(m\)</span>. The sequence <span class="math inline">\(A, A^2, A^3, \ldots\)</span> is eventually periodic.</p>
+                </div>
+                <p><em>Proof.</em> The sequence being periodic is equivalent to any matrix appearing more than once in the sequence. Since the sequence is infinite and there are <span class="math inline">\(m^{k^2}\)</span> modular matrices of same dimension and modulus, we can always choose a sequence index greater than <span class="math inline">\(m^{k^2}\)</span> and argue by the Pigeonhole Principle that there must exist a duplicate matrix. Thus, the sequence must repeat at some point (not necessarily with the starting matrix).</p>
+                <p>With this in mind, we now begin discussing invertibility.</p>
+                <div class="side-box">
+                <p><strong>Definition.</strong> The <em>determinant</em> of a modular matrix with modulus <span class="math inline">\(m\)</span> is simplify defined to be the regular determinant taken modulo <span class="math inline">\(m\)</span>.</p>
+                </div>
+                <div class="side-box">
+                <p><strong>Theorem.</strong> A modular matrix <span class="math inline">\(A \in M_{k \times k}(\mathbb{Z}_m)\)</span> is invertible iff <span class="math inline">\(\det A\)</span> is invertible in <span class="math inline">\(\mathbb{Z}_m\)</span>. That is to say, iff <span class="math inline">\(\gcd{(\det A, m)} = 1\)</span>.</p>
+                </div>
+                <p><em>Proof.</em> Since the properties of determinants still apply, <span class="math inline">\(\det A^{-1} = (\det A)^{-1}\)</span>, so clearly if <span class="math inline">\(\gcd{(\det A, m)} &gt; 1\)</span>, this cannot exist. Thus, it suffices to show that all matrices with <span class="math inline">\(\det A\)</span> such that <span class="math inline">\(\gcd(\det A, m) = 1\)</span> are invertible. <em>This remains to be proven (I might come back to this later).</em></p>
+                <p><strong>Notation.</strong> We denote the set of invertible modular matrices with size <span class="math inline">\(k \times k\)</span> and modulo <span class="math inline">\(m\)</span> by <span class="math inline">\(N_{k \times k}(\mathbb{Z}_m)\)</span>.</p>
+                <p>With this, we can now see some sets of modular matrices have a structure to them.</p>
+                <div class="side-box">
+                <p><strong>Theorem.</strong> <span class="math inline">\(N_{k \times k}(\mathbb{Z}_{m})\)</span> forms a group under multiplication.</p>
+                </div>
+                <p><strong>Proof.</strong> Most of the necessary properties follow readily from matrix algebra, so we may quickly verify the conditions:</p>
+                <ul>
+                <li><strong>Associativity</strong>: We have trivially that <span class="math inline">\(A(BC) = (AB)C\)</span>.</li>
+                <li><strong>Identity Element</strong>: The unique identity element for <span class="math inline">\(M_{k \times k}(\mathbb{Z}_m)\)</span> is <span class="math inline">\(I_k\)</span>.</li>
+                <li><strong>Inverse Element</strong>: It is already stated that each element has a (two-sided) inverse. Since this inverse is also invertible, it is included the group.</li>
+                </ul>
+                <p>Because this group is of finite order, we have that for any invertible modular matrix <span class="math inline">\(A\)</span>, there exists some smallest non-zero exponent <span class="math inline">\(r\)</span>, the order of the element, such that <span class="math inline">\(A^r = I_k\)</span>. We wish to the order, or some multiple of it, which shall give us a tool to reduce the exponent of a modular matrix power.</p>
+                <p>This motivates us to take a look at the cyclic group generated by the element <span class="math inline">\(A\)</span>. Note that for any group <span class="math inline">\(G\)</span> where <span class="math inline">\(| G | = n\)</span> we have that <span class="math inline">\(g^n = e\)</span> for all <span class="math inline">\(g \in G\)</span>, so we are motivated to find the order of this cyclic group, or some multiple of it.</p>
+                <p>Observe that the cyclic group generated by some invertible modular matrix <span class="math inline">\(A\)</span> is a subgroup of all invertible modular matrices of same size and modulus. By Lagrange's theorem, we can find that the order of all such invertible matrices is a multiple of the order of <span class="math inline">\(A\)</span>. Thus, our focus now shifts to the entire group of invertible matrices and finding its order.</p>
+                <h2 id="counting-matrices">Counting Matrices</h2>
+                <p><strong>Remark.</strong> It should be noted that there is also a well-behaved closed form for the number of invertible modular matrices for  <span class="math inline">\(m\)</span>. Consider an argument where we choose <span class="math inline">\(k\)</span> linearly independent vectors of size <span class="math inline">\(k\)</span> one-by-one. For the first vector, we have <span class="math inline">\(m^k - 1\)</span> choices (all but the zero vector). For the second vector, we have <span class="math inline">\(m^k - m\)</span> choices since there are <span class="math inline">\(m\)</span> vectors that can be formed as a linear combination of the first chosen vector. The third has <span class="math inline">\(m^k - m^2\)</span> choices by a similar reasoning. In general, the number of invertible matrices for a prime modulus <span class="math inline">\(m\)</span> is given by <span class="math display">\[
+                    (m^k - 1)(m^k - m)(m^k - m^2) \cdots (m^k - m^{k - 1}) = \prod_{i = 0}^{k - 1} (m^k - m^i)
+                .\]</span> The reason this fails to count all invertible matrices for composite <span class="math inline">\(m\)</span> is because not all matrices with nonzero determinant are invertible in such instances.</p>
+                <p>Since this doesn't generalize well for prime powers, we'll have to find some other approach. It suffices to find a multiple of the order for prime powers, since for any composite number, we may simply take the LCM of the orders of its pure prime power components. This motivates a new approach.</p>
+                <div class="side-box">
+                <p><strong>Definition.</strong> Let the <em>determinant frequency</em> of some congruency class <span class="math inline">\(a\)</span> with respect to the set <span class="math inline">\(N_{k \times k}(\mathbb{Z}_m)\)</span> be the number of matrices <span class="math inline">\(A \in N_{k \times k}(\mathbb{Z}_m)\)</span> such that <span class="math inline">\(\det A = a\)</span>. We shall denote this frequency by <span class="math inline">\(\mathfrak{q} (a)\)</span>.</p>
+                </div>
+                <p>With this, we can decompose the invertible matrices into a sum of over all determinants that give inverses. In particular, we want to calculate <span class="math display">\[
+                    \sum_{\gcd(a, m) = 1} \mathfrak{q} (a)
+                .\]</span> While this doesn't do much for us, there's one really nice simplification that we can make.</p>
+                <div class="side-box">
+                <p><strong>Theorem.</strong> For all <span class="math inline">\(a\)</span> such that <span class="math inline">\(\gcd(a, m) = 1\)</span>, <span class="math inline">\(\mathfrak{q}(a)\)</span> are all equal.</p>
+                </div>
+                <p><em>Proof.</em> Consider the mapping <span class="math inline">\(x \mapsto qx\)</span>, where <span class="math inline">\(\gcd(a, m) = 1\)</span>. Since <span class="math inline">\(q^{-1}\)</span> exists, this mapping is invertible, and is thus a bijection over <span class="math inline">\(\mathbb{Z}_m\)</span>. We observe that applying such a mapping elementwise to a modular matrix also forms a bijection. Since the properties of determinants apply, this mapping transforms <span class="math inline">\(\det A\)</span> to be <span class="math inline">\(q^k \det A\)</span>. Since <span class="math inline">\(\gcd(\det A, m) = \gcd(a, m) = 1\)</span> and <span class="math inline">\(\gcd(q, m) = 1\)</span>, we can always choose a <span class="math inline">\(q\)</span> such that <span class="math inline">\(q^k = a^{-1}\)</span>. This means that we can always construct a bijection between modular matrices of determinant <span class="math inline">\(a\)</span> and modular matrices of determinant <span class="math inline">\(1\)</span>, which suffices to show that each of the specified congruency classes for determinants contains the same number of elements.</p>
+                <p>This allows us to simplify our sum a bit further, transforming into <span class="math display">\[
+                    \sum_{\gcd(a, m) = 1} \mathfrak{q} (a) = \varphi(m) \mathfrak{q}(1)
+                .\]</span> Unfortunately, I'm not so sure how hard it is to determine <span class="math inline">\(\mathfrak{q}(1)\)</span> in general. Of course the set of modular matrices of determinant <span class="math inline">\(1\)</span> forms a group in of itself, so there's something to work with, but I'm not sure how far one can get in terms of counting. Perhaps we should aim for a general asymptotic, although this isn't really applicable to reducing matrix powers.</p>
+                <p>Perhaps I'll come back to this later if I have any ideas.</p>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>chirprush - Proving that the Euler Totient is Even</title>
+
+        <link rel="stylesheet" href="/assets/css/style.css">
+        <link rel="stylesheet" href="/assets/css/panel.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Katex -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+
+        
+        <meta charset="utf-8">
+    </head>
+
+    <body>
+        <div id="side-nav" class="side-panel">
+            <div class="panel-content">
+                <div class="panel-grid">
+                    <img class="grid-pfp" src="/assets/images/pfp.svg"></img>
+                    <h2 class="grid-title">Rushil Surti</h1>
+                    <p class="grid-email">rush040507@gmail.com</p>
+                    <div class="grid-icons"><a href="https://www.github.com/chirprush/" target="_blank"><i class="fa-brands fa-github"></i></a> <a href="https://www.youtube.com/channel/UCSc-MTo8KGPDMLszD6jYjxA" target="_blank"><i class="fa-brands fa-youtube"></i></a> <a href="https://www.instagram.com/chirprush/" target="_blank"><i class="fa-brands fa-instagram"></i></a></div>
+                </div>
+
+                <hr class="separator" />
+
+                <div class="description">
+                    <h2>Description</h2>
+                    <div class="side-line">
+                        <p>We prove that the Euler totient function is even using group theory.</p>
+                    </div>
+                </div>
+
+                <div class="contents">
+                    <h2>Contents</h2>
+                    <div class="side-line">
+                        <ul>
+                        <li><a href="#theoretical-background">Theoretical Background</a></li>
+                        <li><a href="#the-proof">The Proof</a></li>
+                        </ul>
+                        <!--
+                        <ul>
+                            <li><b>Section 1.</b> Sample text</li>
+                            <li><ul>
+                                <li><b>Section 1.1.</b> Some stuff</li>
+                            </ul></li>
+                            <li><b>Section 2.</b> More sample text</li>
+                        </ul>
+                        -->
+                    </div>
+                </div>
+
+                <div class="navigation-container">
+                    <a href="/index.html">Articles</a>
+                    <a href="/tags.html">Tags</a>
+                    <a href="/about.html">About Me</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="content">
+                <h1>Proving that the Euler Totient is Even</h1>
+
+                <hr class="separator" />
+                <div class="info-holder">
+                    <span class="info-value"><b>Author:</b> Rushil Surti</span>
+                    <span class="info-value"><b>Date:</b> July 23, 2024</span>
+                    <span class="info-value"><b>Tags:</b>  <a href="/tags.html#number-theory"><span class="info-tag">number-theory</span></a>  <a href="/tags.html#group-theory"><span class="info-tag">group-theory</span></a> </span>
+                </div>
+
+                <h2 id="theoretical-background">Theoretical Background</h2>
+                <p>After pondering about some stuff relating to modular matrices from a <a href="/articles/matrix-modular-arithmetic/index.html">while back</a>, I thought of a very quick, and easy to derive way of showing that the Euler totient function <span class="math inline">\(\phi (n)\)</span> is even (except in the case of <span class="math inline">\(n = 2\)</span>). We'll first start with a review.</p>
+                <div class="side-box">
+                <p>The <strong>Euler totient function</strong> <span class="math inline">\(\phi(n)\)</span> is defined to be the number of natural numbers less than <span class="math inline">\(n\)</span> that are relatively prime to <span class="math inline">\(n\)</span> (that is <span class="math inline">\(\gcd(n, k) = 1\)</span> for the natural <span class="math inline">\(k\)</span>).</p>
+                </div>
+                <p>While there are definitely number theory proofs of this always being even, we shall show this is true with group theory.</p>
+                <p>Let <span class="math inline">\(A_n\)</span> denote the set, of natural numbers less than <span class="math inline">\(n\)</span> that are relatively prime to <span class="math inline">\(n\)</span>. We assert that this set forms a group when equipped with multiplication modulo <span class="math inline">\(n\)</span>, and we shall denote this group by <span class="math inline">\(\mathbb{Z}_n^\times\)</span>.</p>
+                <div class="side-box">
+                <p><strong>Theorem.</strong> <span class="math inline">\(\mathbb{Z}_n^\times\)</span> forms a group.</p>
+                </div>
+                <p><em>Proof.</em> We shall prove the three necessary conditions: associativity, the existence of an identity, and inverses for each element.</p>
+                <ul>
+                <li><strong>Associativity</strong>: This one is obvious, as multiplication is associative and even commutative.</li>
+                <li><strong>Identity element</strong>: This condition is also obvious, as one can verify that <span class="math inline">\(1\)</span> is in <span class="math inline">\(\mathbb{Z}_n^\times\)</span> and satisfies the conditions to be the identity.</li>
+                <li><p><strong>Inverse elements</strong>: By the Extended Euclidean algorithm, we know that for any <span class="math inline">\(a \in \mathbb{Z}_n^\times\)</span>, <span class="math inline">\(a^{-1}\)</span> exists in general. Thus, it suffices to prove that this <span class="math inline">\(a^{-1}\)</span> is in <span class="math inline">\(\mathbb{Z}_n^\times\)</span>; that is, we must prove that <span class="math inline">\(\gcd(a^{-1}, n) = 1\)</span>.</p>
+                <p>Observe that for any <span class="math inline">\(k\)</span>, <span class="math inline">\(\gcd(ka^{-1}, n) \ge \gcd(a^{-1}, n)\)</span>. If we take <span class="math inline">\(k = a\)</span>, however, we see that <span class="math inline">\(\gcd(ka^{-1}, n) = \gcd(1, n) = 1\)</span>, so clearly <span class="math inline">\(\gcd(a^{-1}, n) = 1\)</span>.</p></li>
+                </ul>
+                <p>This group has a direct correlation with the original problem at hand. Indeed, <span class="math inline">\(|\mathbb{Z}_n^\times| = |A_n| = \phi (n)\)</span>. Now that we have a group structure over the set, however, we can use some fun group theory concepts. In particular, recall Lagrange's theorem, or a certain version of it at least.</p>
+                <div class="side-box">
+                <p><strong>Theorem</strong> (Lagrange's theorem)<strong>.</strong> For any subgroup <span class="math inline">\(H\)</span> of some group <span class="math inline">\(G\)</span>, <span class="math inline">\(|H|\)</span> divides <span class="math inline">\(|G|\)</span>.</p>
+                </div>
+                <h2 id="the-proof">The Proof</h2>
+                <p>Using this we can trivially show that the Euler totient is even.</p>
+                <div class="side-box">
+                <p><strong>Theorem.</strong> <span class="math inline">\(\phi(n)\)</span> is even for <span class="math inline">\(n \ge 3\)</span>.</p>
+                </div>
+                <p><em>Proof.</em> We have that <span class="math inline">\(\mathbb{Z}_n^\times\)</span> is a group and <span class="math inline">\(|\mathbb{Z}_n^\times| = \phi(n)\)</span>. Observe, however, that <span class="math inline">\(\{1, -1\} \subseteq \mathbb{Z}_n^\times\)</span> is a subgroup of this group, and it clearly has order <span class="math inline">\(2\)</span>. Thus, we must have that <span class="math inline">\(2 \mid \phi(n)\)</span>.</p>
+                <p>The only exception to this is the case of <span class="math inline">\(n = 2\)</span>, where <span class="math inline">\(\phi(2) = 1\)</span>. The reason that this argument fails in this case is because the subgroup is actually of order <span class="math inline">\(1\)</span>, as <span class="math inline">\(1\)</span> is congruent to <span class="math inline">\(-1\)</span> modulo <span class="math inline">\(2\)</span>.</p>
+            </div>
+        </div>
+    </body>
+</html>

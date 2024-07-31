@@ -72,7 +72,7 @@ body {
     font-size: 12pt;
     white-space: nowrap;
 
-    background-color: var(--side-panel-selected);
+    background-color: #c7edf4;
     border-radius: 5px;
     padding-right: 5px;
     padding-left: 5px;
@@ -114,6 +114,10 @@ body {
     font-size: 12pt;
 }
 
+.content a {
+    color: #3e5f93;
+}
+
 .thumbnail > * {
     padding-left: 20px;
     width: calc(100% - 40px);
@@ -121,4 +125,8 @@ body {
 
 .thumbnail:hover {
     background: var(--side-panel-hover);
+}
+
+img {
+    width: 100%;
 }

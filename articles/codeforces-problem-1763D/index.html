@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>chirprush - Codeforces: Problem 1763D</title>
+
+        <link rel="stylesheet" href="/assets/css/style.css">
+        <link rel="stylesheet" href="/assets/css/panel.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Katex -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+
+        
+        <meta charset="utf-8">
+    </head>
+
+    <body>
+        <div id="side-nav" class="side-panel">
+            <div class="panel-content">
+                <div class="panel-grid">
+                    <img class="grid-pfp" src="/assets/images/pfp.svg"></img>
+                    <h2 class="grid-title">Rushil Surti</h1>
+                    <p class="grid-email">rush040507@gmail.com</p>
+                    <div class="grid-icons"><a href="https://www.github.com/chirprush/" target="_blank"><i class="fa-brands fa-github"></i></a> <a href="https://www.youtube.com/channel/UCSc-MTo8KGPDMLszD6jYjxA" target="_blank"><i class="fa-brands fa-youtube"></i></a> <a href="https://www.instagram.com/chirprush/" target="_blank"><i class="fa-brands fa-instagram"></i></a></div>
+                </div>
+
+                <hr class="separator" />
+
+                <div class="description">
+                    <h2>Description</h2>
+                    <div class="side-line">
+                        <p>A 2200 rated Codeforces combinatorics problem with a whole lot of casework.</p>
+                    </div>
+                </div>
+
+                <div class="contents">
+                    <h2>Contents</h2>
+                    <div class="side-line">
+                        <ul>
+                        <li><a href="#problem">Problem</a></li>
+                        <li><a href="#solution">Solution</a></li>
+                        </ul>
+                        <!--
+                        <ul>
+                            <li><b>Section 1.</b> Sample text</li>
+                            <li><ul>
+                                <li><b>Section 1.1.</b> Some stuff</li>
+                            </ul></li>
+                            <li><b>Section 2.</b> More sample text</li>
+                        </ul>
+                        -->
+                    </div>
+                </div>
+
+                <div class="navigation-container">
+                    <a href="/index.html">Articles</a>
+                    <a href="/tags.html">Tags</a>
+                    <a href="/about.html">About Me</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="content">
+                <h1>Codeforces: Problem 1763D</h1>
+
+                <hr class="separator" />
+                <div class="info-holder">
+                    <span class="info-value"><b>Author:</b> Rushil Surti</span>
+                    <span class="info-value"><b>Date:</b> July 5, 2024</span>
+                    <span class="info-value"><b>Tags:</b>  <a href="/tags.html#codeforces"><span class="info-tag">codeforces</span></a>  <a href="/tags.html#combinatorics"><span class="info-tag">combinatorics</span></a>  <a href="/tags.html#permutations"><span class="info-tag">permutations</span></a> </span>
+                </div>
+
+                <h2 id="problem">Problem</h2>
+                <div class="side-box">
+                <p><strong>Problem.</strong> We call a permutation <em>bitonic</em> if all the elements increase until a certain index <span class="math inline">\(k\)</span>, where <span class="math inline">\(2 \le k \le n - 1\)</span>, and then decrease until the end.</p>
+                <p>Count modulo <span class="math inline">\(10^9 + 7\)</span> the number of bitonic permutations of length <span class="math inline">\(n\)</span> such that <span class="math inline">\(B_i = x\)</span> and <span class="math inline">\(B_j = y\)</span>, where <span class="math inline">\(i &lt; j\)</span> and <span class="math inline">\(x \ne y\)</span>.</p>
+                </div>
+                <h2 id="solution">Solution</h2>
+                <p>Given the definition of a bitonic permutation, we are motivated to go casewise on <span class="math inline">\(k\)</span> when counting. Notice that since the elements increase up to <span class="math inline">\(k\)</span> and decrease afterwards, <span class="math inline">\(B_k\)</span> must be equal to the maximum value, <span class="math inline">\(n\)</span>.</p>
+                <p><strong>Observation.</strong> Without the <span class="math inline">\(B_i\)</span> and <span class="math inline">\(B_j\)</span> conditions, the number of total bitonic permutations <span class="math inline">\(A\)</span> on <span class="math inline">\(n\)</span> numbers is given by <span class="math display">\[
+                    A = \sum_{k = 2}^{n - 1} \binom{n - 1}{k - 1} = 2^{n - 1} - 2
+                .\]</span> This works because we must set <span class="math inline">\(B_k = n\)</span>, giving us <span class="math inline">\(n - 1\)</span> elements left to choose from. We can then choose any <span class="math inline">\(k - 1\)</span> of the remaining elements because there is only one way to increasingly sort each choice, and the choice of <span class="math inline">\(k - 1\)</span> elements uniquely determines the decreasing elements.</p>
+                <p>With this idea in mind, we can start looking at the constrained problem. There are two main cases that we have to consider:</p>
+                <ul>
+                <li><p>Either <span class="math inline">\(B_i = x = n\)</span> or <span class="math inline">\(B_j = y = n\)</span>. Having this condition forces <span class="math inline">\(k\)</span> to be either <span class="math inline">\(i\)</span> or <span class="math inline">\(j\)</span>. This case is actually easier, however, as we only have to consider one value. Consulting the following diagram,</p>
+                <p><img src="/articles/codeforces-problem-1763D/figures/edgecase1.png" /></p>
+                we see that the answers for each case respectively should be <span class="math display">\[
+                      \binom{n - y - 1}{j - i - 1} \binom{y - 1}{n - j}, \text{ and } \binom{n - x - 1}{j - i - 1} \binom{x - 1}{i - 1} 
+                  ,\]</span> since we must handle the sorting condition and since choosing two of the sections uniquely determines the choice of the third.</li>
+                <li><p>Otherwise we must go casewise on all possible values of <span class="math inline">\(k\)</span>. In particular, though, we can group these cases of <span class="math inline">\(k\)</span> into three further cases: <span class="math inline">\(k &lt; i\)</span>, <span class="math inline">\(i &lt; k &lt; j\)</span>, and <span class="math inline">\(k &gt; j\)</span>.</p></li>
+                </ul>
+                <p>We shall now tackle these cases:</p>
+                <ul>
+                <li><p>Case <span class="math inline">\(k &lt; i\)</span>. We must have that <span class="math inline">\(x &gt; y\)</span>, and we have the following diagram:</p>
+                <p><img src="/articles/codeforces-problem-1763D/figures/maincase1.png" /></p>
+                For this case, it's clear to see that the answer is <span class="math display">\[
+                      \binom{n - x - 1}{i - k - 1} \binom{x - y - 1}{j - i - 1}  \binom{y - 1}{n - j}  
+                  .\]</span></li>
+                <li><p>Case <span class="math inline">\(i &lt; k &lt; j\)</span>. We have the following diagram:</p>
+                <p><img src="/articles/codeforces-problem-1763D/figures/maincase2.png" /></p>
+                <p>This case is slightly more complicated, as there is an overlap of elements in the inner two sections. With a bit of thinking, we see that the condition <span class="math inline">\(n - \min\{x, y\} - 1 \ge j - i - 2\)</span> must hold (otherwise there is no possible permutation). For convenience, we shall say that WLOG <span class="math inline">\(x &lt; y\)</span>, simplifying the condition to <span class="math inline">\(n - x - 1 \ge j - i - 2\)</span>.</p>
+                <p>We shall first place the elements in range <span class="math inline">\(y + 1\)</span> to <span class="math inline">\(n - 1\)</span>. We must choose <span class="math inline">\(j - k - 1\)</span> of them to place in the third interval, leaving the others to be uniquely placed in the second interval. We shall then choose the remaining <span class="math inline">\(k - i - 1 - (n - y - 1 - (j - k - 1)) = j - i - 1 + y - n\)</span> numbers out of the <span class="math inline">\(y - x - 1\)</span> we have. All that is left is to choose the first interval out of simplicity, which then uniquely determines the fourth.</p>
+                Thus, if <span class="math inline">\(x &lt; y\)</span>, the answer is <span class="math display">\[
+                      \binom{n - y - 1}{j - k - 1}  \binom{y - x - 1}{j - i - 1 + y - n}  \binom{x - 1}{i - 1} 
+                  ,\]</span> and if <span class="math inline">\(x &gt; y\)</span>, the answer is <span class="math display">\[
+                      \binom{n - x - 1}{k - i - 1} \binom{x - y - 1}{j - i - 1 + x - n} \binom{y - 1}{n - j} 
+                  .\]</span></li>
+                <li><p>Case <span class="math inline">\(k &gt; j\)</span>. We must have that <span class="math inline">\(x &lt; y\)</span>, and we have the following diagram:</p>
+                <p><img src="/articles/codeforces-problem-1763D/figures/maincase3.png" /></p>
+                <p>It is also apparent for this case that the answer is <span class="math display">\[
+                      \binom{n - y - 1}{k - j - 1} \binom{y - x - 1}{j - i - 1} \binom{x - 1}{i - 1} 
+                  .\]</span></p></li>
+                </ul>
+            </div>
+        </div>
+    </body>
+</html>

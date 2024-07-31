@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>chirprush - Project Euler: Problem 743</title>
+
+        <link rel="stylesheet" href="/assets/css/style.css">
+        <link rel="stylesheet" href="/assets/css/panel.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Katex -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+
+        
+        <meta charset="utf-8">
+    </head>
+
+    <body>
+        <div id="side-nav" class="side-panel">
+            <div class="panel-content">
+                <div class="panel-grid">
+                    <img class="grid-pfp" src="/assets/images/pfp.svg"></img>
+                    <h2 class="grid-title">Rushil Surti</h1>
+                    <p class="grid-email">rush040507@gmail.com</p>
+                    <div class="grid-icons"><a href="https://www.github.com/chirprush/" target="_blank"><i class="fa-brands fa-github"></i></a> <a href="https://www.youtube.com/channel/UCSc-MTo8KGPDMLszD6jYjxA" target="_blank"><i class="fa-brands fa-youtube"></i></a> <a href="https://www.instagram.com/chirprush/" target="_blank"><i class="fa-brands fa-instagram"></i></a></div>
+                </div>
+
+                <hr class="separator" />
+
+                <div class="description">
+                    <h2>Description</h2>
+                    <div class="side-line">
+                        <p>Solving Project Euler Problem 743, a really nice combo problem using a sliding window approach.</p>
+                    </div>
+                </div>
+
+                <div class="contents">
+                    <h2>Contents</h2>
+                    <div class="side-line">
+                        <ul>
+                        <li><a href="#problem">Problem</a></li>
+                        <li><a href="#solution">Solution</a></li>
+                        </ul>
+                        <!--
+                        <ul>
+                            <li><b>Section 1.</b> Sample text</li>
+                            <li><ul>
+                                <li><b>Section 1.1.</b> Some stuff</li>
+                            </ul></li>
+                            <li><b>Section 2.</b> More sample text</li>
+                        </ul>
+                        -->
+                    </div>
+                </div>
+
+                <div class="navigation-container">
+                    <a href="/index.html">Articles</a>
+                    <a href="/tags.html">Tags</a>
+                    <a href="/about.html">About Me</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="content">
+                <h1>Project Euler: Problem 743</h1>
+
+                <hr class="separator" />
+                <div class="info-holder">
+                    <span class="info-value"><b>Author:</b> Rushil Surti</span>
+                    <span class="info-value"><b>Date:</b> June 25, 2024</span>
+                    <span class="info-value"><b>Tags:</b>  <a href="/tags.html#project-euler"><span class="info-tag">project-euler</span></a>  <a href="/tags.html#combinatorics"><span class="info-tag">combinatorics</span></a>  <a href="/tags.html#matrices"><span class="info-tag">matrices</span></a> </span>
+                </div>
+
+                <h2 id="problem">Problem</h2>
+                <div class="side-box">
+                <p><strong>Problem.</strong> Let <span class="math inline">\(A(n, k)\)</span> be the number of <span class="math inline">\(2 \times n\)</span> matrices such the sum of the entries in each contiguous <span class="math inline">\(2 \times k\)</span> submatrix is <span class="math inline">\(k\)</span>.</p>
+                <p>Determine <span class="math inline">\(A(10^{16}, 10^8)\)</span> modulo <span class="math inline">\(10^9 + 7\)</span>.</p>
+                </div>
+                <h2 id="solution">Solution</h2>
+                <p>A key observation to make for this problem is that one can choose the entries of the first initial <span class="math inline">\(2 \times k\)</span> submatrix, and by a sliding window technique, we see that this choice determines the rest of the entire <span class="math inline">\(2 \times n\)</span> matrix up to reflections of each row. In particular, knowing the <span class="math inline">\(i\)</span>th row tells us some very helpful information about all rows of the form <span class="math inline">\(i + mk\)</span> for integer <span class="math inline">\(m\)</span>:</p>
+                <ul>
+                <li>If the row is <span class="math inline">\((0, 0)\)</span>, then so are all the rows.</li>
+                <li>If the row is <span class="math inline">\((1, 1)\)</span>, then again so are all the rows.</li>
+                <li>If the row is <span class="math inline">\((0, 1)\)</span> or <span class="math inline">\((1, 0)\)</span>, then all of the aforementioned rows can be either <span class="math inline">\((0, 1)\)</span> or <span class="math inline">\((1, 0)\)</span>.</li>
+                </ul>
+                <p>This motivates one to go casewise on the number of each type of row that appear in the initial chosen submatrix. In particular, we shall index a submatrix by the tuple <span class="math inline">\((a_{00}, a_{11}, a_{01}, a_{10})\)</span>. Finding the number of total matrices then amounts to summing over all cases and then determining the number of <span class="math inline">\(2 \times n\)</span> matrices with the parameters of the initially chosen <span class="math inline">\(2 \times k\)</span> submatrix.</p>
+                <p>We shall note that for a valid tuple, there are <span class="math display">\[
+                    \binom{k}{a_{00}, a_{11}, a_{01}, a_{10}}
+                ,\]</span> initial submatrices, and thus since the submatrix gets copied over <span class="math inline">\(n/k - 1\)</span> times, there are <span class="math display">\[
+                    \binom{k}{a_{00}, a_{11}, a_{01}, a_{10}} 2^{(n/k - 1)(a_{01} + a_{10})}
+                ,\]</span> full size matrices. This means that our answer should be <span class="math display">\[
+                    A(n, k) = \sum_{2a_{11} + a_{01} + a_{10} = k} \binom{k}{a_{00}, a_{11}, a_{01}, a_{10}} 2^{(n/k - 1)(a_{01} + a_{10})}
+                .\]</span> We shall index instead by <span class="math inline">\(l = a_{01} + a_{10}\)</span>, noting that it must be the same parity as <span class="math inline">\(k\)</span>, which transforms our sum into <span class="math display">\[
+                \begin{align*}
+                    A(n, k) &amp;= \sum_{\substack{l = 0, \\ l \equiv_2 k}}^{k} \binom{k}{l} \binom{k - l}{m - l} \sum_{i = 0}^{l} \binom{l}{i} 2^{(n/k - 1)l} \\
+                    &amp;= \sum_{\substack{l = 0, \\ l \equiv_2 k}}^{k} \binom{k}{l} \binom{k - l}{(k-l)/2} 2^{nl/k} \\
+                    &amp;= \sum_{\substack{l = 0, \\ l \equiv_2 k}}^{k} \frac{k!}{l! \cdot ((k-l)/2)!^2} 2^{nl/k}.
+                \end{align*}
+                \]</span> Precomputing factorials, powers, and modular inverses, this should be rather quick to compute, running maybe in roughly <span class="math inline">\(O(k \log{k})\)</span> time (just eyeballing it).</p>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>chirprush - Project Euler: Problem 549</title>
+
+        <link rel="stylesheet" href="/assets/css/style.css">
+        <link rel="stylesheet" href="/assets/css/panel.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Katex -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+
+        
+        <meta charset="utf-8">
+    </head>
+
+    <body>
+        <div id="side-nav" class="side-panel">
+            <div class="panel-content">
+                <div class="panel-grid">
+                    <img class="grid-pfp" src="/assets/images/pfp.svg"></img>
+                    <h2 class="grid-title">Rushil Surti</h1>
+                    <p class="grid-email">rush040507@gmail.com</p>
+                    <div class="grid-icons"><a href="https://www.github.com/chirprush/" target="_blank"><i class="fa-brands fa-github"></i></a> <a href="https://www.youtube.com/channel/UCSc-MTo8KGPDMLszD6jYjxA" target="_blank"><i class="fa-brands fa-youtube"></i></a> <a href="https://www.instagram.com/chirprush/" target="_blank"><i class="fa-brands fa-instagram"></i></a></div>
+                </div>
+
+                <hr class="separator" />
+
+                <div class="description">
+                    <h2>Description</h2>
+                    <div class="side-line">
+                        <p>Solving Project Euler Problem 549, a nice number theory problem revolving around the factorization of factorials.</p>
+                    </div>
+                </div>
+
+                <div class="contents">
+                    <h2>Contents</h2>
+                    <div class="side-line">
+                        <ul>
+                        <li><a href="#problem">Problem</a></li>
+                        <li><a href="#solution">Solution</a></li>
+                        <li><a href="#afterthoughts">Afterthoughts</a></li>
+                        </ul>
+                        <!--
+                        <ul>
+                            <li><b>Section 1.</b> Sample text</li>
+                            <li><ul>
+                                <li><b>Section 1.1.</b> Some stuff</li>
+                            </ul></li>
+                            <li><b>Section 2.</b> More sample text</li>
+                        </ul>
+                        -->
+                    </div>
+                </div>
+
+                <div class="navigation-container">
+                    <a href="/index.html">Articles</a>
+                    <a href="/tags.html">Tags</a>
+                    <a href="/about.html">About Me</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="content">
+                <h1>Project Euler: Problem 549</h1>
+
+                <hr class="separator" />
+                <div class="info-holder">
+                    <span class="info-value"><b>Author:</b> Rushil Surti</span>
+                    <span class="info-value"><b>Date:</b> June 7, 2024</span>
+                    <span class="info-value"><b>Tags:</b>  <a href="/tags.html#project-euler"><span class="info-tag">project-euler</span></a>  <a href="/tags.html#number-theory"><span class="info-tag">number-theory</span></a> </span>
+                </div>
+
+                <h2 id="problem">Problem</h2>
+                <div class="side-box">
+                <p>Let <span class="math inline">\(s(n)\)</span> be the smallest number <span class="math inline">\(m\)</span> such that <span class="math inline">\(n\)</span> divides <span class="math inline">\(m!\)</span>. Define <span class="math inline">\(S(n)\)</span> to be <span class="math display">\[
+                    S(n) := \sum_{i = 2}^{n} s(n)
+                .\]</span> Compute <span class="math inline">\(S(10^8)\)</span>.</p>
+                </div>
+                <h2 id="solution">Solution</h2>
+                <p>We shall first obtain some intuition for <span class="math inline">\(s(n)\)</span>. In particular, one can observe the following:</p>
+                <p><strong>Observation.</strong> Suppose <span class="math inline">\(n = p_1^{e_1} p_2^{e_2} \cdots p_n^{e_n}\)</span>, where for convenience <span class="math inline">\(p_1 &lt; p_2 &lt; \cdots &lt; p_n\)</span>. Clearly then <span class="math inline">\(p_i^{e_i} \mid m!\)</span> for each <span class="math inline">\(i\)</span>. For each <span class="math inline">\(i\)</span>, we may then use Legendre's formula to linearly search numbers of the form <span class="math inline">\((kp_i)!\)</span> until the resulting power is high enough, letting the first such number inside the factorial be denoted by <span class="math inline">\(a_i(n)\)</span>. This takes <span class="math inline">\(O(\log n)\)</span> time. With this developed, we have that <span class="math display">\[
+                    s(n) = \max_{1 \le i \le n} a_i(n)
+                .\]</span> Using sieve methods, we may compute the smallest prime factor of each number in <span class="math inline">\([2, n]\)</span> in <span class="math inline">\(O(\sqrt{n})\)</span> time. This allows us to iterate over all numbers in <span class="math inline">\([2, n]\)</span> and prime factorize them in <span class="math inline">\(O(n \log n)\)</span> time. Applying the method above for finding <span class="math inline">\(s(n)\)</span> makes the computational complexity <span class="math inline">\(O(\sqrt{n} + n \log^2 n) = O(n \log^2 n)\)</span> in total.</p>
+                <p>Unfortunately, this runs really slow in implementation and is unsuitable for computing something as large as <span class="math inline">\(S(10^8)\)</span>. Are there any optimizations we can make?</p>
+                <p><strong>Idea.</strong> Can we simply take the component <span class="math inline">\(a_i(n)\)</span> for which <span class="math inline">\(p_i^{e_i}\)</span> is maximal?</p>
+                <p>No, one counterexample would be <span class="math inline">\(40 = 2^3 \cdot 5\)</span>.</p>
+                <p>Perhaps a different approach can be taken where one precomputes the values of <span class="math inline">\(s(n)\)</span> for all pure prime powers <span class="math inline">\(n\)</span>, making the rest of the numbers just lookups and avoiding recomputation. This works in decent time, and gave the correct answer, but it was rather slow on my machine. Perhaps another optimization could be to store the value of <span class="math inline">\(s(n)\)</span> for each <span class="math inline">\(n\)</span> in an array and then update values in this array when computing the sieve and such. This avoids the need to factor each number when iterating.</p>
+                <h2 id="afterthoughts">Afterthoughts</h2>
+                <p>This is just purely unrelated to the question, but the idea of <span class="math inline">\(s(n)\)</span> is an interesting number theoretic concept, and there's lots of we can potentially play around with:</p>
+                <ul>
+                <li>Can we derive an asymptotic for <span class="math inline">\(s(n)\)</span>?</li>
+                </ul>
+            </div>
+        </div>
+    </body>
+</html>

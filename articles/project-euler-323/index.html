@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>chirprush - Project Euler: Problem 323</title>
+
+        <link rel="stylesheet" href="/assets/css/style.css">
+        <link rel="stylesheet" href="/assets/css/panel.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Katex -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+
+        
+        <meta charset="utf-8">
+    </head>
+
+    <body>
+        <div id="side-nav" class="side-panel">
+            <div class="panel-content">
+                <div class="panel-grid">
+                    <img class="grid-pfp" src="/assets/images/pfp.svg"></img>
+                    <h2 class="grid-title">Rushil Surti</h1>
+                    <p class="grid-email">rush040507@gmail.com</p>
+                    <div class="grid-icons"><a href="https://www.github.com/chirprush/" target="_blank"><i class="fa-brands fa-github"></i></a> <a href="https://www.youtube.com/channel/UCSc-MTo8KGPDMLszD6jYjxA" target="_blank"><i class="fa-brands fa-youtube"></i></a> <a href="https://www.instagram.com/chirprush/" target="_blank"><i class="fa-brands fa-instagram"></i></a></div>
+                </div>
+
+                <hr class="separator" />
+
+                <div class="description">
+                    <h2>Description</h2>
+                    <div class="side-line">
+                        <p>Solving Project Euler Problem 323, a fun problem involving bitwise OR and expected values.</p>
+                    </div>
+                </div>
+
+                <div class="contents">
+                    <h2>Contents</h2>
+                    <div class="side-line">
+                        <ul>
+                        <li><a href="#problem">Problem</a></li>
+                        <li><a href="#solution">Solution</a></li>
+                        </ul>
+                        <!--
+                        <ul>
+                            <li><b>Section 1.</b> Sample text</li>
+                            <li><ul>
+                                <li><b>Section 1.1.</b> Some stuff</li>
+                            </ul></li>
+                            <li><b>Section 2.</b> More sample text</li>
+                        </ul>
+                        -->
+                    </div>
+                </div>
+
+                <div class="navigation-container">
+                    <a href="/index.html">Articles</a>
+                    <a href="/tags.html">Tags</a>
+                    <a href="/about.html">About Me</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="content">
+                <h1>Project Euler: Problem 323</h1>
+
+                <hr class="separator" />
+                <div class="info-holder">
+                    <span class="info-value"><b>Author:</b> Rushil Surti</span>
+                    <span class="info-value"><b>Date:</b> January 12, 2024</span>
+                    <span class="info-value"><b>Tags:</b>  <a href="/tags.html#project-euler"><span class="info-tag">project-euler</span></a>  <a href="/tags.html#bitmasks"><span class="info-tag">bitmasks</span></a>  <a href="/tags.html#probability"><span class="info-tag">probability</span></a> </span>
+                </div>
+
+                <h2 id="problem">Problem</h2>
+                <div class="side-box">
+                <p><strong>Problem.</strong> Let <span class="math inline">\(y_1, y_2, \ldots\)</span> be a sequence of random unsigned <span class="math inline">\(32\)</span>-bit integers that are uniformly chosen. Define a sequence <span class="math inline">\((x_k)\)</span> such that <span class="math inline">\(x_1 = y_1\)</span> and <span class="math inline">\(x_k = x_{k - 1} \mid y_k\)</span> (bitwise OR).</p>
+                <p>It can be seen that there will eventually be a smallest index <span class="math inline">\(N\)</span> such that <span class="math inline">\(x_N = 2^{32} - 1\)</span>. Find the expected value of <span class="math inline">\(N\)</span> to <span class="math inline">\(10\)</span> digits after the decimal point.</p>
+                </div>
+                <h2 id="solution">Solution</h2>
+                When I first saw this problem, I thought it was harder than it looked, but once you start thinking in terms of random variables, it actually becomes quite easy.
+                <div class="side-box">
+                <p><strong>Definition.</strong> Define a <em>bit random variable</em> <span class="math inline">\(y\)</span> to be a discrete random variable which takes on the values <span class="math inline">\(0\)</span> and <span class="math inline">\(1\)</span> with equal probability <span class="math inline">\(1/2\)</span>.</p>
+                </div>
+                <p>We can decompose each <span class="math inline">\(y_k\)</span> into bit random variables, which we shall notate as follows: <span class="math display">\[
+                    y_k = (y_k[0], y_k[1], \ldots, y_k[31])
+                ,\]</span> where <span class="math inline">\(y_k[i]\)</span> represents the <span class="math inline">\(i\)</span>th bit of <span class="math inline">\(y_k\)</span>. This is motivated by the fact that, since each <span class="math inline">\(y_k\)</span> is uniformly distributed, we can treat it as a combination of independent, similarly uniform, random variables. We can decompose each <span class="math inline">\(x_k\)</span> in the same fashion.</p>
+                <p>There are two important observations to make:</p>
+                <ul>
+                <li>The probability that <span class="math inline">\(x_k = 2^{32} - 1 = 11\ldots1_2\)</span> can be found by taking the intersections of the events of the individual bits being <span class="math inline">\(1\)</span>. In other words, <span class="math display">\[
+                      P(x_k = 2^{32} - 1) = \prod_{i} P(x_k[i] = 1)
+                  .\]</span> By symmetry, we can simplify this further by noticing that the probability that any one of these bits are <span class="math inline">\(1\)</span> is the exact same. So, <span class="math display">\[
+                      \prod_{i} P(x_k[i] = 1) = P(x_k[0] = 1)^{32}
+                  .\]</span></li>
+                <li>The probability <span class="math inline">\(P(x_k[i] = 1)\)</span> is rather easy to calculate. Observe that <span class="math display">\[
+                      P(x_k[i] = 1) = 1 - P(x_k[i] = 0) = 1 - \frac{1}{2^k}
+                  .\]</span></li>
+                </ul>
+                <p>With this, the expected value of <span class="math inline">\(N\)</span>, the smallest index, is easy to find. The probability that some index <span class="math inline">\(n\)</span> is the smallest such index is the difference between the probability that <span class="math inline">\(x_n\)</span> is <span class="math inline">\(2^{32} - 1\)</span> and the probability that <span class="math inline">\(x_{n-1}\)</span> is <span class="math inline">\(2^{32} - 1\)</span>. Thus <span class="math display">\[
+                    E[N] = \sum_{n = 1}^{\infty} n \left( (1 - 2^{-n})^{32} - (1 - 2^{-(n-1)})^{32} \right)
+                .\]</span> One can very easily truncate this to about <span class="math inline">\(50\)</span> terms to get the answer to <span class="math inline">\(10\)</span> decimal places.</p>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>chirprush - Codeforces: Problem 1902C</title>
+
+        <link rel="stylesheet" href="/assets/css/style.css">
+        <link rel="stylesheet" href="/assets/css/panel.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Katex -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+
+        
+        <meta charset="utf-8">
+    </head>
+
+    <body>
+        <div id="side-nav" class="side-panel">
+            <div class="panel-content">
+                <div class="panel-grid">
+                    <img class="grid-pfp" src="/assets/images/pfp.svg"></img>
+                    <h2 class="grid-title">Rushil Surti</h1>
+                    <p class="grid-email">rush040507@gmail.com</p>
+                    <div class="grid-icons"><a href="https://www.github.com/chirprush/" target="_blank"><i class="fa-brands fa-github"></i></a> <a href="https://www.youtube.com/channel/UCSc-MTo8KGPDMLszD6jYjxA" target="_blank"><i class="fa-brands fa-youtube"></i></a> <a href="https://www.instagram.com/chirprush/" target="_blank"><i class="fa-brands fa-instagram"></i></a></div>
+                </div>
+
+                <hr class="separator" />
+
+                <div class="description">
+                    <h2>Description</h2>
+                    <div class="side-line">
+                        <p>A quick little number theory Codeforces problem on minimizing costs.</p>
+                    </div>
+                </div>
+
+                <div class="contents">
+                    <h2>Contents</h2>
+                    <div class="side-line">
+                        <ul>
+                        <li><a href="#problem">Problem</a></li>
+                        <li><a href="#solution">Solution</a></li>
+                        </ul>
+                        <!--
+                        <ul>
+                            <li><b>Section 1.</b> Sample text</li>
+                            <li><ul>
+                                <li><b>Section 1.1.</b> Some stuff</li>
+                            </ul></li>
+                            <li><b>Section 2.</b> More sample text</li>
+                        </ul>
+                        -->
+                    </div>
+                </div>
+
+                <div class="navigation-container">
+                    <a href="/index.html">Articles</a>
+                    <a href="/tags.html">Tags</a>
+                    <a href="/about.html">About Me</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="content">
+                <h1>Codeforces: Problem 1902C</h1>
+
+                <hr class="separator" />
+                <div class="info-holder">
+                    <span class="info-value"><b>Author:</b> Rushil Surti</span>
+                    <span class="info-value"><b>Date:</b> March 24, 2024</span>
+                    <span class="info-value"><b>Tags:</b>  <a href="/tags.html#codeforces"><span class="info-tag">codeforces</span></a>  <a href="/tags.html#number-theory"><span class="info-tag">number-theory</span></a>  <a href="/tags.html#optimization"><span class="info-tag">optimization</span></a> </span>
+                </div>
+
+                <h2 id="problem">Problem</h2>
+                <div class="side-box">
+                <p><strong>Problem.</strong> Given an array of not necessarily positive integers <span class="math inline">\(a_1, a_2, \ldots, a_n\)</span>, choose values <span class="math inline">\(a_{n+1}, x\)</span> such that for each <span class="math inline">\(i\)</span>, <span class="math inline">\(M - a_i \ge 0\)</span> and <span class="math inline">\(x \mid M - a_i\)</span> such that <span class="math display">\[
+                    \textsf{cost} := \sum_{i = 1}^{n+1} \frac{M - a_i}{x}
+                \]</span> is minimized, where <span class="math inline">\(M\)</span> denotes the maximum of the array including <span class="math inline">\(a_{n+1}\)</span>.</p>
+                </div>
+                <h2 id="solution">Solution</h2>
+                <p>Observe that we can first simplify the form of <span class="math inline">\(\textsf{cost}\)</span>: <span class="math display">\[
+                \begin{align*}
+                    \textsf{cost} &amp;= \frac{1}{x} \sum_{i = 1}^{n + 1} M - a_i \\
+                    &amp;= \frac{1}{x} \Bigl( (n+1) M - S \Bigr),
+                \end{align*}
+                \]</span> where <span class="math inline">\(S\)</span> is the sum of all the elements in the updated list. Observe that, if we were to know our maximum value, calculating the optimal value for <span class="math inline">\(x\)</span> is easy: <span class="math display">\[
+                    x = \gcd(M - a_1, M - a_2, \ldots, M - a_{n+1})
+                .\]</span> Thus, we must search for the best maximum value. There are two cases to consider:</p>
+                <ul>
+                <li>The case where <span class="math inline">\(M = a_{n + 1}\)</span>, and</li>
+                <li>The case where <span class="math inline">\(M \ne a_{n+1}\)</span></li>
+                </ul>
+                <p>The latter case is far easier to handle since we don't have to choose the value of <span class="math inline">\(M\)</span>, as we can calculate <span class="math inline">\(\textsf{cost}\)</span> directly after finding <span class="math inline">\(x\)</span>. The former case, on the other hand, is not so simple. This motivates the following claim:</p>
+                <p><strong>Claim.</strong> The value of <span class="math inline">\(\textsf{cost}\)</span> is optimal when <span class="math inline">\(M = \max\{ a_1, a_2, \ldots, a_n \}\)</span>. That is, <span class="math inline">\(M\)</span> is strictly not equal to <span class="math inline">\(a_{n+1}\)</span>.</p>
+                <p>The proof of this is omitted for time reasons, but it intuitively makes sense as increasing the maximum by <span class="math inline">\(x\)</span> always increases the cost by <span class="math inline">\(n\)</span>; whereas, keeping the maximum constant and adding a smaller element only increases the cost by <span class="math inline">\(n\)</span> in the worst case.</p>
+                <p>With this, we can then simply choose <span class="math inline">\(a_{n+1}\)</span> to be the greatest value of the form <span class="math inline">\(M - kx\)</span> which isn't already contained in the array.</p>
+            </div>
+        </div>
+    </body>
+</html>

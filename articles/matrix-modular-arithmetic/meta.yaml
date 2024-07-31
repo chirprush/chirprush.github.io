@@ -1,0 +1,6 @@
+---
+title: "Matrices Over Modular Arithmetic"
+tags: ["matrices", "linear-algebra", "number-theory", "combinatorics"]
+publish-date: "July 11, 2024"
+description: |
+  Exploring properties of powers of matrices who have entries in the ring of integers modulo some integer.

@@ -1,0 +1,6 @@
+---
+title: "Perspective Projection"
+tags: ["linear-algebra", "graphics"]
+publish-date: "June 17, 2024"
+description: |
+  Developing a perspective projection for use in rendering 3D graphics. This particular derivation was used in my AP CSA final project :D

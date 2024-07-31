@@ -1,0 +1,6 @@
+---
+title: "Drawing Equipotential Lines"
+tags: ["physics", "linear-algebra", "multivariable-calculus"]
+publish-date: "June 9, 2024"
+description: |
+  Deriving an algorithm to draw equipotential lines for a vector field starting from a point with lots of fun math along the way.

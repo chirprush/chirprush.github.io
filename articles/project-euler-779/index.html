@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>chirprush - Project Euler: Problem 779</title>
+
+        <link rel="stylesheet" href="/assets/css/style.css">
+        <link rel="stylesheet" href="/assets/css/panel.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Katex -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+
+        
+        <meta charset="utf-8">
+    </head>
+
+    <body>
+        <div id="side-nav" class="side-panel">
+            <div class="panel-content">
+                <div class="panel-grid">
+                    <img class="grid-pfp" src="/assets/images/pfp.svg"></img>
+                    <h2 class="grid-title">Rushil Surti</h1>
+                    <p class="grid-email">rush040507@gmail.com</p>
+                    <div class="grid-icons"><a href="https://www.github.com/chirprush/" target="_blank"><i class="fa-brands fa-github"></i></a> <a href="https://www.youtube.com/channel/UCSc-MTo8KGPDMLszD6jYjxA" target="_blank"><i class="fa-brands fa-youtube"></i></a> <a href="https://www.instagram.com/chirprush/" target="_blank"><i class="fa-brands fa-instagram"></i></a></div>
+                </div>
+
+                <hr class="separator" />
+
+                <div class="description">
+                    <h2>Description</h2>
+                    <div class="side-line">
+                        <p>Solving Project Euler Problem 779, a really beautiful number theory problem.</p>
+                    </div>
+                </div>
+
+                <div class="contents">
+                    <h2>Contents</h2>
+                    <div class="side-line">
+                        <ul>
+                        <li><a href="#problem">Problem</a></li>
+                        <li><a href="#solution">Solution</a></li>
+                        </ul>
+                        <!--
+                        <ul>
+                            <li><b>Section 1.</b> Sample text</li>
+                            <li><ul>
+                                <li><b>Section 1.1.</b> Some stuff</li>
+                            </ul></li>
+                            <li><b>Section 2.</b> More sample text</li>
+                        </ul>
+                        -->
+                    </div>
+                </div>
+
+                <div class="navigation-container">
+                    <a href="/index.html">Articles</a>
+                    <a href="/tags.html">Tags</a>
+                    <a href="/about.html">About Me</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="content">
+                <h1>Project Euler: Problem 779</h1>
+
+                <hr class="separator" />
+                <div class="info-holder">
+                    <span class="info-value"><b>Author:</b> Rushil Surti</span>
+                    <span class="info-value"><b>Date:</b> June 23, 2024</span>
+                    <span class="info-value"><b>Tags:</b>  <a href="/tags.html#project-euler"><span class="info-tag">project-euler</span></a>  <a href="/tags.html#number-theory"><span class="info-tag">number-theory</span></a>  <a href="/tags.html#analysis"><span class="info-tag">analysis</span></a>  <a href="/tags.html#primes"><span class="info-tag">primes</span></a> </span>
+                </div>
+
+                <h2 id="problem">Problem</h2>
+                <div class="side-box">
+                <p><strong>Problem.</strong> Let <span class="math inline">\(p(n)\)</span> denote the smallest prime that divides <span class="math inline">\(n\)</span> and let <span class="math inline">\(\alpha (n) = \nu_{p(n)}(n)\)</span>. For positive integers <span class="math inline">\(K\)</span>, define <span class="math display">\[
+                    f_K(n) = \frac{\alpha(n) - 1}{(p(n))^K}
+                ,\]</span> and let <span class="math display">\[
+                    \overline{f_K} = \lim_{N \to \infty} \frac{1}{N} \sum_{n = 2}^{N} f_K (n)
+                .\]</span> Find the value of <span class="math display">\[
+                    \sum_{K = 1}^{\infty} \overline{f_K}
+                .\]</span></p>
+                </div>
+                <h2 id="solution">Solution</h2>
+                <p>Let <span class="math inline">\(A\)</span> denote the answer that we're looking for. Our first step will be to notice that prime power in the denominator of <span class="math inline">\(f_K(n)\)</span> looks very sus and geometric series like, so we'll interchange the sums. In particular, <span class="math display">\[
+                \begin{align*}
+                    A &amp;= \sum_{K = 1}^{\infty} \lim_{N \to \infty} \frac{1}{N} \sum_{n = 2}^{N} f_K(n) \\
+                    &amp;= \lim_{N \to \infty} \frac{1}{N} \sum_{n = 2}^{N} \sum_{K = 1}^{\infty}  f_K(n) \\
+                    &amp;= \lim_{N \to \infty} \frac{1}{N} \sum_{n = 2}^{N} \sum_{K = 1}^{\infty}  \frac{\alpha(n) - 1}{(p(n))^K} \\
+                    &amp;= \lim_{N \to \infty} \frac{1}{N} \sum_{n = 2}^{N} \frac{\alpha(n) - 1}{p(n) - 1}.
+                \end{align*}
+                \]</span> Our second step will be to notice that <span class="math inline">\(p(n)\)</span> and <span class="math inline">\(\alpha(n)\)</span> are really just functions of the smallest prime factor. With this, we wish to transform the sum so that we go casewise based off of the smallest prime factor and its exponent, multiplying by the number of times such a number appears in the interval <span class="math inline">\([2, N]\)</span>. <span class="math display">\[
+                \begin{align*}
+                    A &amp;= \lim_{N \to \infty} \frac{1}{N} \sum\limits_{\substack{p \textrm{ prime,} \\ p \le N}} \sum_{a = 1}^{m} \frac{a - 1}{p - 1} \cdot P_{\le N}(p, a),
+                \end{align*}
+                \]</span> where <span class="math inline">\(m := \lfloor \log_{p} N \rfloor\)</span> and <span class="math inline">\(P_{\le N}(p, a)\)</span> counts the number of naturals <span class="math inline">\(x\)</span> less than or equal to <span class="math inline">\(N\)</span> such that <span class="math inline">\(p\)</span> is the smallest prime factor of <span class="math inline">\(x\)</span> and <span class="math inline">\(\nu_{p}(x) = a\)</span>. Thus it suffices to determine an expression for <span class="math inline">\(P_{\le N} (p, a)\)</span>.</p>
+                <p>Observe that there are <span class="math inline">\(\lfloor N / p^a \rfloor\)</span> multiples of <span class="math inline">\(p^a\)</span> in the interval. We would like to remove all multiples that contain a prime factor less than or equal to <span class="math inline">\(p\)</span>. Suppose that <span class="math inline">\(p = p_k\)</span>, where <span class="math inline">\((p_n)\)</span> is the sorted sequence of prime numbers. By inclusion-exclusion, <span class="math display">\[
+                    P_{\le N}(p_k, a) = \sum_{Q \subseteq P_k} (-1)^{|Q|} \left \lfloor \frac{N}{p_k^a \cdot Q_1 Q_2 \cdots Q_{|Q|}}\right\rfloor
+                ,\]</span> where <span class="math inline">\(P_k := \{ p_1, p_2, \ldots, p_{k} \}\)</span> and each <span class="math inline">\(Q_i\)</span> is just the <span class="math inline">\(i\)</span>th element of <span class="math inline">\(Q\)</span>. This result lends itself to a very nice approximation: <span class="math display">\[
+                    P_{\le N}(p_k, a) = \frac{N}{p_k^a} \left( 1 - \frac{1}{p_1} \right) \left( 1 - \frac{1}{p_2} \right) \cdots \left( 1 - \frac{1}{p_{k}} \right) + o(N)
+                .\]</span> This transforms our sum to be <span class="math display">\[
+                \begin{align*}
+                    A &amp;= \lim_{N \to \infty} \sum\limits_{\substack{p_k \textrm{ prime,}  \\ p \le N}} \left( 1 - \frac{1}{p_1} \right) \left( 1 - \frac{1}{p_2} \right) \cdots \left( 1 - \frac{1}{p_{k}} \right) (p_k-1)^{-1} \sum_{a = 1}^{m} \frac{a - 1}{p_k^a} \\
+                    &amp;= \lim_{N \to \infty} \sum\limits_{\substack{p_k \textrm{ prime,}  \\ p \le N}} \left( 1 - \frac{1}{p_1} \right) \left( 1 - \frac{1}{p_2} \right) \cdots \left( 1 - \frac{1}{p_{k}} \right) (p_k-1)^{-1} \frac{(m-1)p_k^{-m} - m p_k^{-m + 1} + 1}{(p_k-1)^2} \\
+                    &amp;= \lim_{N \to \infty} \sum\limits_{\substack{p_k \textrm{ prime,}  \\ p \le N}} \left( 1 - \frac{1}{p_1} \right) \left( 1 - \frac{1}{p_2} \right) \cdots \left( 1 - \frac{1}{p_{k}} \right) (p_k-1)^{-3}.
+                \end{align*}
+                \]</span> Since we would like the answer within <span class="math inline">\(12\)</span> decimal places of precision, it suffices to prime sieve up only a couple powers of <span class="math inline">\(10\)</span> and then simply sum all of the terms.</p>
+                <p>This was a really cool problem.</p>
+            </div>
+        </div>
+    </body>
+</html>

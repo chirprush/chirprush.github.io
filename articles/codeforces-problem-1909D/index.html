@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>chirprush - Codeforces: Problem 1909D</title>
+
+        <link rel="stylesheet" href="/assets/css/style.css">
+        <link rel="stylesheet" href="/assets/css/panel.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Katex -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+
+        
+        <meta charset="utf-8">
+    </head>
+
+    <body>
+        <div id="side-nav" class="side-panel">
+            <div class="panel-content">
+                <div class="panel-grid">
+                    <img class="grid-pfp" src="/assets/images/pfp.svg"></img>
+                    <h2 class="grid-title">Rushil Surti</h1>
+                    <p class="grid-email">rush040507@gmail.com</p>
+                    <div class="grid-icons"><a href="https://www.github.com/chirprush/" target="_blank"><i class="fa-brands fa-github"></i></a> <a href="https://www.youtube.com/channel/UCSc-MTo8KGPDMLszD6jYjxA" target="_blank"><i class="fa-brands fa-youtube"></i></a> <a href="https://www.instagram.com/chirprush/" target="_blank"><i class="fa-brands fa-instagram"></i></a></div>
+                </div>
+
+                <hr class="separator" />
+
+                <div class="description">
+                    <h2>Description</h2>
+                    <div class="side-line">
+                        <p>A nice little 1900 rated Codeforces problem on making all elements equal with operations.</p>
+                    </div>
+                </div>
+
+                <div class="contents">
+                    <h2>Contents</h2>
+                    <div class="side-line">
+                        <ul>
+                        <li><a href="#problem">Problem</a></li>
+                        <li><a href="#solution">Solution</a></li>
+                        </ul>
+                        <!--
+                        <ul>
+                            <li><b>Section 1.</b> Sample text</li>
+                            <li><ul>
+                                <li><b>Section 1.1.</b> Some stuff</li>
+                            </ul></li>
+                            <li><b>Section 2.</b> More sample text</li>
+                        </ul>
+                        -->
+                    </div>
+                </div>
+
+                <div class="navigation-container">
+                    <a href="/index.html">Articles</a>
+                    <a href="/tags.html">Tags</a>
+                    <a href="/about.html">About Me</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="content">
+                <h1>Codeforces: Problem 1909D</h1>
+
+                <hr class="separator" />
+                <div class="info-holder">
+                    <span class="info-value"><b>Author:</b> Rushil Surti</span>
+                    <span class="info-value"><b>Date:</b> April 7, 2024</span>
+                    <span class="info-value"><b>Tags:</b>  <a href="/tags.html#codeforces"><span class="info-tag">codeforces</span></a>  <a href="/tags.html#number-theory"><span class="info-tag">number-theory</span></a>  <a href="/tags.html#optimization"><span class="info-tag">optimization</span></a> </span>
+                </div>
+
+                <h2 id="problem">Problem</h2>
+                <div class="side-box">
+                <p><strong>Problem.</strong> Given a list of <span class="math inline">\(n\)</span> numbers <span class="math inline">\(a_1, a_2, \ldots, a_n\)</span> and an integer <span class="math inline">\(k\)</span>, one can perform the following operation any number of times:</p>
+                <ul>
+                <li>Choose (and then delete) some number <span class="math inline">\(a_i\)</span>, and</li>
+                <li>Partition the sum of <span class="math inline">\(a_i + k\)</span> into two numbers and then add these into the list.</li>
+                </ul>
+                <p>Determine whether it is possible to make all elements in <span class="math inline">\(a\)</span> equal using this operation, and if so, the minimum number of operations required to do so.</p>
+                </div>
+                <h2 id="solution">Solution</h2>
+                <p>Our primary approach shall be to look at the sums after resulting operations done.</p>
+                <p><strong>Observation.</strong> Suppose we perform <span class="math inline">\(q_i\)</span> operations on some element <span class="math inline">\(a_i\)</span> in order to split it into <span class="math inline">\(q_i + 1\)</span> equal elements of some value <span class="math inline">\(d\)</span>. This tells us that <span class="math display">\[
+                    d = \frac{a_i + k q_i}{q_i + 1} = \frac{a_i - k}{q_i + 1} + k
+                .\]</span> Note that since we're trying to make all elements equal, we can chain this condition to see that <span class="math display">\[
+                \begin{align*}
+                    d = &amp;\frac{a_1 - k}{q_1 + 1} + k = \frac{a_2 - k}{q_2 + 1} + k = \cdots = \frac{a_n - k}{q_n + 1} + k \\
+                    \implies &amp;\frac{a_1 - k}{q_1 + 1} = \frac{a_2 - k}{q_2 + 1} = \cdots = \frac{a_n - k}{q_n + 1}.
+                \end{align*}
+                \]</span> Equivalently, for all pairs of elements <span class="math inline">\((a_i, a_j)\)</span>, the following must be satisfied (although note that we only ever need to check <span class="math inline">\(n - 1\)</span> consecutive pairs) <span class="math display">\[
+                    (a_i - k) (q_j + 1) = (a_j - k) (q_i + 1)
+                .\]</span></p>
+                <p>One may solve this equation for <span class="math inline">\(q_i, q_j\)</span> as normal, and to do this, the first order of business is to divide out the common factors from both sides. This strategy leads to the following claim.</p>
+                <p><strong>Claim.</strong> We have that for each index <span class="math inline">\(i\)</span>, <span class="math display">\[
+                    q_i + 1 = \frac{a_i - k}{\gcd(a_1 - k, a_2 - k, \ldots, a_n - k)}
+                .\]</span></p>
+                <p>One should note that there are a couple edge cases to keep in mind when using the following:</p>
+                <ul>
+                <li>Case <span class="math inline">\(a_1 - k = a_2 - k = \cdots = a_n - k = 0\)</span>: This should be a valid arrangement, but it encounters a division by <span class="math inline">\(0\)</span>. This is easily circumvented, however, by initially checking if all elements are equal (or simply checking if the greatest common factor is <span class="math inline">\(0\)</span>, as any equal element sequence should still give the correct answer with this algorithm).</li>
+                <li>Case <span class="math inline">\(q_i &lt; 0\)</span>: This can happen a few ways, but luckily this is a bug, not a feature. Whenever this case is encountered, it is impossible to make all elements equal.</li>
+                </ul>
+                <p>Once each <span class="math inline">\(q_i\)</span> is determined, we can sum them to find our resulting answer.</p>
+                <p><strong>Remark.</strong> While the following was not used in the final solution, it came up while brainstorming some possible methods, and it does in theory provide an alternate method for obtaining <span class="math inline">\(q\)</span> in terms of <span class="math inline">\(d\)</span>.</p>
+                <p>Let the minimum number of operations be <span class="math inline">\(q\)</span>. Then the equal element should be <span class="math display">\[
+                    d = \frac{1}{n + q} \left( qk + \sum_{i = 1}^{n} a_i \right)
+                .\]</span> In particular, this is equivalent to <span class="math display">\[
+                    q = \frac{1}{d - k} \left( \sum_{i = 1}^{n} a_i - dn \right)
+                .\]</span></p>
+            </div>
+        </div>
+    </body>
+</html>
