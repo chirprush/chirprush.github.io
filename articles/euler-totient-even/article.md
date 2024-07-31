@@ -1,6 +1,6 @@
 ## Theoretical Background
 
-After pondering about some stuff relating to modular matrices from a [while back](/articles/matrix-modular-arithmetic/index.html), I thought of a very quick, and easy to derive way of showing that the Euler totient function \( \phi (n) \) is even (except in the case of \( n = 2 \)). We'll first start with a review.
+After pondering about some stuff relating to modular matrices from a [while back](/articles/matrix-modular-arithmetic/index.html), I thought of a very quick and easy to derive way of showing that the Euler totient function \( \phi (n) \) is even (except in the case of \( n = 2 \)). We'll first start with a review.
 
 <div class="side-box">
 The **Euler totient function** \( \phi(n) \) is defined to be the number of natural numbers less than \( n \) that are relatively prime to \( n \) (that is \( \gcd(n, k) = 1 \) for the natural \( k \)).
