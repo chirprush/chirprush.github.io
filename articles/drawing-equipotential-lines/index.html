@@ -97,7 +97,7 @@
                     x_1 \frac{\partial P(\vvec{r})}{\partial x_1} + x_2 \frac{\partial P(\vvec{r})}{\partial x_2} + \cdots + x_n \frac{\partial P(\vvec{r})}{\partial x_n} = \vvec{x} \cdot \nabla P(\vvec{r}) = 0
                 .\]</span> Observe that <span class="math inline">\(\nabla P = - \vvec{F}\)</span>, so this reduces to any point <span class="math inline">\(\vvec{x}\)</span> on the equipotential surface in the neighborhood of <span class="math inline">\(\vvec{r}\)</span> having the property that <span class="math display">\[
                     \vvec{F} \cdot \vvec{x} = 0
-                ,\]</span> which means that the vector tangent to the equipotential surface is orthogonal to the field lines.</p>
+                ,\]</span> which means that the vector tangent to the equipotential surface is orthogonal to the field lines. <span class="math inline">\(\blacksquare\)</span></p>
                 <h2 id="the-algorithm">The Algorithm</h2>
                 <p>Realizing this, we can use this to find and draw points along equipotential curves in two dimensions. Note that, for higher dimensions, this strategy fails to work given a greater number of points needed to define a valid surface as well as having a greater number of directions. That being said, this algorithm could be adapted to higher dimensions if given enough thought.</p>
                 <p>Suppose we start at some point <span class="math inline">\(\vvec{r}\)</span> and we wish to find some further point <span class="math inline">\(\vvec{r}&#39;&#39;\)</span> on the equipotential surface. We may first move along the vector orthogonal to the field line at the point by some amount. That is to say, <span class="math display">\[

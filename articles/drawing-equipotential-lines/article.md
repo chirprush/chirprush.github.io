@@ -33,7 +33,7 @@ Observe that \( \nabla P = - \vvec{F} \), so this reduces to any point \( \vvec{
 \[
     \vvec{F} \cdot \vvec{x} = 0
 ,\]
-which means that the vector tangent to the equipotential surface is orthogonal to the field lines.
+which means that the vector tangent to the equipotential surface is orthogonal to the field lines. \( \blacksquare \)
 
 ## The Algorithm
 

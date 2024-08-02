@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>chirprush - Project Euler: Problem 421</title>
+
+        <link rel="stylesheet" href="/assets/css/style.css">
+        <link rel="stylesheet" href="/assets/css/panel.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Katex -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+
+        
+        <meta charset="utf-8">
+    </head>
+
+    <body>
+        <div id="side-nav" class="side-panel">
+            <div class="panel-content">
+                <div class="panel-grid">
+                    <img class="grid-pfp" src="/assets/images/pfp.svg"></img>
+                    <h2 class="grid-title">Rushil Surti</h1>
+                    <p class="grid-email">rush040507@gmail.com</p>
+                    <div class="grid-icons"><a href="https://www.github.com/chirprush/" target="_blank"><i class="fa-brands fa-github"></i></a> <a href="https://www.youtube.com/channel/UCSc-MTo8KGPDMLszD6jYjxA" target="_blank"><i class="fa-brands fa-youtube"></i></a> <a href="https://www.instagram.com/chirprush/" target="_blank"><i class="fa-brands fa-instagram"></i></a></div>
+                </div>
+
+                <hr class="separator" />
+
+                <div class="description">
+                    <h2>Description</h2>
+                    <div class="side-line">
+                        <p>Solving Project Euler Problem 421, a beautiful number theory puzzle on counting roots modulo primes with a cryptographic and probabilistic flavor.</p>
+                    </div>
+                </div>
+
+                <div class="contents">
+                    <h2>Contents</h2>
+                    <div class="side-line">
+                        <ul>
+                        <li><a href="#problem">Problem</a></li>
+                        <li><a href="#solution">Solution</a><ul>
+                        <li><a href="#the-main-term">The Main Term</a></li>
+                        <li><a href="#the-residual-term">The Residual Term</a></li>
+                        </ul></li>
+                        <li><a href="#implementation-remarks">Implementation Remarks</a></li>
+                        </ul>
+                        <!--
+                        <ul>
+                            <li><b>Section 1.</b> Sample text</li>
+                            <li><ul>
+                                <li><b>Section 1.1.</b> Some stuff</li>
+                            </ul></li>
+                            <li><b>Section 2.</b> More sample text</li>
+                        </ul>
+                        -->
+                    </div>
+                </div>
+
+                <div class="navigation-container">
+                    <a href="/index.html">Articles</a>
+                    <a href="/tags.html">Tags</a>
+                    <a href="/about.html">About Me</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="content">
+                <h1>Project Euler: Problem 421</h1>
+
+                <hr class="separator" />
+                <div class="info-holder">
+                    <span class="info-value"><b>Author:</b> Rushil Surti</span>
+                    <span class="info-value"><b>Date:</b> August 2, 2024</span>
+                    <span class="info-value"><b>Tags:</b>  <a href="/tags.html#project-euler"><span class="info-tag">project-euler</span></a>  <a href="/tags.html#number-theory"><span class="info-tag">number-theory</span></a>  <a href="/tags.html#group-theory"><span class="info-tag">group-theory</span></a>  <a href="/tags.html#probability"><span class="info-tag">probability</span></a>  <a href="/tags.html#combinatorics"><span class="info-tag">combinatorics</span></a>  <a href="/tags.html#cryptography"><span class="info-tag">cryptography</span></a> </span>
+                </div>
+
+                <h2 id="problem">Problem</h2>
+                <div class="side-box">
+                <p><strong>Problem.</strong> Let <span class="math inline">\(s(n, m)\)</span> denote the sum of all distinct prime factors of <span class="math inline">\(n^{15} + 1\)</span> less than or equal to <span class="math inline">\(m\)</span>. Determine the value of <span class="math display">\[
+                    \sum_{n = 1}^{10^{11}} s(n, 10^8)
+                .\]</span></p>
+                </div>
+                <h2 id="solution">Solution</h2>
+                <p>For sake of being general, let <span class="math inline">\(L := 10^{11}\)</span> and <span class="math inline">\(N := 10^8\)</span> so that we must determine the value instead of <span class="math display">\[
+                    \sum_{n = 1}^{L} s(n, N)
+                .\]</span></p>
+                <p><strong>Observation.</strong> Our first observation is that <span class="math inline">\(L\)</span> is sufficiently large such that it is not possible to even iterate over each value of <span class="math inline">\(n\)</span> in a reasonable amount of time. It <em>is</em>, however, possible to iterate over all primes less than or equal to <span class="math inline">\(N\)</span> in a reasonable amount of time, which motivates us to make a transformation of the problem.</p>
+                <p>In particular, we shall take the sum over all primes less than or equal to <span class="math inline">\(N\)</span> and, noticing that we only care about distinct prime factors, we can evaluate this sum as the product of each prime with the frequency for which it appears in <span class="math inline">\(n^{15} + 1\)</span> as <span class="math inline">\(n\)</span> ranges from <span class="math inline">\(1\)</span> to <span class="math inline">\(L\)</span>. Along with the previous motivation given for such a reframing, this transformation is often used in many similar Project Euler problems, which is a good indicator that we are on the right track.</p>
+                <p>It now suffices to determine the number of <span class="math inline">\(n \le L\)</span> such that for some fixed <span class="math inline">\(p\)</span>, <span class="math display">\[
+                    n^{15} + 1 \equiv 0 \pmod{p}
+                .\]</span> Denote this frequency by <span class="math inline">\(f_{\le L}(p)\)</span>.</p>
+                <p><strong>Observation.</strong> Obviously, the values of <span class="math inline">\(n^{15} + 1\)</span> are periodic with a period length of <span class="math inline">\(p\)</span>. This means that there are the same number of solutions to the indicated equation in each block of <span class="math inline">\(p\)</span> elements. This allows us to decompose <span class="math inline">\(f_{\le L}(p)\)</span> to be <span class="math display">\[
+                    f_{\le L}(p) = \left\lfloor \frac{L}{p} \right\rfloor f_{\le p}(p) + f_{\le L \bmod p}(p)
+                .\]</span></p>
+                <h3 id="the-main-term">The Main Term</h3>
+                <p>We shall try to tackle the <span class="math inline">\(f_{\le p}(p)\)</span> term first.</p>
+                <p><strong>Observation.</strong> The number of solutions to <span class="math display">\[
+                    n^{15} + 1 \equiv 0 \pmod{p}
+                \]</span> is the same as the number of solutions to <span class="math display">\[
+                    n^{15} - 1 \equiv 0 \pmod{p}
+                .\]</span></p>
+                <p><em>Proof.</em> Suppose that <span class="math inline">\(\omega\)</span> is some solution to <span class="math display">\[
+                    \omega^{15} \equiv -1 \pmod{p}
+                .\]</span> We can then observe that <span class="math inline">\(-\omega\)</span> is a solution to the latter equation since <span class="math display">\[
+                    (-\omega)^{15} \equiv -\omega^{15} \equiv 1 \pmod{p}
+                .\]</span> Since <span class="math inline">\(x \mapsto -x\)</span> is a bijection over <span class="math inline">\(\mathbb{Z}_{p}^{\times}\)</span>, the number of solutions to the first and second equation are equal. <span class="math inline">\(\blacksquare\)</span></p>
+                <p>For the case of <span class="math inline">\(f_{\le L \bmod p}(p)\)</span>, this also means that we can simply find all solutions to the second equation in the specified range and negate them.</p>
+                <p>This is now slightly easier to work with because we have more knowledge of solving for when values are congruent to the identity element due to Fermat's little theorem and group theory.</p>
+                <p><strong>Observation.</strong> Observe that since <span class="math inline">\(15 = 3 \cdot 5\)</span>, we know that if <span class="math display">\[
+                    n^{15} \equiv 1 \pmod{p}
+                ,\]</span> then <span class="math inline">\(n\)</span> must have an order of either <span class="math inline">\(1\)</span>, <span class="math inline">\(3\)</span>, <span class="math inline">\(5\)</span>, or <span class="math inline">\(15\)</span> in <span class="math inline">\(\mathbb{Z}_p^{\times}\)</span> (since <span class="math inline">\(15\)</span> must be a multiple of the order). This tells us that there at least exists a subgroup of <span class="math inline">\(\mathbb{Z}_p^{\times}\)</span> that is of the same order, and one can verify that this subgroup is cyclic. Ranging <span class="math inline">\(n\)</span> over all possible values, we see that there are (and assert that there are only) either <span class="math inline">\(1\)</span>, <span class="math inline">\(3\)</span>, <span class="math inline">\(5\)</span>, or <span class="math inline">\(15\)</span> solutions to this equation depending on whether or not subgroups of the corresponding orders exist for the group.</p>
+                <p>This turns our focus to determining whether the group has a subgroup of certain order. In particular, we have the order of the group as <span class="math inline">\(| \mathbb{Z}_p^\times | = p - 1\)</span> and a desired subgroup order, say <span class="math inline">\(a\)</span>, and we want to determine whether there is such a subgroup in this group. In other words, we wish for a sort of converse to Lagrange's theorem, which can be achieved using the following theorem (one could also apply the more general Sylow's first theorem).</p>
+                <div class="side-box">
+                <p><strong>Theorem</strong> (Cauchy's Theorem)<strong>.</strong> Let <span class="math inline">\(G\)</span> be a finite group and suppose some prime <span class="math inline">\(p\)</span> divides <span class="math inline">\(|G|\)</span>. There then exists a subgroup of <span class="math inline">\(G\)</span> with order <span class="math inline">\(p\)</span>.</p>
+                </div>
+                <p>Applying it to our case here, we see that there exists subgroups of order <span class="math inline">\(3\)</span> and <span class="math inline">\(5\)</span> iff <span class="math inline">\(3 \mid p - 1\)</span> and <span class="math inline">\(5 \mid p - 1\)</span> respectively. Note that there exists a subgroup of order <span class="math inline">\(15\)</span> iff both such subgroups of order <span class="math inline">\(3\)</span> and <span class="math inline">\(5\)</span> exist (as this subgroup is just their direct product). Thus, we have the following realization.</p>
+                <p><strong>Lemma.</strong> There are <span class="math inline">\(\gcd(15, p - 1)\)</span> solutions to <span class="math display">\[
+                    n^{15} \equiv 1 \pmod{p}
+                \]</span> for <span class="math inline">\(1 \le n &lt; p\)</span>.</p>
+                <h3 id="the-residual-term">The Residual Term</h3>
+                <p>The residual term, <span class="math inline">\(f_{\le L \bmod p}(p)\)</span>, is a lot more unwieldy. Since <span class="math inline">\(L\)</span> is arbitrary, we must find some way of computing efficiently <span class="math inline">\(f_{\le k}(p)\)</span> for any arbitrary <span class="math inline">\(k\)</span> such that <span class="math inline">\(1 \le k &lt; p\)</span>. Indeed, one must be cognizant of our entire solution time complexity when looking for a viable solution. Iterating over all primes less than or equal to <span class="math inline">\(N := 10^8\)</span> alone takes <span class="math inline">\(O(N \log{\log N})\)</span> time using the <a href="https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes">Sieve of Eratosthenes</a>, so we mandate that computing the answer for each prime must take sublinear time in order for our program to run in reasonable enough time. Thus, if we're to find all solutions to <span class="math display">\[
+                    n^{15} \equiv \pm 1 \pmod{p}
+                \]</span> we must be smarter than just iterating over all elements of <span class="math inline">\(\mathbb{Z}_p^\times\)</span>. Indeed, we shall use our previous work on the existence of cyclic subgroups to help us in this case.</p>
+                <p><strong>Observation.</strong> Suppose we have a generator <span class="math inline">\(g\)</span> of <span class="math inline">\(\mathbb{Z}_p^{\times}\)</span>. Consider elements of the form <span class="math inline">\(g^{k(p-1)/q}\)</span> for <span class="math inline">\(0 \le k &lt; q\)</span>, where <span class="math inline">\(q\)</span> is some prime dividing <span class="math inline">\(p - 1\)</span>. We can then see that the set of these elements forms a subgroup of order <span class="math inline">\(q\)</span>. If we take <span class="math inline">\(q = 3\)</span> or <span class="math inline">\(q = 5\)</span>, these are precisely the subgroups that we want to compute. We have that <span class="math inline">\(q\)</span> is constant with respect to <span class="math inline">\(p\)</span> and calculating <span class="math inline">\(g^{(p-1)/q}\)</span> only takes <span class="math inline">\(O (\log p)\)</span> time, so this gives us indeed a sublinear way of getting all solutions modulo <span class="math inline">\(p\)</span>.</p>
+                <p>Now we turn to finding a generator of <span class="math inline">\(\mathbb{Z}_p^{\times}\)</span>. This, too, must be determined in sublinear time, so we still cannot just linearly iterate over all elements. It should be noted, though, that there is a very efficient approach to checking whether an element is indeed a generator of the group. Recall the following <a href="https://crypto.stackexchange.com/a/68318">result</a>:</p>
+                <div class="side-box">
+                <p><strong>Fact.</strong> An element <span class="math inline">\(g\)</span> is a generator if and only if for <em>each</em> prime factor <span class="math inline">\(q\)</span> of <span class="math inline">\(p - 1\)</span>, <span class="math display">\[
+                    g^{(p-1) / q} \not \equiv 1 \pmod{p}
+                .\]</span></p>
+                </div>
+                <p>Since there are asymptotically <span class="math inline">\(O(\log{\log p})\)</span> distinct prime factors (see the <a href="https://en.wikipedia.org/wiki/Prime_omega_function">omega function</a>) and we can factor <span class="math inline">\(p - 1\)</span> in roughly <span class="math inline">\(O(\log{p})\)</span> time with the help of some precomputation, this gives us a very fast way of verifying that an element is in fact a generator.</p>
+                <p>The fact that we can quickly verify elements but cannot linearly iterate over all of them in time motivates the following idea:</p>
+                <p><strong>Idea.</strong> We can randomly sample values from <span class="math inline">\(\mathbb{Z}_{p}^{\times}\)</span> until we reach a generator.</p>
+                <p>Our intuition for this is aided by the <a href="https://crypto.stanford.edu/pbc/notes/numbertheory/gen.html">following theorem</a>:</p>
+                <div class="side-box">
+                <p><strong>Theorem.</strong> There are <span class="math inline">\(\phi(p - 1)\)</span> generators in <span class="math inline">\(\mathbb{Z}_p^{\times}\)</span>.</p>
+                </div>
+                <p>With this, there is a <span class="math inline">\(\phi(p-1) / (p - 1)\)</span> probability of sampling a generator, so we should then expect <span class="math inline">\((p - 1) / \phi(p - 1)\)</span> samples before arriving at a generator (note that this assumes sampling with replacement; sampling without replacement would likely achieve better odds at the honestly small cost of storing past samples in perhaps a hashmap). Luckily, this probability is actually decently large. Direct computation of primes up to <span class="math inline">\(10^6\)</span> tells us that the average value of this characteristic is actually roughly <span class="math inline">\(0.374\)</span>. It also <a href="https://mathworld.wolfram.com/TotientSummatoryFunction.html">known</a> that <span class="math display">\[
+                    \sum_{k = 2}^{n} \phi(n) \sim \frac{1}{2 \zeta(2)} n^2 + O(n \log n)
+                .\]</span> Although there is no rigorous basis for this, we can expect that the probability of sampling a random generator is probably close to this value in the limit, so all in all we expect roughly <span class="math inline">\(2 \zeta(2) \approx 3.3\)</span> samples per prime, which is absolutely within reason, and we can just treat this as a constant factor for time complexity.</p>
+                <p>In total, this means that for each prime <span class="math inline">\(p\)</span>, we can determine the set of solutions to <span class="math display">\[
+                    n^{15} \equiv 1 \pmod{p}
+                \]</span> in <span class="math inline">\(O (\log{p} \log{\log p})\)</span> time. Negating these <span class="math inline">\(n\)</span> will then give us the desired solutions to the original congruence. This means that our full solution should run in roughly <span class="math inline">\(O(N \log{N} (\log{\log N})^2)\)</span> time.</p>
+                <p>While our ability to generate the set does seem to make some of our work determining <span class="math inline">\(f_{\le p}(p)\)</span> slightly redundant, it should be noted that it's better to use our previous work for efficiency and perhaps even some cleanliness. It's also just really interesting.</p>
+                <h2 id="implementation-remarks">Implementation Remarks</h2>
+                <p>We shall make some final remarks on implementation, specifically on the size of the answer. Since the problem does not specify that we should take the answer modulo some reasonably large prime smaller than the size of a 64-bit integer, we are inclined to believe that the full answer should fit, but it's good practice to show that this is true anyway.</p>
+                <p>In particular, we can intuit the following upper bound: <span class="math display">\[
+                \begin{align*}
+                    \textsf{answer} &amp;:= \sum_{p \le N} p \left( \left\lfloor \frac{L}{p} \right\rfloor f_{\le p} (p)  + f_{\le L \bmod p} (p) \right) \\
+                    &amp;\le \sum_{p \le N} 15 p \left( \frac{L}{p} + 1 \right) \\
+                    &amp;= 15 \sum_{p \le N} \left( L + p \right).
+                \end{align*}
+                \]</span> Since the sum is taken over all primes less than <span class="math inline">\(N\)</span>, we can transform this sum to be <span class="math display">\[
+                    15L \cdot \pi (N) + 15 \sum_{p \le N} p
+                .\]</span> Indeed, this sum is less than <span class="math inline">\(2^{64} - 1\)</span> (which can be quickly verified with Mathematica; the explicit value is <span class="math inline">\(8646370646855809140\)</span>), so if we use an unsigned long long integer type, we shouldn't run into integer overflow.</p>
+            </div>
+        </div>
+    </body>
+</html>

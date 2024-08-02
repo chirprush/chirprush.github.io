@@ -28,7 +28,7 @@ We provide the following construction for a permutation that costs only \( m \) 
 \[
     a: \left\lceil m / 2 \right\rceil, (\left\lceil m / 2 \right\rceil - 1), \ldots, 1, m, (m-1), \ldots, (m + 1 - \left\lceil m / 2 \right\rceil)
 ,\]
-though because the math is a tad gruesome, we shall not verify here that the sequence does in fact fulfill the cost conditions stated above.
+though because the math is a tad gruesome, we shall not verify here that the sequence does in fact fulfill the cost conditions stated above. \( \blacksquare \)
 
 
 Now since we have that a clique of size \( m \) is constructible and \( m \le \min\{n, k\} \), the solution is rather obvious (simply form as many cliques of greatest size that we can). We also trivially have that when \( k \ge n \), the minimum clique number is \( 1 \), which seems to be a rather good sanity check. In particular, we also have a closed form for the minimum number of cliques needed:

@@ -61,6 +61,13 @@ Stdout:
 
 Stderr:
 
+Rendering article at 'articles/project-euler-421'
+Command: pandoc -f markdown-smart+tex_math_single_backslash --standalone --toc --mathjax --template=templates/article.html --metadata-file=articles/project-euler-421/meta.yaml -o articles/project-euler-421/index.html articles/project-euler-421/article.md
+Return code: 0
+Stdout:
+
+Stderr:
+
 Rendering article at 'articles/project-euler-323'
 Command: pandoc -f markdown-smart+tex_math_single_backslash --standalone --toc --mathjax --template=templates/article.html --metadata-file=articles/project-euler-323/meta.yaml -o articles/project-euler-323/index.html articles/project-euler-323/article.md
 Return code: 0

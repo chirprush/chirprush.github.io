@@ -15,7 +15,7 @@ Consider matrices from the set \( M_{k \times k}(\mathbb{Z}_m) \), where \( \mat
 **Theorem.** Let \( A \) be any modular matrix of dimension \( k \) and modulus \( m \). The sequence \( A, A^2, A^3, \ldots \) is eventually periodic.
 </div>
 
-*Proof.* The sequence being periodic is equivalent to any matrix appearing more than once in the sequence. Since the sequence is infinite and there are \( m^{k^2} \) modular matrices of same dimension and modulus, we can always choose a sequence index greater than \( m^{k^2} \) and argue by the Pigeonhole Principle that there must exist a duplicate matrix. Thus, the sequence must repeat at some point (not necessarily with the starting matrix).
+*Proof.* The sequence being periodic is equivalent to any matrix appearing more than once in the sequence. Since the sequence is infinite and there are \( m^{k^2} \) modular matrices of same dimension and modulus, we can always choose a sequence index greater than \( m^{k^2} \) and argue by the Pigeonhole Principle that there must exist a duplicate matrix. Thus, the sequence must repeat at some point (not necessarily with the starting matrix). \( \blacksquare \)
 
 With this in mind, we now begin discussing invertibility.
 
@@ -27,7 +27,7 @@ With this in mind, we now begin discussing invertibility.
 **Theorem.** A modular matrix \( A \in M_{k \times k}(\mathbb{Z}_m) \) is invertible iff \( \det A \) is invertible in \( \mathbb{Z}_m \). That is to say, iff \( \gcd{(\det A, m)} = 1 \).
 </div>
 
-*Proof.* Since the properties of determinants still apply, \( \det A^{-1} = (\det A)^{-1} \), so clearly if \( \gcd{(\det A, m)} > 1 \), this cannot exist. Thus, it suffices to show that all matrices with \( \det A \) such that \( \gcd(\det A, m) = 1 \) are invertible. *This remains to be proven (I might come back to this later).*
+*Proof.* Since the properties of determinants still apply, \( \det A^{-1} = (\det A)^{-1} \), so clearly if \( \gcd{(\det A, m)} > 1 \), this cannot exist. Thus, it suffices to show that all matrices with \( \det A \) such that \( \gcd(\det A, m) = 1 \) are invertible. *This remains to be proven (I might come back to this later).* \( \blacksquare \)
 
 **Notation.** We denote the set of invertible modular matrices with size \( k \times k \) and modulo \( m \) by \( N_{k \times k}(\mathbb{Z}_m) \).
 
@@ -41,7 +41,7 @@ With this, we can now see some sets of modular matrices have a structure to them
 
 - **Associativity**: We have trivially that \( A(BC) = (AB)C \).
 - **Identity Element**: The unique identity element for \( M_{k \times k}(\mathbb{Z}_m) \) is \( I_k \).
-- **Inverse Element**: It is already stated that each element has a (two-sided) inverse. Since this inverse is also invertible, it is included the group.
+- **Inverse Element**: It is already stated that each element has a (two-sided) inverse. Since this inverse is also invertible, it is included the group. \( \blacksquare \)
 
 Because this group is of finite order, we have that for any invertible modular matrix \( A \), there exists some smallest non-zero exponent \( r \), the order of the element, such that \( A^r = I_k \). We wish to the order, or some multiple of it, which shall give us a tool to reduce the exponent of a modular matrix power.
 
@@ -73,7 +73,7 @@ While this doesn't do much for us, there's one really nice simplification that w
 **Theorem.** For all \( a \) such that \( \gcd(a, m) = 1 \), \( \mathfrak{q}(a) \) are all equal.
 </div>
 
-*Proof.* Consider the mapping \( x \mapsto qx \), where \( \gcd(q, m) = 1 \). Since \( q^{-1} \) exists, this mapping is invertible, and is thus a bijection over \( \mathbb{Z}_m \). We observe that applying such a mapping elementwise to a modular matrix also forms a bijection. Since the properties of determinants apply, this mapping transforms \( \det A \) to be \( q^k \det A \). Since \( \gcd(\det A, m) = \gcd(a, m) = 1 \) and \( \gcd(q, m) = 1 \), we can always choose a \( q \) such that \( q^k = a^{-1} \). This means that we can always construct a bijection between modular matrices of determinant \( a \) and modular matrices of determinant \( 1 \), which suffices to show that each of the specified congruency classes for determinants contains the same number of elements.
+*Proof.* Consider the mapping \( x \mapsto qx \), where \( \gcd(q, m) = 1 \). Since \( q^{-1} \) exists, this mapping is invertible, and is thus a bijection over \( \mathbb{Z}_m \). We observe that applying such a mapping elementwise to a modular matrix also forms a bijection. Since the properties of determinants apply, this mapping transforms \( \det A \) to be \( q^k \det A \). Since \( \gcd(\det A, m) = \gcd(a, m) = 1 \) and \( \gcd(q, m) = 1 \), we can always choose a \( q \) such that \( q^k = a^{-1} \). This means that we can always construct a bijection between modular matrices of determinant \( a \) and modular matrices of determinant \( 1 \), which suffices to show that each of the specified congruency classes for determinants contains the same number of elements. \( \blacksquare \)
 
 This allows us to simplify our sum a bit further, transforming into
 \[

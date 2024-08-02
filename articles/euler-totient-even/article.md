@@ -20,7 +20,7 @@ Let \( A_n \) denote the set, of natural numbers less than \( n \) that are rela
 - **Identity element**: This condition is also obvious, as one can verify that \( 1 \) is in \( \mathbb{Z}_n^\times \) and satisfies the conditions to be the identity.
 - **Inverse elements**: By the Extended Euclidean algorithm, we know that for any \( a \in \mathbb{Z}_n^\times \), \( a^{-1} \) exists in general. Thus, it suffices to prove that this \( a^{-1} \) is in \( \mathbb{Z}_n^\times \); that is, we must prove that \( \gcd(a^{-1}, n) = 1 \).
 
-    Observe that for any \( k \), \( \gcd(ka^{-1}, n) \ge \gcd(a^{-1}, n) \). If we take \( k = a \), however, we see that \( \gcd(ka^{-1}, n) = \gcd(1, n) = 1 \), so clearly \( \gcd(a^{-1}, n) = 1 \).
+    Observe that for any \( k \), \( \gcd(ka^{-1}, n) \ge \gcd(a^{-1}, n) \). If we take \( k = a \), however, we see that \( \gcd(ka^{-1}, n) = \gcd(1, n) = 1 \), so clearly \( \gcd(a^{-1}, n) = 1 \). \( \blacksquare \)
 
 This group has a direct correlation with the original problem at hand. Indeed, \( |\mathbb{Z}_n^\times| = |A_n| = \phi (n) \). Now that we have a group structure over the set, however, we can use some fun group theory concepts. In particular, recall Lagrange's theorem, or a certain version of it at least.
 
@@ -36,6 +36,6 @@ Using this we can trivially show that the Euler totient is even.
 **Theorem.** \( \phi(n) \) is even for \( n \ge 3 \).
 </div>
 
-*Proof.* We have that \( \mathbb{Z}_n^\times \) is a group and \( |\mathbb{Z}_n^\times| = \phi(n) \). Observe, however, that \( \{1, -1\} \subseteq \mathbb{Z}_n^\times \) is a subgroup of this group, and it clearly has order \( 2 \). Thus, we must have that \( 2 \mid \phi(n) \).
+*Proof.* We have that \( \mathbb{Z}_n^\times \) is a group and \( |\mathbb{Z}_n^\times| = \phi(n) \). Observe, however, that \( \{1, -1\} \subseteq \mathbb{Z}_n^\times \) is a subgroup of this group, and it clearly has order \( 2 \). Thus, we must have that \( 2 \mid \phi(n) \). \( \blacksquare \)
 
 The only exception to this is the case of \( n = 2 \), where \( \phi(2) = 1 \). The reason that this argument fails in this case is because the subgroup is actually of order \( 1 \), as \( 1 \) is congruent to \( -1 \) modulo \( 2 \).

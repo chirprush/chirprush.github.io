@@ -19,6 +19,6 @@ In other words, we have a system of \( m + 1 \) equations in our \( m + 1 \) unk
     \textsf{sub}[r, k] = \frac{(p^r - 1)(p^r - p) \cdots (p^r - p^{k - 1})}{(p^k - 1)(p^k - p) \cdots (p^k - p^{k-1})}
 .\]
 
-*Proof.* We would like to be able to pick out \( k \)-dimensional subspaces of a \( r \)-dimensional vector space, so we do so by picking \( k \) linearly independent vectors to form a basis. However, this overcounts by quite a bit, so we must divide by the number of ways to choose \( k \) linearly independent vectors from the subspace that we found.
+*Proof.* We would like to be able to pick out \( k \)-dimensional subspaces of a \( r \)-dimensional vector space, so we do so by picking \( k \) linearly independent vectors to form a basis. However, this overcounts by quite a bit, so we must divide by the number of ways to choose \( k \) linearly independent vectors from the subspace that we found. \( \blacksquare \)
 
 Since the denominator of \( \textsf{sub}[r, k] \) can be precomputed in reasonable time and the numerator can be computed with an easy recursion, we can solve for \( \textsf{ranks}[k] \) and thus find the answer in something like \( O(k^2 \log n) \) time, where the logarithm factor appears because of calculating the exponentials modulo the fixed prime \( P \).
