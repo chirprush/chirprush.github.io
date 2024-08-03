@@ -33,6 +33,9 @@ class Article:
             except KeyError as e:
                 raise ValueError("   Title not listed for article")
 
+    def site_url(self):
+        return "https://chirprush.github.io/" + str(self.result)
+
     def thumbnail(self):
         # Ex.
         # <div class="thumbnail" onclick="location.href='/articles/first-article/index.html';">
@@ -117,6 +120,7 @@ with open("log.txt", "w") as log:
         try:
             article = Article(d)
             articles.append(article)
+
         except ValueError as e:
             print(e)
             print("   Skipping..")
@@ -176,4 +180,19 @@ with open("log.txt", "w") as log:
 
     print("Finished rendering tags.html")
     
+    print()
+
+    print("Rendering sitemap.txt")
+
+    with open("sitemap.txt", "w") as sitemap:
+        sitemap.write("https://chirprush.github.io/\n")
+        sitemap.write("https://chirprush.github.io/index.html\n")
+        sitemap.write("https://chirprush.github.io/about.html\n")
+        sitemap.write("https://chirprush.github.io/tags.html\n")
+
+        for article in articles:
+            sitemap.write(article.site_url() + "\n")
+
+    print("Finished rendering sitemap.txt")
+
     print()
