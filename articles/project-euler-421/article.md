@@ -106,12 +106,12 @@ The fact that we can quickly verify elements but cannot linearly iterate over al
 Our intuition for this is aided by the [following theorem](https://crypto.stanford.edu/pbc/notes/numbertheory/gen.html):
 
 <div class="side-box">
-**Theorem.** There are \( \phi(p - 1) \) generators in \( \mathbb{Z}_p^{\times} \).
+**Theorem.** There are \( \varphi(p - 1) \) generators in \( \mathbb{Z}_p^{\times} \).
 </div>
 
-With this, there is a \( \phi(p-1) / (p - 1) \) probability of sampling a generator, so we should then expect \( (p - 1) / \phi(p - 1) \) samples before arriving at a generator (note that this assumes sampling with replacement; sampling without replacement would likely achieve better odds at the honestly small cost of storing past samples in perhaps a hashmap). Luckily, this probability is actually decently large. Direct computation of primes up to \( 10^6 \) tells us that the average value of this characteristic is actually roughly \( 0.374 \). It also [known](https://mathworld.wolfram.com/TotientSummatoryFunction.html) that
+With this, there is a \( \varphi(p-1) / (p - 1) \) probability of sampling a generator, so we should then expect \( (p - 1) / \varphi(p - 1) \) samples before arriving at a generator (note that this assumes sampling with replacement; sampling without replacement would likely achieve better odds at the honestly small cost of storing past samples in perhaps a hashmap). Luckily, this probability is actually decently large. Direct computation of primes up to \( 10^6 \) tells us that the average value of this characteristic is actually roughly \( 0.374 \). It also [known](https://mathworld.wolfram.com/TotientSummatoryFunction.html) that
 \[
-    \sum_{k = 2}^{n} \phi(n) \sim \frac{1}{2 \zeta(2)} n^2 + O(n \log n)
+    \sum_{k = 2}^{n} \varphi(n) \sim \frac{1}{2 \zeta(2)} n^2 + O(n \log n)
 .\]
 Although there is no rigorous basis for this, we can expect that the probability of sampling a random generator is probably close to this value in the limit, so all in all we expect roughly \( 2 \zeta(2) \approx 3.3 \) samples per prime, which is absolutely within reason, and we can just treat this as a constant factor for time complexity.
 

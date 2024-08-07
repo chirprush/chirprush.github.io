@@ -75,6 +75,8 @@ While this doesn't do much for us, there's one really nice simplification that w
 
 *Proof.* Consider the mapping \( x \mapsto qx \), where \( \gcd(q, m) = 1 \). Since \( q^{-1} \) exists, this mapping is invertible, and is thus a bijection over \( \mathbb{Z}_m \). We observe that applying such a mapping elementwise to the first column (or any singular column) of a modular matrix also forms a bijection (a consequence of \( \gcd(a, m) = 1 \)). Since the properties of determinants apply, this mapping transforms \( \det A \) to be \( q \det A \). Since \( \gcd(\det A, m) = \gcd(a, m) = 1 \) and \( \gcd(q, m) = 1 \), we can always choose \( q \) to be \( a^{-1} \). This means that we can always construct a bijection between modular matrices of determinant \( a \) and modular matrices of determinant \( 1 \), which suffices to show that each of the specified congruency classes for determinants contains the same number of elements. \( \blacksquare \)
 
+In fact, this is actually a special case of the more general result: \( \mathfrak{q}(a) = \mathfrak{q}(\gcd(a, m)) \).
+
 This allows us to simplify our sum a bit further, transforming into
 \[
     \sum_{\gcd(a, m) = 1} \mathfrak{q} (a) = \varphi(m) \mathfrak{q}(1)
@@ -82,3 +84,23 @@ This allows us to simplify our sum a bit further, transforming into
 Unfortunately, I'm not so sure how hard it is to determine \( \mathfrak{q}(1) \) in general. Of course the set of modular matrices of determinant \( 1 \) forms a group in of itself, so there's something to work with, but I'm not sure how far one can get in terms of counting. Perhaps we should aim for a general asymptotic, although this isn't really applicable to reducing matrix powers.
 
 Perhaps I'll come back to this later if I have any ideas.
+
+## Alternative Methods for Reducing Matrix Powers
+
+To reiterate and be clear, one of the main reasons why we are motivated to calculate such determinant frequencies and orders of groups is to reduce the computation needed for calculating large matrix powers under modular arithmetic. This is highly analogous with number theory, where we have [Euler's theorem](https://en.wikipedia.org/wiki/Euler%27s_theorem)
+\[
+    a^{\varphi(m)} \equiv 1 \pmod{m}
+,\]
+where \( \gcd(a, m) = 1 \). If we wish to compute large powers of such an integer \( a \) modulo \( m \), we can take the exponent modulo \( \varphi(m) \) in order to reduce computation, at times by a drastic amount. In essence, we are trying to generalize this concept from modular scalars to modular matrices. Indeed, if one takes the case of \( k = 1 \), we have that \( \varphi (m) \mathfrak{q}(1) = \varphi(m) \), so we are on the right track, as scalars can be thought of as merely \( 1 \times 1 \) matrices.
+
+As for the question of why one would take large powers of modular matrices, such instances often arise when we are trying to calculate large values of linear recurrences modulo some number, so these approaches are not without benefit even outside of just purely being interesting.
+
+If we reconsider the formula above for counting the number of invertible matrices for prime \( m \), we can approximate the order of the group asymptotically to see how well we can reduce matrix powers. Since the product is roughly of order \( O(m^{k^2}) \) and there are \( \varphi(m) = m - 1 \)  equivalency classes we are dividng over, we get that the exponent can be reduced to a value in the range of roughly \( [0, m^{k^2 - 1}) \), which can grow rather large quickly. This is not sufficiently small enough to be useful.
+
+In the case of linear recurrences, however, we can improve this reduction quite significantly. A linear recurrence of the form
+\[
+    a_{n} = c_{1} a_{n-1} + c_{2} a_{n - 2} + \cdots + c_k a_{n - k}
+,\]
+where \( c_k \) in particular is non-zero, can be modelled by a \( k \times k \) matrix. Feeding in an input vector of initial values and applying it to this matrix shifts each of the values in the vector over an index according to the sequence. Thus, taking some \( j \)th power of the matrix shifts the indices over by \( j \). Using this approach, we can hope to calculate large values from the sequence of \( a_{n} \).
+
+Observe that the next state of the sequence depends solely on the input vector, for which there are \( m^k \) total choices. Using a pigeonhole argument similar to the one at the start of the article, we can show that the matrix power sequences have to be eventually periodic, with a period length less than or equal to \( m^k \). The actual order of the matrix must be brute forced in some way (or perhaps one could attempt diagonalization if possible?), but this is a significant improvement over the previous bound.
