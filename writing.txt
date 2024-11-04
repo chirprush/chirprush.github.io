@@ -1,0 +1,3 @@
+- Differential geometry/tensor calculus stuff
+- Signal processing and allat
+- AP Lit simulation project writeup if I actually end up doing it

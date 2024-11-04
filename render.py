@@ -2,6 +2,7 @@
 
 import subprocess
 import yaml
+import zlib
 from pathlib import Path
 from dateutil import parser
 
@@ -14,8 +15,22 @@ class Article:
         self.metadata = base / "meta.yaml"
         self.result = base / "index.html"
 
+        self.checksum_file = base / "checksum.txt"
+
+        self.should_render = True
+
         if not self.article.exists():
             raise ValueError(f"   Could not find article markdown file at '{self.article}'")
+        else:
+            with open(str(self.article.absolute())) as article:
+                self.current_checksum = zlib.crc32(article.read().encode("utf-8"))
+
+        if self.checksum_file.exists():
+            with open(str(self.checksum_file.absolute())) as csum:
+                self.past_checksum = int(csum.read())
+
+            if self.current_checksum == self.past_checksum:
+                self.should_render = False
 
         if not self.metadata.exists():
             raise ValueError(f"   Could not find yaml metadata file at '{self.metadata}'")
@@ -63,6 +78,10 @@ class Article:
         thumbnail_tag = f"""<div class="thumbnail" onclick="location.href='{"/" + str(self.result)}';">\n    {heading_tag}\n    {info_tag}\n    {description_tag}\n</div>"""
 
         return thumbnail_tag
+
+    def renew_checksum(self):
+        with open(str(self.checksum_file.absolute()), "w") as csum:
+            csum.write(str(self.current_checksum))
 
     def render(self, log):
         # Tweaking the options to get the correct arrangement for Katex to actually render
@@ -115,7 +134,6 @@ with open("log.txt", "w") as log:
         if not d.is_dir():
             continue
 
-        print(f"-> Retrieving article at '{d}'")
 
         try:
             article = Article(d)
@@ -126,12 +144,19 @@ with open("log.txt", "w") as log:
             print("   Skipping..")
             continue
 
-        print(f"   Rendering article '{article.name}' to '{article.result}'")
+        if article.should_render:
+            print(f"-> Retrieving article at '{d}'")
+            print(f"   Rendering article '{article.name}' to '{article.result}'")
+            log.write(f"Rendering article at '{d}'\n")
 
-        log.write(f"Rendering article at '{d}'\n")
-        article.render(log)
+            article.render(log)
 
-        print()
+            print()
+        else:
+            # print(f"   No changes found. Skipping rendering.")
+            pass
+
+        article.renew_checksum()
 
     print("Rendering index.html")
 
