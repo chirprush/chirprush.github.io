@@ -1,0 +1,6 @@
+---
+title: "A Remark on Commuting Matrices"
+tags: ["linear-algebra", "matrices"]
+publish-date: "November 9, 2024"
+description: |
+  Suppose matrices \\( A \\) and \\( B \\) commute. We explore the question of when one matrix can be expressed in terms of the other.

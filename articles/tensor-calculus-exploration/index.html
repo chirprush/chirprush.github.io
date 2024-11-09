@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>chirprush - $title$</title>
+        <title>chirprush - Tensor Calculus Exploration</title>
 
         <link rel="stylesheet" href="/assets/css/style.css">
         <link rel="stylesheet" href="/assets/css/panel.css">
@@ -13,14 +13,9 @@
         <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
         <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
 
-        $for(header-includes)$
-        $header-includes$
-        $endfor$
-
-        $for(script-includes)$
-        <script src="./$script-includes$"></script>
-        $endfor$
-
+        
+                <script src="./simulation.js"></script>
+        
         <meta charset="utf-8">
     </head>
 
@@ -39,14 +34,17 @@
                 <div class="description">
                     <h2>Description</h2>
                     <div class="side-line">
-                        <p>$description$</p>
+                        <p>Gaining an intuitive foothold and mental organization on tensor calculus, particularly for applications involving the geodesic equation. In part, these are notes for myself.</p>
                     </div>
                 </div>
 
                 <div class="contents">
                     <h2>Contents</h2>
                     <div class="side-line">
-                        $toc$
+                        <ul>
+                        <li><a href="#section"></a></li>
+                        <li><a href="#a-tangible-example">A Tangible Example</a></li>
+                        </ul>
                         <!--
                         <ul>
                             <li><b>Section 1.</b> Sample text</li>
@@ -69,16 +67,19 @@
 
         <div class="content-wrapper">
             <div class="content">
-                <h1>$title$</h1>
+                <h1>Tensor Calculus Exploration</h1>
 
                 <hr class="separator" />
                 <div class="info-holder">
                     <span class="info-value"><b>Author:</b> Rushil Surti</span>
-                    <span class="info-value"><b>Date:</b> $publish-date$</span>
-                    <span class="info-value"><b>Tags:</b> $for(tags)$ <a href="/tags.html#$tags$"><span class="info-tag">$tags$</span></a> $endfor$</span>
+                    <span class="info-value"><b>Date:</b> November 4, 2024</span>
+                    <span class="info-value"><b>Tags:</b>  <a href="/tags.html#notes"><span class="info-tag">notes</span></a>  <a href="/tags.html#tensor-calculus"><span class="info-tag">tensor-calculus</span></a>  <a href="/tags.html#linear-algebra"><span class="info-tag">linear-algebra</span></a>  <a href="/tags.html#multivariable-calculus"><span class="info-tag">multivariable-calculus</span></a> </span>
                 </div>
 
-                $body$
+                <p>In comparison to fields like high school/undergraduate calculus and linear algebra, tensor calculus is a subject that feels rather <em>out there</em>. The first time when one might hear about tensor calculus is in general relativity to model the curvature of spacetime, and it even has it's own embedded language of sorts for how to manage indices. The concept of a tensor itself is rather esoteric, a common joke being that a tensor is defined seemingly tautologically as anything that transforms like a tensor (although this is more of a nod to the mathematical view of a tensor as an abstract multilinear map).</p>
+                <p>But tensor calculus itself is a rather beautiful and geometric extension of regular calculus, and it comes as a consequence of differing coordinate systems. The main tenant of tensor calculus (specifically the transformation rules of tensors) is actually rather natural: <strong>objects are physically the same regardless of how we view them</strong>. At the moment, this statement might not be very impactful (we will revisit after some actual math), but we do already have some inuitive notion of what this is getting at. In physics, we have different systems of measurement: the SI system, the CGS system, the goofy imperial system, and so on. One can say a certain length is <span class="math inline">\(2.54 \text{ cm}\)</span> or <span class="math inline">\(1 \text{ in}\)</span>, and while both the numbers and units are different, the physical lengths both represent are the same. Tensor calculus takes this idea, generalizes it much further, and makes it systematic.</p>
+                <h2 id="section"></h2>
+                <h2 id="a-tangible-example">A Tangible Example</h2>
             </div>
         </div>
     </body>

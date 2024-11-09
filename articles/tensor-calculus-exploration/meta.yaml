@@ -1,0 +1,8 @@
+---
+title: "Tensor Calculus Exploration"
+tags: ["notes", "tensor-calculus", "linear-algebra", "multivariable-calculus"]
+publish-date: "November 4, 2024"
+description: |
+  Gaining an intuitive foothold and mental organization on tensor calculus, particularly for applications involving the geodesic equation. In part, these are notes for myself.
+script-includes: ["simulation.js"]
+wip: true

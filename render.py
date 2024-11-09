@@ -3,6 +3,7 @@
 import subprocess
 import yaml
 import zlib
+from sys import argv
 from pathlib import Path
 from dateutil import parser
 
@@ -41,6 +42,8 @@ class Article:
 
                 self.name = self.data["title"]
 
+                self.wip = self.data.get("wip", False)
+
                 # Useful for sorting based on time
                 self.epoch = parser.parse(self.data["publish-date"]).timestamp()
             except yaml.YAMLError as e:
@@ -62,8 +65,13 @@ class Article:
         #     </div>
         #     <p>The first (and hopefully not the last) article for this website, created mainly for testing purposes.</p>
         # </div>
+
+        # Bit of a hacky workaround because Pandoc's YAML parser needs one to escape backslashes but
+        # it seems Python's YAML parser doesn't
+        processed_description = self.data["description"].strip().replace("\\\\", "\\")
+
         heading_tag = f"<h3>{self.name}</h3>"
-        description_tag = f"<p>{self.data['description'].strip()}</p>"
+        description_tag = f"<p>{processed_description}</p>"
 
         tags = " ".join(f'<a href="/tags.html#{tag}"><span class="info-tag">{tag}</span></a>' for tag in self.data["tags"])
 
@@ -126,6 +134,8 @@ class Article:
 # as well, but I'll work on that once I actually get content and can see how
 # things look I suppose
 
+force_render = ("-f" in argv) or ("--force" in argv)
+
 articles_dir = Path("./articles")
 articles = []
 
@@ -134,17 +144,22 @@ with open("log.txt", "w") as log:
         if not d.is_dir():
             continue
 
-
         try:
             article = Article(d)
-            articles.append(article)
+
+            if article.wip:
+                print(f"-> Skipping article at '{d}' (WIP)")
+                print()
+                continue
+            else:
+                articles.append(article)
 
         except ValueError as e:
             print(e)
             print("   Skipping..")
             continue
 
-        if article.should_render:
+        if article.should_render or force_render:
             print(f"-> Retrieving article at '{d}'")
             print(f"   Rendering article '{article.name}' to '{article.result}'")
             log.write(f"Rendering article at '{d}'\n")

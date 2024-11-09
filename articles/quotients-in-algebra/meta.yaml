@@ -4,3 +4,4 @@ tags: ["group-theory", "abstract-algebra"]
 publish-date: "October 5, 2024"
 description: |
   Exploring the intuition and some details behind quotient groups/rings/structures in abstract algebra.
+wip: true
