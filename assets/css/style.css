@@ -86,6 +86,55 @@ body {
     margin-left: 12px;
 }
 
+.black-box {
+    border: solid 2px black;
+}
+
+.black-box p {
+    width: 95%;
+    margin-left: 12px;
+}
+
+.solution {
+    
+}
+
+.solution summary {
+    font-weight: bold;
+
+    background-color: var(--side-panel-bg);
+
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 12px;
+    
+    border-radius: 10px;
+}
+
+.solution .solution-contents {
+    margin-left: 5px;
+    border-left: black 2px solid;
+}
+
+.solution[open] .solution-contents {
+    animation: appear 0.5s ease-in-out;
+}
+
+@keyframes appear {
+    0%   { opacity: 0; max-height: 0vh }
+    100% { opacity  1; max-height: 100vh }
+}
+
+.solution p, .solution li {
+    margin-left: 10px;
+    width: 95%;
+}
+
+.solution {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
 .thumbnail {
     /* border: solid 2px var(--side-panel-border); */
     background: var(--side-panel-bg);
@@ -118,6 +167,12 @@ body {
     color: #3e5f93;
 }
 
+.content canvas {
+    width: 100%;
+
+    margin-top: 15px;
+}
+
 .thumbnail > * {
     padding-left: 20px;
     width: calc(100% - 40px);
@@ -133,4 +188,8 @@ img {
 
 ol > li::marker {
     font-weight: bold;
+}
+
+.content li {
+    margin-bottom: 10px;
 }

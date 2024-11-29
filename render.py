@@ -15,6 +15,7 @@ class Article:
         self.article = base / "article.md"
         self.metadata = base / "meta.yaml"
         self.result = base / "index.html"
+        self.includes = base / "includes.html"
 
         self.checksum_file = base / "checksum.txt"
 
@@ -101,6 +102,10 @@ class Article:
         # if you use the katex flag instead of the mathjax flag, it won't work :(
         # Thank you pandoc, very cool
         cmd = ["pandoc", "-f", "markdown-smart+tex_math_single_backslash", "--standalone", "--toc", "--mathjax", "--template=templates/article.html", "--metadata-file=" + str(self.metadata), "-o", str(self.result), str(self.article)]
+
+        if self.includes.exists():
+            cmd = ["pandoc", "-f", "markdown-smart+tex_math_single_backslash", "--standalone", "--toc", "--mathjax", "--template=templates/article.html", "--metadata-file=" + str(self.metadata), "--include-in-header=" + str(self.includes), "-o", str(self.result), str(self.article)]
+
         print()
         print("   " + " ".join(cmd[:3]))
         print("   " + " ".join(cmd[3:]))

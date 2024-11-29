@@ -1,4 +1,6 @@
-In comparison to fields like high school/undergraduate calculus and linear
+<div id="simulation-canvas"></div>
+
+In comparison to fields like high school/undergraduate calculus and linear 
 algebra, tensor calculus is a subject that feels rather _out there_. The first
 time when one might hear about tensor calculus is in general relativity to model
 the curvature of spacetime, and it even has it's own embedded language of sorts

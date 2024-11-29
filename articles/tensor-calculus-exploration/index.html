@@ -13,8 +13,16 @@
         <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
         <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
 
+                <script type="importmap">
+          {
+            "imports": {
+              "three": "https://cdn.jsdelivr.net/npm/three@v0.170.0/build/three.module.js",
+              "three/addons/": "https://cdn.jsdelivr.net/npm/three@v0.170.0/examples/jsm/"
+            }
+          }
+        </script>
         
-                <script src="./simulation.js"></script>
+        <script src="./simulation.js" type="module"></script>
         
         <meta charset="utf-8">
     </head>
@@ -42,7 +50,7 @@
                     <h2>Contents</h2>
                     <div class="side-line">
                         <ul>
-                        <li><a href="#section"></a></li>
+                        <li><a href="#coordinate-systems">Coordinate Systems</a></li>
                         <li><a href="#a-tangible-example">A Tangible Example</a></li>
                         </ul>
                         <!--
@@ -76,9 +84,15 @@
                     <span class="info-value"><b>Tags:</b>  <a href="/tags.html#notes"><span class="info-tag">notes</span></a>  <a href="/tags.html#tensor-calculus"><span class="info-tag">tensor-calculus</span></a>  <a href="/tags.html#linear-algebra"><span class="info-tag">linear-algebra</span></a>  <a href="/tags.html#multivariable-calculus"><span class="info-tag">multivariable-calculus</span></a> </span>
                 </div>
 
+                <div id="simulation-canvas">
+                
+                </div>
                 <p>In comparison to fields like high school/undergraduate calculus and linear algebra, tensor calculus is a subject that feels rather <em>out there</em>. The first time when one might hear about tensor calculus is in general relativity to model the curvature of spacetime, and it even has it's own embedded language of sorts for how to manage indices. The concept of a tensor itself is rather esoteric, a common joke being that a tensor is defined seemingly tautologically as anything that transforms like a tensor (although this is more of a nod to the mathematical view of a tensor as an abstract multilinear map).</p>
                 <p>But tensor calculus itself is a rather beautiful and geometric extension of regular calculus, and it comes as a consequence of differing coordinate systems. The main tenant of tensor calculus (specifically the transformation rules of tensors) is actually rather natural: <strong>objects are physically the same regardless of how we view them</strong>. At the moment, this statement might not be very impactful (we will revisit after some actual math), but we do already have some inuitive notion of what this is getting at. In physics, we have different systems of measurement: the SI system, the CGS system, the goofy imperial system, and so on. One can say a certain length is <span class="math inline">\(2.54 \text{ cm}\)</span> or <span class="math inline">\(1 \text{ in}\)</span>, and while both the numbers and units are different, the physical lengths both represent are the same. Tensor calculus takes this idea, generalizes it much further, and makes it systematic.</p>
-                <h2 id="section"></h2>
+                <h2 id="coordinate-systems">Coordinate Systems</h2>
+                <p>Early we looked at the adage (? is this the right word) that objects are physically the same regardless of how they are viewed. In order to make this statement concrete, we must make concrete what we mean by viewing something physical. In particular, we do so by constructing the notion of a coordinate system.</p>
+                <p><a href="Small%20note%20somewhere%20to%20clarify%20tensor%20vs%20tensor%20field">outline</a>: Consider we have two coordinate systems for the same plane (we only <a href="Small%20note%20somewhere%20to%20clarify%20tensor%20vs%20tensor%20field">outline</a>: treat coordinate systems and we don't really go into the rigour of manifolds and <a href="Small%20note%20somewhere%20to%20clarify%20tensor%20vs%20tensor%20field">outline</a>: such because idk topology bro like) (so we're <a href="Small%20note%20somewhere%20to%20clarify%20tensor%20vs%20tensor%20field">outline</a>: assuming 2D because it's the easiest to visualize). Both coordinate <a href="Small%20note%20somewhere%20to%20clarify%20tensor%20vs%20tensor%20field">outline</a>: systems look the same in terms of themselves of course, but it's the <a href="Small%20note%20somewhere%20to%20clarify%20tensor%20vs%20tensor%20field">outline</a>: between them that we care about [look this up]: Must the number of coordinates always be the same? I feel [look this up]: like differentiability should preserve the dimension of the [look this up]: manifold perhaps and like we're going to assume that the entire space is filled [look this up]: (i.e. bijective).</p>
+                <p><a href="Small%20note%20somewhere%20to%20clarify%20tensor%20vs%20tensor%20field">outline</a>: contravariant vectors (called vectors and covectors in math) are <a href="Small%20note%20somewhere%20to%20clarify%20tensor%20vs%20tensor%20field">outline</a>: really wacky but ultimately a consequence of the chain rule right <a href="Small%20note%20somewhere%20to%20clarify%20tensor%20vs%20tensor%20field">outline</a>: Mathematically the vector space is isomoporhic to the dual space so <a href="Small%20note%20somewhere%20to%20clarify%20tensor%20vs%20tensor%20field">outline</a>: while you could always just use normal vectors, they don't transform the way <a href="Small%20note%20somewhere%20to%20clarify%20tensor%20vs%20tensor%20field">outline</a>: that we want because if the basis transforms one way, the components have to <a href="Small%20note%20somewhere%20to%20clarify%20tensor%20vs%20tensor%20field">outline</a>: transform the other way (think about this in terms of units and such)</p>
                 <h2 id="a-tangible-example">A Tangible Example</h2>
             </div>
         </div>

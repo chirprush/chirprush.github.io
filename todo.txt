@@ -21,4 +21,4 @@ don't have to worry about changing every single file.
 - [X] Set up Github Pages
 - [X] Maybe download the Source Sans font locally so it doesn't take a long time to load? (wait shouldn't it cache though)
 - [X] Probably cache a previous version of each article to quickly compare to so that we can skip rerendering something that hasn't changed
-- [ ] (Modular Matrices) Try writing about reducing matrix powers using smart brute force computation maybe?
+- [ ] Fix the latex overflow
