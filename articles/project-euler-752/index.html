@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>chirprush - Project Euler: Problem 752</title>
+
+        <link rel="stylesheet" href="/assets/css/style.css">
+        <link rel="stylesheet" href="/assets/css/panel.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Katex -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+
+        
+        <meta charset="utf-8">
+    </head>
+
+    <body>
+        <div id="side-nav" class="side-panel">
+            <div class="panel-content">
+                <div class="panel-grid">
+                    <img class="grid-pfp" src="/assets/images/pfp.svg"></img>
+                    <h2 class="grid-title">Rushil Surti</h1>
+                    <p class="grid-email">rush040507@gmail.com</p>
+                    <div class="grid-icons"><a href="https://www.github.com/chirprush/" target="_blank"><i class="fa-brands fa-github"></i></a> <a href="https://www.youtube.com/channel/UCSc-MTo8KGPDMLszD6jYjxA" target="_blank"><i class="fa-brands fa-youtube"></i></a> <a href="https://www.instagram.com/chirprush/" target="_blank"><i class="fa-brands fa-instagram"></i></a> <a href="https://math.stackexchange.com/users/1128617/chirpyboat73" target="_blank"><i class="fa-brands fa-stack-exchange"></i></a></div>
+                </div>
+
+                <hr class="separator" />
+
+                <div class="description">
+                    <h2>Description</h2>
+                    <div class="side-line">
+                        <p>Solving Project Euler Problem 752, a nice problem on orders in fields with square roots.</p>
+                    </div>
+                </div>
+
+                <div class="contents">
+                    <h2>Contents</h2>
+                    <div class="side-line">
+                        <ul>
+                        <li><a href="#some-basic-observations">Some Basic Observations</a></li>
+                        <li><a href="#an-erroneous-solution-path">An Erroneous Solution Path</a></li>
+                        <li><a href="#no-way-its-gl2-pn">No Way It's <span class="math inline">\(GL(2, p^n)\)</span></a></li>
+                        <li><a href="#remarks">Remarks</a></li>
+                        <li><a href="#appendix-asymptotics-for-sigman-omegan">Appendix: Asymptotics for <span class="math inline">\(\sigma(n), \omega(n)\)</span></a></li>
+                        </ul>
+                        <!--
+                        <ul>
+                            <li><b>Section 1.</b> Sample text</li>
+                            <li><ul>
+                                <li><b>Section 1.1.</b> Some stuff</li>
+                            </ul></li>
+                            <li><b>Section 2.</b> More sample text</li>
+                        </ul>
+                        -->
+                    </div>
+                </div>
+
+                <div class="navigation-container">
+                    <a href="/index.html">Articles</a>
+                    <a href="/tags.html">Tags</a>
+                    <a href="/about.html">About Me</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="content">
+                <h1>Project Euler: Problem 752</h1>
+
+                <hr class="separator" />
+                <div class="info-holder">
+                    <span class="info-value"><b>Author:</b> Rushil Surti</span>
+                    <span class="info-value"><b>Date:</b> December 5, 2024</span>
+                    <span class="info-value"><b>Tags:</b>  <a href="/tags.html#project-euler"><span class="info-tag">project-euler</span></a>  <a href="/tags.html#number-theory"><span class="info-tag">number-theory</span></a>  <a href="/tags.html#matrices"><span class="info-tag">matrices</span></a>  <a href="/tags.html#abstract-algebra"><span class="info-tag">abstract-algebra</span></a>  <a href="/tags.html#group-theory"><span class="info-tag">group-theory</span></a> </span>
+                </div>
+
+                <p>This was actually a rather nice problem I had pinned for quite a while on Project Euler, so I'm glad I got around to actually solving it.</p>
+                <div class="black-box">
+                <p><strong>Problem.</strong> Write <span class="math inline">\((1 + \sqrt{7})^k = \alpha(k) + \beta(k) \sqrt{7}\)</span>. Now, define <span class="math inline">\(g(x)\)</span> to be the the smallest positive integer <span class="math inline">\(k\)</span> such that we simultaneously have <span class="math display">\[\begin{align*}
+                    \alpha(k) &amp;\equiv 1 \pmod{x}, \\
+                    \beta(k) &amp;\equiv 0 \pmod{x}
+                ,\end{align*}\]</span> and <span class="math inline">\(g(x) = 0\)</span> if there does not exist any <span class="math inline">\(k\)</span>. Calculate <span class="math display">\[
+                    G(N) = \sum_{x = 2}^{N} g(x)
+                \]</span> for <span class="math inline">\(N = 10^6\)</span>.</p>
+                </div>
+                <p>At first this seems like a chaining of very arbitrary definitions, but we can unravel this a bit more.</p>
+                <h2 id="some-basic-observations">Some Basic Observations</h2>
+                <p>Our first thing that we'll notice is that the choice of equivalence classes modulo <span class="math inline">\(x\)</span> being <span class="math inline">\(1\)</span> and <span class="math inline">\(0\)</span> is not at all arbitrary. In particular, <span class="math inline">\(\alpha(0)\)</span> and <span class="math inline">\(\beta(0)\)</span> satisfy these congruences, although <span class="math inline">\(0\)</span> is not a positive integer. This does hint that we'll be doing some work with orders and periods.</p>
+                <p>In particular, we are motivated to realize that since <span class="math inline">\(g(x)\)</span> intuitively represents a period, it is lcm-multiplicative. That is, for <span class="math inline">\(k = p_1^{e_1} p_2^{e_2} \cdots p_m^{e_m}\)</span>, <span class="math display">\[
+                    g(k) = \operatorname{lcm} \left( g(p_1^{e_1}), g(p_2^{e_2}), \ldots, g(p_m^{e_m}) \right)
+                ,\]</span> so now it suffices to determine the value of <span class="math inline">\(g\)</span> for prime powers only.</p>
+                <p>Some things should still be in the back of one's mind while solving this, though. We still haven't determined when a solution exists, which is rather important to know.</p>
+                <h2 id="an-erroneous-solution-path">An Erroneous Solution Path</h2>
+                <p>In a similar vein to solving for <span class="math inline">\(\cos(x)\)</span> in terms of complex exponentials, let's see that <span class="math display">\[\begin{align*}
+                    \alpha(k) &amp;\equiv \frac{(1 + \sqrt{7})^k + (1 - \sqrt{7})^k}{2} \pmod{x}, \\
+                    \beta(k) &amp;\equiv \frac{(1 + \sqrt{7})^k - (1 - \sqrt{7})^k}{2 \sqrt{7}} \pmod{x}
+                .\end{align*}\]</span> Notice that, if we could find our solutions to <span class="math inline">\(m^2 \equiv 7 \pmod{p}\)</span>, it would be trivial to obtain a direct expression for <span class="math inline">\(\alpha(k)\)</span> and <span class="math inline">\(\beta(k)\)</span>. With this direct expression, we could quickly check values until we arrived at the desired congruences.</p>
+                <p>There are some implicit assumptions that we should be aware of while trying this solution path. It may not be the case that <span class="math inline">\(\sqrt{7} \in \mathbb{Z}/x \mathbb{Z}\)</span>. In fact, number theory tells us that we can only have this square root if <span class="math inline">\(7\)</span> is a quadratic residue modulo <span class="math inline">\(x\)</span>. <em>Does this mean that there exists no solution (and thus <span class="math inline">\(g(x) = 0\)</span>) for <span class="math inline">\(x\)</span> where <span class="math inline">\(7\)</span> is a quadratic nonresidue?</em></p>
+                <p>Unfortunately, <strong>no</strong>. Consider that <span class="math inline">\(7\)</span> is a quadratic nonresidue modulo <span class="math inline">\(13\)</span>. However, with a bit of work, the reader can verify that <span class="math inline">\(g(13) = 168\)</span>. This fact (especially with <span class="math inline">\(13\)</span> being prime) effectively kills the solution path. We simply do not gain any information for <span class="math inline">\(x\)</span> where <span class="math inline">\(7\)</span> is a quadratic nonresidue.</p>
+                <h2 id="no-way-its-gl2-pn">No Way It's <span class="math inline">\(GL(2, p^n)\)</span></h2>
+                <p>That didn't work out, so let's return to the start of the problem. We want an efficient way to compute the coefficients, so we're motivated to consider a recurrence of some kind. Notice that <span class="math display">\[
+                    (1 + \sqrt{7})^k = (1 + \sqrt{7})^{k - 1} (1 + \sqrt{7})
+                ,\]</span> and multiplying everything out and writing in terms of <span class="math inline">\(\alpha(k)\)</span> and <span class="math inline">\(\beta(k)\)</span> gives <span class="math display">\[\begin{align*}
+                    \alpha(k) &amp;= \alpha(k - 1) + 7 \beta(k - 1), \\
+                    \beta(k) &amp;= \alpha(k - 1) + \beta(k - 1)
+                ,\end{align*}\]</span> and we can indeed take these under congruences. Since it suffices to only consider prime powers by our initial observations, take <span class="math inline">\(x = p^n\)</span>. Thus, <span class="math display">\[\begin{align*}
+                    \alpha(k) &amp;\equiv \alpha(k - 1) + 7 \beta(k - 1) \pmod{p^n}, \\
+                    \beta(k) &amp;\equiv \alpha(k - 1) + \beta(k - 1) \pmod{p^n}
+                .\end{align*}\]</span> Taking a bit of inspiration from a <a href="https://chirprush.github.io/articles/matrix-modular-arithmetic/index.html">previous blog post</a>, we can introduce some linear algebra and group theory here. Define <span class="math inline">\(\mathbf{v}_k = \begin{bmatrix}  \alpha(k) &amp; \beta(k) \end{bmatrix}^T\)</span> so that <span class="math display">\[\begin{align*}
+                    \mathbf{v}_k &amp;= \begin{bmatrix}
+                        1 &amp; 7 \\
+                        1 &amp; 1
+                    \end{bmatrix} \mathbf{v}_{k - 1} \pmod{p^n} \\
+                    \implies \mathbf{v}_k &amp;= \begin{bmatrix}
+                        1 &amp; 7 \\
+                        1 &amp; 1
+                    \end{bmatrix}^k \begin{bmatrix}
+                        1 \\
+                        0
+                    \end{bmatrix} \pmod{p^n}
+                .\end{align*}\]</span> For convenience, denote this matrix by <span class="math inline">\(A\)</span>.</p>
+                <p>Now, since we want to find when <span class="math inline">\(\mathbf{v}_k \equiv \begin{bmatrix} 1 &amp; 0 \end{bmatrix}^T \pmod{p^n}\)</span> it suffices to find the smallest <span class="math inline">\(k\)</span> such that <span class="math display">\[
+                    \begin{bmatrix}
+                        1 &amp; 7 \\
+                        1 &amp; 1
+                    \end{bmatrix}^k \equiv
+                    \begin{bmatrix}
+                        1 &amp; 0 \\
+                        0 &amp; 1
+                    \end{bmatrix} \pmod{p^n}
+                ,\]</span> where all congruences are taken elementwise. This <span class="math inline">\(k\)</span> is precisely the order of the matrix. This approach is particularly nice because it also tells us which cases do not have solutions. Since the determinant of A is <span class="math inline">\(-6\)</span>, we can say that <span class="math inline">\(g(x) = 0\)</span> precisely when <span class="math inline">\(\gcd(x, 6) &gt; 1\)</span>. This is the case because (analyzing the determinants of the left and right side) <span class="math inline">\((-6)^k \not\equiv 1 \pmod{x}\)</span> ever for such <span class="math inline">\(x\)</span>.</p>
+                <p>While it's hard to pin down what this order is as we vary the modulus, <span class="math inline">\(p^n\)</span>, we can identify a multiple of it quite easily. In particular, the cyclic group generated by taking powers of <span class="math inline">\(A\)</span> is a subgroup of the group of <span class="math inline">\(2\times 2\)</span> matrices with elements over <span class="math inline">\(\mathbb{Z}/p^n \mathbb{Z}\)</span> (otherwise known as <span class="math inline">\(GL(2, p^n)\)</span>). As a consequence of <a href="https://en.wikipedia.org/wiki/Lagrange%27s_theorem_(group_theory)">Lagrange's Theorem</a>, the order of <span class="math inline">\(A\)</span> must divide the order of <span class="math inline">\(GL(2, p^n)\)</span>, which is given by <span class="math display">\[
+                    |GL(2, p^n)| = (p^{2n} - p^{2n - 1})(p^{2n} - p^{2n - 2}) = p^{4n - 3} (p - 1)^2 (p + 1)
+                .\]</span> If we test the factors of this expression for each <span class="math inline">\(x = p^n\)</span> and find the smallest factor <span class="math inline">\(k\)</span> where <span class="math inline">\(A^k \equiv I_2\)</span>, then we've essentially solved the problem. The only thing left to check now is the big question: <strong>is the time complexity viable?</strong></p>
+                <p>First, let's try and get an estimate of the number of factors of <span class="math inline">\(|GL(2, p^n)|\)</span>. Observe that <span class="math display">\[\begin{align*}
+                    \sigma(|GL(2, p^n)|) &amp;\le \sigma(p^{4n - 3}) \sigma((p - 1)^2) \sigma(p + 1) \\
+                    &amp;\le (4n - 2) \sigma(p - 1) 2^{\omega(p - 1)} \sigma(p + 1) \\
+                    &amp;= O(n (\log p)^3)
+                ,\end{align*}\]</span> where <span class="math inline">\(\omega(\cdot)\)</span> denotes the <a href="https://en.wikipedia.org/wiki/Prime_omega_function">distinct prime factors</a>, and we have used that <span class="math inline">\(\sigma(n) = O(\log n)\)</span> and <span class="math inline">\(\omega(n) = O(\log \log n)\)</span> (see the Appendix for proofs).</p>
+                <p>If we create a least prime factor sieve we can easily factor and find these factors in <span class="math inline">\(O(n \log p)\)</span> time, which is dominated by the number of factors anyway so that's not a problem. However, we're finding the factors over every prime power less than or equal to <span class="math inline">\(N\)</span>, so we should check that the time complexity of the entire program is viable. Observing that <span class="math display">\[\begin{align*}
+                    \sum_{p \le N} \sum_{n = 1}^{\lfloor \log_p N \rfloor} n (\log p)^3 &amp;\le
+                    \sum_{p \le N} \lfloor \log_p N \rfloor^2 (\log p)^3 \\
+                    &amp;\le (\log N)^2 \sum_{p \le N} \log p \\
+                    &amp;\le (\log N)^2 \int_2^N \log x \, d\pi(x) \\
+                    &amp;= O(N (\log N)^2)
+                ,\end{align*}\]</span> we see that our solution is indeed viable. The actual program I wrote takes quite a while to compute the answer, though, so either I could be off by a factor somewhere, or it's just a consequence of a huge constant.</p>
+                <p>Happy December everybody &gt;:)</p>
+                <h2 id="remarks">Remarks</h2>
+                <p>Solving any problem on Project Euler unlocks the solution forum, where you get to see other people's solutions to the problem. Looking at these solutions, there was actually two observations that I very regretfully missed.</p>
+                <p>Firstly, the people on the forums made the observation that <span class="math inline">\(g(p^n) = p^{n - 1}g(p)\)</span>. This one simplification reduces the computation time immensely, as now we need only compute <span class="math inline">\(g(p)\)</span> for each prime less than <span class="math inline">\(10^6\)</span>, as opposed to each pure prime power. Now, we could normally proceed and iterate over the factors of <span class="math inline">\((p^2 - 1)(p^2 - p)\)</span>, but we actually can do better. This is where the second observation comes in.</p>
+                <p>Instead of considering the group of invertible matrices modulo <span class="math inline">\(p\)</span> to obtain a multiple of the order of the matrix for the recurrence relation, we can identify an even smaller, richer embedding that reduces the upper bound of the order. In particular, we may view <span class="math inline">\(1 + \sqrt{7}\)</span> as an element of <span class="math inline">\(\mathbb{F}_p (\sqrt{7})\)</span>, i.e. the field of order <span class="math inline">\(p\)</span> adjoin <span class="math inline">\(\sqrt{7}\)</span>. There are two cases for the order of this field:</p>
+                <ol type="1">
+                <li>Case: <span class="math inline">\(7\)</span> is a quadratic residue modulo <span class="math inline">\(p\)</span>. In this case, <span class="math display">\[
+                     (x - (1 - \sqrt{7}))(x - (1 + \sqrt{7})) = x^2 - 2x - 6
+                 \]</span> is reducible over <span class="math inline">\(\mathbb{F}_p\)</span>, so <span class="math inline">\(\mathbb{F}_p (\sqrt{7}) \cong  \mathbb{F}_p\)</span>. The multiplicative order of any element is thus a factor of <span class="math inline">\(p - 1\)</span>.</li>
+                <li>Case: <span class="math inline">\(7\)</span> is a quadratic nonresidue modulo <span class="math inline">\(p\)</span>. In this case, <span class="math display">\[
+                     (x - (1 - \sqrt{7}))(x - (1 + \sqrt{7})) = x^2 - 2x - 6
+                 \]</span> is irreducible over <span class="math inline">\(\mathbb{F}_p\)</span>. The multiplicative order is then <span class="math inline">\(p^2 - 1\)</span>.</li>
+                </ol>
+                <p>Since we have that <span class="math inline">\(\operatorname{lcm}(p - 1, p^2 - 1) = p^2 - 1\)</span>, we know that <span class="math inline">\(g(p) \mid (p^2 - 1)\)</span>, so it suffices to check the factors of <span class="math inline">\(p^2 - 1\)</span>.</p>
+                <h2 id="appendix-asymptotics-for-sigman-omegan">Appendix: Asymptotics for <span class="math inline">\(\sigma(n), \omega(n)\)</span></h2>
+                <p>In order to determine the asymptotics for <span class="math inline">\(\sigma(n)\)</span> and <span class="math inline">\(\omega(n)\)</span>, we'll actually find their average order. That is, we shall show that <span class="math display">\[
+                    \frac{1}{N} \sum_{n = 1}^{N} \sigma(n) = O(\log N)
+                ,\]</span> and <span class="math display">\[
+                    \frac{1}{N} \sum_{n = 1}^{N} \omega(n) = O(\log \log N)
+                .\]</span> For convenience let <span class="math inline">\(d(n, k) : \mathbb{N}^2 \to \{0, 1\}\)</span> be the function where <span class="math inline">\(d(n, k) = 0\)</span> if <span class="math inline">\(k \nmid n\)</span> and <span class="math inline">\(d(n, k) = 1\)</span> if <span class="math inline">\(k \mid n\)</span>.</p>
+                <p>For the erstwhile function, observe that <span class="math display">\[\begin{align*}
+                    \frac{1}{N} \sum_{n = 1}^{N}  \sigma(n) &amp;= \frac{1}{N} \sum_{n = 1}^N
+                    \sum_{k = 1}^N d(n, k) \\
+                    &amp;= \frac{1}{N} \sum_{k = 1}^{N} \sum_{n = 1}^{N} d(n, k) \\
+                    &amp;= \frac{1}{N} \sum_{k = 1}^N \left \lfloor \frac{N}{k} \right \rfloor \\
+                    &amp;= O \left( \sum_{k = 1}^N \frac{1}{k} \right) \\
+                    &amp;= O(\log N)
+                ,\end{align*}\]</span> as it is well known that the <a href="https://en.wikipedia.org/wiki/Harmonic_number">Harmonic numbers</a> grow at a rate of <span class="math inline">\(\log N\)</span>.</p>
+                <p>For the latter function, notice that <span class="math display">\[\begin{align*}
+                    \frac{1}{N} \sum_{n = 1}^N \omega(n) &amp;= \frac{1}{N} \sum_{n = 1}^N \sum_{p \le N} d(n, p) \\
+                    &amp;= \frac{1}{N} \sum_{p \le N} \sum_{n = 1} d(n, p) \\
+                    &amp;= \frac{1}{N} \sum_{p \le N} \left\lfloor \frac{N}{p} \right\rfloor \\
+                    &amp;= O \left( \sum_{p \le N} \frac{1}{p} \right) \\
+                    &amp;= O(\log \log N)
+                ,\end{align*}\]</span> since the sum of the reciprocal of the primes grows at a rate of <span class="math inline">\(\log \log N\)</span>.</p>
+            </div>
+        </div>
+    </body>
+</html>
