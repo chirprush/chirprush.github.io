@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>chirprush - A Combinatorial Totient Sum Identity</title>
+
+        <link rel="stylesheet" href="/assets/css/style.css">
+        <link rel="stylesheet" href="/assets/css/panel.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Katex -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+
+        
+        <meta charset="utf-8">
+    </head>
+
+    <body>
+        <div id="side-nav" class="side-panel">
+            <div class="panel-content">
+                <div class="panel-grid">
+                    <img class="grid-pfp" src="/assets/images/pfp.svg"></img>
+                    <h2 class="grid-title">Rushil Surti</h1>
+                    <p class="grid-email">rush040507@gmail.com</p>
+                    <div class="grid-icons"><a href="https://www.github.com/chirprush/" target="_blank"><i class="fa-brands fa-github"></i></a> <a href="https://www.youtube.com/channel/UCSc-MTo8KGPDMLszD6jYjxA" target="_blank"><i class="fa-brands fa-youtube"></i></a> <a href="https://www.instagram.com/chirprush/" target="_blank"><i class="fa-brands fa-instagram"></i></a> <a href="https://math.stackexchange.com/users/1128617/chirpyboat73" target="_blank"><i class="fa-brands fa-stack-exchange"></i></a></div>
+                </div>
+
+                <hr class="separator" />
+
+                <div class="description">
+                    <h2>Description</h2>
+                    <div class="side-line">
+                        <p>A very small article before winter break, featuring a clean double counting argument for a sum involving the Euler totient function.</p>
+                    </div>
+                </div>
+
+                <div class="contents">
+                    <h2>Contents</h2>
+                    <div class="side-line">
+                        <ul>
+                        <li><a href="#the-result">The Result</a></li>
+                        </ul>
+                        <!--
+                        <ul>
+                            <li><b>Section 1.</b> Sample text</li>
+                            <li><ul>
+                                <li><b>Section 1.1.</b> Some stuff</li>
+                            </ul></li>
+                            <li><b>Section 2.</b> More sample text</li>
+                        </ul>
+                        -->
+                    </div>
+                </div>
+
+                <div class="navigation-container">
+                    <a href="/index.html">Articles</a>
+                    <a href="/tags.html">Tags</a>
+                    <a href="/about.html">About Me</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="content">
+                <h1>A Combinatorial Totient Sum Identity</h1>
+
+                <hr class="separator" />
+                <div class="info-holder">
+                    <span class="info-value"><b>Author:</b> Rushil Surti</span>
+                    <span class="info-value"><b>Date:</b> December 21, 2024</span>
+                    <span class="info-value"><b>Tags:</b>  <a href="/tags.html#mini"><span class="info-tag">mini</span></a>  <a href="/tags.html#combinatorics"><span class="info-tag">combinatorics</span></a>  <a href="/tags.html#number-theory"><span class="info-tag">number-theory</span></a> </span>
+                </div>
+
+                <p>Hey everyone! It's almost winter break, and I should probably get to working more on college apps, so here's a short and sweet result in the meantime :)</p>
+                <p>The proof below may at first seem like it was pulled out of nowhere, but it does actually have some proper backstory. I was playing around with the generating function for partitions for a Project Euler problem (at the time I hadn't actually made the connection that it was the generating function for partitions), and at some point I thought it would be cool to attempt deriving an asymptotic using a partial fraction decomposition, so I wished for a way to factor the denominator of the generating function. Although this didn't really go to plan, I still stumbled upon a really cool and somewhat random identity.</p>
+                <h2 id="the-result">The Result</h2>
+                <div class="black-box">
+                <p><strong>Theorem.</strong> For natural <span class="math inline">\(n\)</span> we have that <span class="math display">\[
+                    \sum_{k = 1}^{n} \phi(k) \left \lfloor \frac{n}{k} \right \rfloor = \frac{n(n + 1)}{2}
+                .\]</span></p>
+                </div>
+                <p><em>Proof.</em> The proof we'll give arises from a very interesting double counting argument. Consider the polynomial <span class="math display">\[
+                    p_n(x) = \prod_{k = 1}^n (x^k - 1)
+                .\]</span> There are a couple properties apparent from writing the polynomial this way. In particular, each factor <span class="math inline">\(x^k - 1\)</span> has <span class="math inline">\(k\)</span> roots, precisely the <span class="math inline">\(k\)</span>th roots of unity. Thus, we can ascertain the overall degree as <span class="math display">\[
+                    \deg p_n(x) = \sum_{k = 1}^n \deg (x^k - 1) = \sum_{k = 1}^{n} k = \frac{n(n+1)}{2}
+                .\]</span> But, using double counting, there is another way to write the polynomial: we can look at the multiplicity of each root of unity factor on its own. For example, <span class="math inline">\(p_2(x) = (x - 1)(x^2 - 1) = (x-1)^2 (x+1)\)</span>. If we then add up the multiplicities of each root of the polynomial, we get the degree again. Thus it suffices to answer the following question: for coprime <span class="math inline">\(j, k\)</span> (because otherwise we can reduce them) what is the multiplicity of <span class="math inline">\(\alpha_{jk} := \exp(2 \pi i j / k)\)</span> in <span class="math inline">\(p_n(x)\)</span>?</p>
+                <p>Coupling together the fact that <span class="math inline">\(\alpha_{jk}\)</span> can only be a root of <span class="math inline">\(x^m - 1\)</span> if <span class="math inline">\(k \mid m\)</span> and that its multiplicity in <span class="math inline">\(x^m - 1\)</span> is at most one, we can see that the multiplicity of <span class="math inline">\(\alpha_{jk}\)</span> in <span class="math inline">\(p_n(x)\)</span> is <span class="math inline">\(\lfloor n / k \rfloor\)</span>, precisely the number of numbers less than or equal to <span class="math inline">\(n\)</span> that are a multiple of <span class="math inline">\(k\)</span>. This holds irrespective of <span class="math inline">\(j\)</span>, of which there are <span class="math inline">\(\phi(k)\)</span> valid values (since <span class="math inline">\(j\)</span> is coprime to <span class="math inline">\(k\)</span>). The sum of the multiplicities of each <span class="math inline">\(\alpha_{jk}\)</span> for a fixed <span class="math inline">\(k\)</span> is then <span class="math inline">\(\phi(k) \lfloor n / k \rfloor\)</span>. Taking <span class="math inline">\(k\)</span> from <span class="math inline">\(1\)</span> to <span class="math inline">\(n\)</span>, we then recover <span class="math display">\[
+                    \sum_{k = 1}^{n} \phi(k) \left \lfloor \frac{n}{k} \right \rfloor = \deg
+                    p_n(x) = \frac{n(n + 1)}{2}
+                ,\]</span> which is precisely what we wished to prove. <span class="math inline">\(\blacksquare\)</span></p>
+                <p>We remark that the most concise way to express this idea is the following remarkable equivalence of products: <span class="math display">\[
+                    \prod_{k = 1}^{n} (x^k - 1) = \prod_{k = 1}^{n} \Phi_k(x)^{\lfloor n / k \rfloor}
+                ,\]</span> where <span class="math inline">\(\Phi_k(x)\)</span> is the <span class="math inline">\(k\)</span>th cyclotomic polynomial in <span class="math inline">\(x\)</span>. This comes as a consequence of the well-known identity <span class="math display">\[
+                    \prod_{d \mid n} \Phi_d(x) = x^n - 1
+                .\]</span> In fact, this is merely a statement about how the cyclotomic polynomials and roots of unity polynomials are multiplicative bases for each other, which has some interesting consequences I hope to perhaps write about in the future.</p>
+                <p>Happy holidays! &gt;:)</p>
+            </div>
+        </div>
+    </body>
+</html>
