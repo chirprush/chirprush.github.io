@@ -173,6 +173,11 @@ body {
     margin-top: 15px;
 }
 
+.content .katex {
+    overflow-x: scroll;
+    overflow-y: hidden;
+}
+
 .thumbnail > * {
     padding-left: 20px;
     width: calc(100% - 40px);
