@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>chirprush - Convolution Canonicity: Dirichlet Convolutions!</title>
+
+        <link rel="stylesheet" href="/assets/css/style.css">
+        <link rel="stylesheet" href="/assets/css/panel.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Katex -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+
+                <script src="./code-block.js"></script>
+        
+        <meta charset="utf-8">
+    </head>
+
+    <body>
+        <div id="side-nav" class="side-panel">
+            <div class="panel-content">
+                <div class="panel-grid">
+                    <img class="grid-pfp" src="/assets/images/pfp.svg"></img>
+                    <h2 class="grid-title">Rushil Surti</h1>
+                    <p class="grid-email">rush040507@gmail.com</p>
+                    <div class="grid-icons"><a href="https://www.github.com/chirprush/" target="_blank"><i class="fa-brands fa-github"></i></a> <a href="https://www.youtube.com/channel/UCSc-MTo8KGPDMLszD6jYjxA" target="_blank"><i class="fa-brands fa-youtube"></i></a> <a href="https://www.instagram.com/chirprush/" target="_blank"><i class="fa-brands fa-instagram"></i></a> <a href="https://math.stackexchange.com/users/1128617/chirpyboat73" target="_blank"><i class="fa-brands fa-stack-exchange"></i></a></div>
+                </div>
+
+                <hr class="separator" />
+
+                <div class="description">
+                    <h2>Description</h2>
+                    <div class="side-line">
+                        <p>The primer article in a series exploring convolution in group theory. The topic? Dirichlet convolutions! We'll generalize them over arbitrary fields and classify some certain cases.</p>
+                    </div>
+                </div>
+
+                <div class="contents">
+                    <h2>Contents</h2>
+                    <div class="side-line">
+                        <ul>
+                        <li><a href="#a-primer-and-brief-overview-on-dirichlet-convolution">A Primer and Brief Overview on Dirichlet Convolution</a></li>
+                        <li><a href="#generalizations-and-classifications">Generalizations and Classifications</a><ul>
+                        <li><a href="#case-mathcaldn-mathbbf_2.">Case <span class="math inline">\(\mathcal{D}^n (\mathbb{F}_2)\)</span>.</a></li>
+                        <li><a href="#case-mathcaldinfty-mathbbf_2.">Case <span class="math inline">\(\mathcal{D}^\infty (\mathbb{F}_2)\)</span>.</a></li>
+                        <li><a href="#case-mathcaldn-mathbbc.">Case <span class="math inline">\(\mathcal{D}^n (\mathbb{C})\)</span>.</a></li>
+                        <li><a href="#case-mathcaldinfty-mathbbc.">Case <span class="math inline">\(\mathcal{D}^\infty (\mathbb{C})\)</span>.</a></li>
+                        </ul></li>
+                        <li><a href="#afterthoughts-and-more-to-come">Afterthoughts and More to Come</a></li>
+                        </ul>
+                        <!--
+                        <ul>
+                            <li><b>Section 1.</b> Sample text</li>
+                            <li><ul>
+                                <li><b>Section 1.1.</b> Some stuff</li>
+                            </ul></li>
+                            <li><b>Section 2.</b> More sample text</li>
+                        </ul>
+                        -->
+                    </div>
+                </div>
+
+                <div class="navigation-container">
+                    <a href="/index.html">Articles</a>
+                    <a href="/tags.html">Tags</a>
+                    <a href="/about.html">About Me</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="content">
+                <h1>Convolution Canonicity: Dirichlet Convolutions!</h1>
+
+                <hr class="separator" />
+                <div class="info-holder">
+                    <span class="info-value"><b>Author:</b> Rushil Surti</span>
+                    <span class="info-value"><b>Date:</b> January 11, 2025</span>
+                    <span class="info-value"><b>Tags:</b>  <a href="/tags.html#group-theory"><span class="info-tag">group-theory</span></a>  <a href="/tags.html#abstract-algebra"><span class="info-tag">abstract-algebra</span></a>  <a href="/tags.html#lie-theory"><span class="info-tag">lie-theory</span></a>  <a href="/tags.html#number-theory"><span class="info-tag">number-theory</span></a>  <a href="/tags.html#linear-algebra"><span class="info-tag">linear-algebra</span></a>  <a href="/tags.html#matrices"><span class="info-tag">matrices</span></a>  <a href="/tags.html#finite-fields"><span class="info-tag">finite-fields</span></a> </span>
+                </div>
+
+                <p><span class="math display">\[
+                    \gdef\Dir#1#2{\mathcal{D}^{#1} (#2)}
+                \]</span> Happy new year, everyone!</p>
+                <p>College application season is, for the most part, finally over, which fortunately means I'm now far more open to work on stuff like blogging and other passion projects (custom playlist software here I come rahhhh!). In the process of writing college apps, my mind of course found a way of sneaking math into everything, so I have tons of ideas to expand upon. I hope you look forward to a bunch of articles to come!</p>
+                <p>I plan for this article to be the first in a series of two, which I've affectionately named "Convolution Canonicity." Namely, the series shall feature:</p>
+                <ol type="1">
+                <li>This article, which explores the group properties of a generalized form of Dirichlet convolution.</li>
+                <li>A following article, which constructs convolutions in a more general manner, aided by the Haar measure and Fourier transforms. Consider this a first step into harmonic analysis.</li>
+                </ol>
+                <p>In doing so, I hope to put a spotlight on the elegance of convolution and its apparent universality across different settings (hence the mention to canonicity).</p>
+                <p>I would also like to stress that this article is more "loose" than previous articles in a sense. While there is a central theme underlying our discussion, <strong>there is no one central problem we are trying to solve</strong>. This is more of an exploration, a journey through cool ideas found in Dirichlet convolution and, as a bonus, a concrete setting to learn more about group theory among other subjects. That being said, in the midst of conjuring tangentially related puzzles and ideas, I will try to keep a balance of some overarching structure as to not meander into oblivion.</p>
+                <p>That's about it for the introduction. It's time for some math!</p>
+                <h2 id="a-primer-and-brief-overview-on-dirichlet-convolution">A Primer and Brief Overview on Dirichlet Convolution</h2>
+                <p>Dirichlet convolution is an operation birthed out of number theory. Like many forms of convolution, it's an operation between two functions that returns a new function according to some specific rules.</p>
+                <div class="black-box">
+                <p><strong>Definition.</strong> Specifically, for functions <span class="math inline">\(f, g : \mathbb{N} \to \mathbb{C}\)</span>, we can create a new function <span class="math inline">\(f * g\)</span> called the <strong>Dirichlet convolution</strong> of <span class="math inline">\(f\)</span> and <span class="math inline">\(g\)</span> by the following rule: <span class="math display">\[
+                    (f * g)(n) := \sum_{d \mid n} f(d) g \left( \frac{n}{d} \right)
+                .\]</span></p>
+                </div>
+                <p>Immediately, the connection to number theory is quite clear, especially so in its common first form (the leftmost sum). This is a sum taken over the divisors of <span class="math inline">\(n\)</span>, the index into the function. It may help to consider some examples.</p>
+                <hr />
+                <p><strong>Example (clarifying sum).</strong> Suppose I have functions <span class="math inline">\(f, g\)</span> and I wish to find <span class="math inline">\((f * g)(6)\)</span>. This is precisely equal to <span class="math display">\[
+                    (f * g)(6) = f(1) g(6) + f(2) g(3) + f(3) g(2) + f(6) g(1)
+                .\]</span></p>
+                <p><strong>Example (applying the sum).</strong> For a more concrete function, denote by <span class="math inline">\(u\)</span> the function that is identically <span class="math inline">\(1\)</span> on all inputs. Clearly then, <span class="math display">\[
+                    (u * u)(n) = \sum_{d \mid n} u(d) u\left( \frac{n}{d} \right) = \sum_{d \mid n} 1 = d(n)
+                ,\]</span> where <span class="math inline">\(d(n)\)</span> is counts the number of divisors of <span class="math inline">\(n\)</span>.</p>
+                <p><strong>Example (the identity). </strong> Another useful tool in the library of arithmetic functions is the identity function <span class="math inline">\(I(n)\)</span>, which is defined by <span class="math inline">\(I(1) = 1\)</span> and <span class="math inline">\(I(n) = 0\)</span> for <span class="math inline">\(n &gt; 1\)</span>. We call this function the identity, as for any arithmetic function <span class="math inline">\(f\)</span>, its convolution with the identity is itself: <span class="math display">\[
+                    (f * I)(n) = \sum_{d \mid n} f(d) I \left( \frac{n}{d} \right) = f(n)
+                ,\]</span> since all terms but the one in which <span class="math inline">\(n / d = 1\)</span> disappear. More succinctly, we say <span class="math inline">\(f * I = I * f = f\)</span>.</p>
+                <hr />
+                <p>In number theory, the operation of Dirichlet convolution allows one to not only succinctly express identities between arithmetic functions, but also derive relations between them. To illustrate, consider the well-known identity <span class="math display">\[
+                    n = \sum_{d \mid n} \varphi(d)
+                .\]</span> If we define the function <span class="math inline">\(N(n) := n\)</span> and use the previously defined function <span class="math inline">\(u\)</span>, Dirichlet convolution allows us to express the identity as <span class="math display">\[
+                    \varphi * u = N
+                ,\]</span> which is rather elegant. This also gives us another new identity, however. In the sphere of Dirichlet convolutions, we have inverses! Let's take the convolution on both sides by <span class="math inline">\(u^{-1}\)</span>: <span class="math display">\[
+                    \varphi * u * u^{-1} = \varphi * I = \varphi = N * u^{-1}
+                .\]</span> But what is <span class="math inline">\(u^{-1}\)</span>? Well, with sufficient work, one can show that it is precisely the <a href="https://en.wikipedia.org/wiki/M%C3%B6bius_function">Möbius function</a> <span class="math inline">\(\mu\)</span>! Thus, <span class="math inline">\(\varphi = N * \mu\)</span>, or more explicitly, <span class="math display">\[
+                    \varphi(n) = \sum_{d \mid n} \mu(d) \cdot \frac{n}{d}
+                .\]</span> The curious readers will recognize this as a specific example of <a href="https://en.wikipedia.org/wiki/M%C3%B6bius_inversion_formula">Möbius inversion</a>.</p>
+                <p>Of course, in order to give a quick overview of the topic, I've been a bit loose in these statements. In order to multiply both sides by <span class="math inline">\(u^{-1}\)</span> we had to assume that <span class="math inline">\(*\)</span> is associative (i.e. <span class="math inline">\(f * g * h = (f * g) * h = f * (g * h)\)</span>), and in switching around of the convolution, we had to assume that <span class="math inline">\(*\)</span> is additionally commutative (i.e. <span class="math inline">\(f * g = g * f\)</span>). Indeed, these are true in general; however, their proofs aren't particularly illuminating, and thus I have left them out.</p>
+                <p><em>Note: For those interested in the specific proofs and number theory side of Dirichlet convolutions, I'd recommend Apostol's <a href="https://link.springer.com/book/10.1007/978-1-4757-5579-4">Introduction to Analytic Number Theory</a>, which provides a good overview of the tool quite early on in the book. The notation used here was chosen to align with that of the book.</em></p>
+                <p>Let's expand more on the inverses. Are inverses unique? When can a function be inverted? It turns out indeed that inverses are always unique, and a function <span class="math inline">\(f\)</span> has a Dirichlet inverse <span class="math inline">\(f^{-1}\)</span> if and only if <span class="math inline">\(f(1) \ne 0\)</span>, as we need to have <span class="math inline">\(1/f(1)\)</span> exist. To verify this, one may set <span class="math inline">\(f * f^{-1} = I\)</span> and find a recurrence for the values of <span class="math inline">\(f^{-1} (n)\)</span>.</p>
+                <p>Together, these properties may seem intriguing at best, but we can culminate them into a very powerful statement:</p>
+                <p><strong>Dirichlet convolution forms an abelian (i.e. commutative) group over functions from <span class="math inline">\(\mathbb{N}\)</span> to <span class="math inline">\(\mathbb{C}\)</span>.</strong></p>
+                <p>This forms the basis of our exploration. A group-like structure immediately raises some interesting questions, both from a number-theoretic lens and a more pure perspective. Can we generalize this group? Can we classify these generalizations?</p>
+                <p>Since the article hasn't ended yet, you know what the answer is!</p>
+                <h2 id="generalizations-and-classifications">Generalizations and Classifications</h2>
+                <p>Our first order of business will be to generalize this notion of Dirichlet convolution. What is the most general structure that allows for the construction of Dirichlet convolution? Intuitively, the complex numbers can't be the only codomain for the arithmetic functions that works. After all, the functions we've looked at don't even use the full space of complex numbers!</p>
+                <p>To motivate what we're looking for, let's write out the first few terms of a general Dirichlet convolution between two functions <span class="math inline">\(f, g\)</span>: <span class="math display">\[\begin{align*}
+                    (f * g)(1) &amp;= f(1) g(1), \\
+                    (f * g)(2) &amp;= f(1) g(2) + f(2) g(1), \\
+                    (f * g)(3) &amp;= f(1) g(3) + f(3) g(1), \\
+                    (f * g)(4) &amp;= f(1) g(4) + f(2) g(2) + f(4) g(1), \\
+                \end{align*}\]</span> and so on. For the first term of the function, we only need multiplication, but for the rest of the terms we need both multiplication and addition. If we are to take inverses as well, we no doubt need subtraction and division too. This motivates some field theory!</p>
+                <p>Take some field <span class="math inline">\(K\)</span> and consider a function <span class="math inline">\(f\)</span> such that <span class="math inline">\(f(1) \in K^{\times}\)</span> (the multiplicative subgroup of <span class="math inline">\(K\)</span>) and <span class="math inline">\(f(n) \in K\)</span> for <span class="math inline">\(n &gt; 1\)</span>. This is precisely the generalization we are looking for. As <span class="math inline">\(f(1) \in K^{\times}\)</span>, <span class="math inline">\(f(1)\)</span> must be invertible, which is equivalent to the function having an inverse. The introduction of a field allows for the rest of the function values to be added, subtracted, multiplied, and divided. Thus, our generalization of Dirichlet convolution depends on our choice of field.</p>
+                <p>But we can generalize even further! Instead of considering the function to have domain <span class="math inline">\(\mathbb{N}\)</span>, we can give it the "truncated" domain <span class="math inline">\(\{ 1, 2, \ldots, n \}\)</span>. Since all divisors of <span class="math inline">\(n\)</span> are less than or equal to <span class="math inline">\(n\)</span>, this is perfectly valid.</p>
+                <p>Combining these two generalizing ideas, we can get a very formal looking definition:</p>
+                <div class="black-box">
+                <p><strong>Definition.</strong> Let <span class="math inline">\(K\)</span> be a field. We define the <strong>generalized Dirichlet convolution group</strong> to be <span class="math inline">\(\Dir{n}{K} := (K^{\times} \times K^{n - 1}, *)\)</span>.</p>
+                <p>To handle the countably infinite case, we further define <span class="math inline">\(\Dir{\infty}{K} := (K^{\times} \times K^{\mathbb{N}}, *)\)</span>.</p>
+                </div>
+                <p>This does look a little daunting at first, but I'd like to remind the reader that at the very most this is just notation. We've already discussed the real intuition behind the construction, and it'll continue to become familiar as we move through some more specific cases.</p>
+                <p>Upon some thinking, we run into four main natural cases when trying to give specific values to <span class="math inline">\(K\)</span> or <span class="math inline">\(n\)</span>. I shall rank them in a vague sense of their size/complexity, and this will be the order in which we'll explore them. We have:</p>
+                <ol type="1">
+                <li>The case when <span class="math inline">\(K\)</span> is finite and <span class="math inline">\(n\)</span> is finite. Of course, since <span class="math inline">\(K\)</span> is finite, it's isomorphic to a finite field of the form <span class="math inline">\(\mathbb{F}_{p^k}\)</span>. In other words, we're working over <span class="math inline">\(\Dir{n}{\mathbb{F}_{p^k}}\)</span>.</li>
+                <li>The case when <span class="math inline">\(K\)</span> is finite and <span class="math inline">\(n\)</span> is infinite. This is similar to the previous case, but of course the domain is much bigger. This is <span class="math inline">\(\Dir{\infty}{\mathbb{F}_{p^k}}\)</span>.</li>
+                <li>The case when <span class="math inline">\(K\)</span> is infinite and <span class="math inline">\(n\)</span> is finite. This case has some promising starts. Most infinite fields are practically subsets of <span class="math inline">\(\mathbb{C}\)</span> (of course, matrix groups and elliptic curve groups and others exist, but hear me out), so we'll go ahead and call this <span class="math inline">\(\Dir{n}{\mathbb{C}}\)</span>.</li>
+                <li>The case when <span class="math inline">\(K\)</span> is infinite and <span class="math inline">\(n\)</span> is infinite. This is the case we started with, with functions from <span class="math inline">\(\mathbb{N}\)</span> to <span class="math inline">\(\mathbb{C}\)</span>, which we shall write as <span class="math inline">\(\Dir{\infty}{\mathbb{C}}\)</span> now. In terms of classification, this seems practically impossible.</li>
+                </ol>
+                <p>Since we have these natural cases so nicely laid out (good job, me), we might as well get to exploring!</p>
+                <h3 id="case-mathcaldn-mathbbf_2.">Case <span class="math inline">\(\mathcal{D}^n (\mathbb{F}_2)\)</span>.</h3>
+                <p>Just up above, I wrote that this case should be <span class="math inline">\(\Dir{n}{\mathbb{F}_{p^k}}\)</span>, so why are we only taking the case of <span class="math inline">\(\mathbb{F}_2\)</span>? As it turns out, I can't say much in specifics for <span class="math inline">\(\mathbb{F}_{p^k}\)</span>! In fact, I can tell you the order is <span class="math display">\[
+                    |\Dir{n}{\mathbb{F}_{p^k}}| = (p^k - 1) p^{nk}
+                ,\]</span> but I can't tell you much else. As I hope to show below, even the behavior for <span class="math inline">\(\mathbb{F}_2\)</span> is highly nontrivial, so I hope you can be satisfied with just this for now.</p>
+                <p>Let's first start by getting on the same page. As a review, <span class="math inline">\(\Dir{n}{\mathbb{F}_2}\)</span> is the group of functions <span class="math inline">\(f\)</span> with <span class="math inline">\(f(1) = 1\)</span> (because there's only one element in <span class="math inline">\(\mathbb{F}_2^\times\)</span>) and the other entries in <span class="math inline">\(f\)</span> being akin to the integers modulo <span class="math inline">\(2\)</span>. You can even think of the functions as being tuples or vectors, if you'd prefer. There are precisely <span class="math inline">\(2^{n-1}\)</span> of these functions in <span class="math inline">\(\Dir{n}{\mathbb{F}_2}\)</span>.</p>
+                <p>Getting a sense for the group requires a decent bit of playing around. Upon doing so, we see one of the characteristic identities that makes <span class="math inline">\(\mathbb{F}_2\)</span> particularly well-behaved and special: something I've called the square lemma.</p>
+                <div class="black-box">
+                <p><strong>Lemma (the square lemma).</strong> Suppose <span class="math inline">\(f \in \Dir{n}{\mathbb{F}_2}\)</span>. We have that <span class="math inline">\((f * f)(n) = 1\)</span> if and only if <span class="math inline">\(n = k^2\)</span> and <span class="math inline">\(f(k) = 1\)</span>.</p>
+                </div>
+                <p><em>Proof.</em> In the sum, we can pair together the terms <span class="math inline">\(f(d) f(n / d)\)</span> and <span class="math inline">\(f(n / d) f(d)\)</span> to get <span class="math inline">\(2f(d) f(n/d)\)</span>, which vanishes except for one case: when <span class="math inline">\(n\)</span> is a perfect square and <span class="math inline">\(d^2 = n\)</span>. Thus, if <span class="math inline">\(n\)</span> is not a square, <span class="math inline">\((f * f)(n) = 0\)</span>. Otherwise, <span class="math inline">\((f * f)(n) = f(d) f(d)\)</span>, which is <span class="math inline">\(1\)</span> iff <span class="math inline">\(f(d) = 1\)</span>. <span class="math inline">\(\blacksquare\)</span></p>
+                <p>As a notational note, I will refer to <span class="math inline">\(f^n\)</span> in the standard group theoretic manner to respect <span class="math inline">\(f^{n} = f^{n - 1} * f\)</span>. In other words, <span class="math inline">\(f^n\)</span> represents <span class="math inline">\(f\)</span> convolved with itself <span class="math inline">\(n\)</span> times.</p>
+                <p>This is a rather limiting condition, and will give us a decent bit of control over repeated convolutions of elements. In particular, this allows us to classify the first few groups by hand:</p>
+                <ul>
+                <li><span class="math inline">\(\Dir{1}{\mathbb{F}_2}\)</span> has <span class="math inline">\(1\)</span> element, meaning it's isomorphic to the trivial group.</li>
+                <li><span class="math inline">\(\Dir{2}{\mathbb{F}_2} \cong \mathbb{Z}_2\)</span> necessarily because there are only <span class="math inline">\(2\)</span> elements.</li>
+                <li><span class="math inline">\(\Dir{3}{\mathbb{F}_2} \cong V_4 \cong \mathbb{Z}_2 \times \mathbb{Z}_2\)</span> as <span class="math inline">\((1, 0, 1), (1, 1, 0), (1, 0, 1)\)</span> all square to the identity.</li>
+                <li><span class="math inline">\(\Dir{4}{\mathbb{F}_2} \cong \mathbb{Z}_2 \times \mathbb{Z}_4\)</span>, as most elements have order <span class="math inline">\(2\)</span>, but in particular functions <span class="math inline">\(f\)</span> such that <span class="math inline">\(f(2) = 1\)</span> have order <span class="math inline">\(4\)</span>. For example, there is the chain <span class="math inline">\((1, 1, 0, 0) \xrightarrow{f^2} (1, 0, 0, 1) \xrightarrow{f^4} (1, 0, 0, 0)\)</span> utilizing the square lemma.</li>
+                </ul>
+                <p>Of course, some of these properties are to be expected. Since <span class="math inline">\(|\Dir{n}{\mathbb{F}_2}| = 2^{n - 1}\)</span>, all elements have orders that are powers of <span class="math inline">\(2\)</span>. In addition, we can always see that <span class="math inline">\(\Dir{n}{\mathbb{F}_2}\)</span> will be a direct product of cyclic factors in the above fashion due to the below very useful theorem:</p>
+                <div class="black-box">
+                <p><strong>Theorem (<a href="https://math.libretexts.org/Bookshelves/Abstract_and_Geometric_Algebra/Abstract_Algebra%3A_Theory_and_Applications_(Judson)/13%3A_The_Structure_of_Groups/13.01%3A_Finite_Abelian_Groups">fundamental theorem on finite abelian groups</a>).</strong> Every finite abelian group <span class="math inline">\(G\)</span> can be written in the form <span class="math display">\[
+                    G \cong \mathbb{Z}_{p_1^{e_1}} \times \mathbb{Z}_{p_2^{e_2}} \times \cdots \times \mathbb{Z}_{p_k^{e_k}}
+                ,\]</span> for some <span class="math inline">\(p_1, p_2, \ldots, p_k\)</span> and <span class="math inline">\(e_1, e_2, \ldots, e_k\)</span> such that <span class="math inline">\(|G| = p_1^{e_1} p_2^{e_2} \cdots p_k^{e_k}\)</span>.</p>
+                </div>
+                <p>Yay for finite abelian groups!</p>
+                <p>Of course, we note for the reader that <span class="math inline">\(\mathbb{Z}_2 \times \mathbb{Z}_2 \not\cong \mathbb{Z}_4\)</span>, so this theorem does <em>not</em> give a unique factorization like we have for the naturals over the primes.</p>
+                <p>As seen with the concrete cases above, the general tools we have (cyclic product factorization and prime power group order) are useful, but cannot possibly give the entire picture. We must make an argument on more specific structure in the group itself.</p>
+                <p>I encourage the reader to play around with concrete cases themselves to gain an intuition of what is going on. As a hint for what our proof will need, though, consider iteratively applying the square operation like done for <span class="math inline">\(\Dir{4}{\mathbb{F}_2}\)</span> and identifying the orders of elements based on this. I will say that the argument looks quite foreign without a little bit of thinking first.</p>
+                <hr />
+                <p><strong>Claim.</strong> I claim that the below algorithm gives the unique (up to rearrangement) factorization of <span class="math inline">\(\Dir{n}{\mathbb{F}_2}\)</span> into cyclic groups of the form <span class="math inline">\(\mathbb{Z}_{2^k}\)</span>, including multiplicity.</p>
+                <div class="code-container">
+                <p class="code-language">
+                python
+                </p>
+                <hr />
+                <pre id="classification-code-block" class="code-body"></pre>
+                </div>
+                <p>This algorithm runs in roughly <span class="math inline">\(O(n \log \log n)\)</span>. The fact that there even exists an algorithm is rather cool, but it certainly does not seem obvious how it even connects to what we have said. Thus, let us show the connection.</p>
+                <p><em>Proof.</em> Let <span class="math inline">\(\wp(n)\)</span> denote the unique smallest integer <span class="math inline">\(q\)</span> such that <span class="math inline">\(q^{2^m} = n\)</span> for some <span class="math inline">\(m\)</span>. We may now define an equivalence relation <span class="math inline">\(\sim\)</span> to be such that <span class="math inline">\(a \sim b \iff \wp(a) = \wp(b)\)</span>. We shall denote the partition of <span class="math inline">\(\{1, 2, \ldots n \}\)</span> induced by <span class="math inline">\(\sim\)</span> to be <span class="math inline">\(p_n\)</span>, where the sets are sorted. Denote by <span class="math inline">\([p_{n, k}]\)</span> the smallest element in <span class="math inline">\(p_{n, k}\)</span>, which we shall think of as a representative. For example, <span class="math inline">\(\{1, 2, 3, 4\}\)</span> partitions into <span class="math inline">\(p_{4,1} = \{1\}, p_{4, 2} = \{ 2, 4 \}, p_{4, 3} = \{ 3 \}\)</span>, and <span class="math inline">\([p_{4, 2}] = 2\)</span>.</p>
+                <p>Denote by <span class="math inline">\(\textsf{oats}(A)\)</span> the function <span class="math inline">\(f \in \Dir{n}{\mathbb{F}_2}\)</span> such that <span class="math inline">\(f(t) = 1\)</span> if <span class="math inline">\(t \in A\)</span> and <span class="math inline">\(f(t) = 0\)</span>. For <span class="math inline">\(k \ge 2\)</span>, we can associate <span class="math inline">\(p_{n,k}\)</span> with a cyclic group generated by <span class="math inline">\(g_k := \textsf{oats}(\{ 1, [p_{n, k}] \})\)</span>. Call this cyclic group <span class="math inline">\(G_k\)</span>. One can verify that <span class="math inline">\(|G_k| = 2^{|p_{n, k}|}\)</span> and <span class="math inline">\(G_{k} \le \Dir{n}{\mathbb{F}_2}\)</span>.</p>
+                <p>We wish to prove that <span class="math display">\[
+                    G_{2} \times G_{3} \times \cdots \times G_{k} \le \Dir{n}{\mathbb{F}_2}
+                .\]</span> It suffices to show that <span class="math inline">\(G_{i} \cap G_{j} = \{ I \}\)</span> (where <span class="math inline">\(I\)</span> is the identity). BWOC, suppose this was not the case. Then, WLOG, <span class="math inline">\(G_j \le G_i\)</span> (where <span class="math inline">\(G_j\)</span> nontrivial). However, take <span class="math inline">\(r\)</span> to be a generator of <span class="math inline">\(G_j\)</span> such that <span class="math inline">\(r = g_i^{2^m}\)</span> for some <span class="math inline">\(m\)</span> (always possible since <span class="math inline">\(G_i\)</span> is cyclic and has the aforementioned pure prime order). But! The square lemma tells us <span class="math display">\[
+                    \{ t : g_i^{2^q}(t) = 1, t \ne 1, \text{ for any } q \} \subseteq p_{n, i}
+                .\]</span> But <span class="math inline">\(r\)</span> has indices <span class="math inline">\(t\)</span> where <span class="math inline">\(r(t) = 1\)</span> and <span class="math inline">\(t \in p_{n, j}\)</span>, which is disjoint from <span class="math inline">\(p_{n, i}\)</span>, so we reach a contradiction.</p>
+                <p>Since each <span class="math inline">\(i\)</span> for <span class="math inline">\(2 \le i \le n\)</span> is included in exactly one of the partitions, one can verify that <span class="math inline">\(|G_2 \times G_3 \times \cdots \times G_k| = 2^{n - 1}\)</span>. Thus, <span class="math display">\[
+                    G_{2} \times G_{3} \times \cdots \times G_{k} \cong \mathbb{Z}_{2^{|p_{n, 2}|}} \times \mathbb{Z}_{2^{|p_{n, 3}|}} \times \cdots \times \mathbb{Z}_{2^{|p_{n, k}|}} \cong \Dir{n}{\mathbb{F}_2}
+                .\]</span> <span class="math inline">\(\blacksquare\)</span></p>
+                <p>In the future, I'd like to add an interactive simulation and some more intuition to this argument, but I think the best way to understand it fully is to just play around.</p>
+                <p>So, yeah! Even the case of <span class="math inline">\(K = \mathbb{F}_2\)</span> is very much so nontrivial. I can't imagine what the general factorization looks like for other finite fields without having the square lemma at hand. Of course, I hope to explore small cases with more computer work, but I'll leave it here for now.</p>
+                <h3 id="case-mathcaldinfty-mathbbf_2.">Case <span class="math inline">\(\mathcal{D}^\infty (\mathbb{F}_2)\)</span>.</h3>
+                <p>We've now moved onto the infinite case. Unfortunately, things don't generalize quite as well. Using the square lemma once again, we can show that all elements of <span class="math inline">\(\Dir{\infty}{\mathbb{F}_2}\)</span> except for the identity have infinite order, making this a torsion-free abelian group. Even with this, though, we can't say much; quite little is known about the classification of infinite abelian groups in the literature, even for a special case like ours. At the very least, this is what research has led me to believe. Perhaps in the future I'll revisit this case with more knowledge, but most of the theory we've built up in the previous case unfortunately fails to work here.</p>
+                <p>To blatantly cherry-pick a quote from <a href="https://en.wikipedia.org/wiki/Torsion-free_abelian_group">Wikipedia</a>, <em>"it has been proven that the classification problem for countable torsion-free abelian groups is as hard as possible."</em></p>
+                <p>Well would you look at that.</p>
+                <h3 id="case-mathcaldn-mathbbc.">Case <span class="math inline">\(\mathcal{D}^n (\mathbb{C})\)</span>.</h3>
+                <p>Unlike the previous case, we can actually make some marginal progress here. The key idea in this case is to view Dirichlet convolution by a specific function as a matrix action (thus associating each element with a matrix) on a vector.</p>
+                <p>To be specific, for any <span class="math inline">\(f \in \Dir{n}{\mathbb{C}}\)</span>, we may create a unique associated matrix <span class="math inline">\(\varphi(f)\)</span> such that <span class="math display">\[
+                    (\varphi(f))_{n, k} = \begin{cases}
+                        f \left( \frac{n}{k} \right) &amp; \text{if } k \mid n, \\
+                        0 &amp; \text{otherwise}
+                    \end{cases}
+                \]</span></p>
+                <hr />
+                <p><strong>Example.</strong> For a specific case, consider <span class="math inline">\(f(n) = n\)</span>. This yields the matrix <span class="math display">\[
+                    \varphi(f) = \begin{bmatrix}
+                        1 &amp; 0 &amp; 0 &amp; 0 \\
+                        2 &amp; 1 &amp; 0 &amp; 0 \\
+                        3 &amp; 0 &amp; 1 &amp; 0 \\
+                        4 &amp; 2 &amp; 0 &amp; 1
+                    \end{bmatrix}
+                .\]</span></p>
+                <p>Notice how, by the diagonal, the matrix is invertible iff <span class="math inline">\(f(1)\)</span> is invertible! This checks out well with how we think about the Dirichlet convolution functions.</p>
+                <hr />
+                <p>We shall denote by <span class="math inline">\(\mathcal{M}_n \subset M_{n \times n}(\mathbb{C})\)</span> the set of matrices <span class="math inline">\(\{ \varphi(f) : f \in \Dir{n}{\mathbb{C}} \}\)</span>. Since we have a bijection between our functions and this set, we have a very enticing claim that they are isomorphic:</p>
+                <div class="black-box">
+                <p><strong>Claim.</strong> <span class="math inline">\((\mathcal{M}_n, \cdot)\)</span> forms a group isomorphic to <span class="math inline">\(\Dir{n}{\mathbb{C}}\)</span>.</p>
+                </div>
+                <p><em>Proof.</em> Since we already know <span class="math inline">\(\varphi\)</span> is bijective, it suffices to show that <span class="math inline">\(\varphi\)</span> is a group homomorphism. That is, we must show that <span class="math display">\[
+                    \varphi(f) \varphi(g) = \varphi(f * g)
+                ,\]</span> where <span class="math inline">\(*\)</span> is, of course, Dirichlet convolution. To do so, observe that <span class="math display">\[
+                    (\varphi(f) \varphi(g))_{i, j} = \sum_{k = 1}^{n} (\varphi(f))_{i, k} (\varphi(g))_{k, j}
+                .\]</span> By consequence of the right hand side, <span class="math inline">\((\varphi(f) \varphi(g))_{i, j} = 0\)</span> if <span class="math inline">\(j \nmid i\)</span>. Assuming otherwise, we can reduce the expression to <span class="math display">\[
+                    (\varphi(f) \varphi(g))_{i, j} = \sum_{k \mid i} f \left( \frac{i}{k} \right) g \left( \frac{k}{j} \right) = (f * g) \left( \frac{i}{j} \right)
+                .\]</span> Matching this to our definition of <span class="math inline">\(\varphi\)</span>, we nicely see that this proves our claim. <span class="math inline">\(\blacksquare\)</span></p>
+                <p>We care about matrices like these because they are very nice to play around with, and, helpfully, there is much known about these matrix groups. Observe that <span class="math inline">\(\mathcal{M}_n\)</span> is a subgroup of the <span class="math inline">\(n \times n\)</span> complex lower triangular matrix group. By <a href="https://en.wikipedia.org/wiki/Closed-subgroup_theorem">Cartan's theorem</a>, the triangular matrix group being a Lie group implies that <span class="math inline">\(\mathcal{M}_n\)</span> is a Lie group! Thus, <span class="math inline">\(\Dir{n}{\mathbb{C}}\)</span> is isomorphic to an <span class="math inline">\(n\)</span>-dimensional Lie group!</p>
+                <h3 id="case-mathcaldinfty-mathbbc.">Case <span class="math inline">\(\mathcal{D}^\infty (\mathbb{C})\)</span>.</h3>
+                <p>Similarly to the second case, this case fails to mesh well with the previous theory that we've built up. I suppose the most pertinent thing to research into would be infinite-dimensional abelian Lie groups, but not much is returned, which seems rather reasonable. For what it's worth, this has been a very brief yet still interesting encounter with Lie groups, and I hope to learn more about them in the future.</p>
+                <p>Moving on!</p>
+                <h2 id="afterthoughts-and-more-to-come">Afterthoughts and More to Come</h2>
+                <p>I will make the conclusion short for the sake of time and my tireful fingers.</p>
+                <p>I quite liked this exploration! I feel like it's been quite a while since I've worked on a crazy random math problem like this; it's been a while since I've gotten off the path of textbooks and the pure math curriculum and tried something for my own entertainment. I hope the reader also got some of the same enjoyment out of this article, and pertinently, I hope to have conveyed some sense of exploration to you. Alas, the power of words is limited, and the power of my words even more so. I do think the linear structure of this article doesn't do the process and feeling of discovery I felt justice.</p>
+                <p>Thus, here's how my work actually looked in the PDF app I use on my phone. Quite fun!</p>
+                <p><img src="./images/dirichlet-work.jpg"></img></p>
+                <p>To actually conclude, I'll leave off with an analogy I like very much from the internet. While it was originally referencing remote code execution (RE), I feel that the same sort of style applies to challenging a hard math problem like this:</p>
+                <p><em>"RE is like a game of minesweeper. You start with an empty field not knowing the state of any of the cells, i.e. not knowing whether each individual cell contains a landmine or not. When you discover the state of a cell, you have the context to deduce the state of its neighbor cells. In minesweeper, you don't have a particular direction in which you progress. You never say 'In this game of minesweeper, I want to go up no matter what', you just let the numbers nudge you in the direction that is the easiest to go in at the moment. I assert that this is also true for RE. Once you find out what a function or a variable does, you suddenly understand a little more about functions and variables that depend on the ones whose meaning you've just inferred. It may be beneficial not to set any particular goal with an RE project, and instead letting the complex network of intertwined functions and variables guide you towards understanding the system as a whole."</em></p>
+                <p>— <a href="https://psi3.ru/blog/swl01u/">portasynthinca3</a></p>
+                <p>Thank you for reading, and...</p>
+                <p>Happy January!! See you again soon &gt;:)</p>
+            </div>
+        </div>
+    </body>
+</html>
