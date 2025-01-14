@@ -63,7 +63,7 @@ the function that is identically \( 1 \) on all inputs. Clearly then,
 \[
     (u * u)(n) = \sum_{d \mid n} u(d) u\left( \frac{n}{d} \right) = \sum_{d \mid n} 1 = d(n)
 ,\]
-where \( d(n) \) is counts the number of divisors of \( n \).
+where \( d(n) \) counts the number of divisors of \( n \).
 
 **Example (the identity). ** Another useful tool in the library of arithmetic
 functions is the identity function \( I(n) \), which is defined by \( I(1) = 1

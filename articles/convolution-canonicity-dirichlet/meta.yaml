@@ -1,7 +1,7 @@
 ---
 title: "Convolution Canonicity: Dirichlet Convolutions!"
 tags: ["group-theory", "abstract-algebra", "lie-theory", "number-theory", "linear-algebra", "matrices", "finite-fields"]
-publish-date: "January 11, 2025"
+publish-date: "January 13, 2025"
 description: |
   The primer article in a series exploring convolution in group theory. The
   topic? Dirichlet convolutions! We'll generalize them over arbitrary fields
