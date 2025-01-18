@@ -189,7 +189,7 @@ body {
 }
 
 .content .katex {
-    overflow-x: scroll;
+    overflow-x: auto;
     overflow-y: hidden;
 }
 
@@ -239,8 +239,8 @@ ol > li::marker {
     padding-left: 25px;
     padding-bottom: 15px;
 
+    overflow-x: auto;
     overflow-y: hidden;
-    overflow-x: scroll;
 }
 
 .code-container hr {
