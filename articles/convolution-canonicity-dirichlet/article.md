@@ -215,7 +215,7 @@ so why are we only taking the case of \( \mathbb{F}_2 \)? As it turns out, I
 can't say much in specifics for \( \mathbb{F}_{p^k} \)! In fact, I can tell you
 the order is
 \[
-    |\Dir{n}{\mathbb{F}_{p^k}}| = (p^k - 1) p^{nk}
+    |\Dir{n}{\mathbb{F}_{p^k}}| = (p^k - 1) p^{(n - 1)k}
 ,\]
 but I can't tell you much else. As I hope to show below, even the
 behavior for \( \mathbb{F}_2 \) is highly nontrivial, so I hope you can be
