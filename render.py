@@ -6,6 +6,28 @@ import zlib
 from sys import argv
 from pathlib import Path
 from dateutil import parser
+from datetime import datetime
+
+def current_date():
+    now = datetime.now()
+
+    month, day, year = now.month, now.day, now.year
+    months = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+    ]
+
+    return f"{months[month - 1]} {day}, {year}"
 
 # TODO: Allow for specifying templates within the yaml file
 # (doesn't take long at all to implement; this is just a note)
@@ -101,10 +123,12 @@ class Article:
         # Yeah unfortunately even though we're using Katex to do the actual rendering,
         # if you use the katex flag instead of the mathjax flag, it won't work :(
         # Thank you pandoc, very cool
-        cmd = ["pandoc", "-f", "markdown-smart+tex_math_single_backslash", "--standalone", "--toc", "--mathjax", "--template=templates/article.html", "--metadata-file=" + str(self.metadata), "-o", str(self.result), str(self.article)]
+        edit_date = current_date()
+
+        cmd = ["pandoc", "-f", "markdown-smart+tex_math_single_backslash", "--standalone", "--toc", "--mathjax", "--template=templates/article.html", "--metadata-file=" + str(self.metadata), '--metadata=edit-date:"' + edit_date + '"', "-o", str(self.result), str(self.article)]
 
         if self.includes.exists():
-            cmd = ["pandoc", "-f", "markdown-smart+tex_math_single_backslash", "--standalone", "--toc", "--mathjax", "--template=templates/article.html", "--metadata-file=" + str(self.metadata), "--include-in-header=" + str(self.includes), "-o", str(self.result), str(self.article)]
+            cmd = ["pandoc", "-f", "markdown-smart+tex_math_single_backslash", "--standalone", "--toc", "--mathjax", "--template=templates/article.html", "--metadata-file=" + str(self.metadata), '--metadata=edit-date:"' + edit_date + '"', "--include-in-header=" + str(self.includes), "-o", str(self.result), str(self.article)]
 
         print()
         print("   " + " ".join(cmd[:3]))
