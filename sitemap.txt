@@ -2,6 +2,7 @@ https://chirprush.github.io/
 https://chirprush.github.io/index.html
 https://chirprush.github.io/about.html
 https://chirprush.github.io/tags.html
+https://chirprush.github.io/articles/electromagnetism-cycloid/index.html
 https://chirprush.github.io/articles/music-inspired-mathematics/index.html
 https://chirprush.github.io/articles/convolution-canonicity-dirichlet/index.html
 https://chirprush.github.io/articles/combinatorial-totient-sum-identity/index.html

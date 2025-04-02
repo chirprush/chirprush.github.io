@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>chirprush - An Electromagnetism Cycloid</title>
+
+        <link rel="stylesheet" href="/assets/css/style.css">
+        <link rel="stylesheet" href="/assets/css/panel.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Katex -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+" crossorigin="anonymous">
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js" integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg" crossorigin="anonymous"></script>
+        <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+
+        
+        <meta charset="utf-8">
+    </head>
+
+    <body>
+        <div id="side-nav" class="side-panel">
+            <div class="panel-content">
+                <div class="panel-grid">
+                    <img class="grid-pfp" src="/assets/images/pfp.svg"></img>
+                    <h2 class="grid-title">Rushil Surti</h1>
+                    <p class="grid-email">rush040507@gmail.com</p>
+                    <div class="grid-icons"><a href="https://www.github.com/chirprush/" target="_blank"><i class="fa-brands fa-github"></i></a> <a href="https://www.youtube.com/channel/UCSc-MTo8KGPDMLszD6jYjxA" target="_blank"><i class="fa-brands fa-youtube"></i></a> <a href="https://www.instagram.com/chirprush/" target="_blank"><i class="fa-brands fa-instagram"></i></a> <a href="https://math.stackexchange.com/users/1128617/chirpyboat73" target="_blank"><i class="fa-brands fa-stack-exchange"></i></a></div>
+                </div>
+
+                <hr class="separator" />
+
+                <div class="description">
+                    <h2>Description</h2>
+                    <div class="side-line">
+                        <p>Not an April Fool's joke! This is a mini article on an electromagnetism problem mentioned in one of our class's textbooks. The exact solution was said to be beyond the scope of the textbook, so, don't mind if I do!</p>
+                    </div>
+                </div>
+
+                <div class="contents">
+                    <h2>Contents</h2>
+                    <div class="side-line">
+                        <ul>
+                        <li><a href="#the-workings">The Workings</a></li>
+                        <li><a href="#an-isomorphism">An Isomorphism</a></li>
+                        </ul>
+                        <!--
+                        <ul>
+                            <li><b>Section 1.</b> Sample text</li>
+                            <li><ul>
+                                <li><b>Section 1.1.</b> Some stuff</li>
+                            </ul></li>
+                            <li><b>Section 2.</b> More sample text</li>
+                        </ul>
+                        -->
+                    </div>
+                </div>
+
+                <div class="navigation-container">
+                    <a href="/index.html">Articles</a>
+                    <a href="/tags.html">Tags</a>
+                    <a href="/about.html">About Me</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="content">
+                <h1>An Electromagnetism Cycloid</h1>
+
+                <hr class="separator" />
+                <div class="info-holder">
+                    <span class="info-value"><b>Author:</b> Rushil Surti</span>
+                    <span class="info-value"><b>Date:</b> April 1, 2025</span>
+                    <span class="info-value"><b>Tags:</b>  <a href="/tags.html#mini"><span class="info-tag">mini</span></a>  <a href="/tags.html#physics"><span class="info-tag">physics</span></a>  <a href="/tags.html#linear-algebra"><span class="info-tag">linear-algebra</span></a>  <a href="/tags.html#differential-equations"><span class="info-tag">differential-equations</span></a>  <a href="/tags.html#complex-numbers"><span class="info-tag">complex-numbers</span></a> </span>
+                    <span class="info-value"><b>Edited:</b> April 1, 2025</span>
+                </div>
+
+                <p>Hello again, everyone! This will be a short and sweet mini-article (with bigger articles coming up) on a physics problem taken from a textbook in our physics class. For the reader's (slight) entertainment, I'll set the scene exactly:</p>
+                <p>I was bored during our second period of Physics C, and we had just gotten the packets on magnetism, so I took a scroll through the book. Aside from the interestingly detailed right hand rule diagrams (props to the artists), one problem found in the bottom right of a random page caught my eye. A particle was placed in a specific configuration of an electric and magnetic field so as to have the path of a <a href="https://en.wikipedia.org/wiki/Cycloid">cycloid</a>. The problem was just to nonrigorously explain this behavior, but the textbook noted that the explicit, mathematical derivation and description of the path was something for more advanced textbooks.</p>
+                <p>So of course, I spent the period thinking about it. In the process, I also kinda missed what our teacher was lecturing on. Oops.</p>
+                <div class="black-box">
+                <p><strong>Problem.</strong> Consider a particle of charge <span class="math inline">\(+q\)</span> and mass <span class="math inline">\(m\)</span> placed at rest at the origin in a constant magnetic field <span class="math inline">\(\mathbf{B}\)</span> directed in the negative <span class="math inline">\(z\)</span>-direction and a constant electric field <span class="math inline">\(\mathbf{E}\)</span> directed upward in the positive <span class="math inline">\(y\)</span>-direction.</p>
+                <p>Determine the trajectory of the particle at time <span class="math inline">\(t\)</span>.</p>
+                </div>
+                <h2 id="the-workings">The Workings</h2>
+                <p>The diagram from the textbook indicates that the particle always stays in the <span class="math inline">\(xy\)</span>-plane. Indeed, the particle's trajectory is determined entirely by the Lorentz force <span class="math display">\[
+                    \mathbf{F} = q (\mathbf{E} + \mathbf{v} \times \mathbf{B})
+                ,\]</span> and since the electric field has no <span class="math inline">\(z\)</span>-component while the magnetic field is only in the <span class="math inline">\(z\)</span>-axis, this indeed makes sense.</p>
+                <p>Thus, we can model the position of the particle <span class="math inline">\(\mathbf{x}(t)\)</span> at a time <span class="math inline">\(t\)</span> as a vector in <span class="math inline">\(\mathbf{R}^2\)</span> and consider the individual components of the force by Newton's second law: <span class="math display">\[\begin{align*}
+                    m \ddot{\mathbf{x}}_x (t) &amp;= qB \dot{\mathbf{x}}_y(t), \\
+                    m \ddot{\mathbf{x}}_y (t) &amp;= -qB \dot{\mathbf{x}}_x (t) + qE
+                .\end{align*}\]</span> This is actually a very interesting system of differential equations, because they're coupled! They are not individually solvable, so we need some cool methods. Since this system is linear, we can set up a matrix differential equation! One can verify that the system is equivalent to <span class="math display">\[
+                    \frac{d}{dt} \dot{\mathbf{x}} (t) = \begin{bmatrix}
+                        0 &amp; qB / m \\
+                        -qB / m &amp; 0
+                    \end{bmatrix} \dot{\mathbf{x}}(t) + \begin{bmatrix}
+                        0 \\
+                        qE / m
+                    \end{bmatrix}
+                .\]</span> But, this is actually a very simple form. We have a constant (in <span class="math inline">\(t\)</span>) matrix (let's call it <span class="math inline">\(A\)</span>) times the function plus a constant, which lets us reasonably ansatz an exponential function of the form <span class="math display">\[
+                    \dot{\mathbf{x}}(t) = \exp(A t) \mathbf{u} + \begin{bmatrix}
+                        E / B \\
+                        0
+                    \end{bmatrix}
+                .\]</span> And our initial condition <span class="math inline">\(\dot{\mathbf{x}} (0) = \mathbf{0}\)</span> give <span class="math inline">\(\mathbf{u}\)</span> so that <span class="math display">\[
+                    \dot{\mathbf{x}}(t) = (I - \exp(A t)) \begin{bmatrix}
+                        E/B \\
+                        0
+                    \end{bmatrix}
+                .\]</span> In order to simplify this now, we actually need to evaluate the matrix exponential. Luckily <span class="math inline">\(A\)</span> is of the form <span class="math display">\[
+                    A = \frac{qB}{m} t \begin{bmatrix}
+                        0 &amp; 1 \\
+                        -1 &amp; 0
+                    \end{bmatrix}
+                .\]</span> Ignoring the constant factor, this matrix would have order two, so the even powered terms are the identity, and the odd powered terms are just <span class="math inline">\(A\)</span> (ignoring the constant again). Putting the constants back in, we get a rotation-like matrix in the solution: <span class="math display">\[
+                    \dot{\mathbf{x}}(t) = \begin{bmatrix}
+                        1 - \cos{\left( \frac{qB}{m} t \right)} &amp; -\sin{\left( \frac{qB}{m} t \right)} \\
+                        \sin{\left( \frac{qB}{m} t \right)} &amp; 1 - \cos{\left( \frac{qB}{m}t \right)}
+                    \end{bmatrix} \begin{bmatrix}
+                        E / B \\
+                        0
+                    \end{bmatrix}
+                    =
+                    \frac{E}{B}
+                    \begin{bmatrix}
+                        1 - \cos{\left( \frac{qB}{m} t \right)} \\
+                        \sin{\left( \frac{qB}{m} t \right)}
+                    \end{bmatrix}
+                .\]</span> We can then integrate this vector element-wise and apply the initial condition <span class="math inline">\(\mathbf{x} (0) = \mathbf{0}\)</span> to get <span class="math display">\[
+                    \mathbf{x}(t) = \frac{E}{B} \begin{bmatrix}
+                        t - \frac{m}{qB} \sin{\left( \frac{qB}{m} t \right)} \\
+                        \frac{m}{qB} - \frac{m}{qB} \cos{\left( \frac{qB}{m} t \right)}
+                    \end{bmatrix}
+                .\]</span> There's our cycloid!</p>
+                <h2 id="an-isomorphism">An Isomorphism</h2>
+                <p>If one likes matrix exponentials and coupled differential equations less, we can take an <a href="https://en.wikipedia.org/wiki/Complex_number#Matrix_representation_of_complex_numbers">isomorphism</a> to the complex numbers! In particular, we can treat <span class="math inline">\(\mathbf{x}(t)\)</span> to represent the particle's position in <span class="math inline">\(\mathbf{C}\)</span>, where the real component is the <span class="math inline">\(x\)</span>-component and the imaginary component is the <span class="math inline">\(y\)</span>-component. With this, our matrix <span class="math inline">\(A\)</span> just gets mapped to <span class="math inline">\(-i qB / m\)</span>. Working through everything, this yields the highly analogous solution <span class="math display">\[
+                    \mathbf{x}(t) = \frac{E}{B} \left( t + i \frac{m}{qB} - i \frac{m}{qB} \exp{\left( -i \frac{qB}{m} t\right)} \right)
+                .\]</span></p>
+            </div>
+        </div>
+    </body>
+</html>
