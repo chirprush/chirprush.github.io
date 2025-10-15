@@ -32,7 +32,9 @@
                 <div class="description">
                     <h2>Description</h2>
                     <div class="side-line">
-                        <p>A nice 1800 rated Codeforces problem on constructing an integer sequence. Multiple attempts, because an initial strategy doesn't always work but is nice to document.</p>
+                        <p><p>A nice 1800 rated Codeforces problem on
+constructing an integer sequence. Multiple attempts, because an initial
+strategy doesn't always work but is nice to document.</p></p>
                     </div>
                 </div>
 
@@ -40,10 +42,17 @@
                     <h2>Contents</h2>
                     <div class="side-line">
                         <ul>
-                        <li><a href="#problem">Problem</a></li>
-                        <li><a href="#solution">Solution</a><ul>
-                        <li><a href="#first-attempt-integer-overflow">First Attempt (Integer Overflow)</a></li>
-                        <li><a href="#correct-attempt">Correct Attempt</a></li>
+                        <li><a href="#problem"
+                        id="toc-problem">Problem</a></li>
+                        <li><a href="#solution"
+                        id="toc-solution">Solution</a>
+                        <ul>
+                        <li><a href="#first-attempt-integer-overflow"
+                        id="toc-first-attempt-integer-overflow">First
+                        Attempt (Integer Overflow)</a></li>
+                        <li><a href="#correct-attempt"
+                        id="toc-correct-attempt">Correct
+                        Attempt</a></li>
                         </ul></li>
                         </ul>
                         <!--
@@ -73,53 +82,107 @@
                 <hr class="separator" />
                 <div class="info-holder">
                     <span class="info-value"><b>Author:</b> Rushil Surti</span>
-                    <span class="info-value"><b>Date:</b> March 9, 2024</span>
+                    <span class="info-value"><b>Date:</b> March 9,
+2024</span>
                     <span class="info-value"><b>Tags:</b>  <a href="/tags.html#codeforces"><span class="info-tag">codeforces</span></a>  <a href="/tags.html#number-theory"><span class="info-tag">number-theory</span></a> </span>
+                    <span class="info-value"><b>Edited:</b> October 15,
+2025</span>
                 </div>
 
                 <h2 id="problem">Problem</h2>
                 <div class="side-box">
-                <p><strong>Problem.</strong> We must find <span class="math inline">\(n\)</span> distinct integers such that <span class="math display">\[
-                    \max(a_1, a_2, \ldots, a_n) - \min(a_1, a_2, \ldots, a_n) = \sqrt{a_1 + a_2 + \cdots + a_n}
+                <p><strong>Problem.</strong> We must find <span
+                class="math inline">\(n\)</span> distinct integers such
+                that <span class="math display">\[
+                    \max(a_1, a_2, \ldots, a_n) - \min(a_1, a_2, \ldots,
+                a_n) = \sqrt{a_1 + a_2 + \cdots + a_n}
                 .\]</span></p>
                 </div>
                 <h2 id="solution">Solution</h2>
-                <p><strong>Observation.</strong> WLOG, let <span class="math inline">\(a_1 &lt; a_2 &lt; \cdots &lt; a_n\)</span>. The condition then turns into <span class="math display">\[
+                <p><strong>Observation.</strong> WLOG, let <span
+                class="math inline">\(a_1 &lt; a_2 &lt; \cdots &lt;
+                a_n\)</span>. The condition then turns into <span
+                class="math display">\[
                 \begin{align*}
                     a_n - a_1 &amp;= \sqrt{a_1 + a_2 + \cdots + a_n} \\
                     (a_n - a_1)^2 &amp;= a_1 + a_2 + \cdots + a_n.
                 \end{align*}
-                \]</span> We shall assume this ordering for the sequence moving forward.</p>
-                <h3 id="first-attempt-integer-overflow">First Attempt (Integer Overflow)</h3>
-                <p>Suppose that we turn this into an arithemtic sequence. Let <span class="math display">\[
+                \]</span> We shall assume this ordering for the sequence
+                moving forward.</p>
+                <h3 id="first-attempt-integer-overflow">First Attempt
+                (Integer Overflow)</h3>
+                <p>Suppose that we turn this into an arithemtic
+                sequence. Let <span class="math display">\[
                     a_i = a_1 + (i-1)d
-                .\]</span> This transforms our condition into <span class="math display">\[
+                .\]</span> This transforms our condition into <span
+                class="math display">\[
                 \begin{align*}
-                    (n-1)^2 d^2 &amp;= n a_1 + \frac{n(n-1)}{2} \cdot d \\
-                    \implies a_1 &amp;= \frac{(n-1)^2 d^2}{n} - \frac{(n-1)d}{2} \\
-                    &amp;= (n-1)d \left( \frac{(n-1)d}{n} - \frac{1}{2} \right).
+                    (n-1)^2 d^2 &amp;= n a_1 + \frac{n(n-1)}{2} \cdot d
+                \\
+                    \implies a_1 &amp;= \frac{(n-1)^2 d^2}{n} -
+                \frac{(n-1)d}{2} \\
+                    &amp;= (n-1)d \left( \frac{(n-1)d}{n} - \frac{1}{2}
+                \right).
                 \end{align*}
-                \]</span> If we take <span class="math inline">\(d\)</span> to be equal to <span class="math inline">\(2n\)</span>, then we get <span class="math display">\[
+                \]</span> If we take <span
+                class="math inline">\(d\)</span> to be equal to <span
+                class="math inline">\(2n\)</span>, then we get <span
+                class="math display">\[
                     a_1 = n(n-1)(4n - 5)
-                ,\]</span> which is always an integer for <span class="math inline">\(n \ge 2\)</span>, which is rather reassuring.</p>
-                <p>The only problem is that this sequence of integers quickly blows up for larger <span class="math inline">\(n\)</span>. Unfortunately, the problem gives the constraint that <span class="math inline">\(1 \le a_i \le 10^9\)</span>, which means that we'll have to play around a bit more.</p>
+                ,\]</span> which is always an integer for <span
+                class="math inline">\(n \ge 2\)</span>, which is rather
+                reassuring.</p>
+                <p>The only problem is that this sequence of integers
+                quickly blows up for larger <span
+                class="math inline">\(n\)</span>. Unfortunately, the
+                problem gives the constraint that <span
+                class="math inline">\(1 \le a_i \le 10^9\)</span>, which
+                means that we'll have to play around a bit more.</p>
                 <h3 id="correct-attempt">Correct Attempt</h3>
-                <p>Let us step away from arithmetic progressions and be a bit more general in our reasoning. Let us consider sequences such that <span class="math inline">\(a_n = a_1 + k\)</span> for some integer <span class="math inline">\(k \ge n - 1\)</span>. Thus, the main condition turns into <span class="math display">\[
+                <p>Let us step away from arithmetic progressions and be
+                a bit more general in our reasoning. Let us consider
+                sequences such that <span class="math inline">\(a_n =
+                a_1 + k\)</span> for some integer <span
+                class="math inline">\(k \ge n - 1\)</span>. Thus, the
+                main condition turns into <span class="math display">\[
                     k^2 = a_1 + a_2 + \cdots + a_n
-                .\]</span> Let <span class="math inline">\(K\)</span> be the integer value such that <span class="math display">\[
+                .\]</span> Let <span class="math inline">\(K\)</span> be
+                the integer value such that <span
+                class="math display">\[
                     k^2 = n a_1 + K + k
-                ,\]</span> which tells us that <span class="math display">\[
+                ,\]</span> which tells us that <span
+                class="math display">\[
                     a_1 = (k^2 - k - K) / n
-                ,\]</span> so all we have to do is find valid values of <span class="math inline">\(k, K\)</span> such that <span class="math inline">\(n \mid k^2 - k - K\)</span>, and then we win.</p>
-                <p>In order to get an idea of the values we can give to <span class="math inline">\(K\)</span>, we may bound it as follows: <span class="math display">\[
+                ,\]</span> so all we have to do is find valid values of
+                <span class="math inline">\(k, K\)</span> such that
+                <span class="math inline">\(n \mid k^2 - k - K\)</span>,
+                and then we win.</p>
+                <p>In order to get an idea of the values we can give to
+                <span class="math inline">\(K\)</span>, we may bound it
+                as follows: <span class="math display">\[
                 \begin{align*}
-                    \frac{(n-1)(n-2)}{2} \le K &amp;\le (k - 1) + (k - 2) + \cdots + (k - n + 2) \\
+                    \frac{(n-1)(n-2)}{2} \le K &amp;\le (k - 1) + (k -
+                2) + \cdots + (k - n + 2) \\
                     &amp;= (n-2)k - \frac{(n-1)(n-2)}{2}.
                 \end{align*}
-                \]</span> This gives us an interval of length <span class="math display">\[
+                \]</span> This gives us an interval of length <span
+                class="math display">\[
                     (n-2)k - (n-1)(n-2) + 1
-                ,\]</span> which is greater than <span class="math inline">\(n\)</span> for <span class="math inline">\(k \ge n + 1\)</span> for all <span class="math inline">\(n \ge 3\)</span> (so I suppose we can just hardcode the case for <span class="math inline">\(n = 2\)</span>).</p>
-                <p>Motivated by this, let's suppose that <span class="math inline">\(k \equiv 1 \pmod{n}\)</span> and <span class="math inline">\(K \equiv 0 \pmod{n}\)</span>, so that the divisibility condition always hold true. With the above work, we can see that <span class="math inline">\(k = n + 1\)</span>, which allows us to determine the valid value of <span class="math inline">\(K\)</span> through examining the interval.</p>
+                ,\]</span> which is greater than <span
+                class="math inline">\(n\)</span> for <span
+                class="math inline">\(k \ge n + 1\)</span> for all <span
+                class="math inline">\(n \ge 3\)</span> (so I suppose we
+                can just hardcode the case for <span
+                class="math inline">\(n = 2\)</span>).</p>
+                <p>Motivated by this, let's suppose that <span
+                class="math inline">\(k \equiv 1 \pmod{n}\)</span> and
+                <span class="math inline">\(K \equiv 0
+                \pmod{n}\)</span>, so that the divisibility condition
+                always hold true. With the above work, we can see that
+                <span class="math inline">\(k = n + 1\)</span>, which
+                allows us to determine the valid value of <span
+                class="math inline">\(K\)</span> through examining the
+                interval.</p>
             </div>
         </div>
     </body>

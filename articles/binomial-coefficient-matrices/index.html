@@ -32,7 +32,8 @@
                 <div class="description">
                     <h2>Description</h2>
                     <div class="side-line">
-                        <p>Let's explore the properties of lower triangular matrices filled with binomial coefficients.</p>
+                        <p><p>Let's explore the properties of lower
+triangular matrices filled with binomial coefficients.</p></p>
                     </div>
                 </div>
 
@@ -40,12 +41,20 @@
                     <h2>Contents</h2>
                     <div class="side-line">
                         <ul>
-                        <li><a href="#main-idea">Main Idea</a></li>
-                        <li><a href="#exploration">Exploration</a><ul>
-                        <li><a href="#evaluating-a-tranpose-product">Evaluating A Tranpose Product</a></li>
-                        <li><a href="#evaluating-the-inverse">Evaluating The Inverse</a></li>
+                        <li><a href="#main-idea" id="toc-main-idea">Main
+                        Idea</a></li>
+                        <li><a href="#exploration"
+                        id="toc-exploration">Exploration</a>
+                        <ul>
+                        <li><a href="#evaluating-a-tranpose-product"
+                        id="toc-evaluating-a-tranpose-product">Evaluating
+                        A Tranpose Product</a></li>
+                        <li><a href="#evaluating-the-inverse"
+                        id="toc-evaluating-the-inverse">Evaluating The
+                        Inverse</a></li>
                         </ul></li>
-                        <li><a href="#applications">Applications</a></li>
+                        <li><a href="#applications"
+                        id="toc-applications">Applications</a></li>
                         </ul>
                         <!--
                         <ul>
@@ -74,13 +83,26 @@
                 <hr class="separator" />
                 <div class="info-holder">
                     <span class="info-value"><b>Author:</b> Rushil Surti</span>
-                    <span class="info-value"><b>Date:</b> June 30, 2024</span>
+                    <span class="info-value"><b>Date:</b> June 30,
+2024</span>
                     <span class="info-value"><b>Tags:</b>  <a href="/tags.html#linear-algebra"><span class="info-tag">linear-algebra</span></a>  <a href="/tags.html#matrices"><span class="info-tag">matrices</span></a>  <a href="/tags.html#combinatorics"><span class="info-tag">combinatorics</span></a>  <a href="/tags.html#binomial-coefficient"><span class="info-tag">binomial-coefficient</span></a> </span>
+                    <span class="info-value"><b>Edited:</b> October 15,
+2025</span>
                 </div>
 
                 <h2 id="main-idea">Main Idea</h2>
-                <p><strong>Idea.</strong> Consider <span class="math inline">\((n + 1) \times (n + 1)\)</span> matrices of the form <span class="math inline">\(A_{ij} = \binom{i - 1}{j - 1}\)</span>, with the convention that <span class="math inline">\(\binom{i}{j} = 0\)</span> for <span class="math inline">\(j &gt; i\)</span>. Denote these matrices by <span class="math inline">\(B_n\)</span>. What kind of properties do these matrices (and perhaps similar ones) have?</p>
-                <p><strong>Example.</strong> The first few such matrices are <span class="math display">\[
+                <p><strong>Idea.</strong> Consider <span
+                class="math inline">\((n + 1) \times (n + 1)\)</span>
+                matrices of the form <span class="math inline">\(A_{ij}
+                = \binom{i - 1}{j - 1}\)</span>, with the convention
+                that <span class="math inline">\(\binom{i}{j} =
+                0\)</span> for <span class="math inline">\(j &gt;
+                i\)</span>. Denote these matrices by <span
+                class="math inline">\(B_n\)</span>. What kind of
+                properties do these matrices (and perhaps similar ones)
+                have?</p>
+                <p><strong>Example.</strong> The first few such matrices
+                are <span class="math display">\[
                     B_0 = \begin{bmatrix}
                         1
                     \end{bmatrix},
@@ -101,81 +123,155 @@
                     \end{bmatrix}
                 .\]</span></p>
                 <h2 id="exploration">Exploration</h2>
-                <p>Immediately we can see that by definition such matrices are lower unitriangular, as for any such matrix <span class="math inline">\(A\)</span>, <span class="math inline">\(A_{ij} = 0\)</span> for <span class="math inline">\(j &gt; i\)</span> and <span class="math inline">\(A_{ii} = \binom{i - 1}{i - 1} = 1\)</span>. This is also obvious from the examples.</p>
+                <p>Immediately we can see that by definition such
+                matrices are lower unitriangular, as for any such matrix
+                <span class="math inline">\(A\)</span>, <span
+                class="math inline">\(A_{ij} = 0\)</span> for <span
+                class="math inline">\(j &gt; i\)</span> and <span
+                class="math inline">\(A_{ii} = \binom{i - 1}{i - 1} =
+                1\)</span>. This is also obvious from the examples.</p>
                 <p>With this structure comes a few properties:</p>
                 <ul>
-                <li><span class="math inline">\(\det B_n = 1\)</span>.</li>
-                <li><span class="math inline">\(\det (B_n - \lambda I) = (\lambda - 1)^{n + 1}\)</span>.</li>
-                <li><span class="math inline">\(B_n\)</span> is not diagonalizable.</li>
+                <li><span class="math inline">\(\det B_n =
+                1\)</span>.</li>
+                <li><span class="math inline">\(\det (B_n - \lambda I) =
+                (\lambda - 1)^{n + 1}\)</span>.</li>
+                <li><span class="math inline">\(B_n\)</span> is not
+                diagonalizable.</li>
                 </ul>
-                <h3 id="evaluating-a-tranpose-product">Evaluating A Tranpose Product</h3>
-                <p><strong>Question.</strong> What is <span class="math inline">\(B_n B_n^T\)</span>?</p>
-                <p>Using Mathematica, we can gain the intuition that the answer should be <span class="math inline">\((B_n B_n^T)_{ij} = \binom{i + j - 2}{i - 1} = \binom{i + j - 2}{j - 1}\)</span>. We can prove this is true by observing that <span class="math display">\[
+                <h3 id="evaluating-a-tranpose-product">Evaluating A
+                Tranpose Product</h3>
+                <p><strong>Question.</strong> What is <span
+                class="math inline">\(B_n B_n^T\)</span>?</p>
+                <p>Using Mathematica, we can gain the intuition that the
+                answer should be <span class="math inline">\((B_n
+                B_n^T)_{ij} = \binom{i + j - 2}{i - 1} = \binom{i + j -
+                2}{j - 1}\)</span>. We can prove this is true by
+                observing that <span class="math display">\[
                 \begin{align*}
-                    (B_n B_n^T)_{ij} &amp;= \sum_{k = 0}^{n} (B_n)_{ik} (B_n^T)_{kj} \\
-                    &amp;= \sum_{k = 1}^{n} \binom{i - 1}{k - 1} \binom{j - 1}{k - 1} \\
-                    &amp;= \sum_{k = 0}^{\min(i - 1, j - 1)} \binom{i - 1}{k} \binom{j - 1}{j - 1 - k}.
+                    (B_n B_n^T)_{ij} &amp;= \sum_{k = 0}^{n} (B_n)_{ik}
+                (B_n^T)_{kj} \\
+                    &amp;= \sum_{k = 1}^{n} \binom{i - 1}{k - 1}
+                \binom{j - 1}{k - 1} \\
+                    &amp;= \sum_{k = 0}^{\min(i - 1, j - 1)} \binom{i -
+                1}{k} \binom{j - 1}{j - 1 - k}.
                 \end{align*}
-                \]</span> If we WLOG let <span class="math inline">\(i \ge j\)</span>, then Vandermonde's identity tells us that <span class="math inline">\((B_n B_n^T)_{ij}\)</span> indeed is <span class="math inline">\(\binom{i + j - 2}{j - 1}\)</span>.</p>
-                <h3 id="evaluating-the-inverse">Evaluating The Inverse</h3>
-                <p><strong>Question.</strong> What is the inverse of <span class="math inline">\(B_n\)</span>?</p>
-                <p>Since <span class="math inline">\(B_n\)</span> is unitriangular, it's very easy to work out some small examples, so let us do so. For <span class="math inline">\(B_3\)</span>, we have <span class="math display">\[
+                \]</span> If we WLOG let <span class="math inline">\(i
+                \ge j\)</span>, then Vandermonde's identity tells us
+                that <span class="math inline">\((B_n
+                B_n^T)_{ij}\)</span> indeed is <span
+                class="math inline">\(\binom{i + j - 2}{j -
+                1}\)</span>.</p>
+                <h3 id="evaluating-the-inverse">Evaluating The
+                Inverse</h3>
+                <p><strong>Question.</strong> What is the inverse of
+                <span class="math inline">\(B_n\)</span>?</p>
+                <p>Since <span class="math inline">\(B_n\)</span> is
+                unitriangular, it's very easy to work out some small
+                examples, so let us do so. For <span
+                class="math inline">\(B_3\)</span>, we have <span
+                class="math display">\[
                 \begin{align*}
                     \begin{bmatrix}
-                        1 &amp; 0 &amp; 0 &amp; 0 &amp; \bigm| &amp; b_1 \\
-                        1 &amp; 1 &amp; 0 &amp; 0 &amp; \bigm| &amp; b_2 \\
-                        1 &amp; 2 &amp; 1 &amp; 0 &amp; \bigm| &amp; b_3 \\
+                        1 &amp; 0 &amp; 0 &amp; 0 &amp; \bigm| &amp; b_1
+                \\
+                        1 &amp; 1 &amp; 0 &amp; 0 &amp; \bigm| &amp; b_2
+                \\
+                        1 &amp; 2 &amp; 1 &amp; 0 &amp; \bigm| &amp; b_3
+                \\
                         1 &amp; 3 &amp; 3 &amp; 1 &amp; \bigm| &amp; b_4
                     \end{bmatrix} &amp;\longrightarrow
                     \begin{bmatrix}
-                        1 &amp; 0 &amp; 0 &amp; 0 &amp; \bigm| &amp; b_1 \\
-                        0 &amp; 1 &amp; 0 &amp; 0 &amp; \bigm| &amp; b_2 - b_1 \\
-                        1 &amp; 2 &amp; 1 &amp; 0 &amp; \bigm| &amp; b_3 \\
+                        1 &amp; 0 &amp; 0 &amp; 0 &amp; \bigm| &amp; b_1
+                \\
+                        0 &amp; 1 &amp; 0 &amp; 0 &amp; \bigm| &amp; b_2
+                - b_1 \\
+                        1 &amp; 2 &amp; 1 &amp; 0 &amp; \bigm| &amp; b_3
+                \\
                         1 &amp; 3 &amp; 3 &amp; 1 &amp; \bigm| &amp; b_4
                     \end{bmatrix} \\
-                    &amp;\longrightarrow 
+                    &amp;\longrightarrow
                     \begin{bmatrix}
-                        1 &amp; 0 &amp; 0 &amp; 0 &amp; \bigm| &amp; b_1 \\
-                        0 &amp; 1 &amp; 0 &amp; 0 &amp; \bigm| &amp; b_2 - b_1 \\
-                        0 &amp; 0 &amp; 1 &amp; 0 &amp; \bigm| &amp; b_3 - 2b_2 + b_1 \\
+                        1 &amp; 0 &amp; 0 &amp; 0 &amp; \bigm| &amp; b_1
+                \\
+                        0 &amp; 1 &amp; 0 &amp; 0 &amp; \bigm| &amp; b_2
+                - b_1 \\
+                        0 &amp; 0 &amp; 1 &amp; 0 &amp; \bigm| &amp; b_3
+                - 2b_2 + b_1 \\
                         1 &amp; 3 &amp; 3 &amp; 1 &amp; \bigm| &amp; b_4
                     \end{bmatrix} \\
-                    &amp;\longrightarrow 
+                    &amp;\longrightarrow
                     \begin{bmatrix}
-                        1 &amp; 0 &amp; 0 &amp; 0 &amp; \bigm| &amp; b_1 \\
-                        0 &amp; 1 &amp; 0 &amp; 0 &amp; \bigm| &amp; b_2 - b_1 \\
-                        0 &amp; 0 &amp; 1 &amp; 0 &amp; \bigm| &amp; b_3 - 2b_2 + b_1 \\
-                        0 &amp; 0 &amp; 0 &amp; 1 &amp; \bigm| &amp; b_4 - 3b_3 + 3b_2 - b_1
+                        1 &amp; 0 &amp; 0 &amp; 0 &amp; \bigm| &amp; b_1
+                \\
+                        0 &amp; 1 &amp; 0 &amp; 0 &amp; \bigm| &amp; b_2
+                - b_1 \\
+                        0 &amp; 0 &amp; 1 &amp; 0 &amp; \bigm| &amp; b_3
+                - 2b_2 + b_1 \\
+                        0 &amp; 0 &amp; 0 &amp; 1 &amp; \bigm| &amp; b_4
+                - 3b_3 + 3b_2 - b_1
                     \end{bmatrix},
                 \end{align*}
-                \]</span> which I suppose is somewhat obvious. This tells us that <span class="math display">\[
+                \]</span> which I suppose is somewhat obvious. This
+                tells us that <span class="math display">\[
                     B_3^{-1} = \begin{bmatrix}
                         1 &amp; 0 &amp; 0 &amp; 0 \\
                         -1 &amp; 1 &amp; 0 &amp; 0 \\
                         1 &amp; -2 &amp; 1 &amp; 0 \\
                         -1 &amp; 3 &amp; -3 &amp; 1
                     \end{bmatrix}
-                ,\]</span> which allows one to guess that <span class="math inline">\((B_n^{-1})_{ij} = (-1)^{i + j} (B_n)_{ij} = (-1)^{i + j} \binom{i - 1}{j - 1}\)</span>. Let's try and prove this. We have that <span class="math display">\[
+                ,\]</span> which allows one to guess that <span
+                class="math inline">\((B_n^{-1})_{ij} = (-1)^{i + j}
+                (B_n)_{ij} = (-1)^{i + j} \binom{i - 1}{j - 1}\)</span>.
+                Let's try and prove this. We have that <span
+                class="math display">\[
                     (B_n B_n^{-1})_{ij} = \delta_{ij}
-                ,\]</span> so we must have that (credits to this <a href="https://artofproblemsolving.com/community/c7h1973655p13689198">aops thread</a> for the idea) <span class="math display">\[
+                ,\]</span> so we must have that (credits to this <a
+                href="https://artofproblemsolving.com/community/c7h1973655p13689198">aops
+                thread</a> for the idea) <span class="math display">\[
                 \begin{align*}
-                    (B_n B_n^{-1})_{ij} &amp;= \sum_{k = 1}^{n+1} (B_n)_{ik} (B_n^{-1})_{kj} \\
-                    &amp;= \sum_{k = 1}^{n + 1} (-1)^{k + j} \binom{i - 1}{k - 1} \binom{k - 1}{j - 1} \\
-                    &amp;= \sum_{k = 0}^{n} (-1)^{k + 1 + j} \binom{i - 1}{k} \binom{k}{j - 1}  \\
-                    &amp;= \binom{i - 1}{j - 1} (-1)^{1 + j} \sum_{k = 0}^{n} (-1)^k \binom{i - 1 - (j - 1)}{k - (j - 1)}.
+                    (B_n B_n^{-1})_{ij} &amp;= \sum_{k = 1}^{n+1}
+                (B_n)_{ik} (B_n^{-1})_{kj} \\
+                    &amp;= \sum_{k = 1}^{n + 1} (-1)^{k + j} \binom{i -
+                1}{k - 1} \binom{k - 1}{j - 1} \\
+                    &amp;= \sum_{k = 0}^{n} (-1)^{k + 1 + j} \binom{i -
+                1}{k} \binom{k}{j - 1}  \\
+                    &amp;= \binom{i - 1}{j - 1} (-1)^{1 + j} \sum_{k =
+                0}^{n} (-1)^k \binom{i - 1 - (j - 1)}{k - (j - 1)}.
                 \end{align*}
-                \]</span> For <span class="math inline">\(j &gt; i\)</span>, this is trivially <span class="math inline">\(0\)</span>, so we'll assume from now on that <span class="math inline">\(j \le i\)</span>. <span class="math display">\[
+                \]</span> For <span class="math inline">\(j &gt;
+                i\)</span>, this is trivially <span
+                class="math inline">\(0\)</span>, so we'll assume from
+                now on that <span class="math inline">\(j \le
+                i\)</span>. <span class="math display">\[
                 \begin{align*}
-                    (B_n B_n^{-1})_{ij}  &amp;= \binom{i - 1}{j - 1} (-1)^{1 + j} \sum_{k = j - 1}^{i - 1} (-1)^k \binom{i - 1 - (j - 1)}{k - (j - 1)} \\
-                    &amp;= \binom{i - 1}{j - 1} (-1)^{1 + j} \sum_{k = 0}^{i - j} (-1)^{k + j - 1} \binom{i - j}{k} \\
-                    &amp;= \binom{i - 1}{j - 1} \sum_{k = 0}^{i - j} (-1)^k \binom{i - j}{k} \\
+                    (B_n B_n^{-1})_{ij}  &amp;= \binom{i - 1}{j - 1}
+                (-1)^{1 + j} \sum_{k = j - 1}^{i - 1} (-1)^k \binom{i -
+                1 - (j - 1)}{k - (j - 1)} \\
+                    &amp;= \binom{i - 1}{j - 1} (-1)^{1 + j} \sum_{k =
+                0}^{i - j} (-1)^{k + j - 1} \binom{i - j}{k} \\
+                    &amp;= \binom{i - 1}{j - 1} \sum_{k = 0}^{i - j}
+                (-1)^k \binom{i - j}{k} \\
                     &amp;= \binom{i - 1}{j - 1} (1 - 1)^{i - j},
                 \end{align*}
-                \]</span> which is <span class="math inline">\(0\)</span> for <span class="math inline">\(j &lt; i\)</span> and <span class="math inline">\(1\)</span> only for <span class="math inline">\(j = i\)</span>, which is what we wished to show.</p>
+                \]</span> which is <span
+                class="math inline">\(0\)</span> for <span
+                class="math inline">\(j &lt; i\)</span> and <span
+                class="math inline">\(1\)</span> only for <span
+                class="math inline">\(j = i\)</span>, which is what we
+                wished to show.</p>
                 <h2 id="applications">Applications</h2>
-                <p>Knowing the inverse actually allows one to calculate a formula for the number of derangements of <span class="math inline">\(n\)</span> objects without using the inclusion-exclusion principle, denoted by <span class="math inline">\(D_n\)</span>. In particular, we can show combinatorially that <span class="math display">\[
+                <p>Knowing the inverse actually allows one to calculate
+                a formula for the number of derangements of <span
+                class="math inline">\(n\)</span> objects without using
+                the inclusion-exclusion principle, denoted by <span
+                class="math inline">\(D_n\)</span>. In particular, we
+                can show combinatorially that <span
+                class="math display">\[
                     \sum_{i = 0}^{k} \binom{k}{i} D_i = k!
-                ,\]</span> for all <span class="math inline">\(0 \le k \le n\)</span>. We can turn this into a matrix equation and solve to realize that <span class="math display">\[
+                ,\]</span> for all <span class="math inline">\(0 \le k
+                \le n\)</span>. We can turn this into a matrix equation
+                and solve to realize that <span class="math display">\[
                     \begin{bmatrix}
                         D_0 \\
                         D_1 \\
@@ -188,9 +284,11 @@
                         \vdots \\
                         n!
                     \end{bmatrix}
-                ,\]</span> which shows that <span class="math display">\[
+                ,\]</span> which shows that <span
+                class="math display">\[
                 \begin{align*}
-                    D_n &amp;= \sum_{k = 0}^{n} (-1)^k \binom{n}{n - k} (n-k)! \\
+                    D_n &amp;= \sum_{k = 0}^{n} (-1)^k \binom{n}{n - k}
+                (n-k)! \\
                     &amp;= \sum_{k = 0}^{n} (-1)^k \frac{n!}{k!} \\
                     &amp;= n! \sum_{k = 0}^{n} \frac{(-1)^k}{k!}.
                 \end{align*}

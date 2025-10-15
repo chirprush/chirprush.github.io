@@ -32,7 +32,9 @@
                 <div class="description">
                     <h2>Description</h2>
                     <div class="side-line">
-                        <p>Deriving an algorithm to draw equipotential lines for a vector field starting from a point with lots of fun math along the way.</p>
+                        <p><p>Deriving an algorithm to draw
+equipotential lines for a vector field starting from a point with lots
+of fun math along the way.</p></p>
                     </div>
                 </div>
 
@@ -40,9 +42,15 @@
                     <h2>Contents</h2>
                     <div class="side-line">
                         <ul>
-                        <li><a href="#theoretical-groundwork">Theoretical Groundwork</a></li>
-                        <li><a href="#the-algorithm">The Algorithm</a><ul>
-                        <li><a href="#a-specific-case">A Specific Case</a></li>
+                        <li><a href="#theoretical-groundwork"
+                        id="toc-theoretical-groundwork">Theoretical
+                        Groundwork</a></li>
+                        <li><a href="#the-algorithm"
+                        id="toc-the-algorithm">The Algorithm</a>
+                        <ul>
+                        <li><a href="#a-specific-case"
+                        id="toc-a-specific-case">A Specific
+                        Case</a></li>
                         </ul></li>
                         </ul>
                         <!--
@@ -72,49 +80,151 @@
                 <hr class="separator" />
                 <div class="info-holder">
                     <span class="info-value"><b>Author:</b> Rushil Surti</span>
-                    <span class="info-value"><b>Date:</b> June 9, 2024</span>
+                    <span class="info-value"><b>Date:</b> June 9,
+2024</span>
                     <span class="info-value"><b>Tags:</b>  <a href="/tags.html#physics"><span class="info-tag">physics</span></a>  <a href="/tags.html#linear-algebra"><span class="info-tag">linear-algebra</span></a>  <a href="/tags.html#multivariable-calculus"><span class="info-tag">multivariable-calculus</span></a> </span>
+                    <span class="info-value"><b>Edited:</b> October 15,
+2025</span>
                 </div>
 
-                <h2 id="theoretical-groundwork">Theoretical Groundwork</h2>
+                <h2 id="theoretical-groundwork">Theoretical
+                Groundwork</h2>
                 <p><span class="math display">\[
                     \gdef\vvec#1{\mathbf{#1}}
                 \]</span></p>
-                <p>This is a small little description of how I would try to draw equipotential curves, specifically for <em>two dimensional</em> vector fields. We shall first start by laying the groundwork of vector fields and potentials.</p>
+                <p>This is a small little description of how I would try
+                to draw equipotential curves, specifically for <em>two
+                dimensional</em> vector fields. We shall first start by
+                laying the groundwork of vector fields and
+                potentials.</p>
                 <div class="side-box">
-                <p><strong>Definition.</strong> Let <span class="math inline">\(\vvec{F} \colon \mathbb{R}^n \to \mathbb{R}^n\)</span> be a vector field. We call the field's potential function <span class="math inline">\(P \colon \mathbb{R}^n \to \mathbb{R}\)</span> the unique function such that: <span class="math display">\[
+                <p><strong>Definition.</strong> Let <span
+                class="math inline">\(\vvec{F} \colon \mathbb{R}^n \to
+                \mathbb{R}^n\)</span> be a vector field. We call the
+                field's potential function <span class="math inline">\(P
+                \colon \mathbb{R}^n \to \mathbb{R}\)</span> the unique
+                function such that: <span class="math display">\[
                 \vvec{F} = - \nabla P
                 .\]</span></p>
                 </div>
-                <p>It is from this definition that the usual physics properties of the potential arise, and it also gives one a nice geometric intuition (field lines follow the potential downhill). In particular, we have that <span class="math display">\[
-                    \int_{\vvec{a}}^{\vvec{b}} \vvec{F} \cdot d\vvec{l} = \int_{\vvec{b}}^{\vvec{a}} \nabla P \cdot d\vvec{l} = P(\vvec{a}) - P(\vvec{b})
+                <p>It is from this definition that the usual physics
+                properties of the potential arise, and it also gives one
+                a nice geometric intuition (field lines follow the
+                potential downhill). In particular, we have that <span
+                class="math display">\[
+                    \int_{\vvec{a}}^{\vvec{b}} \vvec{F} \cdot d\vvec{l}
+                = \int_{\vvec{b}}^{\vvec{a}} \nabla P \cdot d\vvec{l} =
+                P(\vvec{a}) - P(\vvec{b})
                 ,\]</span> which follows from the Gradient Theorem.</p>
-                <p>It is also from this definition that another key property of potentials arises, one that is very useful in attempting to draw them.</p>
+                <p>It is also from this definition that another key
+                property of potentials arises, one that is very useful
+                in attempting to draw them.</p>
                 <div class="side-box">
-                <p><strong>Claim.</strong> At all points across an equipotential surface, the field lines are orthogonal to the surface.</p>
+                <p><strong>Claim.</strong> At all points across an
+                equipotential surface, the field lines are orthogonal to
+                the surface.</p>
                 </div>
-                <p><em>Proof.</em> Suppose we have a potential function <span class="math inline">\(P\)</span> and we are looking in the neighborhood of some point <span class="math inline">\(\vvec{r}\)</span>. Any point on the equipotential surface in the neighborhood of this point is by definition a point for which the potential does not differ from <span class="math inline">\(P(\vvec{r})\)</span>. In other words, we are looking for any point <span class="math inline">\(\vvec{x} = (x_1, x_2, \ldots, x_n)\)</span> such that <span class="math display">\[
-                    x_1 \frac{\partial P(\vvec{r})}{\partial x_1} + x_2 \frac{\partial P(\vvec{r})}{\partial x_2} + \cdots + x_n \frac{\partial P(\vvec{r})}{\partial x_n} = \vvec{x} \cdot \nabla P(\vvec{r}) = 0
-                .\]</span> Observe that <span class="math inline">\(\nabla P = - \vvec{F}\)</span>, so this reduces to any point <span class="math inline">\(\vvec{x}\)</span> on the equipotential surface in the neighborhood of <span class="math inline">\(\vvec{r}\)</span> having the property that <span class="math display">\[
+                <p><em>Proof.</em> Suppose we have a potential function
+                <span class="math inline">\(P\)</span> and we are
+                looking in the neighborhood of some point <span
+                class="math inline">\(\vvec{r}\)</span>. Any point on
+                the equipotential surface in the neighborhood of this
+                point is by definition a point for which the potential
+                does not differ from <span
+                class="math inline">\(P(\vvec{r})\)</span>. In other
+                words, we are looking for any point <span
+                class="math inline">\(\vvec{x} = (x_1, x_2, \ldots,
+                x_n)\)</span> such that <span class="math display">\[
+                    x_1 \frac{\partial P(\vvec{r})}{\partial x_1} + x_2
+                \frac{\partial P(\vvec{r})}{\partial x_2} + \cdots + x_n
+                \frac{\partial P(\vvec{r})}{\partial x_n} = \vvec{x}
+                \cdot \nabla P(\vvec{r}) = 0
+                .\]</span> Observe that <span
+                class="math inline">\(\nabla P = - \vvec{F}\)</span>, so
+                this reduces to any point <span
+                class="math inline">\(\vvec{x}\)</span> on the
+                equipotential surface in the neighborhood of <span
+                class="math inline">\(\vvec{r}\)</span> having the
+                property that <span class="math display">\[
                     \vvec{F} \cdot \vvec{x} = 0
-                ,\]</span> which means that the vector tangent to the equipotential surface is orthogonal to the field lines. <span class="math inline">\(\blacksquare\)</span></p>
+                ,\]</span> which means that the vector tangent to the
+                equipotential surface is orthogonal to the field lines.
+                <span class="math inline">\(\blacksquare\)</span></p>
                 <h2 id="the-algorithm">The Algorithm</h2>
-                <p>Realizing this, we can use this to find and draw points along equipotential curves in two dimensions. Note that, for higher dimensions, this strategy fails to work given a greater number of points needed to define a valid surface as well as having a greater number of directions. That being said, this algorithm could be adapted to higher dimensions if given enough thought.</p>
-                <p>Suppose we start at some point <span class="math inline">\(\vvec{r}\)</span> and we wish to find some further point <span class="math inline">\(\vvec{r}&#39;&#39;\)</span> on the equipotential surface. We may first move along the vector orthogonal to the field line at the point by some amount. That is to say, <span class="math display">\[
-                    \vvec{r}&#39; \leftarrow \vvec{r} + dt \begin{bmatrix} 0 &amp; -1 \\ 1 &amp; 0 \end{bmatrix} \frac{\vvec{F}(\vvec{r})}{\| \vvec{F} (\vvec{r}) \|}
-                ,\]</span> where the matrix represents a clockwise <span class="math inline">\(90^\circ\)</span> rotation and <span class="math inline">\(dt\)</span> represents some step size.</p>
-                <p>Practically, however, this also changes the potential we are at, so we must normalize the vector in a sense. We shall choose to normalize the vector along the field vector <span class="math inline">\(\vvec{F} (\vvec{r}&#39;)\)</span>, as going along the surface does not change the potential value. We can measure the potential value at <span class="math inline">\(\vvec{r}&#39;\)</span> and then compare this to the value of <span class="math inline">\(P(\vvec{r})\)</span> we wish to stay at in order to determine how far to step. In particular, using the shorthand that <span class="math inline">\(\vvec{F} = \vvec{F} (\vvec{r}&#39;)\)</span>, let <span class="math display">\[
-                    \Delta P = \left. \frac{\partial}{\partial t} \, P(\vvec{r}&#39; + t \vvec{F}) \right\vert_{t = 0}
-                \]</span> so that <span class="math inline">\((\Delta P) t = P(\vvec{r}) - P(\vvec{r}&#39;)\)</span>. Then our final approximation for the next point along the equipotential surface is given by <span class="math display">\[
-                    \vvec{r}&#39;&#39; \leftarrow \vvec{r}&#39; + t \vvec{F}
-                .\]</span> Note that for several steps along the equipotential surface, the value of <span class="math inline">\(P(\vvec{r})\)</span> should be stored and held constant in order to not diverge from the equipotential.</p>
+                <p>Realizing this, we can use this to find and draw
+                points along equipotential curves in two dimensions.
+                Note that, for higher dimensions, this strategy fails to
+                work given a greater number of points needed to define a
+                valid surface as well as having a greater number of
+                directions. That being said, this algorithm could be
+                adapted to higher dimensions if given enough
+                thought.</p>
+                <p>Suppose we start at some point <span
+                class="math inline">\(\vvec{r}\)</span> and we wish to
+                find some further point <span
+                class="math inline">\(\vvec{r}&#39;&#39;\)</span> on the
+                equipotential surface. We may first move along the
+                vector orthogonal to the field line at the point by some
+                amount. That is to say, <span class="math display">\[
+                    \vvec{r}&#39; \leftarrow \vvec{r} + dt
+                \begin{bmatrix} 0 &amp; -1 \\ 1 &amp; 0 \end{bmatrix}
+                \frac{\vvec{F}(\vvec{r})}{\| \vvec{F} (\vvec{r}) \|}
+                ,\]</span> where the matrix represents a clockwise <span
+                class="math inline">\(90^\circ\)</span> rotation and
+                <span class="math inline">\(dt\)</span> represents some
+                step size.</p>
+                <p>Practically, however, this also changes the potential
+                we are at, so we must normalize the vector in a sense.
+                We shall choose to normalize the vector along the field
+                vector <span class="math inline">\(\vvec{F}
+                (\vvec{r}&#39;)\)</span>, as going along the surface
+                does not change the potential value. We can measure the
+                potential value at <span
+                class="math inline">\(\vvec{r}&#39;\)</span> and then
+                compare this to the value of <span
+                class="math inline">\(P(\vvec{r})\)</span> we wish to
+                stay at in order to determine how far to step. In
+                particular, using the shorthand that <span
+                class="math inline">\(\vvec{F} = \vvec{F}
+                (\vvec{r}&#39;)\)</span>, let <span
+                class="math display">\[
+                    \Delta P = \left. \frac{\partial}{\partial t} \,
+                P(\vvec{r}&#39; + t \vvec{F}) \right\vert_{t = 0}
+                \]</span> so that <span class="math inline">\((\Delta P)
+                t = P(\vvec{r}) - P(\vvec{r}&#39;)\)</span>. Then our
+                final approximation for the next point along the
+                equipotential surface is given by <span
+                class="math display">\[
+                    \vvec{r}&#39;&#39; \leftarrow \vvec{r}&#39; + t
+                \vvec{F}
+                .\]</span> Note that for several steps along the
+                equipotential surface, the value of <span
+                class="math inline">\(P(\vvec{r})\)</span> should be
+                stored and held constant in order to not diverge from
+                the equipotential.</p>
                 <h3 id="a-specific-case">A Specific Case</h3>
-                <p>As a final remark, we shall calculate the value of <span class="math inline">\(\Delta P\)</span> for an electrostatic system of <span class="math inline">\(n\)</span> particles with respective charges <span class="math inline">\(q_1, q_2, \ldots, q_n\)</span> and positions <span class="math inline">\(\vvec{r}_1, \vvec{r}_2, \ldots, \vvec{r}_n\)</span>. We have that <span class="math display">\[
-                    P(\vvec{r}) = \sum_{i = 1}^{n} \frac{kq_i}{\| \vvec{r} - \vvec{r}_i \|}
-                .\]</span> This then tells us that <span class="math display">\[
+                <p>As a final remark, we shall calculate the value of
+                <span class="math inline">\(\Delta P\)</span> for an
+                electrostatic system of <span
+                class="math inline">\(n\)</span> particles with
+                respective charges <span class="math inline">\(q_1, q_2,
+                \ldots, q_n\)</span> and positions <span
+                class="math inline">\(\vvec{r}_1, \vvec{r}_2, \ldots,
+                \vvec{r}_n\)</span>. We have that <span
+                class="math display">\[
+                    P(\vvec{r}) = \sum_{i = 1}^{n} \frac{kq_i}{\|
+                \vvec{r} - \vvec{r}_i \|}
+                .\]</span> This then tells us that <span
+                class="math display">\[
                 \begin{align*}
-                    \left. \frac{\partial}{\partial t} P(\vvec{r}&#39; + t \vvec{F}) \right\vert_{t = 0} &amp;= -\left. \sum_{i = 1}^{n} \frac{k q_i}{\| \vvec{r}&#39; + t \vvec{F} - \vvec{r}_i \|^3} \, (\vvec{r}&#39; + t \vvec{F} - \vvec{r}_i) \cdot \vvec{F} \, \right\vert_{t = 0} \\
-                    &amp;= - \vvec{F} \cdot \sum_{i = 1}^{n} \frac{k q_i (\vvec{r}&#39; - \vvec{r}_i)}{\| \vvec{r}&#39; - \vvec{r}_i \|^3}.
+                    \left. \frac{\partial}{\partial t} P(\vvec{r}&#39; +
+                t \vvec{F}) \right\vert_{t = 0} &amp;= -\left. \sum_{i =
+                1}^{n} \frac{k q_i}{\| \vvec{r}&#39; + t \vvec{F} -
+                \vvec{r}_i \|^3} \, (\vvec{r}&#39; + t \vvec{F} -
+                \vvec{r}_i) \cdot \vvec{F} \, \right\vert_{t = 0} \\
+                    &amp;= - \vvec{F} \cdot \sum_{i = 1}^{n} \frac{k q_i
+                (\vvec{r}&#39; - \vvec{r}_i)}{\| \vvec{r}&#39; -
+                \vvec{r}_i \|^3}.
                 \end{align*}
                 \]</span></p>
             </div>

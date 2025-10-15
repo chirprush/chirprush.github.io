@@ -32,7 +32,9 @@
                 <div class="description">
                     <h2>Description</h2>
                     <div class="side-line">
-                        <p>Developing a perspective projection for use in rendering 3D graphics. This particular derivation was used in my AP CSA final project :D</p>
+                        <p><p>Developing a perspective projection for
+use in rendering 3D graphics. This particular derivation was used in my
+AP CSA final project :D</p></p>
                     </div>
                 </div>
 
@@ -40,8 +42,10 @@
                     <h2>Contents</h2>
                     <div class="side-line">
                         <ul>
-                        <li><a href="#background">Background</a></li>
-                        <li><a href="#derivation">Derivation</a></li>
+                        <li><a href="#background"
+                        id="toc-background">Background</a></li>
+                        <li><a href="#derivation"
+                        id="toc-derivation">Derivation</a></li>
                         </ul>
                         <!--
                         <ul>
@@ -70,39 +74,115 @@
                 <hr class="separator" />
                 <div class="info-holder">
                     <span class="info-value"><b>Author:</b> Rushil Surti</span>
-                    <span class="info-value"><b>Date:</b> June 17, 2024</span>
+                    <span class="info-value"><b>Date:</b> June 17,
+2024</span>
                     <span class="info-value"><b>Tags:</b>  <a href="/tags.html#linear-algebra"><span class="info-tag">linear-algebra</span></a>  <a href="/tags.html#graphics"><span class="info-tag">graphics</span></a> </span>
+                    <span class="info-value"><b>Edited:</b> October 15,
+2025</span>
                 </div>
 
                 <h2 id="background">Background</h2>
                 <p><span class="math display">\[
                     \gdef\vvec#1{\mathbf{#1}}
                 \]</span></p>
-                <p>A little bit ago I was creating a 3D renderer from scratch for CS class, and I thought it would be a fun idea to try deriving the rendering and projection techniques myself mathematically. I don't quite know if this is how it's usually done in general (perhaps I could have overcomplicated some things?), but this is what I came up with.</p>
-                <p>We shall first describe the following variables that we have to work with:</p>
+                <p>A little bit ago I was creating a 3D renderer from
+                scratch for CS class, and I thought it would be a fun
+                idea to try deriving the rendering and projection
+                techniques myself mathematically. I don't quite know if
+                this is how it's usually done in general (perhaps I
+                could have overcomplicated some things?), but this is
+                what I came up with.</p>
+                <p>We shall first describe the following variables that
+                we have to work with:</p>
                 <ul>
-                <li><span class="math inline">\(\vvec{c}\)</span>, the vector containing the camera position,</li>
-                <li><span class="math inline">\(\vvec{\hat n}\)</span>, the unit vector relative to the camera position that contains the direction of the camera,</li>
-                <li><span class="math inline">\(\vvec{q}\)</span>, the center of the projection plane,</li>
-                <li><span class="math inline">\(\textsf{dist}\)</span>, the distance from the camera to the projection plane,</li>
-                <li><span class="math inline">\(\textsf{width}\)</span>, the width of the projection plane,</li>
-                <li><span class="math inline">\(\textsf{height}\)</span>, the height of the projection plane,</li>
+                <li><span class="math inline">\(\vvec{c}\)</span>, the
+                vector containing the camera position,</li>
+                <li><span class="math inline">\(\vvec{\hat n}\)</span>,
+                the unit vector relative to the camera position that
+                contains the direction of the camera,</li>
+                <li><span class="math inline">\(\vvec{q}\)</span>, the
+                center of the projection plane,</li>
+                <li><span class="math inline">\(\textsf{dist}\)</span>,
+                the distance from the camera to the projection
+                plane,</li>
+                <li><span class="math inline">\(\textsf{width}\)</span>,
+                the width of the projection plane,</li>
+                <li><span
+                class="math inline">\(\textsf{height}\)</span>, the
+                height of the projection plane,</li>
                 </ul>
-                <p>The projection plane is the plane with center <span class="math inline">\(\vvec{q} = \vvec{c} + \textsf{dist} \cdot \vvec{\hat n}\)</span> and is oriented to be orthogonal to <span class="math inline">\(\vvec{\hat n}\)</span>.</p>
-                <p>The desired outcome of the perspective projection algorithm is, given a point <span class="math inline">\(\vvec{p}\)</span>, to determine where <span class="math inline">\(\vvec{p}\)</span> lies when projected on the plane, whether or not it should be rendered (i.e. does it lie in the width and height bounds and it is in front of the camera?), and where on the screen it should be rendered.</p>
+                <p>The projection plane is the plane with center <span
+                class="math inline">\(\vvec{q} = \vvec{c} +
+                \textsf{dist} \cdot \vvec{\hat n}\)</span> and is
+                oriented to be orthogonal to <span
+                class="math inline">\(\vvec{\hat n}\)</span>.</p>
+                <p>The desired outcome of the perspective projection
+                algorithm is, given a point <span
+                class="math inline">\(\vvec{p}\)</span>, to determine
+                where <span class="math inline">\(\vvec{p}\)</span> lies
+                when projected on the plane, whether or not it should be
+                rendered (i.e. does it lie in the width and height
+                bounds and it is in front of the camera?), and where on
+                the screen it should be rendered.</p>
                 <h2 id="derivation">Derivation</h2>
-                <p>The first order of business is to project the point onto the plane. Note that the perspective projection of <span class="math inline">\(\vvec{p}\)</span> lies on the ray <span class="math inline">\(\vvec{r} (t) = t\vvec{c} + (1 - t) \vvec{p} = \vvec{c} + t (\vvec{p} - \vvec{c})\)</span>, so we must determine where this ray intersects with the plane.</p>
-                <p>Observe that the projection plane is the set of vectors <span class="math inline">\(\vvec{x}\)</span> such that <span class="math inline">\(\vvec{\hat n} \cdot (\vvec{x} - \vvec{q}) = 0\)</span>. With this, we may substitute <span class="math inline">\(\vvec{r}(t)\)</span> in for <span class="math inline">\(\vvec{x}\)</span> to determine the intersection: <span class="math display">\[
-                    \vvec{\hat n} \cdot (\vvec{r}(t) - \vvec{q}) = \vvec{\hat n} \cdot (\vvec{c} - \vvec{q} + t(\vvec{p} - \vvec{c})) = 0
-                .\]</span> From this, we obtain <span class="math display">\[
-                    t_p = \frac{\vvec{\hat n} \cdot (\vvec{q} - \vvec{c})}{\vvec{\hat n} \cdot (\vvec{p} - \vvec{c})} = \frac{\textsf{dist}}{\vvec{\hat n} \cdot (\vvec{p} - \vvec{c})}
-                .\]</span> With this construction, values of <span class="math inline">\(t_p\)</span> that are negative correspond to points behind the camera, so these can be thrown out.</p>
-                <p>Now that we have the projected point onto the plane <span class="math inline">\(\vvec{r} (t_p)\)</span>, we must figure out where on the plane this value falls to render it onto the screen. To do so, we shall construct an orthogonal basis for the plane, with the origin at the center of the plane, and then solve for the corresponding position of the points mapped in terms of the plane basis.</p>
-                <p>Through <span class="math inline">\(90^\circ\)</span> rotations of the camera direction vector about respective axes (converting to spherical coordinates and then simply adding angles makes this a whole lot easier), we can obtain vectors <span class="math inline">\(\vvec{r}\)</span> and <span class="math inline">\(\vvec{d}\)</span>, which represent the right and down orthonormal basis vectors of the projection plane. Our goal then is to solve the following matrix equation: <span class="math display">\[
+                <p>The first order of business is to project the point
+                onto the plane. Note that the perspective projection of
+                <span class="math inline">\(\vvec{p}\)</span> lies on
+                the ray <span class="math inline">\(\vvec{r} (t) =
+                t\vvec{c} + (1 - t) \vvec{p} = \vvec{c} + t (\vvec{p} -
+                \vvec{c})\)</span>, so we must determine where this ray
+                intersects with the plane.</p>
+                <p>Observe that the projection plane is the set of
+                vectors <span class="math inline">\(\vvec{x}\)</span>
+                such that <span class="math inline">\(\vvec{\hat n}
+                \cdot (\vvec{x} - \vvec{q}) = 0\)</span>. With this, we
+                may substitute <span
+                class="math inline">\(\vvec{r}(t)\)</span> in for <span
+                class="math inline">\(\vvec{x}\)</span> to determine the
+                intersection: <span class="math display">\[
+                    \vvec{\hat n} \cdot (\vvec{r}(t) - \vvec{q}) =
+                \vvec{\hat n} \cdot (\vvec{c} - \vvec{q} + t(\vvec{p} -
+                \vvec{c})) = 0
+                .\]</span> From this, we obtain <span
+                class="math display">\[
+                    t_p = \frac{\vvec{\hat n} \cdot (\vvec{q} -
+                \vvec{c})}{\vvec{\hat n} \cdot (\vvec{p} - \vvec{c})} =
+                \frac{\textsf{dist}}{\vvec{\hat n} \cdot (\vvec{p} -
+                \vvec{c})}
+                .\]</span> With this construction, values of <span
+                class="math inline">\(t_p\)</span> that are negative
+                correspond to points behind the camera, so these can be
+                thrown out.</p>
+                <p>Now that we have the projected point onto the plane
+                <span class="math inline">\(\vvec{r} (t_p)\)</span>, we
+                must figure out where on the plane this value falls to
+                render it onto the screen. To do so, we shall construct
+                an orthogonal basis for the plane, with the origin at
+                the center of the plane, and then solve for the
+                corresponding position of the points mapped in terms of
+                the plane basis.</p>
+                <p>Through <span class="math inline">\(90^\circ\)</span>
+                rotations of the camera direction vector about
+                respective axes (converting to spherical coordinates and
+                then simply adding angles makes this a whole lot
+                easier), we can obtain vectors <span
+                class="math inline">\(\vvec{r}\)</span> and <span
+                class="math inline">\(\vvec{d}\)</span>, which represent
+                the right and down orthonormal basis vectors of the
+                projection plane. Our goal then is to solve the
+                following matrix equation: <span class="math display">\[
                     A \vvec{v} = \vvec{p} - \vvec{q}
-                ,\]</span> where <span class="math inline">\(A = \begin{bmatrix} \vvec{r} &amp; \vvec{d} \end{bmatrix}\)</span>. Although <span class="math inline">\(A\)</span> is not square, we may multiply by its left psuedoinverse on both sides to see that <span class="math display">\[
-                    \vvec{v} = \begin{bmatrix} x \\ y \end{bmatrix} = (A^T A)^{-1} A^T (\vvec{p} - \vvec{q})
-                .\]</span> From this, we can map the coordinates onto our rendering canvas and cull any points that potentially lie out of our view.</p>
+                ,\]</span> where <span class="math inline">\(A =
+                \begin{bmatrix} \vvec{r} &amp; \vvec{d}
+                \end{bmatrix}\)</span>. Although <span
+                class="math inline">\(A\)</span> is not square, we may
+                multiply by its left psuedoinverse on both sides to see
+                that <span class="math display">\[
+                    \vvec{v} = \begin{bmatrix} x \\ y \end{bmatrix} =
+                (A^T A)^{-1} A^T (\vvec{p} - \vvec{q})
+                .\]</span> From this, we can map the coordinates onto
+                our rendering canvas and cull any points that
+                potentially lie out of our view.</p>
             </div>
         </div>
     </body>

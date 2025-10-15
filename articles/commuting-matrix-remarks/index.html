@@ -32,7 +32,9 @@
                 <div class="description">
                     <h2>Description</h2>
                     <div class="side-line">
-                        <p>Suppose matrices \( A \) and \( B \) commute. We explore the question of when one matrix can be expressed in terms of the other.</p>
+                        <p><p>Suppose matrices \( A \) and \( B \)
+commute. We explore the question of when one matrix can be expressed in
+terms of the other.</p></p>
                     </div>
                 </div>
 
@@ -40,8 +42,12 @@
                     <h2>Contents</h2>
                     <div class="side-line">
                         <ul>
-                        <li><a href="#refining-the-question">Refining the Question</a></li>
-                        <li><a href="#tackling-the-problem">Tackling the Problem</a></li>
+                        <li><a href="#refining-the-question"
+                        id="toc-refining-the-question">Refining the
+                        Question</a></li>
+                        <li><a href="#tackling-the-problem"
+                        id="toc-tackling-the-problem">Tackling the
+                        Problem</a></li>
                         </ul>
                         <!--
                         <ul>
@@ -70,34 +76,122 @@
                 <hr class="separator" />
                 <div class="info-holder">
                     <span class="info-value"><b>Author:</b> Rushil Surti</span>
-                    <span class="info-value"><b>Date:</b> November 9, 2024</span>
+                    <span class="info-value"><b>Date:</b> November 9,
+2024</span>
                     <span class="info-value"><b>Tags:</b>  <a href="/tags.html#linear-algebra"><span class="info-tag">linear-algebra</span></a>  <a href="/tags.html#matrices"><span class="info-tag">matrices</span></a> </span>
-                    <span class="info-value"><b>Edited:</b> January 25, 2025</span>
+                    <span class="info-value"><b>Edited:</b> October 15,
+2025</span>
                 </div>
 
                 <p><span class="math display">\[
                     \gdef\vec#1{\mathbf{#1}}
                 \]</span></p>
-                <p>Just yesterday in linear class, we reached Chapter 2, which started with a review on matrix properties and a couple anti-patterns to look out for. One of the warnings from the text, that <span class="math inline">\(AB \ne BA\)</span> in general, sparked some nice discussion on the commutativity of pairs of matrices. In particular, we took a close look at the ending predicate of the warning: that <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> do not commute <em>in general</em>.</p>
-                <p>Naturally, this leads one to question when <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> do commute, and I was asked to provide some examples. My first thought went to <span class="math inline">\(B\)</span> being a polynomial (or even a power series; a prototypical example would be the matrix exponential) in <span class="math inline">\(A\)</span>, as integer powers of <span class="math inline">\(A\)</span> must commute with <span class="math inline">\(A\)</span> by construction. While this worked fine for offering an example in class, it also led me to wonder something rather interesting:</p>
+                <p>Just yesterday in linear class, we reached Chapter 2,
+                which started with a review on matrix properties and a
+                couple anti-patterns to look out for. One of the
+                warnings from the text, that <span
+                class="math inline">\(AB \ne BA\)</span> in general,
+                sparked some nice discussion on the commutativity of
+                pairs of matrices. In particular, we took a close look
+                at the ending predicate of the warning: that <span
+                class="math inline">\(A\)</span> and <span
+                class="math inline">\(B\)</span> do not commute <em>in
+                general</em>.</p>
+                <p>Naturally, this leads one to question when <span
+                class="math inline">\(A\)</span> and <span
+                class="math inline">\(B\)</span> do commute, and I was
+                asked to provide some examples. My first thought went to
+                <span class="math inline">\(B\)</span> being a
+                polynomial (or even a power series; a prototypical
+                example would be the matrix exponential) in <span
+                class="math inline">\(A\)</span>, as integer powers of
+                <span class="math inline">\(A\)</span> must commute with
+                <span class="math inline">\(A\)</span> by construction.
+                While this worked fine for offering an example in class,
+                it also led me to wonder something rather
+                interesting:</p>
                 <div class="black-box">
-                <p><strong>Question.</strong> Let <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> be <span class="math inline">\(n \times n\)</span> matrices that commute. Must one of the matrices be a polynomial of the other?</p>
+                <p><strong>Question.</strong> Let <span
+                class="math inline">\(A\)</span> and <span
+                class="math inline">\(B\)</span> be <span
+                class="math inline">\(n \times n\)</span> matrices that
+                commute. Must one of the matrices be a polynomial of the
+                other?</p>
                 </div>
-                <h2 id="refining-the-question">Refining the Question</h2>
-                <p>Before we go straight into tackling the question, there are a couple pieces of information we can use to refine it slightly. Namely, notice that:</p>
+                <h2 id="refining-the-question">Refining the
+                Question</h2>
+                <p>Before we go straight into tackling the question,
+                there are a couple pieces of information we can use to
+                refine it slightly. Namely, notice that:</p>
                 <ol type="1">
-                <li><p>There is a symmetry in the problem. Call a pair of matrices <span class="math inline">\((A, B)\)</span> <em>good</em> if the matrices commute and have one that can be written as a polynomial in the other. Obviously a good pair satisfies our problem, and it seems reasonable that if a pair <span class="math inline">\((A, B)\)</span> is good then <span class="math inline">\((B, A)\)</span> should be good.</p>
-                Indeed, considering the problem this way (as opposed to ordaining <span class="math inline">\(A\)</span> to be a polynomial in <span class="math inline">\(B\)</span> or vice versa) helps to eliminate otherwise unsatisfying counterexamples. If we take <span class="math inline">\(B = I_n\)</span> and <span class="math inline">\(A\)</span> to be any non-diagonal matrix, obviously they commute and <span class="math inline">\(A\)</span> is not a polynomial in <span class="math inline">\(B\)</span> (any polynomial in <span class="math inline">\(B\)</span> can only be diagonal). However, <span class="math inline">\(B\)</span> is trivially a polynomial in <span class="math inline">\(A\)</span>.</li>
-                <li><p>By the <a href="https://en.wikipedia.org/wiki/Cayley%E2%80%93Hamilton_theorem">Cayley-Hamilton theorem</a>, we can actually write higher powers of <span class="math inline">\(A\)</span> as linear combinations of lower powers of <span class="math inline">\(A\)</span>. This means we can write all matrices of the form <span class="math inline">\(A^k\)</span>, where <span class="math inline">\(k \ge n\)</span> as linear combinations of <span class="math inline">\(I_n, A, A^2, \ldots, A^{n-1}\)</span>, so our desired polynomial is of degree <span class="math inline">\(n - 1\)</span>. The existence of such a polynomial allows one to show that even <span class="math inline">\(A^{-1}\)</span> (if it exists) is a polynomial in <span class="math inline">\(A\)</span>.</p></li>
+                <li><p>There is a symmetry in the problem. Call a pair
+                of matrices <span class="math inline">\((A, B)\)</span>
+                <em>good</em> if the matrices commute and have one that
+                can be written as a polynomial in the other. Obviously a
+                good pair satisfies our problem, and it seems reasonable
+                that if a pair <span class="math inline">\((A,
+                B)\)</span> is good then <span class="math inline">\((B,
+                A)\)</span> should be good.</p>
+                <p>Indeed, considering the problem this way (as opposed
+                to ordaining <span class="math inline">\(A\)</span> to
+                be a polynomial in <span
+                class="math inline">\(B\)</span> or vice versa) helps to
+                eliminate otherwise unsatisfying counterexamples. If we
+                take <span class="math inline">\(B = I_n\)</span> and
+                <span class="math inline">\(A\)</span> to be any
+                non-diagonal matrix, obviously they commute and <span
+                class="math inline">\(A\)</span> is not a polynomial in
+                <span class="math inline">\(B\)</span> (any polynomial
+                in <span class="math inline">\(B\)</span> can only be
+                diagonal). However, <span
+                class="math inline">\(B\)</span> is trivially a
+                polynomial in <span
+                class="math inline">\(A\)</span>.</p></li>
+                <li><p>By the <a
+                href="https://en.wikipedia.org/wiki/Cayley%E2%80%93Hamilton_theorem">Cayley-Hamilton
+                theorem</a>, we can actually write higher powers of
+                <span class="math inline">\(A\)</span> as linear
+                combinations of lower powers of <span
+                class="math inline">\(A\)</span>. This means we can
+                write all matrices of the form <span
+                class="math inline">\(A^k\)</span>, where <span
+                class="math inline">\(k \ge n\)</span> as linear
+                combinations of <span class="math inline">\(I_n, A, A^2,
+                \ldots, A^{n-1}\)</span>, so our desired polynomial is
+                of degree <span class="math inline">\(n - 1\)</span>.
+                The existence of such a polynomial allows one to show
+                that even <span class="math inline">\(A^{-1}\)</span>
+                (if it exists) is a polynomial in <span
+                class="math inline">\(A\)</span>.</p></li>
                 </ol>
-                <p>Using these, we can turn our question in a more robust problem statement:</p>
+                <p>Using these, we can turn our question in a more
+                robust problem statement:</p>
                 <div class="black-box">
-                <p><strong>Problem.</strong> Let <span class="math inline">\(A, B\)</span> be <span class="math inline">\(n \times n\)</span> matrices that commute. Must there exist a polynomial <span class="math inline">\(P\)</span> of degree at most <span class="math inline">\(n - 1\)</span> such that <span class="math inline">\(P(A) = B\)</span> or <span class="math inline">\(P(B) = A\)</span>?</p>
+                <p><strong>Problem.</strong> Let <span
+                class="math inline">\(A, B\)</span> be <span
+                class="math inline">\(n \times n\)</span> matrices that
+                commute. Must there exist a polynomial <span
+                class="math inline">\(P\)</span> of degree at most <span
+                class="math inline">\(n - 1\)</span> such that <span
+                class="math inline">\(P(A) = B\)</span> or <span
+                class="math inline">\(P(B) = A\)</span>?</p>
                 </div>
                 <h2 id="tackling-the-problem">Tackling the Problem</h2>
-                <p>At this point, we can now fully tackle the problem statement, which usually just involves looking at different properties of what we're given and quite a bit of trial and error.</p>
-                <p>One of my first steps was algebraically bashing out commutativity and polynomiability (definitely not a word) for <span class="math inline">\(2 \times 2\)</span> matrices, utilizing the fact that any such polynomial need only be degree <span class="math inline">\(1\)</span>. It turns out in this case (unless I'm making some weird mistakes with division by zero) that they are equivalent! So, what happens if we go up a dimension?</p>
-                <p>It turns out that we actually run into some problems. Consider the matrices <span class="math display">\[
+                <p>At this point, we can now fully tackle the problem
+                statement, which usually just involves looking at
+                different properties of what we're given and quite a bit
+                of trial and error.</p>
+                <p>One of my first steps was algebraically bashing out
+                commutativity and polynomiability (definitely not a
+                word) for <span class="math inline">\(2 \times
+                2\)</span> matrices, utilizing the fact that any such
+                polynomial need only be degree <span
+                class="math inline">\(1\)</span>. It turns out in this
+                case (unless I'm making some weird mistakes with
+                division by zero) that they are equivalent! So, what
+                happens if we go up a dimension?</p>
+                <p>It turns out that we actually run into some problems.
+                Consider the matrices <span class="math display">\[
                     A = \begin{bmatrix}
                         0 &amp; 0 &amp; 0 \\
                         0 &amp; 1 &amp; 0 \\
@@ -108,8 +202,24 @@
                         0 &amp; 0 &amp; 0 \\
                         0 &amp; 0 &amp; 0
                     \end{bmatrix}
-                .\]</span> You can check for yourself that these matrices both commute: <span class="math inline">\(AB = BA = \mathbf{0}\)</span>. For polynomials, however, we run into some problems. By simple matrix multiplication <span class="math inline">\(A^2 = A\)</span> and <span class="math inline">\(B^2 = \mathbf{0}\)</span>. As such, a polynomial sending <span class="math inline">\(A\)</span> to <span class="math inline">\(B\)</span> or <span class="math inline">\(B\)</span> to <span class="math inline">\(A\)</span> would have to be linear. This is clearly absurd! Indeed, even though the matrices commute, neither can be written as a polynomial in the other.</p>
-                <p>Upon first reaction, I thought things could be patched up with invertibility in some way, but a little more thinking shows that this also isn't possible! Consider the matrices <span class="math display">\[
+                .\]</span> You can check for yourself that these
+                matrices both commute: <span class="math inline">\(AB =
+                BA = \mathbf{0}\)</span>. For polynomials, however, we
+                run into some problems. By simple matrix multiplication
+                <span class="math inline">\(A^2 = A\)</span> and <span
+                class="math inline">\(B^2 = \mathbf{0}\)</span>. As
+                such, a polynomial sending <span
+                class="math inline">\(A\)</span> to <span
+                class="math inline">\(B\)</span> or <span
+                class="math inline">\(B\)</span> to <span
+                class="math inline">\(A\)</span> would have to be
+                linear. This is clearly absurd! Indeed, even though the
+                matrices commute, neither can be written as a polynomial
+                in the other.</p>
+                <p>Upon first reaction, I thought things could be
+                patched up with invertibility in some way, but a little
+                more thinking shows that this also isn't possible!
+                Consider the matrices <span class="math display">\[
                     A = \begin{bmatrix}
                         1 &amp; 0 &amp; 0 \\
                         0 &amp; 1 &amp; 0 \\
@@ -120,21 +230,101 @@
                         0 &amp; 1 &amp; 0 \\
                         0 &amp; 0 &amp; 2
                     \end{bmatrix}
-                .\]</span> These are diagonal matrices, so they clearly commute. Polynomials in diagonal matrices are easy to control because they distribute into the diagonal elements. This behavior leads to trouble. If we suppose <span class="math inline">\(P(A) = B\)</span>, then <span class="math inline">\(P(1)\)</span> must be both <span class="math inline">\(2\)</span> and <span class="math inline">\(1\)</span>. If we suppose <span class="math inline">\(P(B) = A\)</span>, then <span class="math inline">\(P(2)\)</span> must be both <span class="math inline">\(1\)</span> and <span class="math inline">\(2\)</span>! Thus, essentially due to having non-distinct eigenvalues, there cannot exist such a polynomial.</p>
-                <p>While our property unfortunately does not hold in general for matrices with non-distinct eigenvalues, this seem sharp in a way. In particular, let's additionally assume that <span class="math inline">\(A\)</span> is diagonalizable with distinct eigenvalues. Then we have the following claim:</p>
+                .\]</span> These are diagonal matrices, so they clearly
+                commute. Polynomials in diagonal matrices are easy to
+                control because they distribute into the diagonal
+                elements. This behavior leads to trouble. If we suppose
+                <span class="math inline">\(P(A) = B\)</span>, then
+                <span class="math inline">\(P(1)\)</span> must be both
+                <span class="math inline">\(2\)</span> and <span
+                class="math inline">\(1\)</span>. If we suppose <span
+                class="math inline">\(P(B) = A\)</span>, then <span
+                class="math inline">\(P(2)\)</span> must be both <span
+                class="math inline">\(1\)</span> and <span
+                class="math inline">\(2\)</span>! Thus, essentially due
+                to having non-distinct eigenvalues, there cannot exist
+                such a polynomial.</p>
+                <p>While our property unfortunately does not hold in
+                general for matrices with non-distinct eigenvalues, this
+                seem sharp in a way. In particular, let's additionally
+                assume that <span class="math inline">\(A\)</span> is
+                diagonalizable with distinct eigenvalues. Then we have
+                the following claim:</p>
                 <div class="black-box">
-                <p><strong>Claim.</strong> If <span class="math inline">\(A\)</span> is diagonalizable with <span class="math inline">\(n\)</span> distinct eigenvalues, then <span class="math inline">\(B\)</span> must also be diagonalizable.</p>
+                <p><strong>Claim.</strong> If <span
+                class="math inline">\(A\)</span> is diagonalizable with
+                <span class="math inline">\(n\)</span> distinct
+                eigenvalues, then <span class="math inline">\(B\)</span>
+                must also be diagonalizable.</p>
                 </div>
-                <p><em>Proof.</em> Suppose <span class="math inline">\((\lambda, \vec{v})\)</span> is an eigenpair of <span class="math inline">\(A\)</span>. Observe that by the commutativity of <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, <span class="math display">\[
+                <p><em>Proof.</em> Suppose <span
+                class="math inline">\((\lambda, \vec{v})\)</span> is an
+                eigenpair of <span class="math inline">\(A\)</span>.
+                Observe that by the commutativity of <span
+                class="math inline">\(A\)</span> and <span
+                class="math inline">\(B\)</span>, <span
+                class="math display">\[
                     \begin{align*}
                     A(B \vec{v}) &amp;= BA \vec{v} \\
                     &amp;= B \lambda \vec{v} \\
                     &amp;= \lambda (B \vec{v}).
                     \end{align*}
-                \]</span> This tells us that <span class="math inline">\(B \vec{v}\)</span> is in the <span class="math inline">\(\lambda\)</span>-eigenspace of <span class="math inline">\(A\)</span>, which has dimension <span class="math inline">\(1\)</span> (because we assumed <span class="math inline">\(n\)</span> distinct eigenvalues). But since <span class="math inline">\(\vec{v}\)</span> is also in this eigenspace, <span class="math inline">\(\vec{v}\)</span> and <span class="math inline">\(B \vec{v}\)</span> must be multiples, as neither get annihilated due to our assumptions. Equivalently, <span class="math inline">\(\vec{v}\)</span> is an eigenvector of <span class="math inline">\(B\)</span>. We may repeat this for all eigenvectors of <span class="math inline">\(A\)</span> to see that <span class="math inline">\(B\)</span> has <span class="math inline">\(n\)</span> linearly independent eigenvectors, making it diagonalizable. <span class="math inline">\(\blacksquare\)</span></p>
-                <p>From this, we can write <span class="math inline">\(A = Q^{-1} S Q\)</span> and <span class="math inline">\(B = Q^{-1} T Q\)</span> and observe that <span class="math inline">\(P(A) = Q^{-1} P(S) Q\)</span> by the properties of diagonalizations. If we wish to have <span class="math inline">\(P(A) = B\)</span>, then we must have that <span class="math inline">\(P(S) = T\)</span>. But since the entries of <span class="math inline">\(S\)</span> (the eigenvalues of <span class="math inline">\(A\)</span>) are all distinct, this reduces to finding a polynomial where <span class="math inline">\(P(S_{ii}) = T_{ii}\)</span> for <span class="math inline">\(1 \le i \le n\)</span>. There always exists a degree <span class="math inline">\(n - 1\)</span> polynomial for which this is true, so we can indeed write <span class="math inline">\(B\)</span> as a polynomial in <span class="math inline">\(A\)</span> as desired.</p>
-                <p>Although we've worked with matrices throughout this article, you can essentially substitute a finite dimensional linear transformation in and achieve the same results. This begs the question, <em>what about infinite dimensional linear transformations</em>? Can I write the Fourier transform as a polynomial in convolutions with arbitrary functions? Does this even make sense to say? I'm not too familiar with infinite dimensional linear algebra, but this seems like the perfect gateway. Stay tuned!</p>
-                <p><em>Editing remarks: this article originally structured the initial discussion differently and gave a rather unsatisfying counterexample that was hardly a counterexample. I couldn't stop thinking about the problem afterwards, so I had to fix it. In addition, I've added a conclusion looking towards further results/exploration.</em></p>
+                \]</span> This tells us that <span
+                class="math inline">\(B \vec{v}\)</span> is in the <span
+                class="math inline">\(\lambda\)</span>-eigenspace of
+                <span class="math inline">\(A\)</span>, which has
+                dimension <span class="math inline">\(1\)</span>
+                (because we assumed <span
+                class="math inline">\(n\)</span> distinct eigenvalues).
+                But since <span class="math inline">\(\vec{v}\)</span>
+                is also in this eigenspace, <span
+                class="math inline">\(\vec{v}\)</span> and <span
+                class="math inline">\(B \vec{v}\)</span> must be
+                multiples, as neither get annihilated due to our
+                assumptions. Equivalently, <span
+                class="math inline">\(\vec{v}\)</span> is an eigenvector
+                of <span class="math inline">\(B\)</span>. We may repeat
+                this for all eigenvectors of <span
+                class="math inline">\(A\)</span> to see that <span
+                class="math inline">\(B\)</span> has <span
+                class="math inline">\(n\)</span> linearly independent
+                eigenvectors, making it diagonalizable. <span
+                class="math inline">\(\blacksquare\)</span></p>
+                <p>From this, we can write <span class="math inline">\(A
+                = Q^{-1} S Q\)</span> and <span class="math inline">\(B
+                = Q^{-1} T Q\)</span> and observe that <span
+                class="math inline">\(P(A) = Q^{-1} P(S) Q\)</span> by
+                the properties of diagonalizations. If we wish to have
+                <span class="math inline">\(P(A) = B\)</span>, then we
+                must have that <span class="math inline">\(P(S) =
+                T\)</span>. But since the entries of <span
+                class="math inline">\(S\)</span> (the eigenvalues of
+                <span class="math inline">\(A\)</span>) are all
+                distinct, this reduces to finding a polynomial where
+                <span class="math inline">\(P(S_{ii}) = T_{ii}\)</span>
+                for <span class="math inline">\(1 \le i \le n\)</span>.
+                There always exists a degree <span
+                class="math inline">\(n - 1\)</span> polynomial for
+                which this is true, so we can indeed write <span
+                class="math inline">\(B\)</span> as a polynomial in
+                <span class="math inline">\(A\)</span> as desired.</p>
+                <p>Although we've worked with matrices throughout this
+                article, you can essentially substitute a finite
+                dimensional linear transformation in and achieve the
+                same results. This begs the question, <em>what about
+                infinite dimensional linear transformations</em>? Can I
+                write the Fourier transform as a polynomial in
+                convolutions with arbitrary functions? Does this even
+                make sense to say? I'm not too familiar with infinite
+                dimensional linear algebra, but this seems like the
+                perfect gateway. Stay tuned!</p>
+                <p><em>Editing remarks: this article originally
+                structured the initial discussion differently and gave a
+                rather unsatisfying counterexample that was hardly a
+                counterexample. I couldn't stop thinking about the
+                problem afterwards, so I had to fix it. In addition,
+                I've added a conclusion looking towards further
+                results/exploration.</em></p>
             </div>
         </div>
     </body>

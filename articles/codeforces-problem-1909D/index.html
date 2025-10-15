@@ -32,7 +32,8 @@
                 <div class="description">
                     <h2>Description</h2>
                     <div class="side-line">
-                        <p>A nice little 1900 rated Codeforces problem on making all elements equal with operations.</p>
+                        <p><p>A nice little 1900 rated Codeforces
+problem on making all elements equal with operations.</p></p>
                     </div>
                 </div>
 
@@ -40,8 +41,10 @@
                     <h2>Contents</h2>
                     <div class="side-line">
                         <ul>
-                        <li><a href="#problem">Problem</a></li>
-                        <li><a href="#solution">Solution</a></li>
+                        <li><a href="#problem"
+                        id="toc-problem">Problem</a></li>
+                        <li><a href="#solution"
+                        id="toc-solution">Solution</a></li>
                         </ul>
                         <!--
                         <ul>
@@ -70,46 +73,109 @@
                 <hr class="separator" />
                 <div class="info-holder">
                     <span class="info-value"><b>Author:</b> Rushil Surti</span>
-                    <span class="info-value"><b>Date:</b> April 7, 2024</span>
+                    <span class="info-value"><b>Date:</b> April 7,
+2024</span>
                     <span class="info-value"><b>Tags:</b>  <a href="/tags.html#codeforces"><span class="info-tag">codeforces</span></a>  <a href="/tags.html#number-theory"><span class="info-tag">number-theory</span></a>  <a href="/tags.html#optimization"><span class="info-tag">optimization</span></a> </span>
+                    <span class="info-value"><b>Edited:</b> October 15,
+2025</span>
                 </div>
 
                 <h2 id="problem">Problem</h2>
                 <div class="side-box">
-                <p><strong>Problem.</strong> Given a list of <span class="math inline">\(n\)</span> numbers <span class="math inline">\(a_1, a_2, \ldots, a_n\)</span> and an integer <span class="math inline">\(k\)</span>, one can perform the following operation any number of times:</p>
+                <p><strong>Problem.</strong> Given a list of <span
+                class="math inline">\(n\)</span> numbers <span
+                class="math inline">\(a_1, a_2, \ldots, a_n\)</span> and
+                an integer <span class="math inline">\(k\)</span>, one
+                can perform the following operation any number of
+                times:</p>
                 <ul>
-                <li>Choose (and then delete) some number <span class="math inline">\(a_i\)</span>, and</li>
-                <li>Partition the sum of <span class="math inline">\(a_i + k\)</span> into two numbers and then add these into the list.</li>
+                <li>Choose (and then delete) some number <span
+                class="math inline">\(a_i\)</span>, and</li>
+                <li>Partition the sum of <span class="math inline">\(a_i
+                + k\)</span> into two numbers and then add these into
+                the list.</li>
                 </ul>
-                <p>Determine whether it is possible to make all elements in <span class="math inline">\(a\)</span> equal using this operation, and if so, the minimum number of operations required to do so.</p>
+                <p>Determine whether it is possible to make all elements
+                in <span class="math inline">\(a\)</span> equal using
+                this operation, and if so, the minimum number of
+                operations required to do so.</p>
                 </div>
                 <h2 id="solution">Solution</h2>
-                <p>Our primary approach shall be to look at the sums after resulting operations done.</p>
-                <p><strong>Observation.</strong> Suppose we perform <span class="math inline">\(q_i\)</span> operations on some element <span class="math inline">\(a_i\)</span> in order to split it into <span class="math inline">\(q_i + 1\)</span> equal elements of some value <span class="math inline">\(d\)</span>. This tells us that <span class="math display">\[
-                    d = \frac{a_i + k q_i}{q_i + 1} = \frac{a_i - k}{q_i + 1} + k
-                .\]</span> Note that since we're trying to make all elements equal, we can chain this condition to see that <span class="math display">\[
+                <p>Our primary approach shall be to look at the sums
+                after resulting operations done.</p>
+                <p><strong>Observation.</strong> Suppose we perform
+                <span class="math inline">\(q_i\)</span> operations on
+                some element <span class="math inline">\(a_i\)</span> in
+                order to split it into <span class="math inline">\(q_i +
+                1\)</span> equal elements of some value <span
+                class="math inline">\(d\)</span>. This tells us that
+                <span class="math display">\[
+                    d = \frac{a_i + k q_i}{q_i + 1} = \frac{a_i - k}{q_i
+                + 1} + k
+                .\]</span> Note that since we're trying to make all
+                elements equal, we can chain this condition to see that
+                <span class="math display">\[
                 \begin{align*}
-                    d = &amp;\frac{a_1 - k}{q_1 + 1} + k = \frac{a_2 - k}{q_2 + 1} + k = \cdots = \frac{a_n - k}{q_n + 1} + k \\
-                    \implies &amp;\frac{a_1 - k}{q_1 + 1} = \frac{a_2 - k}{q_2 + 1} = \cdots = \frac{a_n - k}{q_n + 1}.
+                    d = &amp;\frac{a_1 - k}{q_1 + 1} + k = \frac{a_2 -
+                k}{q_2 + 1} + k = \cdots = \frac{a_n - k}{q_n + 1} + k
+                \\
+                    \implies &amp;\frac{a_1 - k}{q_1 + 1} = \frac{a_2 -
+                k}{q_2 + 1} = \cdots = \frac{a_n - k}{q_n + 1}.
                 \end{align*}
-                \]</span> Equivalently, for all pairs of elements <span class="math inline">\((a_i, a_j)\)</span>, the following must be satisfied (although note that we only ever need to check <span class="math inline">\(n - 1\)</span> consecutive pairs) <span class="math display">\[
+                \]</span> Equivalently, for all pairs of elements <span
+                class="math inline">\((a_i, a_j)\)</span>, the following
+                must be satisfied (although note that we only ever need
+                to check <span class="math inline">\(n - 1\)</span>
+                consecutive pairs) <span class="math display">\[
                     (a_i - k) (q_j + 1) = (a_j - k) (q_i + 1)
                 .\]</span></p>
-                <p>One may solve this equation for <span class="math inline">\(q_i, q_j\)</span> as normal, and to do this, the first order of business is to divide out the common factors from both sides. This strategy leads to the following claim.</p>
-                <p><strong>Claim.</strong> We have that for each index <span class="math inline">\(i\)</span>, <span class="math display">\[
-                    q_i + 1 = \frac{a_i - k}{\gcd(a_1 - k, a_2 - k, \ldots, a_n - k)}
+                <p>One may solve this equation for <span
+                class="math inline">\(q_i, q_j\)</span> as normal, and
+                to do this, the first order of business is to divide out
+                the common factors from both sides. This strategy leads
+                to the following claim.</p>
+                <p><strong>Claim.</strong> We have that for each index
+                <span class="math inline">\(i\)</span>, <span
+                class="math display">\[
+                    q_i + 1 = \frac{a_i - k}{\gcd(a_1 - k, a_2 - k,
+                \ldots, a_n - k)}
                 .\]</span></p>
-                <p>One should note that there are a couple edge cases to keep in mind when using the following:</p>
+                <p>One should note that there are a couple edge cases to
+                keep in mind when using the following:</p>
                 <ul>
-                <li>Case <span class="math inline">\(a_1 - k = a_2 - k = \cdots = a_n - k = 0\)</span>: This should be a valid arrangement, but it encounters a division by <span class="math inline">\(0\)</span>. This is easily circumvented, however, by initially checking if all elements are equal (or simply checking if the greatest common factor is <span class="math inline">\(0\)</span>, as any equal element sequence should still give the correct answer with this algorithm).</li>
-                <li>Case <span class="math inline">\(q_i &lt; 0\)</span>: This can happen a few ways, but luckily this is a bug, not a feature. Whenever this case is encountered, it is impossible to make all elements equal.</li>
+                <li>Case <span class="math inline">\(a_1 - k = a_2 - k =
+                \cdots = a_n - k = 0\)</span>: This should be a valid
+                arrangement, but it encounters a division by <span
+                class="math inline">\(0\)</span>. This is easily
+                circumvented, however, by initially checking if all
+                elements are equal (or simply checking if the greatest
+                common factor is <span class="math inline">\(0\)</span>,
+                as any equal element sequence should still give the
+                correct answer with this algorithm).</li>
+                <li>Case <span class="math inline">\(q_i &lt;
+                0\)</span>: This can happen a few ways, but luckily this
+                is a bug, not a feature. Whenever this case is
+                encountered, it is impossible to make all elements
+                equal.</li>
                 </ul>
-                <p>Once each <span class="math inline">\(q_i\)</span> is determined, we can sum them to find our resulting answer.</p>
-                <p><strong>Remark.</strong> While the following was not used in the final solution, it came up while brainstorming some possible methods, and it does in theory provide an alternate method for obtaining <span class="math inline">\(q\)</span> in terms of <span class="math inline">\(d\)</span>.</p>
-                <p>Let the minimum number of operations be <span class="math inline">\(q\)</span>. Then the equal element should be <span class="math display">\[
-                    d = \frac{1}{n + q} \left( qk + \sum_{i = 1}^{n} a_i \right)
-                .\]</span> In particular, this is equivalent to <span class="math display">\[
-                    q = \frac{1}{d - k} \left( \sum_{i = 1}^{n} a_i - dn \right)
+                <p>Once each <span class="math inline">\(q_i\)</span> is
+                determined, we can sum them to find our resulting
+                answer.</p>
+                <p><strong>Remark.</strong> While the following was not
+                used in the final solution, it came up while
+                brainstorming some possible methods, and it does in
+                theory provide an alternate method for obtaining <span
+                class="math inline">\(q\)</span> in terms of <span
+                class="math inline">\(d\)</span>.</p>
+                <p>Let the minimum number of operations be <span
+                class="math inline">\(q\)</span>. Then the equal element
+                should be <span class="math display">\[
+                    d = \frac{1}{n + q} \left( qk + \sum_{i = 1}^{n} a_i
+                \right)
+                .\]</span> In particular, this is equivalent to <span
+                class="math display">\[
+                    q = \frac{1}{d - k} \left( \sum_{i = 1}^{n} a_i - dn
+                \right)
                 .\]</span></p>
             </div>
         </div>

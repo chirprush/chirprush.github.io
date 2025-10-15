@@ -32,7 +32,8 @@
                 <div class="description">
                     <h2>Description</h2>
                     <div class="side-line">
-                        <p>A very mathy and beautiful 2700 rated Codeforces problem. This one had me really excited to solve.</p>
+                        <p><p>A very mathy and beautiful 2700 rated
+Codeforces problem. This one had me really excited to solve.</p></p>
                     </div>
                 </div>
 
@@ -40,8 +41,10 @@
                     <h2>Contents</h2>
                     <div class="side-line">
                         <ul>
-                        <li><a href="#problem">Problem</a></li>
-                        <li><a href="#solution">Solution</a></li>
+                        <li><a href="#problem"
+                        id="toc-problem">Problem</a></li>
+                        <li><a href="#solution"
+                        id="toc-solution">Solution</a></li>
                         </ul>
                         <!--
                         <ul>
@@ -70,24 +73,83 @@
                 <hr class="separator" />
                 <div class="info-holder">
                     <span class="info-value"><b>Author:</b> Rushil Surti</span>
-                    <span class="info-value"><b>Date:</b> July 21, 2024</span>
+                    <span class="info-value"><b>Date:</b> July 21,
+2024</span>
                     <span class="info-value"><b>Tags:</b>  <a href="/tags.html#codeforces"><span class="info-tag">codeforces</span></a>  <a href="/tags.html#linear-algebra"><span class="info-tag">linear-algebra</span></a>  <a href="/tags.html#matrices"><span class="info-tag">matrices</span></a>  <a href="/tags.html#combinatorics"><span class="info-tag">combinatorics</span></a>  <a href="/tags.html#number-theory"><span class="info-tag">number-theory</span></a> </span>
+                    <span class="info-value"><b>Edited:</b> October 15,
+2025</span>
                 </div>
 
                 <h2 id="problem">Problem</h2>
                 <div class="side-box">
-                <p><strong>Problem.</strong> For each <span class="math inline">\(r\)</span> where <span class="math inline">\(0 \le r \le m\)</span>, count the number of <span class="math inline">\(n \times n\)</span> matrices over <span class="math inline">\(\mathbb{F}_p\)</span> with rank <span class="math inline">\(r\)</span> modulo some large fixed prime <span class="math inline">\(P\)</span>.</p>
+                <p><strong>Problem.</strong> For each <span
+                class="math inline">\(r\)</span> where <span
+                class="math inline">\(0 \le r \le m\)</span>, count the
+                number of <span class="math inline">\(n \times
+                n\)</span> matrices over <span
+                class="math inline">\(\mathbb{F}_p\)</span> with rank
+                <span class="math inline">\(r\)</span> modulo some large
+                fixed prime <span class="math inline">\(P\)</span>.</p>
                 </div>
                 <h2 id="solution">Solution</h2>
-                <p>After quite a bit of thinking and structuring the problem, we arrive at the following realization, which allows us to somewhat easily solve for the quantities we're looking for: for each <span class="math inline">\(0 \le r \le m\)</span>, <span class="math display">\[
-                    \sum_{k = 0}^{r} \textsf{sub}[r, k] \cdot \textsf{ranks}[k] = p^{nr}
-                ,\]</span> where <span class="math inline">\(\textsf{sub}[r, k]\)</span> denotes the number of dimension <span class="math inline">\(k\)</span> subspaces that a dimension <span class="math inline">\(r\)</span> vector space over <span class="math inline">\(\mathbb{F}_p\)</span> has, and <span class="math inline">\(\textsf{ranks}[k]\)</span> denotes the number of <span class="math inline">\(n \times n\)</span> matrices with rank <span class="math inline">\(k\)</span> formed using vectors from a fixed <span class="math inline">\(k\)</span> dimensional vector space. Our answer for each <span class="math inline">\(r\)</span> is then <span class="math inline">\(\textsf{sub}[n, r] \cdot \textsf{ranks}[r]\)</span>.</p>
-                <p>In other words, we have a system of <span class="math inline">\(m + 1\)</span> equations in our <span class="math inline">\(m + 1\)</span> unknowns that we wish to solve for, namely each <span class="math inline">\(\textsf{ranks}[k]\)</span>. Thus, we've reduced the problem down to counting the number of subspaces of a vector space over this finite field.</p>
-                <p><strong>Claim</strong>. We have that <span class="math display">\[
-                    \textsf{sub}[r, k] = \frac{(p^r - 1)(p^r - p) \cdots (p^r - p^{k - 1})}{(p^k - 1)(p^k - p) \cdots (p^k - p^{k-1})}
+                <p>After quite a bit of thinking and structuring the
+                problem, we arrive at the following realization, which
+                allows us to somewhat easily solve for the quantities
+                we're looking for: for each <span
+                class="math inline">\(0 \le r \le m\)</span>, <span
+                class="math display">\[
+                    \sum_{k = 0}^{r} \textsf{sub}[r, k] \cdot
+                \textsf{ranks}[k] = p^{nr}
+                ,\]</span> where <span
+                class="math inline">\(\textsf{sub}[r, k]\)</span>
+                denotes the number of dimension <span
+                class="math inline">\(k\)</span> subspaces that a
+                dimension <span class="math inline">\(r\)</span> vector
+                space over <span
+                class="math inline">\(\mathbb{F}_p\)</span> has, and
+                <span class="math inline">\(\textsf{ranks}[k]\)</span>
+                denotes the number of <span class="math inline">\(n
+                \times n\)</span> matrices with rank <span
+                class="math inline">\(k\)</span> formed using vectors
+                from a fixed <span class="math inline">\(k\)</span>
+                dimensional vector space. Our answer for each <span
+                class="math inline">\(r\)</span> is then <span
+                class="math inline">\(\textsf{sub}[n, r] \cdot
+                \textsf{ranks}[r]\)</span>.</p>
+                <p>In other words, we have a system of <span
+                class="math inline">\(m + 1\)</span> equations in our
+                <span class="math inline">\(m + 1\)</span> unknowns that
+                we wish to solve for, namely each <span
+                class="math inline">\(\textsf{ranks}[k]\)</span>. Thus,
+                we've reduced the problem down to counting the number of
+                subspaces of a vector space over this finite field.</p>
+                <p><strong>Claim</strong>. We have that <span
+                class="math display">\[
+                    \textsf{sub}[r, k] = \frac{(p^r - 1)(p^r - p) \cdots
+                (p^r - p^{k - 1})}{(p^k - 1)(p^k - p) \cdots (p^k -
+                p^{k-1})}
                 .\]</span></p>
-                <p><em>Proof.</em> We would like to be able to pick out <span class="math inline">\(k\)</span>-dimensional subspaces of a <span class="math inline">\(r\)</span>-dimensional vector space, so we do so by picking <span class="math inline">\(k\)</span> linearly independent vectors to form a basis. However, this overcounts by quite a bit, so we must divide by the number of ways to choose <span class="math inline">\(k\)</span> linearly independent vectors from the subspace that we found. <span class="math inline">\(\blacksquare\)</span></p>
-                <p>Since the denominator of <span class="math inline">\(\textsf{sub}[r, k]\)</span> can be precomputed in reasonable time and the numerator can be computed with an easy recursion, we can solve for <span class="math inline">\(\textsf{ranks}[k]\)</span> and thus find the answer in something like <span class="math inline">\(O(k^2 \log n)\)</span> time, where the logarithm factor appears because of calculating the exponentials modulo the fixed prime <span class="math inline">\(P\)</span>.</p>
+                <p><em>Proof.</em> We would like to be able to pick out
+                <span class="math inline">\(k\)</span>-dimensional
+                subspaces of a <span
+                class="math inline">\(r\)</span>-dimensional vector
+                space, so we do so by picking <span
+                class="math inline">\(k\)</span> linearly independent
+                vectors to form a basis. However, this overcounts by
+                quite a bit, so we must divide by the number of ways to
+                choose <span class="math inline">\(k\)</span> linearly
+                independent vectors from the subspace that we found.
+                <span class="math inline">\(\blacksquare\)</span></p>
+                <p>Since the denominator of <span
+                class="math inline">\(\textsf{sub}[r, k]\)</span> can be
+                precomputed in reasonable time and the numerator can be
+                computed with an easy recursion, we can solve for <span
+                class="math inline">\(\textsf{ranks}[k]\)</span> and
+                thus find the answer in something like <span
+                class="math inline">\(O(k^2 \log n)\)</span> time, where
+                the logarithm factor appears because of calculating the
+                exponentials modulo the fixed prime <span
+                class="math inline">\(P\)</span>.</p>
             </div>
         </div>
     </body>

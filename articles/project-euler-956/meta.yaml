@@ -1,0 +1,8 @@
+---
+title: "Project Euler: Problem 956"
+tags: ["project-euler", "number-theory", "fft", "finite-fields", "roots-of-unity"]
+publish-date: "October 15, 2025"
+description: |
+  Solving Project Euler Problem 956 in a little bit of an overkill way. Stick
+  around for some fast Fourier transforms over finite fields!
+wip: false

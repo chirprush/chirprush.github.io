@@ -125,10 +125,10 @@ class Article:
         # Thank you pandoc, very cool
         edit_date = current_date()
 
-        cmd = ["pandoc", "-f", "markdown-smart+tex_math_single_backslash", "--standalone", "--toc", "--mathjax", "--template=templates/article.html", "--metadata-file=" + str(self.metadata), '--metadata=edit-date:"' + edit_date + '"', "-o", str(self.result), str(self.article)]
+        cmd = ["pandoc", "-f", "markdown-smart+tex_math_single_backslash", "--standalone", "--toc", "--mathjax", "--template=templates/article.html", "--metadata-file=" + str(self.metadata), '--metadata', 'edit-date=' + edit_date, "-o", str(self.result), str(self.article)]
 
         if self.includes.exists():
-            cmd = ["pandoc", "-f", "markdown-smart+tex_math_single_backslash", "--standalone", "--toc", "--mathjax", "--template=templates/article.html", "--metadata-file=" + str(self.metadata), '--metadata=edit-date:"' + edit_date + '"', "--include-in-header=" + str(self.includes), "-o", str(self.result), str(self.article)]
+            cmd = ["pandoc", "-f", "markdown-smart+tex_math_single_backslash", "--standalone", "--toc", "--mathjax", "--template=templates/article.html", "--metadata-file=" + str(self.metadata), '--metadata', 'edit-date=' + edit_date, "--include-in-header=" + str(self.includes), "-o", str(self.result), str(self.article)]
 
         print()
         print("   " + " ".join(cmd[:3]))

@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>chirprush - PUMAC Power Round 2024: The Hausdorff Measure</title>
+        <title>chirprush - PUMAC Power Round 2024: The Hausdorff
+Measure</title>
 
         <link rel="stylesheet" href="/assets/css/style.css">
         <link rel="stylesheet" href="/assets/css/panel.css">
@@ -32,7 +33,9 @@
                 <div class="description">
                     <h2>Description</h2>
                     <div class="side-line">
-                        <p>Notes on and a review of what our team managed to solve in PUMAC Power Round 2024! Featuring measure theory, topology, and fractals.</p>
+                        <p><p>Notes on and a review of what our team
+managed to solve in PUMAC Power Round 2024! Featuring measure theory,
+topology, and fractals.</p></p>
                     </div>
                 </div>
 
@@ -40,10 +43,17 @@
                     <h2>Contents</h2>
                     <div class="side-line">
                         <ul>
-                        <li><a href="#measures">Measures</a></li>
-                        <li><a href="#the-hausdorff-measure">The Hausdorff Measure</a></li>
-                        <li><a href="#understanding-the-hausdorff-measure">Understanding the Hausdorff Measure</a></li>
-                        <li><a href="#fractals">Fractals</a></li>
+                        <li><a href="#measures"
+                        id="toc-measures">Measures</a></li>
+                        <li><a href="#the-hausdorff-measure"
+                        id="toc-the-hausdorff-measure">The Hausdorff
+                        Measure</a></li>
+                        <li><a
+                        href="#understanding-the-hausdorff-measure"
+                        id="toc-understanding-the-hausdorff-measure">Understanding
+                        the Hausdorff Measure</a></li>
+                        <li><a href="#fractals"
+                        id="toc-fractals">Fractals</a></li>
                         </ul>
                         <!--
                         <ul>
@@ -72,459 +82,1463 @@
                 <hr class="separator" />
                 <div class="info-holder">
                     <span class="info-value"><b>Author:</b> Rushil Surti</span>
-                    <span class="info-value"><b>Date:</b> November 28, 2024</span>
+                    <span class="info-value"><b>Date:</b> November 28,
+2024</span>
                     <span class="info-value"><b>Tags:</b>  <a href="/tags.html#notes"><span class="info-tag">notes</span></a>  <a href="/tags.html#contest"><span class="info-tag">contest</span></a>  <a href="/tags.html#topology"><span class="info-tag">topology</span></a>  <a href="/tags.html#measure-theory"><span class="info-tag">measure-theory</span></a> </span>
+                    <span class="info-value"><b>Edited:</b> October 15,
+2025</span>
                 </div>
 
-                <p>This year was actually my first participating in <a href="https://jason-shi-f9dm.squarespace.com/">PUMAC</a> and it was a really cool experience! Our team placed 6th for the team round which was honestly a surprise, and the day of the competition was certainly challenging, but what stood out to me the most was the power round.</p>
-                <p>The concept of the PUMAC power round is rather simple: your team is thrown straight into a specifically chosen topic in pure mathematics and given roughly a week to figure it out, solving proof-based problems along the way. Personally, I think this is a really cool contrast to the standard math competition experience, which is based on solving hard, concrete problems in a very small amount of time. It's a great window into higher level mathematics (in fact, the contest itself had a question that was stated to be an active area of resesarch).</p>
-                <p><a href="https://static1.squarespace.com/static/570450471d07c094a39efaed/t/673a4bada1036103a5a7897f/1731873709355/Power2024_Updated_1117.pdf">This year's power round</a> introduced the field of measure theory (the formalization of volumes and dimensions to even perhaps pathological sets) to give a rigorous exploration and characterization of fractals. Below is my attempt to capture the essence of the commentary given, and a compartmentalization of our team solutions, at least as far as we got during the contest window. I hope you enjoy!</p>
-                <p><em>Note: there are some minor changes and conventions that should be pointed out. Namely, <span class="math inline">\(\subset\)</span> during this contest denotes subset or subset equals. In addition, I will <strong>switch around the order</strong> of some problems if it is more conducive for understanding. Much of the exposition is structured similarly to the power round document (all credit to the contest organizers for this), but I will occasionally interject with some intuition.</em></p>
+                <p>This year was actually my first participating in <a
+                href="https://jason-shi-f9dm.squarespace.com/">PUMAC</a>
+                and it was a really cool experience! Our team placed 6th
+                for the team round which was honestly a surprise, and
+                the day of the competition was certainly challenging,
+                but what stood out to me the most was the power
+                round.</p>
+                <p>The concept of the PUMAC power round is rather
+                simple: your team is thrown straight into a specifically
+                chosen topic in pure mathematics and given roughly a
+                week to figure it out, solving proof-based problems
+                along the way. Personally, I think this is a really cool
+                contrast to the standard math competition experience,
+                which is based on solving hard, concrete problems in a
+                very small amount of time. It's a great window into
+                higher level mathematics (in fact, the contest itself
+                had a question that was stated to be an active area of
+                resesarch).</p>
+                <p><a
+                href="https://static1.squarespace.com/static/570450471d07c094a39efaed/t/673a4bada1036103a5a7897f/1731873709355/Power2024_Updated_1117.pdf">This
+                year's power round</a> introduced the field of measure
+                theory (the formalization of volumes and dimensions to
+                even perhaps pathological sets) to give a rigorous
+                exploration and characterization of fractals. Below is
+                my attempt to capture the essence of the commentary
+                given, and a compartmentalization of our team solutions,
+                at least as far as we got during the contest window. I
+                hope you enjoy!</p>
+                <p><em>Note: there are some minor changes and
+                conventions that should be pointed out. Namely, <span
+                class="math inline">\(\subset\)</span> during this
+                contest denotes subset or subset equals. In addition, I
+                will <strong>switch around the order</strong> of some
+                problems if it is more conducive for understanding. Much
+                of the exposition is structured similarly to the power
+                round document (all credit to the contest organizers for
+                this), but I will occasionally interject with some
+                intuition.</em></p>
                 <h2 id="measures">Measures</h2>
-                <p>The first half of contest document is spent building up the idea of the Hausdorff measure, the quintessential tool for working with fractals later on. This rising action starts with the definition of <span class="math inline">\(\sigma\)</span>-algebras and a measure itself.</p>
-                <p><strong>Definition.</strong> A <strong><span class="math inline">\(\sigma\)</span>-algebra</strong> <span class="math inline">\(\Sigma\)</span> on a set <span class="math inline">\(X\)</span> is a set of subsets of <span class="math inline">\(X\)</span> satisfying the following rules:</p>
+                <p>The first half of contest document is spent building
+                up the idea of the Hausdorff measure, the quintessential
+                tool for working with fractals later on. This rising
+                action starts with the definition of <span
+                class="math inline">\(\sigma\)</span>-algebras and a
+                measure itself.</p>
+                <p><strong>Definition.</strong> A <strong><span
+                class="math inline">\(\sigma\)</span>-algebra</strong>
+                <span class="math inline">\(\Sigma\)</span> on a set
+                <span class="math inline">\(X\)</span> is a set of
+                subsets of <span class="math inline">\(X\)</span>
+                satisfying the following rules:</p>
                 <ol type="1">
-                <li>The empty set <span class="math inline">\(\emptyset\)</span> is in <span class="math inline">\(\Sigma\)</span></li>
-                <li>For any set <span class="math inline">\(A\)</span> in <span class="math inline">\(\Sigma\)</span>, its complement (i.e. the set containing all elements that <span class="math inline">\(A\)</span> doesn't) is in <span class="math inline">\(\Sigma\)</span></li>
-                <li>For any <a href="https://en.wikipedia.org/wiki/Countable_set">countable</a> list of sets in <span class="math inline">\(\Sigma\)</span>, their union (i.e. the set containing all elements in any set of the list) is in <span class="math inline">\(\Sigma\)</span>.</li>
-                <li>For any countable list of sets in <span class="math inline">\(\Sigma\)</span>, their intersection (i.e. the set containing all elements that appear in all sets of the list) is in <span class="math inline">\(\Sigma\)</span>.</li>
+                <li>The empty set <span
+                class="math inline">\(\emptyset\)</span> is in <span
+                class="math inline">\(\Sigma\)</span></li>
+                <li>For any set <span class="math inline">\(A\)</span>
+                in <span class="math inline">\(\Sigma\)</span>, its
+                complement (i.e. the set containing all elements that
+                <span class="math inline">\(A\)</span> doesn't) is in
+                <span class="math inline">\(\Sigma\)</span></li>
+                <li>For any <a
+                href="https://en.wikipedia.org/wiki/Countable_set">countable</a>
+                list of sets in <span
+                class="math inline">\(\Sigma\)</span>, their union (i.e.
+                the set containing all elements in any set of the list)
+                is in <span class="math inline">\(\Sigma\)</span>.</li>
+                <li>For any countable list of sets in <span
+                class="math inline">\(\Sigma\)</span>, their
+                intersection (i.e. the set containing all elements that
+                appear in all sets of the list) is in <span
+                class="math inline">\(\Sigma\)</span>.</li>
                 </ol>
-                <p>To check understanding, let's take a look at our first problem of the power round.</p>
+                <p>To check understanding, let's take a look at our
+                first problem of the power round.</p>
                 <div id="problem201" class="black-box">
-                <p><strong>Problem 2.0.1.</strong> Which of the following sets are <span class="math inline">\(\sigma\)</span>-algebras over <span class="math inline">\(X = \{ 0, 1, 2, 3 , 4 \}\)</span>?</p>
+                <p><strong>Problem 2.0.1.</strong> Which of the
+                following sets are <span
+                class="math inline">\(\sigma\)</span>-algebras over
+                <span class="math inline">\(X = \{ 0, 1, 2, 3 , 4
+                \}\)</span>?</p>
                 <ol type="1">
-                <li><span class="math inline">\(\Sigma = \{ \emptyset, X \}\)</span></li>
-                <li><span class="math inline">\(\Sigma = \{ \emptyset, 0, 1, 2, 3, 4, X \}\)</span></li>
-                <li><span class="math inline">\(\Sigma = \{ \emptyset,\)</span> <span class="math inline">\(\{ 0, 1 \},\)</span> <span class="math inline">\(\{ 2, 3, 4 \},\)</span> <span class="math inline">\(\{ 0, 1, 2, 3, 4 \} \}\)</span></li>
-                <li><span class="math inline">\(\Sigma = \{ \emptyset,\)</span> <span class="math inline">\(\{ 0 \},\)</span> <span class="math inline">\(\{ 1 \},\)</span> <span class="math inline">\(\{ 0, 1 \},\)</span> <span class="math inline">\(\{ 1, 2 \},\)</span> <span class="math inline">\(\{ 1, 2, 3, 4 \},\)</span> <span class="math inline">\(\{ 0, 2, 3, 4 \}, X \}\)</span></li>
+                <li><span class="math inline">\(\Sigma = \{ \emptyset, X
+                \}\)</span></li>
+                <li><span class="math inline">\(\Sigma = \{ \emptyset,
+                0, 1, 2, 3, 4, X \}\)</span></li>
+                <li><span class="math inline">\(\Sigma = \{
+                \emptyset,\)</span> <span class="math inline">\(\{ 0, 1
+                \},\)</span> <span class="math inline">\(\{ 2, 3, 4
+                \},\)</span> <span class="math inline">\(\{ 0, 1, 2, 3,
+                4 \} \}\)</span></li>
+                <li><span class="math inline">\(\Sigma = \{
+                \emptyset,\)</span> <span class="math inline">\(\{ 0
+                \},\)</span> <span class="math inline">\(\{ 1
+                \},\)</span> <span class="math inline">\(\{ 0, 1
+                \},\)</span> <span class="math inline">\(\{ 1, 2
+                \},\)</span> <span class="math inline">\(\{ 1, 2, 3, 4
+                \},\)</span> <span class="math inline">\(\{ 0, 2, 3, 4
+                \}, X \}\)</span></li>
                 </ol>
                 </div>
                 <details class="solution">
-                <summary>Solution 2.0.1.</summary>
+                <summary>
+                Solution 2.0.1.
+                </summary>
                 <div class="solution-contents">
                 <ol type="1">
-                <li>Yes. The empty set and its complement, <span class="math inline">\(X\)</span>, are in <span class="math inline">\(\Sigma\)</span>. Their intersections and unions are also just either of the sets.</li>
-                <li>No. A <span class="math inline">\(\sigma\)</span>-algebra should contain only subsets of <span class="math inline">\(X\)</span>. It should not contain elements of <span class="math inline">\(X\)</span> itself.</li>
-                <li>Yes. One may verify all the rules are satisfied.</li>
-                <li>No. The complement of <span class="math inline">\(\{ 1, 2 \}\)</span> is <span class="math inline">\(\{0, 3, 4 \}\)</span>, but this isn't in <span class="math inline">\(\Sigma\)</span>.</li>
+                <li>Yes. The empty set and its complement, <span
+                class="math inline">\(X\)</span>, are in <span
+                class="math inline">\(\Sigma\)</span>. Their
+                intersections and unions are also just either of the
+                sets.</li>
+                <li>No. A <span
+                class="math inline">\(\sigma\)</span>-algebra should
+                contain only subsets of <span
+                class="math inline">\(X\)</span>. It should not contain
+                elements of <span class="math inline">\(X\)</span>
+                itself.</li>
+                <li>Yes. One may verify all the rules are
+                satisfied.</li>
+                <li>No. The complement of <span class="math inline">\(\{
+                1, 2 \}\)</span> is <span class="math inline">\(\{0, 3,
+                4 \}\)</span>, but this isn't in <span
+                class="math inline">\(\Sigma\)</span>.</li>
                 </ol>
                 </div>
                 </details>
-                <p>This certainly doesn't feel conducive to measuring volumes, and it's certainly esoteric on first glance. Indeed, as with many things in pure mathematics, we're trading off the confusion of working backwards from intuition with the promise of rigour and consistency. Before we get into the "why" of <span class="math inline">\(\sigma\)</span>-algebras, let's first take a look at the definition of a measure so their interplay can help us better understand what's going on.</p>
-                <p><strong>Definition.</strong> We call a function <span class="math inline">\(\mu : \Sigma \to \mathbb{R} \cup \{ \infty \}\)</span> a <strong>measure</strong> over a <span class="math inline">\(\sigma\)</span>-algebra <span class="math inline">\(\Sigma\)</span> if</p>
+                <p>This certainly doesn't feel conducive to measuring
+                volumes, and it's certainly esoteric on first glance.
+                Indeed, as with many things in pure mathematics, we're
+                trading off the confusion of working backwards from
+                intuition with the promise of rigour and consistency.
+                Before we get into the "why" of <span
+                class="math inline">\(\sigma\)</span>-algebras, let's
+                first take a look at the definition of a measure so
+                their interplay can help us better understand what's
+                going on.</p>
+                <p><strong>Definition.</strong> We call a function <span
+                class="math inline">\(\mu : \Sigma \to \mathbb{R} \cup
+                \{ \infty \}\)</span> a <strong>measure</strong> over a
+                <span class="math inline">\(\sigma\)</span>-algebra
+                <span class="math inline">\(\Sigma\)</span> if</p>
                 <ol type="1">
-                <li><span class="math inline">\(\mu(\emptyset) = 0\)</span></li>
-                <li><span class="math inline">\(\mu(E) \ge 0\)</span> for all <span class="math inline">\(E \in \Sigma\)</span></li>
-                <li>For any set <span class="math inline">\(\{ E_i \}_{i = 1}^\infty \subset \Sigma\)</span> of <em>disjoint</em> sets, <span class="math display">\[
-                \mu \left( \bigcup_{i = 1}^\infty E_i \right) = \sum_{i = 1}^\infty
+                <li><span class="math inline">\(\mu(\emptyset) =
+                0\)</span></li>
+                <li><span class="math inline">\(\mu(E) \ge 0\)</span>
+                for all <span class="math inline">\(E \in
+                \Sigma\)</span></li>
+                <li>For any set <span class="math inline">\(\{ E_i \}_{i
+                = 1}^\infty \subset \Sigma\)</span> of <em>disjoint</em>
+                sets, <span class="math display">\[
+                \mu \left( \bigcup_{i = 1}^\infty E_i \right) = \sum_{i
+                = 1}^\infty
                 \mu(E_i)
                 .\]</span></li>
                 </ol>
-                <p>This definition much better codifies how we intuitively view volumes. Condition 1 tells us that empty sets should have <span class="math inline">\(0\)</span> volume. Condition 2 tells us that volumes can't be negative. Condition 3 tells us that the volume of a set is the sum of the volumes of its smaller pieces. It should be noted that there are many different ways of defining valid measures on sets. This definition merely tells us what conditions a function should obey for it to be considered a part of the class of functions called a measure.</p>
-                <p>The reason why we work over a <span class="math inline">\(\sigma\)</span>-algebra (in particular we assume to be working with the <a href="https://en.wikipedia.org/wiki/Borel_set">Borel algebra</a> over <span class="math inline">\(\mathbb{R}^n\)</span>) is because assigning measure values to every single subset of <span class="math inline">\(\mathbb{R}^n\)</span> either ends up with the measure being equivalently <span class="math inline">\(0\)</span> or just blowing up to infinity all the time. See more discussion <a href="https://stats.stackexchange.com/questions/199280/why-do-we-need-sigma-algebras-to-define-probability-spaces">here</a>. For the contest, it suffices to take this at face value, although I do recommend the curious reader to go more in depth.</p>
-                <p>Combining together a set, a <span class="math inline">\(\sigma\)</span>-algebra over that set, and a measure over the <span class="math inline">\(\sigma\)</span>-algebra gives a measure space.</p>
-                <p>The next few problems concern themselves with examples and useful properties of measures that are referenced in later problems.</p>
+                <p>This definition much better codifies how we
+                intuitively view volumes. Condition 1 tells us that
+                empty sets should have <span
+                class="math inline">\(0\)</span> volume. Condition 2
+                tells us that volumes can't be negative. Condition 3
+                tells us that the volume of a set is the sum of the
+                volumes of its smaller pieces. It should be noted that
+                there are many different ways of defining valid measures
+                on sets. This definition merely tells us what conditions
+                a function should obey for it to be considered a part of
+                the class of functions called a measure.</p>
+                <p>The reason why we work over a <span
+                class="math inline">\(\sigma\)</span>-algebra (in
+                particular we assume to be working with the <a
+                href="https://en.wikipedia.org/wiki/Borel_set">Borel
+                algebra</a> over <span
+                class="math inline">\(\mathbb{R}^n\)</span>) is because
+                assigning measure values to every single subset of <span
+                class="math inline">\(\mathbb{R}^n\)</span> either ends
+                up with the measure being equivalently <span
+                class="math inline">\(0\)</span> or just blowing up to
+                infinity all the time. See more discussion <a
+                href="https://stats.stackexchange.com/questions/199280/why-do-we-need-sigma-algebras-to-define-probability-spaces">here</a>.
+                For the contest, it suffices to take this at face value,
+                although I do recommend the curious reader to go more in
+                depth.</p>
+                <p>Combining together a set, a <span
+                class="math inline">\(\sigma\)</span>-algebra over that
+                set, and a measure over the <span
+                class="math inline">\(\sigma\)</span>-algebra gives a
+                measure space.</p>
+                <p>The next few problems concern themselves with
+                examples and useful properties of measures that are
+                referenced in later problems.</p>
                 <div id="problem202" class="black-box">
-                <p><strong>Problem 2.0.2.</strong> Let <span class="math inline">\(X\)</span> be any set and <span class="math inline">\(\Sigma = \mathcal{P}(X)\)</span>. Let <span class="math inline">\(\mu : \Sigma \to \mathbb{R} \cup \{ \infty \}\)</span> be defined as <span class="math inline">\(\mu(A) = \#A\)</span>, the cardinality of <span class="math inline">\(A\)</span> if <span class="math inline">\(A \subset X\)</span> is finite and <span class="math inline">\(\infty\)</span> if <span class="math inline">\(A\)</span> is infinite.</p>
+                <p><strong>Problem 2.0.2.</strong> Let <span
+                class="math inline">\(X\)</span> be any set and <span
+                class="math inline">\(\Sigma = \mathcal{P}(X)\)</span>.
+                Let <span class="math inline">\(\mu : \Sigma \to
+                \mathbb{R} \cup \{ \infty \}\)</span> be defined as
+                <span class="math inline">\(\mu(A) = \#A\)</span>, the
+                cardinality of <span class="math inline">\(A\)</span> if
+                <span class="math inline">\(A \subset X\)</span> is
+                finite and <span class="math inline">\(\infty\)</span>
+                if <span class="math inline">\(A\)</span> is
+                infinite.</p>
                 <ol type="1">
-                <li>Verify that <span class="math inline">\(\Sigma\)</span> forms a <span class="math inline">\(\sigma\)</span>-algebra over <span class="math inline">\(X\)</span>.</li>
-                <li>Verify that <span class="math inline">\(\mu\)</span> forms a measure over <span class="math inline">\((X, \Sigma)\)</span>.</li>
+                <li>Verify that <span
+                class="math inline">\(\Sigma\)</span> forms a <span
+                class="math inline">\(\sigma\)</span>-algebra over <span
+                class="math inline">\(X\)</span>.</li>
+                <li>Verify that <span class="math inline">\(\mu\)</span>
+                forms a measure over <span class="math inline">\((X,
+                \Sigma)\)</span>.</li>
                 </ol>
-                <p>This is called the <strong>counting measure</strong>.</p>
+                <p>This is called the <strong>counting
+                measure</strong>.</p>
                 </div>
                 <details class="solution">
-                <summary>Solution 2.0.2.</summary>
+                <summary>
+                Solution 2.0.2.
+                </summary>
                 <div class="solution-contents">
-                <p>These follow straightforwardly from the definitions. The below solution is a bit verbose, but this is intentional to avoid fallacies (or just a lack of rigour) arising from improperly handling infinites.</p>
+                <p>These follow straightforwardly from the definitions.
+                The below solution is a bit verbose, but this is
+                intentional to avoid fallacies (or just a lack of
+                rigour) arising from improperly handling infinites.</p>
                 <ol type="1">
-                <li>Clearly <span class="math inline">\(\Sigma\)</span> contains the empty set and is closed under complements, countable unions, and countable intersections, as it is the power set of <span class="math inline">\(X\)</span> containing all possible sets.</li>
-                <li>For the first condition, <span class="math inline">\(\mu(\emptyset) = \# \emptyset = 0\)</span>. For the second condition, observe that set cardinalities are always strictly non-negative, so this is satisfied. For the third condition, observe that by the principle of inclusion exclusion, <span class="math display">\[\begin{align*}
-                 \mu \left( \bigcup_{i = 1}^\infty E_i \right) &amp;= \lim_{n \to \infty} \mu \left( \bigcup_{i = 1}^n E_i \right) \\
-                 &amp;= \lim_{n \to \infty} \# \left( \bigcup_{i = 1}^n E_i \right)  \\
-                 &amp;= \lim_{n \to \infty} \sum_{\emptyset \ne I \subset \{ 1, 2, \ldots, n \}} (-1)^{\#I + 1} \cdot \# \left( \bigcap_{i \in I} E_i \right),
-                \end{align*}\]</span> but since <span class="math inline">\(E_i \cap E_j = \emptyset\)</span> for <span class="math inline">\(i \ne j\)</span>, terms with <span class="math inline">\(\# I &gt; 1\)</span> vanish. Thus, the expression is equal to <span class="math display">\[\begin{align*}
-                 \lim_{n \to \infty} \sum_{i = 1}^n \# E_i &amp;= \lim_{n \to \infty} \sum_{i = 1}^n \mu(E_i) \\
-                 &amp;= \sum_{i = 1}^\infty \mu(E_i).
+                <li>Clearly <span class="math inline">\(\Sigma\)</span>
+                contains the empty set and is closed under complements,
+                countable unions, and countable intersections, as it is
+                the power set of <span class="math inline">\(X\)</span>
+                containing all possible sets.</li>
+                <li>For the first condition, <span
+                class="math inline">\(\mu(\emptyset) = \# \emptyset =
+                0\)</span>. For the second condition, observe that set
+                cardinalities are always strictly non-negative, so this
+                is satisfied. For the third condition, observe that by
+                the principle of inclusion exclusion, <span
+                class="math display">\[\begin{align*}
+                \mu \left( \bigcup_{i = 1}^\infty E_i \right) &amp;=
+                \lim_{n \to \infty} \mu \left( \bigcup_{i = 1}^n E_i
+                \right) \\
+                &amp;= \lim_{n \to \infty} \# \left( \bigcup_{i = 1}^n
+                E_i \right)  \\
+                &amp;= \lim_{n \to \infty} \sum_{\emptyset \ne I \subset
+                \{ 1, 2, \ldots, n \}} (-1)^{\#I + 1} \cdot \# \left(
+                \bigcap_{i \in I} E_i \right),
+                \end{align*}\]</span> but since <span
+                class="math inline">\(E_i \cap E_j = \emptyset\)</span>
+                for <span class="math inline">\(i \ne j\)</span>, terms
+                with <span class="math inline">\(\# I &gt; 1\)</span>
+                vanish. Thus, the expression is equal to <span
+                class="math display">\[\begin{align*}
+                \lim_{n \to \infty} \sum_{i = 1}^n \# E_i &amp;= \lim_{n
+                \to \infty} \sum_{i = 1}^n \mu(E_i) \\
+                &amp;= \sum_{i = 1}^\infty \mu(E_i).
                 \end{align*}\]</span></li>
                 </ol>
                 </div>
                 </details>
                 <div id="problem203" class="black-box">
-                <p><strong>Problem 2.0.3.</strong> Verify that in a measure space <span class="math inline">\((X, \Sigma, \mu)\)</span> with <span class="math inline">\(A, B \in \Sigma\)</span>, if <span class="math inline">\(A \subset B\)</span> then <span class="math inline">\(\mu(A) \le \mu(B)\)</span>.</p>
+                <p><strong>Problem 2.0.3.</strong> Verify that in a
+                measure space <span class="math inline">\((X, \Sigma,
+                \mu)\)</span> with <span class="math inline">\(A, B \in
+                \Sigma\)</span>, if <span class="math inline">\(A
+                \subset B\)</span> then <span
+                class="math inline">\(\mu(A) \le \mu(B)\)</span>.</p>
                 </div>
                 <details class="solution">
-                <summary>Solution 2.0.3.</summary>
+                <summary>
+                Solution 2.0.3.
+                </summary>
                 <div class="solution-contents">
-                <p>Observe that <span class="math inline">\(\mu(B) = \mu(A \cup (B \setminus A)) = \mu(A) + \mu(B \setminus A)\)</span>, since <span class="math inline">\(A\)</span> and <span class="math inline">\(B \setminus A\)</span> are disjoint. But since measures are strictly non-negative, this gives us that <span class="math inline">\(\mu(A) \le \mu(B)\)</span>.</p>
+                <p>Observe that <span class="math inline">\(\mu(B) =
+                \mu(A \cup (B \setminus A)) = \mu(A) + \mu(B \setminus
+                A)\)</span>, since <span
+                class="math inline">\(A\)</span> and <span
+                class="math inline">\(B \setminus A\)</span> are
+                disjoint. But since measures are strictly non-negative,
+                this gives us that <span class="math inline">\(\mu(A)
+                \le \mu(B)\)</span>.</p>
                 </div>
                 </details>
                 <div id="problem204" class="black-box">
-                <p><strong>Problem 2.0.4.</strong> Let <span class="math inline">\((X, \Sigma, \mu)\)</span> a measure space. Show that for any countable <span class="math inline">\(\{ E_i \}_{i = 1}^\infty \subset \Sigma\)</span>, <span class="math display">\[
-                    \mu \left( \bigcup_{i = 1}^\infty E_i \right) \le \sum_{i = 1}^\infty \mu(E_i)
-                .\]</span> This is called <strong>countable subadditivity</strong>.</p>
+                <p><strong>Problem 2.0.4.</strong> Let <span
+                class="math inline">\((X, \Sigma, \mu)\)</span> a
+                measure space. Show that for any countable <span
+                class="math inline">\(\{ E_i \}_{i = 1}^\infty \subset
+                \Sigma\)</span>, <span class="math display">\[
+                    \mu \left( \bigcup_{i = 1}^\infty E_i \right) \le
+                \sum_{i = 1}^\infty \mu(E_i)
+                .\]</span> This is called <strong>countable
+                subadditivity</strong>.</p>
                 </div>
                 <details class="solution">
-                <summary>Solution 2.0.4.</summary>
+                <summary>
+                Solution 2.0.4.
+                </summary>
                 <div class="solution-contents">
-                <p>Define <span class="math inline">\(A_1 := E_1\)</span>, <span class="math inline">\(A_i := E_i \setminus \bigcup_{k = 1}^{i - 1} E_k\)</span> so that each <span class="math inline">\(A_i\)</span> is mutually disjoint. In addition, notice that <span class="math inline">\(A_i \subset E_i\)</span> so that, by the previous problem, <span class="math inline">\(\mu(A_i) \le \mu(E_i)\)</span>. Observe that <span class="math display">\[\begin{align*}
-                    \mu \left( \bigcup_{i = 1}^{\infty} E_i \right) &amp;= \mu \left( \bigcup_{i = 1}^{\infty} A_i \right) \\
+                <p>Define <span class="math inline">\(A_1 :=
+                E_1\)</span>, <span class="math inline">\(A_i := E_i
+                \setminus \bigcup_{k = 1}^{i - 1} E_k\)</span> so that
+                each <span class="math inline">\(A_i\)</span> is
+                mutually disjoint. In addition, notice that <span
+                class="math inline">\(A_i \subset E_i\)</span> so that,
+                by the previous problem, <span
+                class="math inline">\(\mu(A_i) \le \mu(E_i)\)</span>.
+                Observe that <span class="math display">\[\begin{align*}
+                    \mu \left( \bigcup_{i = 1}^{\infty} E_i \right)
+                &amp;= \mu \left( \bigcup_{i = 1}^{\infty} A_i \right)
+                \\
                     &amp;= \sum_{i = 1}^{\infty} \mu(A_i) \\
                     &amp;\le \sum_{i = 1}^{\infty} \mu(E_i)
                 .\end{align*}\]</span></p>
                 </div>
                 </details>
                 <div id="problem205" class="black-box">
-                <p><strong>Problem 2.0.5.</strong> Let <span class="math inline">\(X\)</span> be any set and <span class="math inline">\(\Sigma = \mathcal{P}(x)\)</span>. Let <span class="math inline">\(x_0 \in X\)</span> be a designated point in <span class="math inline">\(X\)</span>. Now, define <span class="math inline">\(\mu : \Sigma \to \overline{\mathbb{R}}\)</span> so that <span class="math inline">\(\mu(A) = 1\)</span> if <span class="math inline">\(x_0 \in A\)</span>, and <span class="math inline">\(\mu(A) = 0\)</span> otherwise. Is <span class="math inline">\((X, \Sigma, \mu)\)</span> a measure space?</p>
+                <p><strong>Problem 2.0.5.</strong> Let <span
+                class="math inline">\(X\)</span> be any set and <span
+                class="math inline">\(\Sigma = \mathcal{P}(x)\)</span>.
+                Let <span class="math inline">\(x_0 \in X\)</span> be a
+                designated point in <span
+                class="math inline">\(X\)</span>. Now, define <span
+                class="math inline">\(\mu : \Sigma \to
+                \overline{\mathbb{R}}\)</span> so that <span
+                class="math inline">\(\mu(A) = 1\)</span> if <span
+                class="math inline">\(x_0 \in A\)</span>, and <span
+                class="math inline">\(\mu(A) = 0\)</span> otherwise. Is
+                <span class="math inline">\((X, \Sigma, \mu)\)</span> a
+                measure space?</p>
                 </div>
                 <details class="solution">
-                <summary>Solution 2.0.5.</summary>
+                <summary>
+                Solution 2.0.5.
+                </summary>
                 <div class="solution-contents">
-                <p>Yes, <span class="math inline">\((X, \Sigma, \mu)\)</span> is a valid measure space. Note that we've already proven <span class="math inline">\(\Sigma\)</span> to be a valid <span class="math inline">\(\sigma\)</span>-algebra in Problem 2.0.2, so it suffices to prove that <span class="math inline">\(\mu\)</span> is a valid measure, considering each condition of the definition of a measure:</p>
+                <p>Yes, <span class="math inline">\((X, \Sigma,
+                \mu)\)</span> is a valid measure space. Note that we've
+                already proven <span
+                class="math inline">\(\Sigma\)</span> to be a valid
+                <span class="math inline">\(\sigma\)</span>-algebra in
+                Problem 2.0.2, so it suffices to prove that <span
+                class="math inline">\(\mu\)</span> is a valid measure,
+                considering each condition of the definition of a
+                measure:</p>
                 <ol type="1">
-                <li>Clearly <span class="math inline">\(\mu(\emptyset) = 0\)</span>, as <span class="math inline">\(x_0 \not\in \emptyset\)</span>.</li>
-                <li>The range of <span class="math inline">\(\mu\)</span> is <span class="math inline">\(\{0, 1 \}\)</span> by definition, so it is nonnegative.</li>
-                <li><p>Let <span class="math inline">\(E = \bigcup_{i = 1}^\infty E_i\)</span>. We shall consider two cases (1) when <span class="math inline">\(x_0 \in E\)</span> and (2) when <span class="math inline">\(x_0 \not\in E\)</span>.</p>
-                <p>For the first case, observe that if <span class="math inline">\(x_0 \in E\)</span> then <span class="math inline">\(\mu(E) = 1\)</span> by definition. Further, if <span class="math inline">\(x_0 \in E\)</span> and each <span class="math inline">\(E_i\)</span> is disjoint, there must be a unique <span class="math inline">\(k\)</span> where <span class="math inline">\(x_0 \in E_k\)</span>. Then, <span class="math display">\[
-                     \sum_{i = 1}^\infty \mu(E_i) = \sum_{i = 1}^\infty \mathbf{1} \{ i = k \} = 1
-                 .\]</span> Thus, countable additivity is satisfied for this case.</p>
-                <p>For the second case, observe that <span class="math inline">\(\mu(E) = 0\)</span> by definition. In addition, if <span class="math inline">\(x_0 \not\in E\)</span>, then <span class="math inline">\(x_0 \not\in E_i\)</span> for all <span class="math inline">\(i\)</span>. This implies that, <span class="math display">\[
-                     \sum_{i = 1}^\infty \mu(E_i) = \sum_{i = 1}^\infty 0 = 0
-                 ,\]</span> so countable additivity holds for this case as well.</p></li>
+                <li><p>Clearly <span
+                class="math inline">\(\mu(\emptyset) = 0\)</span>, as
+                <span class="math inline">\(x_0 \not\in
+                \emptyset\)</span>.</p></li>
+                <li><p>The range of <span
+                class="math inline">\(\mu\)</span> is <span
+                class="math inline">\(\{0, 1 \}\)</span> by definition,
+                so it is nonnegative.</p></li>
+                <li><p>Let <span class="math inline">\(E = \bigcup_{i =
+                1}^\infty E_i\)</span>. We shall consider two cases (1)
+                when <span class="math inline">\(x_0 \in E\)</span> and
+                (2) when <span class="math inline">\(x_0 \not\in
+                E\)</span>.</p>
+                <p>For the first case, observe that if <span
+                class="math inline">\(x_0 \in E\)</span> then <span
+                class="math inline">\(\mu(E) = 1\)</span> by definition.
+                Further, if <span class="math inline">\(x_0 \in
+                E\)</span> and each <span
+                class="math inline">\(E_i\)</span> is disjoint, there
+                must be a unique <span class="math inline">\(k\)</span>
+                where <span class="math inline">\(x_0 \in E_k\)</span>.
+                Then, <span class="math display">\[
+                     \sum_{i = 1}^\infty \mu(E_i) = \sum_{i = 1}^\infty
+                \mathbf{1} \{ i = k \} = 1
+                .\]</span> Thus, countable additivity is satisfied for
+                this case.</p>
+                <p>For the second case, observe that <span
+                class="math inline">\(\mu(E) = 0\)</span> by definition.
+                In addition, if <span class="math inline">\(x_0 \not\in
+                E\)</span>, then <span class="math inline">\(x_0 \not\in
+                E_i\)</span> for all <span
+                class="math inline">\(i\)</span>. This implies that,
+                <span class="math display">\[
+                     \sum_{i = 1}^\infty \mu(E_i) = \sum_{i = 1}^\infty
+                0 = 0
+                ,\]</span> so countable additivity holds for this case
+                as well.</p></li>
                 </ol>
                 </div>
                 </details>
-                <h2 id="the-hausdorff-measure">The Hausdorff Measure</h2>
-                <p>Now that we've established what a measure is and some of its general properties, we can hone in closer on the Hausdorff measure, a particular measure that gives us a way to quantifying dimensions and volume. To get to volumes, we'll first start from something that we are very familiar with in higher dimensions: distance.</p>
-                <p><strong>Definition.</strong> We shall the say the <strong>diameter</strong> of a set <span class="math inline">\(S \subset \mathbb{R}^n\)</span> is defined as <span class="math display">\[
+                <h2 id="the-hausdorff-measure">The Hausdorff
+                Measure</h2>
+                <p>Now that we've established what a measure is and some
+                of its general properties, we can hone in closer on the
+                Hausdorff measure, a particular measure that gives us a
+                way to quantifying dimensions and volume. To get to
+                volumes, we'll first start from something that we are
+                very familiar with in higher dimensions: distance.</p>
+                <p><strong>Definition.</strong> We shall the say the
+                <strong>diameter</strong> of a set <span
+                class="math inline">\(S \subset \mathbb{R}^n\)</span> is
+                defined as <span class="math display">\[
                     |S| := \sup_{x, y \in S} |x - y|
                 .\]</span></p>
-                <p>In other words, the longest possible length across all segments in the set is the diameter. The absolute value signs denote the usual Euclidean norm in <span class="math inline">\(n\)</span> dimensions. Combining this diameter with set unions allows us to create a controllably precise covering of any set.</p>
-                <p><strong>Definition.</strong> We call a <strong><span class="math inline">\(\delta\)</span>-cover</strong> of a set <span class="math inline">\(S \subset \mathbb{R}^n\)</span> for <span class="math inline">\(\delta &gt; 0\)</span> to be a collection of sets <span class="math inline">\(\{ U_i \}_i\)</span> such that</p>
+                <p>In other words, the longest possible length across
+                all segments in the set is the diameter. The absolute
+                value signs denote the usual Euclidean norm in <span
+                class="math inline">\(n\)</span> dimensions. Combining
+                this diameter with set unions allows us to create a
+                controllably precise covering of any set.</p>
+                <p><strong>Definition.</strong> We call a <strong><span
+                class="math inline">\(\delta\)</span>-cover</strong> of
+                a set <span class="math inline">\(S \subset
+                \mathbb{R}^n\)</span> for <span
+                class="math inline">\(\delta &gt; 0\)</span> to be a
+                collection of sets <span class="math inline">\(\{ U_i
+                \}_i\)</span> such that</p>
                 <ol type="1">
-                <li><span class="math inline">\(F \subset \bigcup_i U_i\)</span>. In other words, the collection of sets must cover <span class="math inline">\(F\)</span> (and it can cover points outside of <span class="math inline">\(F\)</span>).</li>
-                <li><span class="math inline">\(|U_i| &lt; \delta\)</span> for each <span class="math inline">\(i\)</span>. Indeed, <span class="math inline">\(\delta\)</span> is the parameter of the delta covers and allows one to control how big each covering set is inside the <span class="math inline">\(\delta\)</span>-cover.</li>
+                <li><span class="math inline">\(F \subset \bigcup_i
+                U_i\)</span>. In other words, the collection of sets
+                must cover <span class="math inline">\(F\)</span> (and
+                it can cover points outside of <span
+                class="math inline">\(F\)</span>).</li>
+                <li><span class="math inline">\(|U_i| &lt;
+                \delta\)</span> for each <span
+                class="math inline">\(i\)</span>. Indeed, <span
+                class="math inline">\(\delta\)</span> is the parameter
+                of the delta covers and allows one to control how big
+                each covering set is inside the <span
+                class="math inline">\(\delta\)</span>-cover.</li>
                 </ol>
-                <p>To check understanding, consider the following problem:</p>
+                <p>To check understanding, consider the following
+                problem:</p>
                 <div id="problem212" class="black-box">
-                <p><strong>Problem 2.1.2.</strong> Which of the following are <span class="math inline">\(\delta\)</span>-covers of <span class="math inline">\([0, 1]\)</span> for <span class="math inline">\(\delta = \frac{1}{2}\)</span>?</p>
+                <p><strong>Problem 2.1.2.</strong> Which of the
+                following are <span
+                class="math inline">\(\delta\)</span>-covers of <span
+                class="math inline">\([0, 1]\)</span> for <span
+                class="math inline">\(\delta = \frac{1}{2}\)</span>?</p>
                 <ol type="1">
-                <li><span class="math inline">\(\{ (-\frac{1}{3}, \frac{1}{3}), (\frac{1}{3}, \frac{2}{3}), (\frac{2}{3}, \frac{4}{3}) \}\)</span></li>
-                <li><span class="math inline">\(\{ [0, \frac{1}{n}] : n \in \mathbb{N} \}\)</span></li>
-                <li><span class="math inline">\(\{ [0, \frac{1}{2}], [\frac{1}{2}, 1] \}\)</span></li>
+                <li><span class="math inline">\(\{ (-\frac{1}{3},
+                \frac{1}{3}), (\frac{1}{3}, \frac{2}{3}), (\frac{2}{3},
+                \frac{4}{3}) \}\)</span></li>
+                <li><span class="math inline">\(\{ [0, \frac{1}{n}] : n
+                \in \mathbb{N} \}\)</span></li>
+                <li><span class="math inline">\(\{ [0, \frac{1}{2}],
+                [\frac{1}{2}, 1] \}\)</span></li>
                 </ol>
                 </div>
                 <details class="solution">
-                <summary>Solution 2.1.2.</summary>
+                <summary>
+                Solution 2.1.2.
+                </summary>
                 <div class="solution-contents">
                 <ol type="1">
-                <li>No; <span class="math inline">\(|(-\frac{1}{3}, \frac{1}{3})| = \frac{2}{3} &gt; \frac{1}{2} = \delta\)</span>.</li>
-                <li>No; <span class="math inline">\(U_1 = [0, 1]\)</span>, and <span class="math inline">\(|[0, 1]| = 1 &gt; \frac{1}{2} = \delta\)</span>.</li>
-                <li>No; <span class="math inline">\(|[\frac{1}{2},1]| = \frac{1}{2} \not&lt; \delta\)</span>.</li>
+                <li>No; <span class="math inline">\(|(-\frac{1}{3},
+                \frac{1}{3})| = \frac{2}{3} &gt; \frac{1}{2} =
+                \delta\)</span>.</li>
+                <li>No; <span class="math inline">\(U_1 = [0,
+                1]\)</span>, and <span class="math inline">\(|[0, 1]| =
+                1 &gt; \frac{1}{2} = \delta\)</span>.</li>
+                <li>No; <span class="math inline">\(|[\frac{1}{2},1]| =
+                \frac{1}{2} \not&lt; \delta\)</span>.</li>
                 </ol>
                 </div>
                 </details>
-                <p>With this, we can finally define the Hausdorff measure.</p>
-                <p><strong>Definition.</strong> We define the <strong>outer <span class="math inline">\(s\)</span>-dimensional Hausdorff measure</strong> of a set <span class="math inline">\(S\)</span> as <span class="math display">\[
-                    \mathcal{H}^s_\delta (S) := \inf \left\{ \sum_{i = 1}^\infty |U_i|^s :
-                    \{U_i \}_i \text{ is a } \delta \text{-cover of } S \right\}
-                ,\]</span> where the infimum is taken over all <span class="math inline">\(\delta\)</span>-covers of <span class="math inline">\(S\)</span>.</p>
-                <p>Before we fully dive into what this is exactly saying, we'll go through some problems to glean important characteristics of the Hausdorff measure. We will briefly mention, though, that intuitively this should be close to a notion of <span class="math inline">\(s\)</span>-dimensional volume. Thinking in terms of units, a set with dimension <span class="math inline">\(s\)</span> should have volume with units of length to the <span class="math inline">\(s\)</span> power. In addition, the infima across <span class="math inline">\(\delta\)</span>-covers makes it so that we are measuring the volume of the most accurate, refined covering of the set.</p>
-                <p>Using the below problem, we can refine this further to only consider all <span class="math inline">\(\delta\)</span>-covers where each element is open and convex.</p>
+                <p>With this, we can finally define the Hausdorff
+                measure.</p>
+                <p><strong>Definition.</strong> We define the
+                <strong>outer <span
+                class="math inline">\(s\)</span>-dimensional Hausdorff
+                measure</strong> of a set <span
+                class="math inline">\(S\)</span> as <span
+                class="math display">\[
+                    \mathcal{H}^s_\delta (S) := \inf \left\{ \sum_{i =
+                1}^\infty |U_i|^s :
+                    \{U_i \}_i \text{ is a } \delta \text{-cover of } S
+                \right\}
+                ,\]</span> where the infimum is taken over all <span
+                class="math inline">\(\delta\)</span>-covers of <span
+                class="math inline">\(S\)</span>.</p>
+                <p>Before we fully dive into what this is exactly
+                saying, we'll go through some problems to glean
+                important characteristics of the Hausdorff measure. We
+                will briefly mention, though, that intuitively this
+                should be close to a notion of <span
+                class="math inline">\(s\)</span>-dimensional volume.
+                Thinking in terms of units, a set with dimension <span
+                class="math inline">\(s\)</span> should have volume with
+                units of length to the <span
+                class="math inline">\(s\)</span> power. In addition, the
+                infima across <span
+                class="math inline">\(\delta\)</span>-covers makes it so
+                that we are measuring the volume of the most accurate,
+                refined covering of the set.</p>
+                <p>Using the below problem, we can refine this further
+                to only consider all <span
+                class="math inline">\(\delta\)</span>-covers where each
+                element is open and convex.</p>
                 <div id="problem211" class="black-box">
-                <p><strong>Problem 2.1.1.</strong> For any set <span class="math inline">\(E\)</span> and any <span class="math inline">\(\varepsilon &gt; 0\)</span>, show that there exists a convex, open set <span class="math inline">\(U \supset E\)</span> such that <span class="math inline">\(|U| \le |E| + \varepsilon\)</span>.</p>
+                <p><strong>Problem 2.1.1.</strong> For any set <span
+                class="math inline">\(E\)</span> and any <span
+                class="math inline">\(\varepsilon &gt; 0\)</span>, show
+                that there exists a convex, open set <span
+                class="math inline">\(U \supset E\)</span> such that
+                <span class="math inline">\(|U| \le |E| +
+                \varepsilon\)</span>.</p>
                 </div>
                 <details class="solution">
-                <summary>Solution 2.1.1.</summary>
+                <summary>
+                Solution 2.1.1.
+                </summary>
                 <div class="solution-contents">
-                <p>We shall firstly prove the following very useful lemma:</p>
-                <p><strong>Lemma.</strong> Fix points <span class="math inline">\(x, y, z \in \mathbb{R}^n\)</span> and let <span class="math inline">\(p(t) = tx + (1 - t)y\)</span>, where <span class="math inline">\(p : [0,1] \to \mathbb{R}^n\)</span>. Then, <span class="math display">\[
+                <p>We shall firstly prove the following very useful
+                lemma:</p>
+                <p><strong>Lemma.</strong> Fix points <span
+                class="math inline">\(x, y, z \in \mathbb{R}^n\)</span>
+                and let <span class="math inline">\(p(t) = tx + (1 -
+                t)y\)</span>, where <span class="math inline">\(p :
+                [0,1] \to \mathbb{R}^n\)</span>. Then, <span
+                class="math display">\[
                     |z - p(t)| \le \max \{ |z - x|, |z - y| \}
                 .\]</span></p>
-                <p><em>Proof.</em> There exists a unique plane passing through <span class="math inline">\(x, y, z\)</span>. Thus, we have an analogous problem in geometry that, given a segment <span class="math inline">\(AB\)</span> and a point <span class="math inline">\(P\)</span>, we must show that for any point <span class="math inline">\(C\)</span> on segment <span class="math inline">\(AB\)</span>, <span class="math inline">\(PC \le \max\{ PA, PB \}\)</span>, but this is immediately obvious, as either <span class="math inline">\(A\)</span> or <span class="math inline">\(B\)</span> is farther away than <span class="math inline">\(C\)</span> from the altitude (the segment with the shortest length). <span class="math inline">\(\blacksquare\)</span></p>
-                <p>Next, let's construct the convex hull of <span class="math inline">\(E\)</span>. Namely, let <span class="math display">\[
-                    H := \{ tx + (1 - t) y \mid t \in [0, 1], x, y \in E \}
+                <p><em>Proof.</em> There exists a unique plane passing
+                through <span class="math inline">\(x, y, z\)</span>.
+                Thus, we have an analogous problem in geometry that,
+                given a segment <span class="math inline">\(AB\)</span>
+                and a point <span class="math inline">\(P\)</span>, we
+                must show that for any point <span
+                class="math inline">\(C\)</span> on segment <span
+                class="math inline">\(AB\)</span>, <span
+                class="math inline">\(PC \le \max\{ PA, PB \}\)</span>,
+                but this is immediately obvious, as either <span
+                class="math inline">\(A\)</span> or <span
+                class="math inline">\(B\)</span> is farther away than
+                <span class="math inline">\(C\)</span> from the altitude
+                (the segment with the shortest length). <span
+                class="math inline">\(\blacksquare\)</span></p>
+                <p>Next, let's construct the convex hull of <span
+                class="math inline">\(E\)</span>. Namely, let <span
+                class="math display">\[
+                    H := \{ tx + (1 - t) y \mid t \in [0, 1], x, y \in E
+                \}
                 .\]</span> With this, we have the following claim:</p>
-                <p><strong>Claim.</strong> <span class="math inline">\(|H| = |E|\)</span>.</p>
-                <p><em>Proof.</em> From the definition of diameter, we can split the supremum into three cases as follows: <span class="math display">\[\begin{align*}
+                <p><strong>Claim.</strong> <span
+                class="math inline">\(|H| = |E|\)</span>.</p>
+                <p><em>Proof.</em> From the definition of diameter, we
+                can split the supremum into three cases as follows:
+                <span class="math display">\[\begin{align*}
                     |H| &amp;= \sup_{x, y \in H} |x - y| \\
-                    &amp;= \max \{ \sup_{x, y \in E} |x - y|, \sup_{x \in E, y \in H \setminus E} |x - y|, \sup_{x, y \in H \setminus E} |x - y| \}
-                .\end{align*}\]</span> It suffices to prove that the last two suprema are bounded above by the first (which is <span class="math inline">\(|E|\)</span>) to show that <span class="math inline">\(|H| = |E|\)</span>.</p>
-                <p>Case <span class="math inline">\(x \in E, y \in H \setminus E\)</span>: Because <span class="math inline">\(y \in H \setminus E\)</span>, there must exist points <span class="math inline">\(a, b \in E\)</span> such that for some <span class="math inline">\(t \in [0, 1]\)</span>, <span class="math inline">\(y = ta + (1-t) b\)</span>. By our above lemma, <span class="math inline">\(|x - y| \le \max\{ |x - a|, |x - b| \}\)</span>, so if we take WLOG <span class="math inline">\(a\)</span> to be the furthest endpoint then we have that <span class="math inline">\(|x-y| \le |x - a|\)</span>. Because we can find such an <span class="math inline">\(a \in E\)</span> for all <span class="math inline">\(x \in E, y \in H \setminus E\)</span>, we must have that <span class="math display">\[
-                    \sup_{x \in E, y \in H \setminus E} |x - y| \le \sup_{x, y \in E} |x - y|
+                    &amp;= \max \{ \sup_{x, y \in E} |x - y|, \sup_{x
+                \in E, y \in H \setminus E} |x - y|, \sup_{x, y \in H
+                \setminus E} |x - y| \}
+                .\end{align*}\]</span> It suffices to prove that the
+                last two suprema are bounded above by the first (which
+                is <span class="math inline">\(|E|\)</span>) to show
+                that <span class="math inline">\(|H| = |E|\)</span>.</p>
+                <p>Case <span class="math inline">\(x \in E, y \in H
+                \setminus E\)</span>: Because <span
+                class="math inline">\(y \in H \setminus E\)</span>,
+                there must exist points <span class="math inline">\(a, b
+                \in E\)</span> such that for some <span
+                class="math inline">\(t \in [0, 1]\)</span>, <span
+                class="math inline">\(y = ta + (1-t) b\)</span>. By our
+                above lemma, <span class="math inline">\(|x - y| \le
+                \max\{ |x - a|, |x - b| \}\)</span>, so if we take WLOG
+                <span class="math inline">\(a\)</span> to be the
+                furthest endpoint then we have that <span
+                class="math inline">\(|x-y| \le |x - a|\)</span>.
+                Because we can find such an <span
+                class="math inline">\(a \in E\)</span> for all <span
+                class="math inline">\(x \in E, y \in H \setminus
+                E\)</span>, we must have that <span
+                class="math display">\[
+                    \sup_{x \in E, y \in H \setminus E} |x - y| \le
+                \sup_{x, y \in E} |x - y|
                 .\]</span></p>
-                <p>Case <span class="math inline">\(x, y \in H \setminus E\)</span>: We proceed similarly. There must exist points <span class="math inline">\(a, b, c, d \in E\)</span> where for some <span class="math inline">\(s, t \in [0, 1]\)</span> we have <span class="math inline">\(x = cs + (1 - s)d, y = at + (1 - t)b\)</span>. Applying the above lemma, we can say WLOG that <span class="math inline">\(|x - y| \le |x - a|\)</span> and again WLOG <span class="math inline">\(|x - a| \le |c - a|\)</span>. Since, we can always find such <span class="math inline">\(a, c \in E\)</span>, we must have <span class="math display">\[
-                    \sup_{x, y \in H \setminus E} |x - y| \le \sup_{x, y \in E} |x - y|
+                <p>Case <span class="math inline">\(x, y \in H \setminus
+                E\)</span>: We proceed similarly. There must exist
+                points <span class="math inline">\(a, b, c, d \in
+                E\)</span> where for some <span class="math inline">\(s,
+                t \in [0, 1]\)</span> we have <span
+                class="math inline">\(x = cs + (1 - s)d, y = at + (1 -
+                t)b\)</span>. Applying the above lemma, we can say WLOG
+                that <span class="math inline">\(|x - y| \le |x -
+                a|\)</span> and again WLOG <span
+                class="math inline">\(|x - a| \le |c - a|\)</span>.
+                Since, we can always find such <span
+                class="math inline">\(a, c \in E\)</span>, we must have
+                <span class="math display">\[
+                    \sup_{x, y \in H \setminus E} |x - y| \le \sup_{x, y
+                \in E} |x - y|
                 .\]</span></p>
                 <p>Thus, <span class="math display">\[
                     |H| = \sup_{x, y \in E} |x - y| = |E|
-                ,\]</span> which concludes our proof. <span class="math inline">\(\blacksquare\)</span></p>
-                <p>From here, define <span class="math inline">\(U\)</span> as <span class="math display">\[
+                ,\]</span> which concludes our proof. <span
+                class="math inline">\(\blacksquare\)</span></p>
+                <p>From here, define <span
+                class="math inline">\(U\)</span> as <span
+                class="math display">\[
                     U := \bigcup_{x \in H} B_x (r)
-                ,\]</span> where <span class="math inline">\(r\)</span> is some fixed radius we shall determine later. Clearly, as <span class="math inline">\(U\)</span> is the union of an arbitrary number of open balls, <span class="math inline">\(U\)</span> is ensured to be open and convex.</p>
+                ,\]</span> where <span class="math inline">\(r\)</span>
+                is some fixed radius we shall determine later. Clearly,
+                as <span class="math inline">\(U\)</span> is the union
+                of an arbitrary number of open balls, <span
+                class="math inline">\(U\)</span> is ensured to be open
+                and convex.</p>
                 <p>Now, notice that <span class="math display">\[
-                    |U| = \sup_{x, y \in H, |z_1| = |z_2| = r} | x - y + z_1 + z_2 |
-                ,\]</span> and by the triangle inequality <span class="math display">\[\begin{align*}
-                    \sup_{x, y \in H, |z_1| = |z_2| = r} | x - y + z_1 + z_2 | &amp;\le \sup_{x, y \in H} |x - y| + |z_1| + |z_2| \\
+                    |U| = \sup_{x, y \in H, |z_1| = |z_2| = r} | x - y +
+                z_1 + z_2 |
+                ,\]</span> and by the triangle inequality <span
+                class="math display">\[\begin{align*}
+                    \sup_{x, y \in H, |z_1| = |z_2| = r} | x - y + z_1 +
+                z_2 | &amp;\le \sup_{x, y \in H} |x - y| + |z_1| + |z_2|
+                \\
                     &amp;= |H| + 2r \\
                     &amp; = |E| + 2r
-                .\end{align*}\]</span> Thus, if we're given any fixed <span class="math inline">\(\varepsilon &gt; 0\)</span>, we can choose <span class="math inline">\(r = \varepsilon / 4\)</span> and obtain an open, convex set <span class="math inline">\(U\)</span> of sufficiently small diameter.</p>
+                .\end{align*}\]</span> Thus, if we're given any fixed
+                <span class="math inline">\(\varepsilon &gt; 0\)</span>,
+                we can choose <span class="math inline">\(r =
+                \varepsilon / 4\)</span> and obtain an open, convex set
+                <span class="math inline">\(U\)</span> of sufficiently
+                small diameter.</p>
                 </div>
                 </details>
-                <p>Of course, this measure is dependent on the parameter <span class="math inline">\(\delta\)</span> controlling the covers of <span class="math inline">\(S\)</span>. We mentioned earlier that we want to refine our covers, so what happens to the measure when we are varying <span class="math inline">\(\delta\)</span>? This leads to the following problem:</p>
+                <p>Of course, this measure is dependent on the parameter
+                <span class="math inline">\(\delta\)</span> controlling
+                the covers of <span class="math inline">\(S\)</span>. We
+                mentioned earlier that we want to refine our covers, so
+                what happens to the measure when we are varying <span
+                class="math inline">\(\delta\)</span>? This leads to the
+                following problem:</p>
                 <div id="problem213" class="black-box">
-                <p><strong>Problem 2.1.3.</strong> Let <span class="math inline">\(0 &lt; \delta_1 &lt; \delta_2\)</span>. Show that <span class="math display">\[
-                    \mathcal{H}^s_{\delta_1} (F) \ge \mathcal{H}^s_{\delta_2} (F)
+                <p><strong>Problem 2.1.3.</strong> Let <span
+                class="math inline">\(0 &lt; \delta_1 &lt;
+                \delta_2\)</span>. Show that <span
+                class="math display">\[
+                    \mathcal{H}^s_{\delta_1} (F) \ge
+                \mathcal{H}^s_{\delta_2} (F)
                 .\]</span></p>
                 </div>
                 <details class="solution">
-                <summary>Solution 2.1.3.</summary>
+                <summary>
+                Solution 2.1.3.
+                </summary>
                 <div class="solution-contents">
                 <p>For convenience, denote <span class="math display">\[
-                    C_\delta := \left\{ \sum_{i  = 1}^\infty |U_i|^s : \{ U_i \}_i \textrm{ is a } \delta \textrm{-cover of } F \right\}
-                ,\]</span> so that we wish to prove <span class="math display">\[
+                    C_\delta := \left\{ \sum_{i  = 1}^\infty |U_i|^s :
+                \{ U_i \}_i \textrm{ is a } \delta \textrm{-cover of } F
+                \right\}
+                ,\]</span> so that we wish to prove <span
+                class="math display">\[
                     \inf C_{\delta_1} \ge \inf C_{\delta_2}
-                .\]</span> In addition, notice that any <span class="math inline">\(\delta_1\)</span>-cover of <span class="math inline">\(F\)</span> is also a <span class="math inline">\(\delta_2\)</span>-cover of <span class="math inline">\(F\)</span>; both assuredly union to a superset of <span class="math inline">\(F\)</span> and each <span class="math inline">\(U_i\)</span> has <span class="math inline">\(|U_i| &lt; \delta_1 &lt; \delta_2\)</span>.</p>
-                <p>Following this line of reason, we must have that <span class="math inline">\(C_{\delta_1} \subset C_{\delta_2}\)</span>, implying <span class="math inline">\(\inf C_{\delta_1} \ge \inf C_{\delta_2}\)</span>, which is what we wished to prove.</p>
+                .\]</span> In addition, notice that any <span
+                class="math inline">\(\delta_1\)</span>-cover of <span
+                class="math inline">\(F\)</span> is also a <span
+                class="math inline">\(\delta_2\)</span>-cover of <span
+                class="math inline">\(F\)</span>; both assuredly union
+                to a superset of <span class="math inline">\(F\)</span>
+                and each <span class="math inline">\(U_i\)</span> has
+                <span class="math inline">\(|U_i| &lt; \delta_1 &lt;
+                \delta_2\)</span>.</p>
+                <p>Following this line of reason, we must have that
+                <span class="math inline">\(C_{\delta_1} \subset
+                C_{\delta_2}\)</span>, implying <span
+                class="math inline">\(\inf C_{\delta_1} \ge \inf
+                C_{\delta_2}\)</span>, which is what we wished to
+                prove.</p>
                 </div>
                 </details>
-                <p>In other words, as we take <span class="math inline">\(\delta\)</span> closer to <span class="math inline">\(0\)</span>, the measure monotonically increases. This leads to a well defined, but not necessary finite limit.</p>
-                <p><strong>Definition.</strong> We define the <strong><span class="math inline">\(s\)</span>-dimensional Hausdorff measure</strong> of a set <span class="math inline">\(S\)</span> to be <span class="math display">\[
-                    \mathcal{H}^s (S) = \lim_{\delta \to 0^+} \mathcal{H}^s_\delta (S)
+                <p>In other words, as we take <span
+                class="math inline">\(\delta\)</span> closer to <span
+                class="math inline">\(0\)</span>, the measure
+                monotonically increases. This leads to a well defined,
+                but not necessary finite limit.</p>
+                <p><strong>Definition.</strong> We define the
+                <strong><span
+                class="math inline">\(s\)</span>-dimensional Hausdorff
+                measure</strong> of a set <span
+                class="math inline">\(S\)</span> to be <span
+                class="math display">\[
+                    \mathcal{H}^s (S) = \lim_{\delta \to 0^+}
+                \mathcal{H}^s_\delta (S)
                 .\]</span></p>
-                <p>Of course, we should probably show that this is an actual measure. Note in the below problem that we are only asked to prove subadditivity (as defined in <a href="#problem204">Problem 2.0.4</a>) as opposed to addivity. Proving full addivitity is harder and outside the scope of the contest (but it is possible).</p>
+                <p>Of course, we should probably show that this is an
+                actual measure. Note in the below problem that we are
+                only asked to prove subadditivity (as defined in <a
+                href="#problem204">Problem 2.0.4</a>) as opposed to
+                addivity. Proving full addivitity is harder and outside
+                the scope of the contest (but it is possible).</p>
                 <div id="problem214" class="black-box">
-                <p><strong>Problem 2.1.4.</strong> Prove the following:</p>
+                <p><strong>Problem 2.1.4.</strong> Prove the
+                following:</p>
                 <ol type="1">
-                <li><span class="math inline">\(\mathcal{H}^s (E) \ge 0\)</span> for all <span class="math inline">\(E \subset \mathbb{R}^n\)</span>.</li>
-                <li><span class="math inline">\(\mathcal{H}^s (\emptyset) = 0\)</span>.</li>
-                <li>Countable subaddivity (see <a href="#problem204">Problem 2.0.4</a>) for <span class="math inline">\(\mathcal{H}^s\)</span>.</li>
+                <li><span class="math inline">\(\mathcal{H}^s (E) \ge
+                0\)</span> for all <span class="math inline">\(E \subset
+                \mathbb{R}^n\)</span>.</li>
+                <li><span class="math inline">\(\mathcal{H}^s
+                (\emptyset) = 0\)</span>.</li>
+                <li>Countable subaddivity (see <a
+                href="#problem204">Problem 2.0.4</a>) for <span
+                class="math inline">\(\mathcal{H}^s\)</span>.</li>
                 </ol>
                 </div>
                 <details class="solution">
-                <summary>Solution 2.1.4.</summary>
+                <summary>
+                Solution 2.1.4.
+                </summary>
                 <div class="solution-contents">
                 <ol type="1">
-                <li>The diameter of a set is strictly nonnegative. Since the Hausdorff measure is a sum of powers of diameters, it also must be strictly nonnegative.</li>
-                <li>Observe that <span class="math inline">\(\emptyset\)</span> is always a <span class="math inline">\(\delta\)</span>-cover for <span class="math inline">\(\emptyset\)</span>, independent of <span class="math inline">\(\delta\)</span>. The value for the measure using this <span class="math inline">\(\delta\)</span>-cover is <span class="math inline">\(0\)</span>, but since the measure is strictly nonnegative, this must be the infimum value, so <span class="math inline">\(\mathcal{H}^s_{\delta} (\emptyset) = 0\)</span>. Taking <span class="math inline">\(\delta \to 0^+\)</span>, we get that <span class="math inline">\(\mathcal{H}^s (\emptyset) = 0\)</span>.</li>
-                <li>We wish to show that for any fixed <span class="math inline">\(\delta &gt; 0\)</span>, <span class="math display">\[
-                 \mathcal{H}^s_\delta \left( \bigcup_{i = 1}^\infty E_i \right) \le \sum_{i = 1}^\infty \mathcal{H}^s _\delta (E_i)
-                .\]</span> Suppose the infima <span class="math inline">\(\delta\)</span>-covers for each <span class="math inline">\(E_i\)</span> are given by <span class="math inline">\(\{ U_{ij} \}_{j = 1}^\infty\)</span>, so that <span class="math display">\[
-                 \sum_{i = 1}^\infty \mathcal{H}^s_\delta (E_i) = \sum_{i = 1}^\infty \sum_{j = 1}^\infty |U_{ij}|^s
-                .\]</span> Observe, however, that <span class="math inline">\(\{ U_{ij} \}_{i,j = 1}^\infty\)</span> is also a <span class="math inline">\(\delta\)</span>-cover for <span class="math inline">\(\bigcup_i E_i\)</span>, since <span class="math display">\[
-                 \bigcup_{i = 1}^\infty E_i \subset \bigcup_{i = 1}^\infty \bigcup_{j = 1}^\infty U_{ij}
-                ,\]</span> and each <span class="math inline">\(|U_{ij}| &lt; \delta\)</span>. Because it is a valid <span class="math inline">\(\delta\)</span>-cover, <span class="math display">\[
-                 \mathcal{H}^s_\delta \left( \bigcup_{i = 1}^\infty E_i \right) \le \sum_{i = 1}^\infty \sum_{j = 1}^\infty |U_{ij}|^s = \sum_{i = 1}^\infty \mathcal{H}^s_\delta(E_i)
-                ,\]</span> and taking <span class="math inline">\(\delta \to 0^+\)</span> gives <span class="math display">\[
-                \mathcal{H}^s \left( \bigcup_{i = 1}^\infty E_i \right) \le \sum_{i = 1}^\infty \mathcal{H}^s (E_i)
+                <li>The diameter of a set is strictly nonnegative. Since
+                the Hausdorff measure is a sum of powers of diameters,
+                it also must be strictly nonnegative.</li>
+                <li>Observe that <span
+                class="math inline">\(\emptyset\)</span> is always a
+                <span class="math inline">\(\delta\)</span>-cover for
+                <span class="math inline">\(\emptyset\)</span>,
+                independent of <span
+                class="math inline">\(\delta\)</span>. The value for the
+                measure using this <span
+                class="math inline">\(\delta\)</span>-cover is <span
+                class="math inline">\(0\)</span>, but since the measure
+                is strictly nonnegative, this must be the infimum value,
+                so <span class="math inline">\(\mathcal{H}^s_{\delta}
+                (\emptyset) = 0\)</span>. Taking <span
+                class="math inline">\(\delta \to 0^+\)</span>, we get
+                that <span class="math inline">\(\mathcal{H}^s
+                (\emptyset) = 0\)</span>.</li>
+                <li>We wish to show that for any fixed <span
+                class="math inline">\(\delta &gt; 0\)</span>, <span
+                class="math display">\[
+                \mathcal{H}^s_\delta \left( \bigcup_{i = 1}^\infty E_i
+                \right) \le \sum_{i = 1}^\infty \mathcal{H}^s _\delta
+                (E_i)
+                .\]</span> Suppose the infima <span
+                class="math inline">\(\delta\)</span>-covers for each
+                <span class="math inline">\(E_i\)</span> are given by
+                <span class="math inline">\(\{ U_{ij} \}_{j =
+                1}^\infty\)</span>, so that <span
+                class="math display">\[
+                \sum_{i = 1}^\infty \mathcal{H}^s_\delta (E_i) = \sum_{i
+                = 1}^\infty \sum_{j = 1}^\infty |U_{ij}|^s
+                .\]</span> Observe, however, that <span
+                class="math inline">\(\{ U_{ij} \}_{i,j =
+                1}^\infty\)</span> is also a <span
+                class="math inline">\(\delta\)</span>-cover for <span
+                class="math inline">\(\bigcup_i E_i\)</span>, since
+                <span class="math display">\[
+                \bigcup_{i = 1}^\infty E_i \subset \bigcup_{i =
+                1}^\infty \bigcup_{j = 1}^\infty U_{ij}
+                ,\]</span> and each <span class="math inline">\(|U_{ij}|
+                &lt; \delta\)</span>. Because it is a valid <span
+                class="math inline">\(\delta\)</span>-cover, <span
+                class="math display">\[
+                \mathcal{H}^s_\delta \left( \bigcup_{i = 1}^\infty E_i
+                \right) \le \sum_{i = 1}^\infty \sum_{j = 1}^\infty
+                |U_{ij}|^s = \sum_{i = 1}^\infty
+                \mathcal{H}^s_\delta(E_i)
+                ,\]</span> and taking <span class="math inline">\(\delta
+                \to 0^+\)</span> gives <span class="math display">\[
+                \mathcal{H}^s \left( \bigcup_{i = 1}^\infty E_i \right)
+                \le \sum_{i = 1}^\infty \mathcal{H}^s (E_i)
                 ,\]</span> which is what we wished to show.</li>
                 </ol>
                 </div>
                 </details>
-                <p>There are also some very intuitive volume-like properties to the Hausdorff measure:</p>
+                <p>There are also some very intuitive volume-like
+                properties to the Hausdorff measure:</p>
                 <div id="problem215" class="black-box">
-                <p><strong>Problem 2.1.5.</strong> Let <span class="math inline">\(E \subset \mathbb{R}^n\)</span> and <span class="math inline">\(0 &lt; c \in \mathbb{R}\)</span>. Then, let <span class="math inline">\(E&#39;\)</span> be <span class="math inline">\(E\)</span> scaled by <span class="math inline">\(c\)</span>, that is, <span class="math inline">\(E&#39; := \{ cx : x \in E \}\)</span>. Show that for all <span class="math inline">\(s\)</span>, <span class="math display">\[
+                <p><strong>Problem 2.1.5.</strong> Let <span
+                class="math inline">\(E \subset \mathbb{R}^n\)</span>
+                and <span class="math inline">\(0 &lt; c \in
+                \mathbb{R}\)</span>. Then, let <span
+                class="math inline">\(E&#39;\)</span> be <span
+                class="math inline">\(E\)</span> scaled by <span
+                class="math inline">\(c\)</span>, that is, <span
+                class="math inline">\(E&#39; := \{ cx : x \in E
+                \}\)</span>. Show that for all <span
+                class="math inline">\(s\)</span>, <span
+                class="math display">\[
                     \mathcal{H}^s (E&#39;) = c^s \mathcal{H}^s(E)
                 .\]</span></p>
                 </div>
                 <details class="solution">
-                <summary>Solution 2.1.5.</summary>
+                <summary>
+                Solution 2.1.5.
+                </summary>
                 <div class="solution-contents">
-                <p>Observe that there is a bijection between the <span class="math inline">\(\delta\)</span>-covers of <span class="math inline">\(E\)</span> and the <span class="math inline">\(c\delta\)</span>-covers of <span class="math inline">\(E&#39;\)</span>. For every <span class="math inline">\(\delta\)</span>-cover <span class="math inline">\(\{ U_i \}_i\)</span> of <span class="math inline">\(E\)</span>, we recover a unique, valid <span class="math inline">\(c\delta\)</span>-cover <span class="math inline">\(\{ U&#39;_i \}_i\)</span>, where <span class="math display">\[
+                <p>Observe that there is a bijection between the <span
+                class="math inline">\(\delta\)</span>-covers of <span
+                class="math inline">\(E\)</span> and the <span
+                class="math inline">\(c\delta\)</span>-covers of <span
+                class="math inline">\(E&#39;\)</span>. For every <span
+                class="math inline">\(\delta\)</span>-cover <span
+                class="math inline">\(\{ U_i \}_i\)</span> of <span
+                class="math inline">\(E\)</span>, we recover a unique,
+                valid <span class="math inline">\(c\delta\)</span>-cover
+                <span class="math inline">\(\{ U&#39;_i \}_i\)</span>,
+                where <span class="math display">\[
                     U&#39;_i = \{ cu : u \in U_i \}
-                .\]</span> We also have an inverse mapping (take <span class="math inline">\(U&#39;_i\)</span> to <span class="math inline">\(U_i\)</span> by scaling down by <span class="math inline">\(c\)</span>), so this is bijective. We can prove that the diameter of each <span class="math inline">\(U&#39;_i\)</span> is valid, as <span class="math display">\[\begin{align*}
-                    |U&#39;_i| &amp;= \sup_{a, b \in U&#39;_i} |a - b| \\
+                .\]</span> We also have an inverse mapping (take <span
+                class="math inline">\(U&#39;_i\)</span> to <span
+                class="math inline">\(U_i\)</span> by scaling down by
+                <span class="math inline">\(c\)</span>), so this is
+                bijective. We can prove that the diameter of each <span
+                class="math inline">\(U&#39;_i\)</span> is valid, as
+                <span class="math display">\[\begin{align*}
+                    |U&#39;_i| &amp;= \sup_{a, b \in U&#39;_i} |a - b|
+                \\
                     &amp;= \sup_{a, b \in U_i} |ca - cb| \\
                     &amp;= c\sup_{a, b \in U_i} |a - b| \\
                     &amp;= c|U_i| &lt; c \delta
-                .\end{align*}\]</span> Mapping each <span class="math inline">\(U_i\)</span> to <span class="math inline">\(U&#39;_i\)</span> gives us that <span class="math inline">\(\mathcal{H}^s_{c \delta} (E&#39;) \le c^s \mathcal{H}^s_\delta (E)\)</span>, and the inverse mapping gives <span class="math inline">\(\mathcal{H}^s_\delta (E) \le c^{-s} \mathcal{H}^s_{c \delta} (E&#39;)\)</span>. Combining these gives <span class="math inline">\(\mathcal{H}^s_{c \delta} (E&#39;) = c^s \mathcal{H}^s_\delta (E)\)</span>, and taking the limit as <span class="math inline">\(\delta \to 0^+\)</span> gives <span class="math inline">\(\mathcal{H}^s (E&#39;) = c^s \mathcal{H}^s(E)\)</span>.</p>
+                .\end{align*}\]</span> Mapping each <span
+                class="math inline">\(U_i\)</span> to <span
+                class="math inline">\(U&#39;_i\)</span> gives us that
+                <span class="math inline">\(\mathcal{H}^s_{c \delta}
+                (E&#39;) \le c^s \mathcal{H}^s_\delta (E)\)</span>, and
+                the inverse mapping gives <span
+                class="math inline">\(\mathcal{H}^s_\delta (E) \le
+                c^{-s} \mathcal{H}^s_{c \delta} (E&#39;)\)</span>.
+                Combining these gives <span
+                class="math inline">\(\mathcal{H}^s_{c \delta} (E&#39;)
+                = c^s \mathcal{H}^s_\delta (E)\)</span>, and taking the
+                limit as <span class="math inline">\(\delta \to
+                0^+\)</span> gives <span
+                class="math inline">\(\mathcal{H}^s (E&#39;) = c^s
+                \mathcal{H}^s(E)\)</span>.</p>
                 </div>
                 </details>
                 <div id="problem216" class="black-box">
-                <p><strong>Problem 2.1.6.</strong> Let <span class="math inline">\(E \subset \mathbb{R}^n\)</span> and <span class="math inline">\(x \in \mathbb{R}^n\)</span>. Let <span class="math inline">\(E&#39; = E + x = \{ e + x : e \in E \}\)</span>. Show that for all <span class="math inline">\(s\)</span>, <span class="math inline">\(\mathcal{H}^s (E) = \mathcal{H}^s (E&#39;)\)</span>.</p>
+                <p><strong>Problem 2.1.6.</strong> Let <span
+                class="math inline">\(E \subset \mathbb{R}^n\)</span>
+                and <span class="math inline">\(x \in
+                \mathbb{R}^n\)</span>. Let <span
+                class="math inline">\(E&#39; = E + x = \{ e + x : e \in
+                E \}\)</span>. Show that for all <span
+                class="math inline">\(s\)</span>, <span
+                class="math inline">\(\mathcal{H}^s (E) = \mathcal{H}^s
+                (E&#39;)\)</span>.</p>
                 </div>
                 <details class="solution">
-                <summary>Solution 2.1.6.</summary>
+                <summary>
+                Solution 2.1.6.
+                </summary>
                 <div class="solution-contents">
-                <p>Observe that there is a bijection between the <span class="math inline">\(\delta\)</span>-covers of <span class="math inline">\(E\)</span> and <span class="math inline">\(E&#39;\)</span>. Namely, if one is given a <span class="math inline">\(\delta\)</span>-cover <span class="math inline">\(\{ U_i \}_i\)</span> of <span class="math inline">\(E\)</span>, we recover a unique, valid <span class="math inline">\(\delta\)</span>-cover <span class="math inline">\(\{ U&#39;_i \}_i\)</span>, where <span class="math display">\[
+                <p>Observe that there is a bijection between the <span
+                class="math inline">\(\delta\)</span>-covers of <span
+                class="math inline">\(E\)</span> and <span
+                class="math inline">\(E&#39;\)</span>. Namely, if one is
+                given a <span
+                class="math inline">\(\delta\)</span>-cover <span
+                class="math inline">\(\{ U_i \}_i\)</span> of <span
+                class="math inline">\(E\)</span>, we recover a unique,
+                valid <span class="math inline">\(\delta\)</span>-cover
+                <span class="math inline">\(\{ U&#39;_i \}_i\)</span>,
+                where <span class="math display">\[
                     U&#39;_i = \{ u + x : u \in U_i \}
-                .\]</span> Clearly this mapping is invertible (switch the plus for a minus), so it's also bijective. It is also trivial to show that the diameter of each <span class="math inline">\(U&#39;_i\)</span> remains the same under shifting, as <span class="math display">\[\begin{align*}
-                    |U&#39;_i| &amp;= \sup_{a, b \in U&#39;_i} |a - b| \\
+                .\]</span> Clearly this mapping is invertible (switch
+                the plus for a minus), so it's also bijective. It is
+                also trivial to show that the diameter of each <span
+                class="math inline">\(U&#39;_i\)</span> remains the same
+                under shifting, as <span
+                class="math display">\[\begin{align*}
+                    |U&#39;_i| &amp;= \sup_{a, b \in U&#39;_i} |a - b|
+                \\
                     &amp;= \sup_{a, b \in U_i} |(a + x) - (b + x)| \\
                     &amp;= \sup_{a, b \in U_i} |a - b| \\
                     &amp;= |U_i|
-                .\end{align*}\]</span> Because there is a mapping from each <span class="math inline">\(\delta\)</span>-cover of <span class="math inline">\(E\)</span> to <span class="math inline">\(E&#39;\)</span>, we can tell that <span class="math inline">\(\mathcal{H}^s_\delta (E&#39;) \le \mathcal{H}^s_\delta (E)\)</span>, but since map goes the other way as well, we have <span class="math inline">\(\mathcal{H}^s_\delta (E) \le \mathcal{H}^s_\delta (E&#39;)\)</span>. This implies that <span class="math inline">\(\mathcal{H}^s_\delta(E) = \mathcal{H}^s_\delta (E&#39;)\)</span>, and taking <span class="math inline">\(\delta \to 0^+\)</span> gives <span class="math inline">\(\mathcal{H}^s (E) = \mathcal{H}^s (E&#39;)\)</span>.</p>
+                .\end{align*}\]</span> Because there is a mapping from
+                each <span class="math inline">\(\delta\)</span>-cover
+                of <span class="math inline">\(E\)</span> to <span
+                class="math inline">\(E&#39;\)</span>, we can tell that
+                <span class="math inline">\(\mathcal{H}^s_\delta
+                (E&#39;) \le \mathcal{H}^s_\delta (E)\)</span>, but
+                since map goes the other way as well, we have <span
+                class="math inline">\(\mathcal{H}^s_\delta (E) \le
+                \mathcal{H}^s_\delta (E&#39;)\)</span>. This implies
+                that <span class="math inline">\(\mathcal{H}^s_\delta(E)
+                = \mathcal{H}^s_\delta (E&#39;)\)</span>, and taking
+                <span class="math inline">\(\delta \to 0^+\)</span>
+                gives <span class="math inline">\(\mathcal{H}^s (E) =
+                \mathcal{H}^s (E&#39;)\)</span>.</p>
                 </div>
                 </details>
-                <p>Earlier, we explored how the outer measure varied with respect to <span class="math inline">\(\delta\)</span>, and now we shall explore the <span class="math inline">\(s\)</span> parameter that has sort of just been hanging out until now.</p>
+                <p>Earlier, we explored how the outer measure varied
+                with respect to <span
+                class="math inline">\(\delta\)</span>, and now we shall
+                explore the <span class="math inline">\(s\)</span>
+                parameter that has sort of just been hanging out until
+                now.</p>
                 <div id="problem217" class="black-box">
-                <p><strong>Problem 2.1.7.</strong> For <span class="math inline">\(0 &lt; r &lt; s\)</span> and <span class="math inline">\(E \subset \mathbb{R}^n\)</span>, prove the following:</p>
+                <p><strong>Problem 2.1.7.</strong> For <span
+                class="math inline">\(0 &lt; r &lt; s\)</span> and <span
+                class="math inline">\(E \subset \mathbb{R}^n\)</span>,
+                prove the following:</p>
                 <ol type="1">
-                <li><span class="math inline">\(\mathcal{H}^r (E) \ge \mathcal{H}^s (E)\)</span>.</li>
-                <li>If <span class="math inline">\(\mathcal{H}^r (E) &lt; \infty\)</span>, then <span class="math inline">\(\mathcal{H}^s (E) = 0\)</span>.</li>
+                <li><span class="math inline">\(\mathcal{H}^r (E) \ge
+                \mathcal{H}^s (E)\)</span>.</li>
+                <li>If <span class="math inline">\(\mathcal{H}^r (E)
+                &lt; \infty\)</span>, then <span
+                class="math inline">\(\mathcal{H}^s (E) =
+                0\)</span>.</li>
                 </ol>
                 </div>
                 <details class="solution">
-                <summary>Solution 2.1.7.</summary>
+                <summary>
+                Solution 2.1.7.
+                </summary>
                 <div class="solution-contents">
                 <ol type="1">
-                <li>Take <span class="math inline">\(0 &lt; \delta &lt; 1\)</span> and consider any <span class="math inline">\(\delta\)</span>-cover of <span class="math inline">\(E\)</span>. Because <span class="math inline">\(0 \le |U_i| &lt; \delta\)</span>, concavity tells us that <span class="math inline">\(|U_i|^s \le |U_i|^r\)</span>, and thus <span class="math display">\[
-                     \sum_{i = 1}^\infty |U_i|^s \le \sum_{i = 1}^\infty |U_i|^r
-                 \]</span> for all <span class="math inline">\(\delta\)</span>-covers. Thus, <span class="math inline">\(\mathcal{H}^r_\delta (E) \ge  \mathcal{H}^s_\delta (E)\)</span> and taking <span class="math inline">\(\delta \to 0^+\)</span> yields <span class="math inline">\(\mathcal{H}^r (E) \ge \mathcal{H}^s (E)\)</span>.</li>
-                <li><p>Suppose <span class="math inline">\(\{ U_i \}_i\)</span> denotes the infima <span class="math inline">\(\delta\)</span>-cover (where once again <span class="math inline">\(0 &lt; \delta &lt; 1\)</span>) for <span class="math inline">\(\mathcal{H}^r_\delta (E)\)</span>. From Problem 2.1.3, we know that <span class="math inline">\(\mathcal{H}^r_\delta(E) \le \mathcal{H}^r(E)\)</span>, so <span class="math inline">\(\mathcal{H}^r_\delta(E)\)</span> must be finite.</p>
-                <p>Let's now inspect <span class="math inline">\(\mathcal{H}^s_\delta (E)\)</span> with the same <span class="math inline">\(\delta\)</span>-cover. Observe that <span class="math display">\[\begin{align*}
-                     0 \le \mathcal{H}^s_\delta(E) &amp;= \sum_i |U_i|^s \\
+                <li><p>Take <span class="math inline">\(0 &lt; \delta
+                &lt; 1\)</span> and consider any <span
+                class="math inline">\(\delta\)</span>-cover of <span
+                class="math inline">\(E\)</span>. Because <span
+                class="math inline">\(0 \le |U_i| &lt; \delta\)</span>,
+                concavity tells us that <span
+                class="math inline">\(|U_i|^s \le |U_i|^r\)</span>, and
+                thus <span class="math display">\[
+                     \sum_{i = 1}^\infty |U_i|^s \le \sum_{i = 1}^\infty
+                |U_i|^r
+                \]</span> for all <span
+                class="math inline">\(\delta\)</span>-covers. Thus,
+                <span class="math inline">\(\mathcal{H}^r_\delta (E)
+                \ge  \mathcal{H}^s_\delta (E)\)</span> and taking <span
+                class="math inline">\(\delta \to 0^+\)</span> yields
+                <span class="math inline">\(\mathcal{H}^r (E) \ge
+                \mathcal{H}^s (E)\)</span>.</p></li>
+                <li><p>Suppose <span class="math inline">\(\{ U_i
+                \}_i\)</span> denotes the infima <span
+                class="math inline">\(\delta\)</span>-cover (where once
+                again <span class="math inline">\(0 &lt; \delta &lt;
+                1\)</span>) for <span
+                class="math inline">\(\mathcal{H}^r_\delta (E)\)</span>.
+                From Problem 2.1.3, we know that <span
+                class="math inline">\(\mathcal{H}^r_\delta(E) \le
+                \mathcal{H}^r(E)\)</span>, so <span
+                class="math inline">\(\mathcal{H}^r_\delta(E)\)</span>
+                must be finite.</p>
+                <p>Let's now inspect <span
+                class="math inline">\(\mathcal{H}^s_\delta (E)\)</span>
+                with the same <span
+                class="math inline">\(\delta\)</span>-cover. Observe
+                that <span class="math display">\[\begin{align*}
+                     0 \le \mathcal{H}^s_\delta(E) &amp;= \sum_i |U_i|^s
+                \\
                      &amp;\le \delta^{s - r} \sum_i |U_i|^r \\
                      &amp;= \delta^{s - r} \mathcal{H}^r_\delta (E)
-                 .\end{align*}\]</span> Taking the limit on both sides returns <span class="math display">\[
-                     0 \le \lim_{\delta \to 0^+} \mathcal{H}^s_\delta(E) \le \lim_{\delta \to 0^+} \delta^{s - r} \mathcal{H}^r_\delta(E) = 0
-                 ,\]</span> so we see that finiteness and <span class="math inline">\(s - r &gt; 0\)</span> imply <span class="math inline">\(\mathcal{H}^s(E) = 0\)</span>.</p></li>
+                .\end{align*}\]</span> Taking the limit on both sides
+                returns <span class="math display">\[
+                     0 \le \lim_{\delta \to 0^+} \mathcal{H}^s_\delta(E)
+                \le \lim_{\delta \to 0^+} \delta^{s - r}
+                \mathcal{H}^r_\delta(E) = 0
+                ,\]</span> so we see that finiteness and <span
+                class="math inline">\(s - r &gt; 0\)</span> imply <span
+                class="math inline">\(\mathcal{H}^s(E) =
+                0\)</span>.</p></li>
                 </ol>
                 </div>
                 </details>
-                <p>This property tells us that there is a critical value for which the Hausdorff measure jumps from an infinite value to a finite (potentially nonzero value). In particular, if we were to fix a set <span class="math inline">\(U\)</span> and graph <span class="math inline">\(\mathcal{H}^s (U)\)</span> while varying <span class="math inline">\(s\)</span>, we would obtain the graph below:</p>
+                <p>This property tells us that there is a critical value
+                for which the Hausdorff measure jumps from an infinite
+                value to a finite (potentially nonzero value). In
+                particular, if we were to fix a set <span
+                class="math inline">\(U\)</span> and graph <span
+                class="math inline">\(\mathcal{H}^s (U)\)</span> while
+                varying <span class="math inline">\(s\)</span>, we would
+                obtain the graph below:</p>
                 <p><img src="./diagrams/hausdorffmeasure.svg" /></p>
                 <p>This leads to the all-important definition:</p>
-                <p><strong>Definition.</strong> The value of <span class="math inline">\(s\)</span> for which <span class="math inline">\(\mathcal{H}^s (U)\)</span> jumps from infinity to a finite value is called the <strong>Hausdorff dimension</strong> of <span class="math inline">\(U\)</span>. Formally, <span class="math display">\[\begin{align*}
-                    \dim U &amp;:= \sup \{ s : \mathcal{H}^s (U) = \infty \} \\
+                <p><strong>Definition.</strong> The value of <span
+                class="math inline">\(s\)</span> for which <span
+                class="math inline">\(\mathcal{H}^s (U)\)</span> jumps
+                from infinity to a finite value is called the
+                <strong>Hausdorff dimension</strong> of <span
+                class="math inline">\(U\)</span>. Formally, <span
+                class="math display">\[\begin{align*}
+                    \dim U &amp;:= \sup \{ s : \mathcal{H}^s (U) =
+                \infty \} \\
                     &amp;= \inf \{ s : \mathcal{H}^s (U) = 0 \}
                 .\end{align*}\]</span></p>
-                <h2 id="understanding-the-hausdorff-measure">Understanding the Hausdorff Measure</h2>
-                <p>Now that we've showed the Hausdorff is well-defined and has some particular properties, including the very appealing ability to uniquely attribute a dimension to any subset of <span class="math inline">\(\mathbb{R}^n\)</span>, we're in great shape to start applying it to fractals. Before we do that, however, we should consider some examples and work with the measure outside of how the problems guide us to give us a better intuition of what we've proved and why.</p>
-                <p>Let's first consider the following: <strong>it is trivial to get upper bounds on the Hausdorff measure but very hard to get lower bounds</strong>. Indeed, if I give you any <span class="math inline">\(\delta\)</span>-cover of a set <span class="math inline">\(E\)</span>, compute the sum of <span class="math inline">\(s\)</span> powers of each element, and take <span class="math inline">\(\delta \to 0^+\)</span>, we cannot say that the Hausdorff measure is what I've computed. The Hausdorff measure takes the infimum over all <span class="math inline">\(\delta\)</span>-covers, meaning that at most I can say the measure is less than or equal to what I've computed. This tells us an upper bound, but not a lower bound.</p>
-                <p>There is one exception to this case, however. If we can prove that <span class="math inline">\(\mathcal{H}^s(E) \le 0\)</span>, nonnegativity tells us that <span class="math inline">\(\mathcal{H}^s(E)\)</span> must be identically <span class="math inline">\(0\)</span>.</p>
-                <p>Another thing that I found hard to understand during the contest before doing any concrete examples was how the Hausdorff dimension and the behavior around it actually arose. So, let's take a concrete example of trying to compute the Hausdorff measure of <span class="math inline">\([0, 1]\)</span>.</p>
-                <p>Consider the <span class="math inline">\(\delta\)</span>-covering where we take intervals of length <span class="math inline">\(\delta / 2\)</span>, resulting in <span class="math inline">\(2 / \delta\)</span> total intervals. Thus, <span class="math display">\[
-                    \mathcal{H}^s_{\delta} ([0, 1]) \approx \sum_{i = 1}^\infty |U_i|^s = \left( \frac{\delta}{2} \right)^s \cdot \frac{2}{\delta} = C \delta^{s - 1}
-                ,\]</span> for some constant <span class="math inline">\(C\)</span>. Taking <span class="math inline">\(\delta\)</span> to be very small, we see that the measure is infinite for <span class="math inline">\(s &lt; 1\)</span> (because then the exponent is negative), finite for <span class="math inline">\(s = 1\)</span>, and <span class="math inline">\(0\)</span> for <span class="math inline">\(s &gt; 1\)</span>. Thus, as we would expect, the dimension of the interval is <span class="math inline">\(1\)</span>. Of course, this isn't rigorous at all since we haven't proven that our <span class="math inline">\(\delta\)</span>-cover is the most optimal one, but the intuition still holds.</p>
-                <p>Further, we actually can glean something from this argument. Remember when I said that if we can show an upper bound of <span class="math inline">\(0\)</span>, we have a definite value for the Hausdorff measure? If we take <span class="math inline">\(s &gt; 1\)</span>, we get exactly this. So, we can say rigorously that <span class="math inline">\(\mathcal{H}^s([0, 1]) = 0\)</span> for <span class="math inline">\(s &gt; 1\)</span>. This alone doesn't tell us that <span class="math inline">\(\dim [0, 1] = 1\)</span>, but it does tell us that <span class="math inline">\(\dim[0, 1] \le 1\)</span>, which is very useful.</p>
+                <h2
+                id="understanding-the-hausdorff-measure">Understanding
+                the Hausdorff Measure</h2>
+                <p>Now that we've showed the Hausdorff is well-defined
+                and has some particular properties, including the very
+                appealing ability to uniquely attribute a dimension to
+                any subset of <span
+                class="math inline">\(\mathbb{R}^n\)</span>, we're in
+                great shape to start applying it to fractals. Before we
+                do that, however, we should consider some examples and
+                work with the measure outside of how the problems guide
+                us to give us a better intuition of what we've proved
+                and why.</p>
+                <p>Let's first consider the following: <strong>it is
+                trivial to get upper bounds on the Hausdorff measure but
+                very hard to get lower bounds</strong>. Indeed, if I
+                give you any <span
+                class="math inline">\(\delta\)</span>-cover of a set
+                <span class="math inline">\(E\)</span>, compute the sum
+                of <span class="math inline">\(s\)</span> powers of each
+                element, and take <span class="math inline">\(\delta \to
+                0^+\)</span>, we cannot say that the Hausdorff measure
+                is what I've computed. The Hausdorff measure takes the
+                infimum over all <span
+                class="math inline">\(\delta\)</span>-covers, meaning
+                that at most I can say the measure is less than or equal
+                to what I've computed. This tells us an upper bound, but
+                not a lower bound.</p>
+                <p>There is one exception to this case, however. If we
+                can prove that <span
+                class="math inline">\(\mathcal{H}^s(E) \le 0\)</span>,
+                nonnegativity tells us that <span
+                class="math inline">\(\mathcal{H}^s(E)\)</span> must be
+                identically <span class="math inline">\(0\)</span>.</p>
+                <p>Another thing that I found hard to understand during
+                the contest before doing any concrete examples was how
+                the Hausdorff dimension and the behavior around it
+                actually arose. So, let's take a concrete example of
+                trying to compute the Hausdorff measure of <span
+                class="math inline">\([0, 1]\)</span>.</p>
+                <p>Consider the <span
+                class="math inline">\(\delta\)</span>-covering where we
+                take intervals of length <span
+                class="math inline">\(\delta / 2\)</span>, resulting in
+                <span class="math inline">\(2 / \delta\)</span> total
+                intervals. Thus, <span class="math display">\[
+                    \mathcal{H}^s_{\delta} ([0, 1]) \approx \sum_{i =
+                1}^\infty |U_i|^s = \left( \frac{\delta}{2} \right)^s
+                \cdot \frac{2}{\delta} = C \delta^{s - 1}
+                ,\]</span> for some constant <span
+                class="math inline">\(C\)</span>. Taking <span
+                class="math inline">\(\delta\)</span> to be very small,
+                we see that the measure is infinite for <span
+                class="math inline">\(s &lt; 1\)</span> (because then
+                the exponent is negative), finite for <span
+                class="math inline">\(s = 1\)</span>, and <span
+                class="math inline">\(0\)</span> for <span
+                class="math inline">\(s &gt; 1\)</span>. Thus, as we
+                would expect, the dimension of the interval is <span
+                class="math inline">\(1\)</span>. Of course, this isn't
+                rigorous at all since we haven't proven that our <span
+                class="math inline">\(\delta\)</span>-cover is the most
+                optimal one, but the intuition still holds.</p>
+                <p>Further, we actually can glean something from this
+                argument. Remember when I said that if we can show an
+                upper bound of <span class="math inline">\(0\)</span>,
+                we have a definite value for the Hausdorff measure? If
+                we take <span class="math inline">\(s &gt; 1\)</span>,
+                we get exactly this. So, we can say rigorously that
+                <span class="math inline">\(\mathcal{H}^s([0, 1]) =
+                0\)</span> for <span class="math inline">\(s &gt;
+                1\)</span>. This alone doesn't tell us that <span
+                class="math inline">\(\dim [0, 1] = 1\)</span>, but it
+                does tell us that <span class="math inline">\(\dim[0, 1]
+                \le 1\)</span>, which is very useful.</p>
                 <div id="problem218" class="black-box">
-                <p><strong>Problem 2.1.8.</strong> Prove that if <span class="math inline">\(E \subset \mathbb{R}^n\)</span>, then <span class="math inline">\(\dim E \le n\)</span>.</p>
+                <p><strong>Problem 2.1.8.</strong> Prove that if <span
+                class="math inline">\(E \subset \mathbb{R}^n\)</span>,
+                then <span class="math inline">\(\dim E \le
+                n\)</span>.</p>
                 </div>
                 <details class="solution">
-                <summary>Solution 2.1.8.</summary>
+                <summary>
+                Solution 2.1.8.
+                </summary>
                 <div class="solution-contents">
-                <p>By <a href="#problem203">Problem 2.0.3</a>, <span class="math inline">\(E \subset \mathbb{R}^n\)</span> gives us <span class="math inline">\(\mathcal{H}^s (E) \le \mathcal{H}^s (\mathbb{R}^n)\)</span>. We then have the following claim:</p>
-                <p><strong>Claim.</strong> For <span class="math inline">\(s &gt; n\)</span>, <span class="math inline">\(\mathcal{H}^s (\mathbb{R}^n) = 0\)</span>.</p>
-                <p>Let's first consider <span class="math inline">\(\mathcal{H}^s_\delta ([-R, R]^n)\)</span> and tile it using <span class="math inline">\(n\)</span>-dimensional cubes of side length <span class="math inline">\(\delta / 2\)</span>. By the Pythagorean identity, the cubes have a diameter of <span class="math inline">\(\delta \sqrt{n} / 2\)</span>, computing the measure then yields <span class="math display">\[\begin{align*}
-                    \mathcal{H}^s_\delta ([-R, R]^n) &amp;\le \sum_i |U_i|^s \\
-                    &amp;= \left(\frac{2 R}{\delta / 2} \right)^n \cdot (\delta \sqrt{n} / 2)^s \\
+                <p>By <a href="#problem203">Problem 2.0.3</a>, <span
+                class="math inline">\(E \subset \mathbb{R}^n\)</span>
+                gives us <span class="math inline">\(\mathcal{H}^s (E)
+                \le \mathcal{H}^s (\mathbb{R}^n)\)</span>. We then have
+                the following claim:</p>
+                <p><strong>Claim.</strong> For <span
+                class="math inline">\(s &gt; n\)</span>, <span
+                class="math inline">\(\mathcal{H}^s (\mathbb{R}^n) =
+                0\)</span>.</p>
+                <p>Let's first consider <span
+                class="math inline">\(\mathcal{H}^s_\delta ([-R,
+                R]^n)\)</span> and tile it using <span
+                class="math inline">\(n\)</span>-dimensional cubes of
+                side length <span class="math inline">\(\delta /
+                2\)</span>. By the Pythagorean identity, the cubes have
+                a diameter of <span class="math inline">\(\delta
+                \sqrt{n} / 2\)</span>, computing the measure then yields
+                <span class="math display">\[\begin{align*}
+                    \mathcal{H}^s_\delta ([-R, R]^n) &amp;\le \sum_i
+                |U_i|^s \\
+                    &amp;= \left(\frac{2 R}{\delta / 2} \right)^n \cdot
+                (\delta \sqrt{n} / 2)^s \\
                     &amp;= C \delta^{s - n}
-                ,\end{align*}\]</span> where <span class="math inline">\(C\)</span> is constant with respect to <span class="math inline">\(\delta\)</span>.</p>
-                <p>If we then take the limit as <span class="math inline">\(\delta \to 0^+\)</span>, we see that <span class="math display">\[\begin{align*}
-                    \mathcal{H}^s ([-R, R]^n) &amp;= \lim_{\delta \to 0^+} \mathcal{H}^s_\delta ([-R, R]^n) \\
+                ,\end{align*}\]</span> where <span
+                class="math inline">\(C\)</span> is constant with
+                respect to <span
+                class="math inline">\(\delta\)</span>.</p>
+                <p>If we then take the limit as <span
+                class="math inline">\(\delta \to 0^+\)</span>, we see
+                that <span class="math display">\[\begin{align*}
+                    \mathcal{H}^s ([-R, R]^n) &amp;= \lim_{\delta \to
+                0^+} \mathcal{H}^s_\delta ([-R, R]^n) \\
                     &amp;\le \lim_{\delta \to 0^+} C \delta^{s - n} = 0
-                ,\end{align*}\]</span> but since measures are nonnegative, <span class="math inline">\(\mathcal{H}^s ([-R, R]^n) = 0\)</span>. Taking the limit as <span class="math inline">\(R \to \infty\)</span>, we recover that <span class="math inline">\(\mathcal{H}^s (\mathbb{R}^n) = 0\)</span>. <span class="math inline">\(\blacksquare\)</span></p>
+                ,\end{align*}\]</span> but since measures are
+                nonnegative, <span class="math inline">\(\mathcal{H}^s
+                ([-R, R]^n) = 0\)</span>. Taking the limit as <span
+                class="math inline">\(R \to \infty\)</span>, we recover
+                that <span class="math inline">\(\mathcal{H}^s
+                (\mathbb{R}^n) = 0\)</span>. <span
+                class="math inline">\(\blacksquare\)</span></p>
                 <p>Now, denote <span class="math display">\[
                     N_A := \{ d \mid \mathcal{H}^d(A) = 0 \}
-                .\]</span> Using the above inequality and nonnegativity of measures yields <span class="math inline">\(0 \le \mathcal{H}^s (E) \le \mathcal{H}^s (\mathbb{R}^n)\)</span>, which tells us that <span class="math inline">\(\mathcal{H}^s (\mathbb{R}^n) = 0 \implies \mathcal{H}^s (E) = 0\)</span>. Thus, <span class="math inline">\(N_{\mathbb{R}^n} \subset N_E\)</span>. This implies that <span class="math display">\[
+                .\]</span> Using the above inequality and nonnegativity
+                of measures yields <span class="math inline">\(0 \le
+                \mathcal{H}^s (E) \le \mathcal{H}^s
+                (\mathbb{R}^n)\)</span>, which tells us that <span
+                class="math inline">\(\mathcal{H}^s (\mathbb{R}^n) = 0
+                \implies \mathcal{H}^s (E) = 0\)</span>. Thus, <span
+                class="math inline">\(N_{\mathbb{R}^n} \subset
+                N_E\)</span>. This implies that <span
+                class="math display">\[
                     \dim E = \inf N_E \le \inf N_{\mathbb{R}^n} \le n
                 .\]</span></p>
                 </div>
                 </details>
-                <p>We remark that the above problem is a special case of <span class="math inline">\(A \subset B \implies \dim A \le \dim B\)</span>, which should be intuitive.</p>
+                <p>We remark that the above problem is a special case of
+                <span class="math inline">\(A \subset B \implies \dim A
+                \le \dim B\)</span>, which should be intuitive.</p>
                 <div id="problem219" class="black-box">
-                <p><strong>Problem 2.1.9.</strong> Prove that <span class="math inline">\(\mathcal{H}^0\)</span> is simply the <a href="#problem202">counting measure</a>.</p>
+                <p><strong>Problem 2.1.9.</strong> Prove that <span
+                class="math inline">\(\mathcal{H}^0\)</span> is simply
+                the <a href="#problem202">counting measure</a>.</p>
                 </div>
                 <details class="solution">
-                <summary>Solution 2.1.9.</summary>
+                <summary>
+                Solution 2.1.9.
+                </summary>
                 <div class="solution-contents">
-                <p>In other words, we must show that <span class="math inline">\(\mathcal{H}^0 (E) = \#E\)</span> if <span class="math inline">\(E\)</span> is finite and <span class="math inline">\(\mathcal{H}^0 (E)\)</span> is infinite if <span class="math inline">\(E\)</span> is infinite.</p>
-                <p>First, let's consider the case when <span class="math inline">\(E\)</span> is finite. Since <span class="math inline">\(E\)</span> does not depend on <span class="math inline">\(\delta\)</span>, we can see that each <span class="math inline">\(U_i\)</span> in our limiting <span class="math inline">\(\delta\)</span>-cover must be singleton (otherwise we could always choose a small enough <span class="math inline">\(\delta\)</span> such that the diameter of <span class="math inline">\(U_i\)</span> would be too large). Thus, if <span class="math inline">\(E = \{ e_1, e_2, \ldots, e_k \}\)</span>, we can take <span class="math inline">\(U_i = \{ e_i \}\)</span> to obtain a measure of <span class="math inline">\(\mathcal{H}^0 (E) = k = \# E\)</span>.</p>
-                <p>For the case when <span class="math inline">\(E\)</span> is infinite, consider that <span class="math display">\[
+                <p>In other words, we must show that <span
+                class="math inline">\(\mathcal{H}^0 (E) = \#E\)</span>
+                if <span class="math inline">\(E\)</span> is finite and
+                <span class="math inline">\(\mathcal{H}^0 (E)\)</span>
+                is infinite if <span class="math inline">\(E\)</span> is
+                infinite.</p>
+                <p>First, let's consider the case when <span
+                class="math inline">\(E\)</span> is finite. Since <span
+                class="math inline">\(E\)</span> does not depend on
+                <span class="math inline">\(\delta\)</span>, we can see
+                that each <span class="math inline">\(U_i\)</span> in
+                our limiting <span
+                class="math inline">\(\delta\)</span>-cover must be
+                singleton (otherwise we could always choose a small
+                enough <span class="math inline">\(\delta\)</span> such
+                that the diameter of <span
+                class="math inline">\(U_i\)</span> would be too large).
+                Thus, if <span class="math inline">\(E = \{ e_1, e_2,
+                \ldots, e_k \}\)</span>, we can take <span
+                class="math inline">\(U_i = \{ e_i \}\)</span> to obtain
+                a measure of <span class="math inline">\(\mathcal{H}^0
+                (E) = k = \# E\)</span>.</p>
+                <p>For the case when <span
+                class="math inline">\(E\)</span> is infinite, consider
+                that <span class="math display">\[
                     \sum_{i} |U_i|^0 \ge \frac{|E|}{\delta}
-                ,\]</span> so if we take <span class="math inline">\(\delta \to 0^+\)</span>, the measure <span class="math inline">\(\mathcal{H}^0 (E) \to \infty\)</span>.</p>
+                ,\]</span> so if we take <span
+                class="math inline">\(\delta \to 0^+\)</span>, the
+                measure <span class="math inline">\(\mathcal{H}^0 (E)
+                \to \infty\)</span>.</p>
                 </div>
                 </details>
                 <p>With this, we're ready to tackle fractals.</p>
                 <h2 id="fractals">Fractals</h2>
-                <p>The fractals we consider in this section are the <a href="https://en.wikipedia.org/wiki/Cantor_set">Cantor set</a>, the <a href="https://en.wikipedia.org/wiki/Sierpi%C5%84ski_carpet">Sierpinksi carpet</a>, the <a href="https://en.wikipedia.org/wiki/Minkowski_sausage">Minkowski sausage</a> (many a jokes were made about this one), the <a href="https://en.wikipedia.org/wiki/Koch_snowflake">Koch curve</a>, and the <a href="https://en.wikipedia.org/wiki/Sierpi%C5%84ski_triangle">Sierpinksi triangle</a>.</p>
-                <p>What exactly do we mean when we talk of a fractal? Intuitively, a fractal is a set of points that is self-similar when we take copies, scale the copies down, translate them, and glue them together in some way. We make this intuition concrete with the idea of contractions and iterated function systems (IFSs).</p>
-                <p><strong>Definition.</strong> A function <span class="math inline">\(f : \mathbb{R}^n \to \mathbb{R}^n\)</span> is called a <strong>contraction</strong> if there exists some constant <span class="math inline">\(0 &lt; c &lt; 1\)</span> such that for every <span class="math inline">\(x, y \in \mathbb{R}^n\)</span>, <span class="math inline">\(|f(x) - f(y)| = c|x - y|\)</span>. The value <span class="math inline">\(c\)</span> is called the <strong>contraction ratio</strong> for <span class="math inline">\(f\)</span>.</p>
-                <p>Contractions take any set and make lengths between points less, shifting the points closer to eachother. This definition takes care of the scaling and translating part of fractals. The next definition handles the multiple copies part:</p>
-                <p><strong>Definition.</strong> An <strong>iterated function system</strong> (<strong>IFS</strong>) is a finite set of contractions <span class="math inline">\((f_1, f_2, \ldots, f_m)\)</span>, where <span class="math inline">\(m \ge 2\)</span>.</p>
-                <p>Each function has the same domain and codomain, but they can have differing contraction ratios.</p>
+                <p>The fractals we consider in this section are the <a
+                href="https://en.wikipedia.org/wiki/Cantor_set">Cantor
+                set</a>, the <a
+                href="https://en.wikipedia.org/wiki/Sierpi%C5%84ski_carpet">Sierpinksi
+                carpet</a>, the <a
+                href="https://en.wikipedia.org/wiki/Minkowski_sausage">Minkowski
+                sausage</a> (many a jokes were made about this one), the
+                <a
+                href="https://en.wikipedia.org/wiki/Koch_snowflake">Koch
+                curve</a>, and the <a
+                href="https://en.wikipedia.org/wiki/Sierpi%C5%84ski_triangle">Sierpinksi
+                triangle</a>.</p>
+                <p>What exactly do we mean when we talk of a fractal?
+                Intuitively, a fractal is a set of points that is
+                self-similar when we take copies, scale the copies down,
+                translate them, and glue them together in some way. We
+                make this intuition concrete with the idea of
+                contractions and iterated function systems (IFSs).</p>
+                <p><strong>Definition.</strong> A function <span
+                class="math inline">\(f : \mathbb{R}^n \to
+                \mathbb{R}^n\)</span> is called a
+                <strong>contraction</strong> if there exists some
+                constant <span class="math inline">\(0 &lt; c &lt;
+                1\)</span> such that for every <span
+                class="math inline">\(x, y \in \mathbb{R}^n\)</span>,
+                <span class="math inline">\(|f(x) - f(y)| = c|x -
+                y|\)</span>. The value <span
+                class="math inline">\(c\)</span> is called the
+                <strong>contraction ratio</strong> for <span
+                class="math inline">\(f\)</span>.</p>
+                <p>Contractions take any set and make lengths between
+                points less, shifting the points closer to eachother.
+                This definition takes care of the scaling and
+                translating part of fractals. The next definition
+                handles the multiple copies part:</p>
+                <p><strong>Definition.</strong> An <strong>iterated
+                function system</strong> (<strong>IFS</strong>) is a
+                finite set of contractions <span
+                class="math inline">\((f_1, f_2, \ldots, f_m)\)</span>,
+                where <span class="math inline">\(m \ge 2\)</span>.</p>
+                <p>Each function has the same domain and codomain, but
+                they can have differing contraction ratios.</p>
                 <div id="problem401" class="black-box">
-                <p><strong>Problem 4.0.1.</strong> Let <span class="math inline">\(f\)</span> be a contraction in <span class="math inline">\(\mathbb{R}^n\)</span>. Denote <span class="math inline">\(f^{(k)}\)</span> to be <span class="math inline">\(f\)</span> composed with itself <span class="math inline">\(k\)</span> times.</p>
+                <p><strong>Problem 4.0.1.</strong> Let <span
+                class="math inline">\(f\)</span> be a contraction in
+                <span class="math inline">\(\mathbb{R}^n\)</span>.
+                Denote <span class="math inline">\(f^{(k)}\)</span> to
+                be <span class="math inline">\(f\)</span> composed with
+                itself <span class="math inline">\(k\)</span> times.</p>
                 <ol type="1">
-                <li>Show that for any <span class="math inline">\(x, y \in \mathbb{R}^n\)</span> and any <span class="math inline">\(\varepsilon &gt; 0\)</span>, there exists some <span class="math inline">\(k\)</span> such that <span class="math inline">\(|f^{(k)}(x) - f^{(k)}(y)| &lt; \varepsilon\)</span>.</li>
-                <li>Show that if one replaces the contraction assumption with the weaker <span class="math inline">\(|f(x) - f(y)| &lt; |x - y|\)</span> for <span class="math inline">\(x \ne y\)</span>, then there exists such functions with no fixed points (that is, no <span class="math inline">\(x\)</span> such that <span class="math inline">\(f(x) = x\)</span>).</li>
+                <li>Show that for any <span class="math inline">\(x, y
+                \in \mathbb{R}^n\)</span> and any <span
+                class="math inline">\(\varepsilon &gt; 0\)</span>, there
+                exists some <span class="math inline">\(k\)</span> such
+                that <span class="math inline">\(|f^{(k)}(x) -
+                f^{(k)}(y)| &lt; \varepsilon\)</span>.</li>
+                <li>Show that if one replaces the contraction assumption
+                with the weaker <span class="math inline">\(|f(x) -
+                f(y)| &lt; |x - y|\)</span> for <span
+                class="math inline">\(x \ne y\)</span>, then there
+                exists such functions with no fixed points (that is, no
+                <span class="math inline">\(x\)</span> such that <span
+                class="math inline">\(f(x) = x\)</span>).</li>
                 </ol>
                 </div>
                 <details class="solution">
-                <summary>Solution 4.0.1.</summary>
+                <summary>
+                Solution 4.0.1.
+                </summary>
                 <div class="solution-contents">
                 <ol type="1">
                 <li><p>First, we have the following claim:</p>
-                <p><strong>Claim.</strong> <span class="math inline">\(|f^{(k)} (x) - f^{(k)} (y) | = c^k |x - y|\)</span>.</p>
-                <p><em>Proof.</em> We will proceed by using induction. Obviously, the base case for when <span class="math inline">\(k = 1\)</span> is equivalent to the contraction condition on <span class="math inline">\(f(x)\)</span>.</p>
-                <p>Now, by our induction hypothesis, suppose that <span class="math inline">\(|f^{(m - 1)} (x) - f^{(m - 1)} (y) | = c^{m - 1} |x - y|\)</span>. Notice that, by contraction, <span class="math display">\[\begin{align*}
-                     |f^{(m)} (x) - f^{(m)} (y) | &amp;= |f(f^{(m - 1)} (x)) - f(f^{(m - 1)} (y))| \\
+                <p><strong>Claim.</strong> <span
+                class="math inline">\(|f^{(k)} (x) - f^{(k)} (y) | = c^k
+                |x - y|\)</span>.</p>
+                <p><em>Proof.</em> We will proceed by using induction.
+                Obviously, the base case for when <span
+                class="math inline">\(k = 1\)</span> is equivalent to
+                the contraction condition on <span
+                class="math inline">\(f(x)\)</span>.</p>
+                <p>Now, by our induction hypothesis, suppose that <span
+                class="math inline">\(|f^{(m - 1)} (x) - f^{(m - 1)} (y)
+                | = c^{m - 1} |x - y|\)</span>. Notice that, by
+                contraction, <span class="math display">\[\begin{align*}
+                     |f^{(m)} (x) - f^{(m)} (y) | &amp;= |f(f^{(m - 1)}
+                (x)) - f(f^{(m - 1)} (y))| \\
                      &amp;= c |f^{(m - 1)} (x) - f^{(m - 1)} (y) |
-                 .\end{align*}\]</span> But because of our induction hypothesis, we have <span class="math display">\[\begin{align*}
-                     c |f^{(m - 1)} (x) - f^{(m - 1)} (y) | &amp;= c \cdot c^{m - 1} |x - y| \\
+                .\end{align*}\]</span> But because of our induction
+                hypothesis, we have <span
+                class="math display">\[\begin{align*}
+                     c |f^{(m - 1)} (x) - f^{(m - 1)} (y) | &amp;= c
+                \cdot c^{m - 1} |x - y| \\
                      &amp;= c^m |x - y|
-                 .\end{align*}\]</span> Thus, induction holds. <span class="math inline">\(\blacksquare\)</span></p>
-                <p>Now, for any fixed <span class="math inline">\(x, y \in \mathbb{R}^n\)</span> and <span class="math inline">\(\varepsilon &gt; 0\)</span>, it suffices to choose a <span class="math inline">\(k\)</span> such that (if <span class="math inline">\(x = y\)</span> then the statement is trivially true, so we shall ignore this case) <span class="math display">\[
+                .\end{align*}\]</span> Thus, induction holds. <span
+                class="math inline">\(\blacksquare\)</span></p>
+                <p>Now, for any fixed <span class="math inline">\(x, y
+                \in \mathbb{R}^n\)</span> and <span
+                class="math inline">\(\varepsilon &gt; 0\)</span>, it
+                suffices to choose a <span
+                class="math inline">\(k\)</span> such that (if <span
+                class="math inline">\(x = y\)</span> then the statement
+                is trivially true, so we shall ignore this case) <span
+                class="math display">\[
                      c^k &lt; \frac{\varepsilon}{|x -y|}
-                 ,\]</span> which is equivalent to <span class="math inline">\(k &gt; \log \left( \frac{\varepsilon}{|x - y|} \right) / \log{c}\)</span>, which is valid because <span class="math inline">\(0 &lt; c &lt; 1\)</span>.</p></li>
-                <li><p>We claim that an example of such a function is <span class="math inline">\(f(x) = \sqrt{x^2 + 1}\)</span>, where <span class="math inline">\(f : \mathbb{R} \to \mathbb{R}\)</span>. First, we shall verify that this function satisfies weak contraction.</p>
-                <p><strong>Claim.</strong> For <span class="math inline">\(x \ne y\)</span>, <span class="math display">\[
+                ,\]</span> which is equivalent to <span
+                class="math inline">\(k &gt; \log \left(
+                \frac{\varepsilon}{|x - y|} \right) / \log{c}\)</span>,
+                which is valid because <span class="math inline">\(0
+                &lt; c &lt; 1\)</span>.</p></li>
+                <li><p>We claim that an example of such a function is
+                <span class="math inline">\(f(x) = \sqrt{x^2 +
+                1}\)</span>, where <span class="math inline">\(f :
+                \mathbb{R} \to \mathbb{R}\)</span>. First, we shall
+                verify that this function satisfies weak
+                contraction.</p>
+                <p><strong>Claim.</strong> For <span
+                class="math inline">\(x \ne y\)</span>, <span
+                class="math display">\[
                      |\sqrt{x^2 + 1} - \sqrt{y^2 + 1}| &lt; |x - y|
-                 .\]</span></p>
-                <p><em>Proof.</em> Squaring both sides, doing some algebra, and squaring again yields <span class="math display">\[\begin{align*}
-                     x^2 + 1 + y^2 + 1 - 2\sqrt{(x^2 + 1)(y^2 + 1)} &amp;&lt; x^2 + y^2 - 2xy \\
+                .\]</span></p>
+                <p><em>Proof.</em> Squaring both sides, doing some
+                algebra, and squaring again yields <span
+                class="math display">\[\begin{align*}
+                     x^2 + 1 + y^2 + 1 - 2\sqrt{(x^2 + 1)(y^2 + 1)}
+                &amp;&lt; x^2 + y^2 - 2xy \\
                      2 - 2 \sqrt{(x^2 + 1)(y^2 + 1)} &amp;&lt; -2xy \\
                      (x^2 + 1)(y^2 + 1) &amp;&gt; (xy + 1)^2
-                 .\end{align*}\]</span> But, <span class="math inline">\((x^2 + 1)(y^2 + 1) - (xy + 1)^2 = (x - y)^2\)</span>, which is strictly greater than <span class="math inline">\(0\)</span> for <span class="math inline">\(x \ne y\)</span>, so our function satisfies the weak contraction condition. <span class="math inline">\(\blacksquare\)</span></p>
-                <p>Now, we must prove that <span class="math inline">\(f(x)\)</span> has no fixed point. This is equivalent to the <span class="math inline">\(f(x) - x = 0\)</span> having no real solution. Clearly <span class="math inline">\(f(x) &gt; 0\)</span> for <span class="math inline">\(x &lt; 0\)</span> (and thus <span class="math inline">\(f(x) - x &gt; 0\)</span>), so we are left to consider when <span class="math inline">\(x &gt; 0\)</span>. Observe, however, in this case that <span class="math inline">\(\sqrt{x^2 + 1} &gt; \sqrt{x^2} = x\)</span>, so there cannot be a solution when <span class="math inline">\(x &gt; 0\)</span>. Thus, <span class="math inline">\(f(x)\)</span> has no fixed point.</p></li>
+                .\end{align*}\]</span> But, <span
+                class="math inline">\((x^2 + 1)(y^2 + 1) - (xy + 1)^2 =
+                (x - y)^2\)</span>, which is strictly greater than <span
+                class="math inline">\(0\)</span> for <span
+                class="math inline">\(x \ne y\)</span>, so our function
+                satisfies the weak contraction condition. <span
+                class="math inline">\(\blacksquare\)</span></p>
+                <p>Now, we must prove that <span
+                class="math inline">\(f(x)\)</span> has no fixed point.
+                This is equivalent to the <span
+                class="math inline">\(f(x) - x = 0\)</span> having no
+                real solution. Clearly <span class="math inline">\(f(x)
+                &gt; 0\)</span> for <span class="math inline">\(x &lt;
+                0\)</span> (and thus <span class="math inline">\(f(x) -
+                x &gt; 0\)</span>), so we are left to consider when
+                <span class="math inline">\(x &gt; 0\)</span>. Observe,
+                however, in this case that <span
+                class="math inline">\(\sqrt{x^2 + 1} &gt; \sqrt{x^2} =
+                x\)</span>, so there cannot be a solution when <span
+                class="math inline">\(x &gt; 0\)</span>. Thus, <span
+                class="math inline">\(f(x)\)</span> has no fixed
+                point.</p></li>
                 </ol>
                 </div>
                 </details>
-                <p>The below problem deals with showing that contractions preserve compactness, which is rather useful theoretically for verifying certain properties, although I won't go into it here because it's not really important for understanding, and I don't believe I could do the topology proper justice.</p>
+                <p>The below problem deals with showing that
+                contractions preserve compactness, which is rather
+                useful theoretically for verifying certain properties,
+                although I won't go into it here because it's not really
+                important for understanding, and I don't believe I could
+                do the topology proper justice.</p>
                 <div id="problem402" class="black-box">
-                <p><strong>Problem 4.0.2.</strong> If <span class="math inline">\(f\)</span> is a contraction and <span class="math inline">\(K\)</span> is compact, show that <span class="math inline">\(f(K)\)</span> is compact.</p>
+                <p><strong>Problem 4.0.2.</strong> If <span
+                class="math inline">\(f\)</span> is a contraction and
+                <span class="math inline">\(K\)</span> is compact, show
+                that <span class="math inline">\(f(K)\)</span> is
+                compact.</p>
                 </div>
                 <details class="solution">
-                <summary>Solution 4.0.2.</summary>
+                <summary>
+                Solution 4.0.2.
+                </summary>
                 <div class="solution-contents">
-                <p>By the definition of compactness, we shall show that <span class="math inline">\(f(K)\)</span> is (1) bounded and (2) closed.</p>
+                <p>By the definition of compactness, we shall show that
+                <span class="math inline">\(f(K)\)</span> is (1) bounded
+                and (2) closed.</p>
                 <ol type="1">
-                <li><p>We're given that <span class="math inline">\(K\)</span> is bounded, so there equivalently must exist a radius <span class="math inline">\(R &gt; 0\)</span> such that <span class="math inline">\(|x| \le R\)</span> for all <span class="math inline">\(x \in K\)</span>. It then suffices to find a new radius <span class="math inline">\(R&#39;\)</span> such that <span class="math inline">\(|f(x)| \le R&#39;\)</span> for <span class="math inline">\(x \in K\)</span>.</p>
-                Observe by the triangle inequality and the contraction condition that <span class="math inline">\(|f(x)| \le |f(x) - f(0)| + |f(0)| = c|x| + |f(0)|\)</span>. Since <span class="math inline">\(|x| \le R\)</span>, we can choose <span class="math inline">\(R&#39; = cR + |f(0)| &lt; \infty\)</span> to see that <span class="math inline">\(f(x) \le R&#39;\)</span> for all <span class="math inline">\(x \in K\)</span>. Thus, <span class="math inline">\(f(K)\)</span> is bounded.</li>
-                <li><p>Equivalently, we shall show that <span class="math inline">\(f(K)^c\)</span> is open. To bridge across the proof, we have the following claim:</p>
-                <p><strong>Claim.</strong> <span class="math inline">\(f(K^c) = f(K)^c\)</span>.</p>
-                <p><em>Proof.</em> In other words, we must have that <span class="math inline">\(f(x) \in f(K) \implies x \in K\)</span>. This would be true if <span class="math inline">\(f\)</span> were injective, so we shall prove as such.</p>
-                <p>Observe that <span class="math inline">\(f(x) = f(y)\)</span> implies by contraction <span class="math inline">\(|f(x) - f(y)| = 0 = c|x - y|\)</span>, which is equivalent to <span class="math inline">\(x = y\)</span>. Thus, <span class="math inline">\(f\)</span> is injective, so <span class="math inline">\(f(K^c) = f(K)^c\)</span>. <span class="math inline">\(\blacksquare\)</span></p>
-                <p>Because <span class="math inline">\(K\)</span> is closed, <span class="math inline">\(K^c\)</span> must be open. Because <span class="math inline">\(K^c\)</span> is open, we can write it as the union of open balls, so <span class="math display">\[\begin{align*}
-                     f(K^c) &amp;= f \left( \bigcup_{\alpha \in K^c}  B_\alpha (r(\alpha)) \right) \\
-                     &amp;= \bigcup_{\alpha \in K^c} f(B_\alpha (r(\alpha))) \\
-                     &amp;= \bigcup_{\alpha \in K^c} B_{f(\alpha)} (c r(\alpha))
-                 ,\end{align*}\]</span> where <span class="math inline">\(c\)</span> is the ratio of <span class="math inline">\(f\)</span>, and <span class="math inline">\(r\)</span> is some function of <span class="math inline">\(\alpha\)</span> for the radius of each ball. Clearly, then <span class="math inline">\(f(K^c) = f(K)^c\)</span> is open, being the union of an arbitrary number of open balls, which means that <span class="math inline">\(f(K)\)</span> is closed.</p></li>
+                <li><p>We're given that <span
+                class="math inline">\(K\)</span> is bounded, so there
+                equivalently must exist a radius <span
+                class="math inline">\(R &gt; 0\)</span> such that <span
+                class="math inline">\(|x| \le R\)</span> for all <span
+                class="math inline">\(x \in K\)</span>. It then suffices
+                to find a new radius <span
+                class="math inline">\(R&#39;\)</span> such that <span
+                class="math inline">\(|f(x)| \le R&#39;\)</span> for
+                <span class="math inline">\(x \in K\)</span>.</p>
+                <p>Observe by the triangle inequality and the
+                contraction condition that <span
+                class="math inline">\(|f(x)| \le |f(x) - f(0)| + |f(0)|
+                = c|x| + |f(0)|\)</span>. Since <span
+                class="math inline">\(|x| \le R\)</span>, we can choose
+                <span class="math inline">\(R&#39; = cR + |f(0)| &lt;
+                \infty\)</span> to see that <span
+                class="math inline">\(f(x) \le R&#39;\)</span> for all
+                <span class="math inline">\(x \in K\)</span>. Thus,
+                <span class="math inline">\(f(K)\)</span> is
+                bounded.</p></li>
+                <li><p>Equivalently, we shall show that <span
+                class="math inline">\(f(K)^c\)</span> is open. To bridge
+                across the proof, we have the following claim:</p>
+                <p><strong>Claim.</strong> <span
+                class="math inline">\(f(K^c) = f(K)^c\)</span>.</p>
+                <p><em>Proof.</em> In other words, we must have that
+                <span class="math inline">\(f(x) \in f(K) \implies x \in
+                K\)</span>. This would be true if <span
+                class="math inline">\(f\)</span> were injective, so we
+                shall prove as such.</p>
+                <p>Observe that <span class="math inline">\(f(x) =
+                f(y)\)</span> implies by contraction <span
+                class="math inline">\(|f(x) - f(y)| = 0 = c|x -
+                y|\)</span>, which is equivalent to <span
+                class="math inline">\(x = y\)</span>. Thus, <span
+                class="math inline">\(f\)</span> is injective, so <span
+                class="math inline">\(f(K^c) = f(K)^c\)</span>. <span
+                class="math inline">\(\blacksquare\)</span></p>
+                <p>Because <span class="math inline">\(K\)</span> is
+                closed, <span class="math inline">\(K^c\)</span> must be
+                open. Because <span class="math inline">\(K^c\)</span>
+                is open, we can write it as the union of open balls, so
+                <span class="math display">\[\begin{align*}
+                     f(K^c) &amp;= f \left( \bigcup_{\alpha \in
+                K^c}  B_\alpha (r(\alpha)) \right) \\
+                     &amp;= \bigcup_{\alpha \in K^c} f(B_\alpha
+                (r(\alpha))) \\
+                     &amp;= \bigcup_{\alpha \in K^c} B_{f(\alpha)} (c
+                r(\alpha))
+                ,\end{align*}\]</span> where <span
+                class="math inline">\(c\)</span> is the ratio of <span
+                class="math inline">\(f\)</span>, and <span
+                class="math inline">\(r\)</span> is some function of
+                <span class="math inline">\(\alpha\)</span> for the
+                radius of each ball. Clearly, then <span
+                class="math inline">\(f(K^c) = f(K)^c\)</span> is open,
+                being the union of an arbitrary number of open balls,
+                which means that <span
+                class="math inline">\(f(K)\)</span> is closed.</p></li>
                 </ol>
                 </div>
                 </details>
-                <p>IFSs are important because they allow us to uniquely characterize the set of points in a fractal without having to explicitly define such set. In particular:</p>
-                <p><strong>Definition.</strong> We denote an <strong>attractor</strong> of an IFS <span class="math inline">\((f_1, f_2, \ldots, f_m)\)</span> to be a set such that <span class="math display">\[
+                <p>IFSs are important because they allow us to uniquely
+                characterize the set of points in a fractal without
+                having to explicitly define such set. In particular:</p>
+                <p><strong>Definition.</strong> We denote an
+                <strong>attractor</strong> of an IFS <span
+                class="math inline">\((f_1, f_2, \ldots, f_m)\)</span>
+                to be a set such that <span class="math display">\[
                     D = \bigcup_{i = 1}^m f_i(D)
-                ,\]</span> where each <span class="math inline">\(f_i(D)\)</span> is not necessarily pairwise disjoint under intersection.</p>
-                <p>Notice the wording: "<em>an</em>" attractor. The following theorem given to us, however, allows us to change this wording.</p>
-                <p><strong>Theorem.</strong> Every IFS <span class="math inline">\((f_1, f_2, \ldots, f_m)\)</span> corresponds to unique, non-empty, compact attractor set <span class="math inline">\(F\)</span>.</p>
+                ,\]</span> where each <span
+                class="math inline">\(f_i(D)\)</span> is not necessarily
+                pairwise disjoint under intersection.</p>
+                <p>Notice the wording: "<em>an</em>" attractor. The
+                following theorem given to us, however, allows us to
+                change this wording.</p>
+                <p><strong>Theorem.</strong> Every IFS <span
+                class="math inline">\((f_1, f_2, \ldots, f_m)\)</span>
+                corresponds to unique, non-empty, compact attractor set
+                <span class="math inline">\(F\)</span>.</p>
                 <div id="problem403" class="black-box">
-                <p><strong>Problem 4.0.3.</strong> Prove the uniqueness of the above theorem. That is, prove that if <span class="math inline">\(F_1\)</span> and <span class="math inline">\(F_2\)</span> are attractors of <span class="math inline">\((f_1, f_2, \ldots, f_m)\)</span>, then <span class="math inline">\(F_1 = F_2\)</span></p>
+                <p><strong>Problem 4.0.3.</strong> Prove the uniqueness
+                of the above theorem. That is, prove that if <span
+                class="math inline">\(F_1\)</span> and <span
+                class="math inline">\(F_2\)</span> are attractors of
+                <span class="math inline">\((f_1, f_2, \ldots,
+                f_m)\)</span>, then <span class="math inline">\(F_1 =
+                F_2\)</span></p>
                 </div>
                 <details class="solution">
-                <summary>Solution 4.0.3. (TODO)</summary>
+                <summary>
+                Solution 4.0.3. (TODO)
+                </summary>
                 <div class="solution-contents">
-                <p>Unfortunately, we didn't actually get a good proof of this in contest.</p>
+                <p>Unfortunately, we didn't actually get a good proof of
+                this in contest.</p>
                 </div>
                 </details>
-                <p>We may go between the IFS and the attractor governed by the IFS as we see fit; they correspond uniquely to one another and each exist. It should be no surprise that this attractor is precisely the formalization of the fractal that we're looking for.</p>
-                <p>The example IFS given for the Cantor set is perhaps illuminating to look at. The Cantor set is precisely the attractor of <span class="math inline">\((f_1, f_2)\)</span>, where <span class="math display">\[\begin{align*}
+                <p>We may go between the IFS and the attractor governed
+                by the IFS as we see fit; they correspond uniquely to
+                one another and each exist. It should be no surprise
+                that this attractor is precisely the formalization of
+                the fractal that we're looking for.</p>
+                <p>The example IFS given for the Cantor set is perhaps
+                illuminating to look at. The Cantor set is precisely the
+                attractor of <span class="math inline">\((f_1,
+                f_2)\)</span>, where <span
+                class="math display">\[\begin{align*}
                     f_1(x) &amp;= \frac{1}{3} x \\
                     f_2(x) &amp;= \frac{1}{3} x + \frac{2}{3}
                 .\end{align*}\]</span></p>
                 <div id="problem404" class="black-box">
-                <p><strong>Problem 4.0.4.</strong> For each of the following fractals, find an IFS whose attractor is that fractal and explain why it is the attractor.</p>
+                <p><strong>Problem 4.0.4.</strong> For each of the
+                following fractals, find an IFS whose attractor is that
+                fractal and explain why it is the attractor.</p>
                 <ol type="1">
                 <li>The Sierpinski carpet</li>
                 <li>The Koch curve</li>
@@ -532,7 +1546,9 @@
                 </ol>
                 </div>
                 <details class="solution">
-                <summary>Solution 4.0.4.</summary>
+                <summary>
+                Solution 4.0.4.
+                </summary>
                 <div class="solution-contents">
                 <p><span class="math display">\[
                     \gdef\ScaleMatrix#1{
@@ -549,159 +1565,470 @@
                     }
                 \]</span></p>
                 <ol type="1">
-                <li><p><strong>The Sierpinski Carpet.</strong> Let <span class="math inline">\(a_1, a_2, \ldots, a_8 = (0, 0)\)</span>, <span class="math inline">\((\frac{1}{9}, 0)\)</span>, <span class="math inline">\((\frac{2}{9}, 0)\)</span>, <span class="math inline">\((\frac{2}{9}, \frac{1}{9})\)</span>, <span class="math inline">\((\frac{2}{9}, \frac{2}{9})\)</span>, <span class="math inline">\((\frac{1}{9}, \frac{2}{9})\)</span>, <span class="math inline">\((0, \frac{2}{9})\)</span>, <span class="math inline">\((0, \frac{1}{9})\)</span>. We claim that the IFS is given by <span class="math display">\[
+                <li><p><strong>The Sierpinski Carpet.</strong> Let <span
+                class="math inline">\(a_1, a_2, \ldots, a_8 = (0,
+                0)\)</span>, <span class="math inline">\((\frac{1}{9},
+                0)\)</span>, <span class="math inline">\((\frac{2}{9},
+                0)\)</span>, <span class="math inline">\((\frac{2}{9},
+                \frac{1}{9})\)</span>, <span
+                class="math inline">\((\frac{2}{9},
+                \frac{2}{9})\)</span>, <span
+                class="math inline">\((\frac{1}{9},
+                \frac{2}{9})\)</span>, <span class="math inline">\((0,
+                \frac{2}{9})\)</span>, <span class="math inline">\((0,
+                \frac{1}{9})\)</span>. We claim that the IFS is given by
+                <span class="math display">\[
                      f_i (x) = \frac{1}{3}x + a_i
-                 .\]</span> We claim as such because these functions scale down the attractor set (a square with a hollow center) and place square copies in eight squares bordering the center, exactly the geometric shape of the Sierpinski Carpet.</p></li>
-                <li><p><strong>The Koch curve.</strong> We claim that the IFS is given by <span class="math display">\[\begin{align*}
+                .\]</span> We claim as such because these functions
+                scale down the attractor set (a square with a hollow
+                center) and place square copies in eight squares
+                bordering the center, exactly the geometric shape of the
+                Sierpinski Carpet.</p></li>
+                <li><p><strong>The Koch curve.</strong> We claim that
+                the IFS is given by <span
+                class="math display">\[\begin{align*}
                      f_1 (x) &amp;= \ScaleMatrix{\frac{1}{3}} x, \\
-                     f_2(x) &amp;= \ScaleMatrix{\frac{1}{3}} \RotationMatrix{60} x + \left(\frac{1}{3}, 0 \right), \\
-                     f_3(x) &amp;= \ScaleMatrix{\frac{1}{3}} \RotationMatrix{-60} x + \left( \frac{1}{2}, \frac{\sqrt{3}}{6} \right), \\
-                     f_4(x) &amp;= \ScaleMatrix{\frac{1}{3}} x + \left( \frac{2}{3}, 0 \right)
-                 .\end{align*}\]</span> There are four segments to the pattern of the Koch curve, and each segment is a third of the length of the original segment (hence the scaling matrix). In addition, <span class="math inline">\(f_2\)</span> and <span class="math inline">\(f_3\)</span> feature <span class="math inline">\(60^\circ\)</span> counterclockwise and clockwise rotations for the rotated segments.</p>
-                <p>We also make a small note that each <span class="math inline">\(f_i\)</span> is indeed a contraction as they satisfy <span class="math display">\[
-                     |f_i(x) - f_i(y)| = \sqrt{\left| \det \ScaleMatrix{\frac{1}{3}} \right|} |x - y| = \frac{1}{3} |x - y|
-                 .\]</span></p></li>
-                <li><p><strong>The Minkowski sausage.</strong> We claim that the IFS is given by <span class="math display">\[\begin{align*}
+                     f_2(x) &amp;= \ScaleMatrix{\frac{1}{3}}
+                \RotationMatrix{60} x + \left(\frac{1}{3}, 0 \right), \\
+                     f_3(x) &amp;= \ScaleMatrix{\frac{1}{3}}
+                \RotationMatrix{-60} x + \left( \frac{1}{2},
+                \frac{\sqrt{3}}{6} \right), \\
+                     f_4(x) &amp;= \ScaleMatrix{\frac{1}{3}} x + \left(
+                \frac{2}{3}, 0 \right)
+                .\end{align*}\]</span> There are four segments to the
+                pattern of the Koch curve, and each segment is a third
+                of the length of the original segment (hence the scaling
+                matrix). In addition, <span
+                class="math inline">\(f_2\)</span> and <span
+                class="math inline">\(f_3\)</span> feature <span
+                class="math inline">\(60^\circ\)</span> counterclockwise
+                and clockwise rotations for the rotated segments.</p>
+                <p>We also make a small note that each <span
+                class="math inline">\(f_i\)</span> is indeed a
+                contraction as they satisfy <span
+                class="math display">\[
+                     |f_i(x) - f_i(y)| = \sqrt{\left| \det
+                \ScaleMatrix{\frac{1}{3}} \right|} |x - y| = \frac{1}{3}
+                |x - y|
+                .\]</span></p></li>
+                <li><p><strong>The Minkowski sausage.</strong> We claim
+                that the IFS is given by <span
+                class="math display">\[\begin{align*}
                      f_1(x) &amp;= \ScaleMatrix{\frac{1}{4}} x, \\
-                     f_2(x) &amp;= \ScaleMatrix{\frac{1}{4}} \RotationMatrix{90} x + \left( \frac{1}{4}, 0 \right), \\
-                     f_3(x) &amp;= \ScaleMatrix{\frac{1}{4}} x + \left( \frac{1}{4}, \frac{1}{4} \right), \\
-                     f_4(x) &amp;= \ScaleMatrix{\frac{1}{4}} \RotationMatrix{-90} x + \left( \frac{1}{2}, \frac{1}{4} \right), \\
-                     f_5(x) &amp;= \ScaleMatrix{\frac{1}{4}} \RotationMatrix{-90} x + \left(\frac{1}{2}, 0 \right), \\
-                     f_6(x) &amp;= \ScaleMatrix{\frac{1}{4}} x + \left( \frac{1}{2}, -\frac{1}{4} \right), \\
-                     f_7(x) &amp;= \ScaleMatrix{\frac{1}{4}} \RotationMatrix{90} x + \left( \frac{3}{4}, - \frac{1}{4} \right), \\
-                     f_8(x) &amp;= \ScaleMatrix{\frac{1}{4}} + \left( \frac{3}{4}, 0 \right)
-                 \end{align*}\]</span> This follows directly from the diagram given in Figure 2. We also note that each <span class="math inline">\(f_i\)</span> is a contraction, as we have <span class="math display">\[
-                     |f_i(x) - f_i(y)| = \sqrt{\left| \det \ScaleMatrix{\frac{1}{4}} \right|} |x - y| = \frac{1}{4} |x - y|
-                 .\]</span></p></li>
+                     f_2(x) &amp;= \ScaleMatrix{\frac{1}{4}}
+                \RotationMatrix{90} x + \left( \frac{1}{4}, 0 \right),
+                \\
+                     f_3(x) &amp;= \ScaleMatrix{\frac{1}{4}} x + \left(
+                \frac{1}{4}, \frac{1}{4} \right), \\
+                     f_4(x) &amp;= \ScaleMatrix{\frac{1}{4}}
+                \RotationMatrix{-90} x + \left( \frac{1}{2}, \frac{1}{4}
+                \right), \\
+                     f_5(x) &amp;= \ScaleMatrix{\frac{1}{4}}
+                \RotationMatrix{-90} x + \left(\frac{1}{2}, 0 \right),
+                \\
+                     f_6(x) &amp;= \ScaleMatrix{\frac{1}{4}} x + \left(
+                \frac{1}{2}, -\frac{1}{4} \right), \\
+                     f_7(x) &amp;= \ScaleMatrix{\frac{1}{4}}
+                \RotationMatrix{90} x + \left( \frac{3}{4}, -
+                \frac{1}{4} \right), \\
+                     f_8(x) &amp;= \ScaleMatrix{\frac{1}{4}} + \left(
+                \frac{3}{4}, 0 \right)
+                \end{align*}\]</span> This follows directly from the
+                diagram given in Figure 2. We also note that each <span
+                class="math inline">\(f_i\)</span> is a contraction, as
+                we have <span class="math display">\[
+                     |f_i(x) - f_i(y)| = \sqrt{\left| \det
+                \ScaleMatrix{\frac{1}{4}} \right|} |x - y| = \frac{1}{4}
+                |x - y|
+                .\]</span></p></li>
                 </ol>
                 </div>
                 </details>
-                <p>Now that we've found a way to formalize our fractals, we can actually use the tools we've developed before to get a better understanding of them. Specifically, the contest gives us a very useful tool for computing the dimension of the fractals. Firstly, consider the following definition:</p>
-                <p><strong>Definition.</strong> An IFS <span class="math inline">\((f_1, f_2, \ldots, f_m)\)</span> satisfies the <strong>open set condition</strong> (<strong>OSC</strong>) if there exists a bounded, non-empty open set <span class="math inline">\(U \subset \mathbb{R}^n\)</span> such that for each <span class="math inline">\(i \ne j\)</span>, <span class="math display">\[
+                <p>Now that we've found a way to formalize our fractals,
+                we can actually use the tools we've developed before to
+                get a better understanding of them. Specifically, the
+                contest gives us a very useful tool for computing the
+                dimension of the fractals. Firstly, consider the
+                following definition:</p>
+                <p><strong>Definition.</strong> An IFS <span
+                class="math inline">\((f_1, f_2, \ldots, f_m)\)</span>
+                satisfies the <strong>open set condition</strong>
+                (<strong>OSC</strong>) if there exists a bounded,
+                non-empty open set <span class="math inline">\(U \subset
+                \mathbb{R}^n\)</span> such that for each <span
+                class="math inline">\(i \ne j\)</span>, <span
+                class="math display">\[
                     f_i(U) \cap f_j(U) = \emptyset
                 \]</span> and <span class="math display">\[
                     U \supset \bigcup_{i = 1}^m f_i(U)
                 .\]</span></p>
                 <p>We are then given the following theorem:</p>
-                <p><strong>Theorem.</strong> Let <span class="math inline">\((f_1, f_2, \ldots, f_m)\)</span> be an IFS satisfying the OSC, and let each <span class="math inline">\(c_i\)</span> denote the contraction ratio of each <span class="math inline">\(f_i\)</span>. Then the unique real number <span class="math inline">\(s\)</span> such that <span class="math display">\[
+                <p><strong>Theorem.</strong> Let <span
+                class="math inline">\((f_1, f_2, \ldots, f_m)\)</span>
+                be an IFS satisfying the OSC, and let each <span
+                class="math inline">\(c_i\)</span> denote the
+                contraction ratio of each <span
+                class="math inline">\(f_i\)</span>. Then the unique real
+                number <span class="math inline">\(s\)</span> such that
+                <span class="math display">\[
                     \sum_{i = 1}^{m} c_i^s = 1
-                \]</span> is the Hausdorff dimension of the attractor for the IFS.</p>
-                <p>Intuitively, this makes sense when viewed from a sort of conservation of Hausdorff measure. We can split the fractal <span class="math inline">\(U\)</span> into each <span class="math inline">\(f_i(U)\)</span> component, of which the set is scaled by <span class="math inline">\(c_i^s\)</span>. Invoking <a href="#problem215">Problem 2.1.5</a> and asserting that measures of each component must add up to their whole, we get this condition. Although not every IFS satisfies the OSC, this is extremely useful for finding the Hausdorff dimensions of attractors whose IFSs do satisfy the OSC.</p>
+                \]</span> is the Hausdorff dimension of the attractor
+                for the IFS.</p>
+                <p>Intuitively, this makes sense when viewed from a sort
+                of conservation of Hausdorff measure. We can split the
+                fractal <span class="math inline">\(U\)</span> into each
+                <span class="math inline">\(f_i(U)\)</span> component,
+                of which the set is scaled by <span
+                class="math inline">\(c_i^s\)</span>. Invoking <a
+                href="#problem215">Problem 2.1.5</a> and asserting that
+                measures of each component must add up to their whole,
+                we get this condition. Although not every IFS satisfies
+                the OSC, this is extremely useful for finding the
+                Hausdorff dimensions of attractors whose IFSs do satisfy
+                the OSC.</p>
                 <div id="problem411" class="black-box">
-                <p><strong>Problem 4.1.1.</strong> Let <span class="math inline">\(f_1, f_2, f_3 : \mathbb{R}^2 \to \mathbb{R}^2\)</span> be defined as <span class="math display">\[\begin{align*}
+                <p><strong>Problem 4.1.1.</strong> Let <span
+                class="math inline">\(f_1, f_2, f_3 : \mathbb{R}^2 \to
+                \mathbb{R}^2\)</span> be defined as <span
+                class="math display">\[\begin{align*}
                     f_1(x) &amp;= \frac{1}{2} x \\
-                    f_2(x) &amp;= \frac{1}{2} x + \left( \frac{1}{2}, 0 \right) \\
-                    f_3(x) &amp;= \frac{1}{2} x + \left( \frac{1}{4}, \frac{\sqrt{3}}{4} \right)
-                .\end{align*}\]</span> Show that this IFS satisfies the open set condition, and calculate its Hausdorff dimension with proof.</p>
+                    f_2(x) &amp;= \frac{1}{2} x + \left( \frac{1}{2}, 0
+                \right) \\
+                    f_3(x) &amp;= \frac{1}{2} x + \left( \frac{1}{4},
+                \frac{\sqrt{3}}{4} \right)
+                .\end{align*}\]</span> Show that this IFS satisfies the
+                open set condition, and calculate its Hausdorff
+                dimension with proof.</p>
                 </div>
                 <details class="solution">
-                <summary>Solution 4.1.1.</summary>
+                <summary>
+                Solution 4.1.1.
+                </summary>
                 <div class="solution-contents">
-                <p>We claim that the set <span class="math inline">\(U\)</span> of all points contained within (but not on the boundary) of the equilateral triangle of side length <span class="math inline">\(1\)</span> with vertices <span class="math inline">\((0, 0), (\frac{1}{2}, \frac{\sqrt{3}}{2}), (1, 0)\)</span> is a set for which this IFS satisfies the open set condition.</p>
-                <p>Note that <span class="math inline">\(U\)</span> is trivially non-empty and is open by construction due to not containing the boundary. In addition, <span class="math inline">\(U\)</span> is bounded, which one can show by taking a ball of radius <span class="math inline">\(1\)</span> or more.</p>
-                <p>We shall now verify that <span class="math inline">\(f_1 (U) \cap f_2(U) = f_1(U) \cap f_3(U) = f_2(U) \cap f_3(U) = \emptyset\)</span>. Notice that, in order for <span class="math inline">\(f_i(U) \cap f_j(U)\)</span> to be nonempty for <span class="math inline">\(i \ne j\)</span>, there must exist points <span class="math inline">\(a, b \in U\)</span> such that <span class="math inline">\(f_i(a) = f_j(b)\)</span>. We shall show no such points exist over all pairs:</p>
+                <p>We claim that the set <span
+                class="math inline">\(U\)</span> of all points contained
+                within (but not on the boundary) of the equilateral
+                triangle of side length <span
+                class="math inline">\(1\)</span> with vertices <span
+                class="math inline">\((0, 0), (\frac{1}{2},
+                \frac{\sqrt{3}}{2}), (1, 0)\)</span> is a set for which
+                this IFS satisfies the open set condition.</p>
+                <p>Note that <span class="math inline">\(U\)</span> is
+                trivially non-empty and is open by construction due to
+                not containing the boundary. In addition, <span
+                class="math inline">\(U\)</span> is bounded, which one
+                can show by taking a ball of radius <span
+                class="math inline">\(1\)</span> or more.</p>
+                <p>We shall now verify that <span
+                class="math inline">\(f_1 (U) \cap f_2(U) = f_1(U) \cap
+                f_3(U) = f_2(U) \cap f_3(U) = \emptyset\)</span>. Notice
+                that, in order for <span class="math inline">\(f_i(U)
+                \cap f_j(U)\)</span> to be nonempty for <span
+                class="math inline">\(i \ne j\)</span>, there must exist
+                points <span class="math inline">\(a, b \in U\)</span>
+                such that <span class="math inline">\(f_i(a) =
+                f_j(b)\)</span>. We shall show no such points exist over
+                all pairs:</p>
                 <ul>
-                <li><span class="math inline">\(f_1 (U) \cap f_2(U) \ne \emptyset\)</span> is equivalent to there being <span class="math inline">\(a, b \in U\)</span> such that <span class="math inline">\(a - b = (1, 0)\)</span>, but clearly <span class="math inline">\(0 &lt; a_x, b_x &lt; 1\)</span> (note the strict inequalities as <span class="math inline">\(U\)</span> is open), so this cannot be the case.</li>
-                <li><span class="math inline">\(f_1 (U) \cap f_3(U) \ne \emptyset\)</span> is equivalent to <span class="math inline">\(a - b = (\frac{1}{2}, \frac{\sqrt{3}}{2})\)</span>, but this again cannot be the case because <span class="math inline">\(0 &lt; a_y, b_y &lt; \frac{\sqrt{3}}{2}\)</span>.</li>
-                <li><span class="math inline">\(f_2(U) \cap f_3(U) \ne \emptyset\)</span> is equivalent to <span class="math inline">\(a - b = (-\frac{1}{2}, \frac{\sqrt{3}}{2} )\)</span>, but this cannot hold because <span class="math inline">\(0 &lt; a_y, b_y &lt; \frac{\sqrt{3}}{2}\)</span> once again.</li>
+                <li><span class="math inline">\(f_1 (U) \cap f_2(U) \ne
+                \emptyset\)</span> is equivalent to there being <span
+                class="math inline">\(a, b \in U\)</span> such that
+                <span class="math inline">\(a - b = (1, 0)\)</span>, but
+                clearly <span class="math inline">\(0 &lt; a_x, b_x &lt;
+                1\)</span> (note the strict inequalities as <span
+                class="math inline">\(U\)</span> is open), so this
+                cannot be the case.</li>
+                <li><span class="math inline">\(f_1 (U) \cap f_3(U) \ne
+                \emptyset\)</span> is equivalent to <span
+                class="math inline">\(a - b = (\frac{1}{2},
+                \frac{\sqrt{3}}{2})\)</span>, but this again cannot be
+                the case because <span class="math inline">\(0 &lt; a_y,
+                b_y &lt; \frac{\sqrt{3}}{2}\)</span>.</li>
+                <li><span class="math inline">\(f_2(U) \cap f_3(U) \ne
+                \emptyset\)</span> is equivalent to <span
+                class="math inline">\(a - b = (-\frac{1}{2},
+                \frac{\sqrt{3}}{2} )\)</span>, but this cannot hold
+                because <span class="math inline">\(0 &lt; a_y, b_y &lt;
+                \frac{\sqrt{3}}{2}\)</span> once again.</li>
                 </ul>
-                <p>The fact that <span class="math inline">\(U \supset f_1(U) \cup f_2(U) \cup f_3(U)\)</span> is also trivial to see geometrically. Since the desired <span class="math inline">\(U\)</span> exists, the IFS <span class="math inline">\((f_1, f_2, f_3)\)</span> satisfies the open set condition.</p>
-                <p>Calculating the Hausdorff dimension is now trivial, as <span class="math inline">\(|f_i(x) - f_i(y)| = \frac{1}{2} |x - y |\)</span> for <span class="math inline">\(i = 1, 2, 3\)</span>, so <span class="math inline">\(c_i = \frac{1}{2}\)</span>. Thus by Theorem 4.1.2, <span class="math display">\[
+                <p>The fact that <span class="math inline">\(U \supset
+                f_1(U) \cup f_2(U) \cup f_3(U)\)</span> is also trivial
+                to see geometrically. Since the desired <span
+                class="math inline">\(U\)</span> exists, the IFS <span
+                class="math inline">\((f_1, f_2, f_3)\)</span> satisfies
+                the open set condition.</p>
+                <p>Calculating the Hausdorff dimension is now trivial,
+                as <span class="math inline">\(|f_i(x) - f_i(y)| =
+                \frac{1}{2} |x - y |\)</span> for <span
+                class="math inline">\(i = 1, 2, 3\)</span>, so <span
+                class="math inline">\(c_i = \frac{1}{2}\)</span>. Thus
+                by Theorem 4.1.2, <span class="math display">\[
                     \frac{3}{2^s} = 1 \implies s = \log(3) / \log(2)
                 .\]</span></p>
                 </div>
                 </details>
                 <div id="problem412" class="black-box">
-                <p><strong>Problem 4.1.2.</strong> Verify that the Hausdorff dimension of the Cantor set is <span class="math inline">\(\frac{\log 2}{\log 3}\)</span>, and find the Hausdorff dimension of the Koch curve.</p>
+                <p><strong>Problem 4.1.2.</strong> Verify that the
+                Hausdorff dimension of the Cantor set is <span
+                class="math inline">\(\frac{\log 2}{\log 3}\)</span>,
+                and find the Hausdorff dimension of the Koch curve.</p>
                 </div>
                 <details class="solution">
-                <summary>Solution 4.1.2.</summary>
+                <summary>
+                Solution 4.1.2.
+                </summary>
                 <div class="solution-contents">
                 <p>To start, we have the following obvious claim:</p>
-                <p><strong>Claim.</strong>The Cantor set IFS and Koch curve IFS satisfy the open set condition.</p>
-                <p><em>Proof.</em> For completeness, we copy the IFS for the Cantor set given and the IFS for the Koch curve from <a href="#problem404">Problem 4.0.4</a> here:</p>
+                <p><strong>Claim.</strong>The Cantor set IFS and Koch
+                curve IFS satisfy the open set condition.</p>
+                <p><em>Proof.</em> For completeness, we copy the IFS for
+                the Cantor set given and the IFS for the Koch curve from
+                <a href="#problem404">Problem 4.0.4</a> here:</p>
                 <ol type="1">
-                <li><strong>Cantor set IFS:</strong> <span class="math display">\[\begin{align*}
+                <li><strong>Cantor set IFS:</strong> <span
+                class="math display">\[\begin{align*}
                      f_1 (x) &amp;= \frac{1}{3} x, \\
                      f_2 (x) &amp;= \frac{1}{3} x + \frac{2}{3}
-                 .\end{align*}\]</span></li>
-                <li><strong>Koch curve IFS:</strong> <span class="math display">\[\begin{align*}
+                .\end{align*}\]</span></li>
+                <li><strong>Koch curve IFS:</strong> <span
+                class="math display">\[\begin{align*}
                      f_1 (x) &amp;= \ScaleMatrix{\frac{1}{3}} x, \\
-                     f_2(x) &amp;= \ScaleMatrix{\frac{1}{3}} \RotationMatrix{60} x + \left(\frac{1}{3}, 0 \right), \\
-                     f_3(x) &amp;= \ScaleMatrix{\frac{1}{3}} \RotationMatrix{-60} x + \left( \frac{1}{2}, \frac{\sqrt{3}}{6} \right), \\
-                     f_4(x) &amp;= \ScaleMatrix{\frac{1}{3}} x + \left( \frac{2}{3}, 0 \right)
-                 .\end{align*}\]</span></li>
+                     f_2(x) &amp;= \ScaleMatrix{\frac{1}{3}}
+                \RotationMatrix{60} x + \left(\frac{1}{3}, 0 \right), \\
+                     f_3(x) &amp;= \ScaleMatrix{\frac{1}{3}}
+                \RotationMatrix{-60} x + \left( \frac{1}{2},
+                \frac{\sqrt{3}}{6} \right), \\
+                     f_4(x) &amp;= \ScaleMatrix{\frac{1}{3}} x + \left(
+                \frac{2}{3}, 0 \right)
+                .\end{align*}\]</span></li>
                 </ol>
-                <p>For both fractals, we shall take <span class="math inline">\(U\)</span> to be the open unit interval <span class="math inline">\((0, 1)\)</span>. It is trivial to verify that this set is bounded, and the image of <span class="math inline">\(U\)</span> under each <span class="math inline">\(f_i\)</span> is disjoint (a consequence of the interval being open). It is also trivial to see that for each fractal, <span class="math inline">\(U\)</span> contains the union of each image under <span class="math inline">\(f_i\)</span>. Thus, we are free to utilize Theorem 4.1.2, noting that <span class="math inline">\(c_i = 1 / 3\)</span> for each <span class="math inline">\(i\)</span> for both fractals. <span class="math inline">\(\blacksquare\)</span></p>
-                <p>The Hausdorff dimension of the Cantor set is thus given by <span class="math display">\[
-                    \sum_{i = 1}^2 \frac{1}{3^s} = 1 \implies s = \frac{\log 2}{\log 3}
-                ,\]</span> and similarly the Hausdorff dimension of the Koch curve is <span class="math display">\[
-                    \sum_{i = 1}^4 \frac{1}{3^s} = 1 \implies s = \frac{\log 4}{\log 3}
+                <p>For both fractals, we shall take <span
+                class="math inline">\(U\)</span> to be the open unit
+                interval <span class="math inline">\((0, 1)\)</span>. It
+                is trivial to verify that this set is bounded, and the
+                image of <span class="math inline">\(U\)</span> under
+                each <span class="math inline">\(f_i\)</span> is
+                disjoint (a consequence of the interval being open). It
+                is also trivial to see that for each fractal, <span
+                class="math inline">\(U\)</span> contains the union of
+                each image under <span
+                class="math inline">\(f_i\)</span>. Thus, we are free to
+                utilize Theorem 4.1.2, noting that <span
+                class="math inline">\(c_i = 1 / 3\)</span> for each
+                <span class="math inline">\(i\)</span> for both
+                fractals. <span
+                class="math inline">\(\blacksquare\)</span></p>
+                <p>The Hausdorff dimension of the Cantor set is thus
+                given by <span class="math display">\[
+                    \sum_{i = 1}^2 \frac{1}{3^s} = 1 \implies s =
+                \frac{\log 2}{\log 3}
+                ,\]</span> and similarly the Hausdorff dimension of the
+                Koch curve is <span class="math display">\[
+                    \sum_{i = 1}^4 \frac{1}{3^s} = 1 \implies s =
+                \frac{\log 4}{\log 3}
                 .\]</span></p>
                 </div>
                 </details>
                 <div id="problem413" class="black-box">
-                <p><strong>Problem 4.1.3.</strong> Use <a href="#problem412">Problem 4.1.2</a> to give a proof that the Cantor set is uncountable.</p>
+                <p><strong>Problem 4.1.3.</strong> Use <a
+                href="#problem412">Problem 4.1.2</a> to give a proof
+                that the Cantor set is uncountable.</p>
                 </div>
                 <details class="solution">
-                <summary>Solution 4.1.3.</summary>
+                <summary>
+                Solution 4.1.3.
+                </summary>
                 <div class="solution-contents">
                 <p>We claim the following:</p>
-                <p><strong>Claim.</strong> Consider a finite or countable set <span class="math inline">\(P \subset \mathbb{R}^n\)</span>. Then for <span class="math inline">\(s &gt; 0\)</span>, <span class="math display">\[
+                <p><strong>Claim.</strong> Consider a finite or
+                countable set <span class="math inline">\(P \subset
+                \mathbb{R}^n\)</span>. Then for <span
+                class="math inline">\(s &gt; 0\)</span>, <span
+                class="math display">\[
                 \mathcal{H}^s (P) = 0
                 .\]</span></p>
-                <p><em>Proof.</em> We shall first show that the Hausdorff measure of a singleton set vanishes. That is, <span class="math display">\[
+                <p><em>Proof.</em> We shall first show that the
+                Hausdorff measure of a singleton set vanishes. That is,
+                <span class="math display">\[
                 \mathcal{H}^s (\{ a \}) = 0
-                .\]</span> Obviously, observe that the <span class="math inline">\(\delta\)</span>-cover <span class="math inline">\(\{ \{a \} \}\)</span> suffices to show that <span class="math inline">\(\mathcal{H}^s_\delta (\{ a \}) = 0\)</span> and thus <span class="math inline">\(\mathcal{H}^s (\{ a \} ) = 0\)</span> by taking <span class="math inline">\(\delta \to 0^+\)</span>.</p>
-                <p>Now, since <span class="math inline">\(P\)</span> is countable, suppose <span class="math inline">\(P = \{ p_1, p_2, \ldots \}\)</span>. By nonnegativity and countable additivity from Theorem 2.1.1, we have <span class="math display">\[
-                \mathcal{H}^s (P) = \mathcal{H}^s\left( \bigcup_{i = 1}^\infty \{ p_i \} \right) = \sum_{i = 1}^\infty \mathcal{H}^s (\{ p_i \}) = 0
-                ,\]</span> which is what we wished to show. <span class="math inline">\(\blacksquare\)</span></p>
-                <p>We now trivially remark that since <span class="math inline">\(\mathcal{H}^s (P) = 0\)</span> for <span class="math inline">\(s &gt; 0\)</span> for any finite or countable set <span class="math inline">\(P\)</span>, the set's Hausdorff dimension must be <span class="math inline">\(0\)</span>. However, the dimension of the Cantor Set is nonzero, so it must be uncountable.</p>
+                .\]</span> Obviously, observe that the <span
+                class="math inline">\(\delta\)</span>-cover <span
+                class="math inline">\(\{ \{a \} \}\)</span> suffices to
+                show that <span
+                class="math inline">\(\mathcal{H}^s_\delta (\{ a \}) =
+                0\)</span> and thus <span
+                class="math inline">\(\mathcal{H}^s (\{ a \} ) =
+                0\)</span> by taking <span class="math inline">\(\delta
+                \to 0^+\)</span>.</p>
+                <p>Now, since <span class="math inline">\(P\)</span> is
+                countable, suppose <span class="math inline">\(P = \{
+                p_1, p_2, \ldots \}\)</span>. By nonnegativity and
+                countable additivity from Theorem 2.1.1, we have <span
+                class="math display">\[
+                \mathcal{H}^s (P) = \mathcal{H}^s\left( \bigcup_{i =
+                1}^\infty \{ p_i \} \right) = \sum_{i = 1}^\infty
+                \mathcal{H}^s (\{ p_i \}) = 0
+                ,\]</span> which is what we wished to show. <span
+                class="math inline">\(\blacksquare\)</span></p>
+                <p>We now trivially remark that since <span
+                class="math inline">\(\mathcal{H}^s (P) = 0\)</span> for
+                <span class="math inline">\(s &gt; 0\)</span> for any
+                finite or countable set <span
+                class="math inline">\(P\)</span>, the set's Hausdorff
+                dimension must be <span
+                class="math inline">\(0\)</span>. However, the dimension
+                of the Cantor Set is nonzero, so it must be
+                uncountable.</p>
                 </div>
                 </details>
                 <div id="problem414" class="black-box">
-                <p><strong>Problem 4.1.4.</strong> Let <span class="math inline">\(n, m \in \mathbb{N}\)</span>. Show that there is a <span class="math inline">\(k\)</span> and a set <span class="math inline">\(E \subset \mathbb{R}^k\)</span> such that the Hausdorff dimension of <span class="math inline">\(E\)</span> is <span class="math inline">\(\frac{n}{m}\)</span>. Conclude that for any <span class="math inline">\(0 \le r \in \mathbb{R}\)</span>, there exists sets with Hausdorff dimension arbitrarily close to <span class="math inline">\(r\)</span>.</p>
+                <p><strong>Problem 4.1.4.</strong> Let <span
+                class="math inline">\(n, m \in \mathbb{N}\)</span>. Show
+                that there is a <span class="math inline">\(k\)</span>
+                and a set <span class="math inline">\(E \subset
+                \mathbb{R}^k\)</span> such that the Hausdorff dimension
+                of <span class="math inline">\(E\)</span> is <span
+                class="math inline">\(\frac{n}{m}\)</span>. Conclude
+                that for any <span class="math inline">\(0 \le r \in
+                \mathbb{R}\)</span>, there exists sets with Hausdorff
+                dimension arbitrarily close to <span
+                class="math inline">\(r\)</span>.</p>
                 </div>
                 <details class="solution">
-                <summary>Solution 4.1.4.</summary>
+                <summary>
+                Solution 4.1.4.
+                </summary>
                 <div class="solution-contents">
-                <p>In other words, we must prove that for any nonnegative rational number <span class="math inline">\(q\)</span>, there exists a set <span class="math inline">\(E \subset \mathbb{R}^k\)</span> with dimension <span class="math inline">\(q\)</span>. Consider the following construction. Denote <span class="math display">\[
-                    P := \left \{ \left( \frac{i_1}{2^m}, \frac{i_2}{2^m}, \ldots, \frac{i_k}{2^m} \right) : \, 0 \le i_1, i_2, \ldots, i_k &lt; 2^m, i_1, i_2, \ldots, i_k \in \mathbb{Z}  \right \}
-                ,\]</span> and choose <span class="math inline">\(k\)</span> such that <span class="math inline">\(mk &gt; n\)</span>. Choose <span class="math inline">\(2^n\)</span> points <span class="math inline">\(p_1, p_2, \ldots, p_{2^n} \in P\)</span> and construct the following IFS: <span class="math display">\[
+                <p>In other words, we must prove that for any
+                nonnegative rational number <span
+                class="math inline">\(q\)</span>, there exists a set
+                <span class="math inline">\(E \subset
+                \mathbb{R}^k\)</span> with dimension <span
+                class="math inline">\(q\)</span>. Consider the following
+                construction. Denote <span class="math display">\[
+                    P := \left \{ \left( \frac{i_1}{2^m},
+                \frac{i_2}{2^m}, \ldots, \frac{i_k}{2^m} \right) : \, 0
+                \le i_1, i_2, \ldots, i_k &lt; 2^m, i_1, i_2, \ldots,
+                i_k \in \mathbb{Z}  \right \}
+                ,\]</span> and choose <span
+                class="math inline">\(k\)</span> such that <span
+                class="math inline">\(mk &gt; n\)</span>. Choose <span
+                class="math inline">\(2^n\)</span> points <span
+                class="math inline">\(p_1, p_2, \ldots, p_{2^n} \in
+                P\)</span> and construct the following IFS: <span
+                class="math display">\[
                     f_i(x) = \frac{1}{2^m} x + p_i
-                .\]</span> Take <span class="math inline">\(U := [0, 1]^k\)</span> so that, by the definition of the points in <span class="math inline">\(P\)</span>, the images of <span class="math inline">\(U\)</span> under each <span class="math inline">\(f_i\)</span> are disjoint. In addition, clearly <span class="math display">\[
+                .\]</span> Take <span class="math inline">\(U := [0,
+                1]^k\)</span> so that, by the definition of the points
+                in <span class="math inline">\(P\)</span>, the images of
+                <span class="math inline">\(U\)</span> under each <span
+                class="math inline">\(f_i\)</span> are disjoint. In
+                addition, clearly <span class="math display">\[
                     U \supset \bigcup_i f_i (U)
-                ,\]</span> as <span class="math inline">\(U\)</span> can contain <span class="math inline">\(2^{mk}\)</span> cubes of dimension <span class="math inline">\(k\)</span> and side length <span class="math inline">\(2^{-m}\)</span>, and since we've chosen <span class="math inline">\(mk &gt; n\)</span>, we can fit <span class="math inline">\(2^n\)</span> of these cubes in <span class="math inline">\(U\)</span>. Taking these together, <span class="math inline">\((f_1, f_2, \ldots, f_{2^n})\)</span> is an IFS that, equipped with the open set <span class="math inline">\(U\)</span>, satisfies the open set condition. Thus, the Hausdorff dimension of the attractor of the IFS can be calculated as <span class="math display">\[
-                    \sum_{i = 1}^{2^n} \frac{1}{2^{ms}} = 1 \iff \frac{2^n}{2^{ms}} = 1 \iff s = \frac{n}{m}
-                ,\]</span> and this holds for any <span class="math inline">\(n, m \in \mathbb{N}\)</span>.</p>
-                <p>Now that we assuredly have sets with any rational dimension, we can claim the following:</p>
-                <p><strong>Claim.</strong> Let <span class="math inline">\(0 \le r \in \mathbb{R}\)</span>. For any <span class="math inline">\(\varepsilon &gt; 0\)</span>, there exists a set with Hausdorff dimension <span class="math inline">\(q\)</span>, where <span class="math inline">\(|r - q| &lt; \varepsilon\)</span>.</p>
-                <p><em>Proof.</em> Decompose <span class="math inline">\(r\)</span> as <span class="math inline">\(r = \lfloor r \rfloor + \{ r \}\)</span>, where <span class="math inline">\(\{ r \}\)</span> denotes the fractional part of <span class="math inline">\(r\)</span>. Suppose that the decimal expansion of <span class="math inline">\(\{ r \}\)</span> is given to be <span class="math display">\[
+                ,\]</span> as <span class="math inline">\(U\)</span> can
+                contain <span class="math inline">\(2^{mk}\)</span>
+                cubes of dimension <span
+                class="math inline">\(k\)</span> and side length <span
+                class="math inline">\(2^{-m}\)</span>, and since we've
+                chosen <span class="math inline">\(mk &gt; n\)</span>,
+                we can fit <span class="math inline">\(2^n\)</span> of
+                these cubes in <span class="math inline">\(U\)</span>.
+                Taking these together, <span class="math inline">\((f_1,
+                f_2, \ldots, f_{2^n})\)</span> is an IFS that, equipped
+                with the open set <span
+                class="math inline">\(U\)</span>, satisfies the open set
+                condition. Thus, the Hausdorff dimension of the
+                attractor of the IFS can be calculated as <span
+                class="math display">\[
+                    \sum_{i = 1}^{2^n} \frac{1}{2^{ms}} = 1 \iff
+                \frac{2^n}{2^{ms}} = 1 \iff s = \frac{n}{m}
+                ,\]</span> and this holds for any <span
+                class="math inline">\(n, m \in \mathbb{N}\)</span>.</p>
+                <p>Now that we assuredly have sets with any rational
+                dimension, we can claim the following:</p>
+                <p><strong>Claim.</strong> Let <span
+                class="math inline">\(0 \le r \in \mathbb{R}\)</span>.
+                For any <span class="math inline">\(\varepsilon &gt;
+                0\)</span>, there exists a set with Hausdorff dimension
+                <span class="math inline">\(q\)</span>, where <span
+                class="math inline">\(|r - q| &lt;
+                \varepsilon\)</span>.</p>
+                <p><em>Proof.</em> Decompose <span
+                class="math inline">\(r\)</span> as <span
+                class="math inline">\(r = \lfloor r \rfloor + \{ r
+                \}\)</span>, where <span class="math inline">\(\{ r
+                \}\)</span> denotes the fractional part of <span
+                class="math inline">\(r\)</span>. Suppose that the
+                decimal expansion of <span class="math inline">\(\{ r
+                \}\)</span> is given to be <span class="math display">\[
                     \{ r \} = \overline{0.a_1 a_2 \cdots}
-                .\]</span> Define the sequence <span class="math inline">\(q_i\)</span> as <span class="math display">\[
-                    q_i = \lfloor r \rfloor + \overline{0.a_1a_2 \cdots a_i}
-                ,\]</span> where we truncate the fractional part of <span class="math inline">\(\{ r \}\)</span> to <span class="math inline">\(i\)</span> digits. Observe that each <span class="math inline">\(q_i\)</span> is necessarily rational and <span class="math display">\[
+                .\]</span> Define the sequence <span
+                class="math inline">\(q_i\)</span> as <span
+                class="math display">\[
+                    q_i = \lfloor r \rfloor + \overline{0.a_1a_2 \cdots
+                a_i}
+                ,\]</span> where we truncate the fractional part of
+                <span class="math inline">\(\{ r \}\)</span> to <span
+                class="math inline">\(i\)</span> digits. Observe that
+                each <span class="math inline">\(q_i\)</span> is
+                necessarily rational and <span class="math display">\[
                     |r - q_i| &lt; 10^{-i}
-                .\]</span> It now suffices to choose an <span class="math inline">\(i\)</span> such that <span class="math inline">\(10^{-i} &lt; \varepsilon\)</span>, which is possible if <span class="math inline">\(i &gt; - \log{\varepsilon} / \log 10\)</span>. Since <span class="math inline">\(q_i\)</span> is rational, we can conclude that a set of Hausdorff dimension <span class="math inline">\(q_i\)</span> must exist. Thus, there exists a set with Hausdorff dimension arbitrarily close to <span class="math inline">\(r\)</span>. <span class="math inline">\(\blacksquare\)</span></p>
+                .\]</span> It now suffices to choose an <span
+                class="math inline">\(i\)</span> such that <span
+                class="math inline">\(10^{-i} &lt; \varepsilon\)</span>,
+                which is possible if <span class="math inline">\(i &gt;
+                - \log{\varepsilon} / \log 10\)</span>. Since <span
+                class="math inline">\(q_i\)</span> is rational, we can
+                conclude that a set of Hausdorff dimension <span
+                class="math inline">\(q_i\)</span> must exist. Thus,
+                there exists a set with Hausdorff dimension arbitrarily
+                close to <span class="math inline">\(r\)</span>. <span
+                class="math inline">\(\blacksquare\)</span></p>
                 </div>
                 </details>
                 <div id="problem415" class="black-box">
-                <p><strong>Problem 4.1.5.</strong> Construct an example of an IFS which does not satisfy the OSC, and where no two functions in the IFS are equal.</p>
+                <p><strong>Problem 4.1.5.</strong> Construct an example
+                of an IFS which does not satisfy the OSC, and where no
+                two functions in the IFS are equal.</p>
                 </div>
                 <details class="solution">
-                <summary>Solution 4.1.5.</summary>
+                <summary>
+                Solution 4.1.5.
+                </summary>
                 <div class="solution-contents">
-                <p>Denote <span class="math inline">\(F = (f_1, f_2)\)</span>, where <span class="math inline">\(f_1, f_2 : \mathbb{R} \to \mathbb{R}\)</span> and <span class="math display">\[\begin{align*}
+                <p>Denote <span class="math inline">\(F = (f_1,
+                f_2)\)</span>, where <span class="math inline">\(f_1,
+                f_2 : \mathbb{R} \to \mathbb{R}\)</span> and <span
+                class="math display">\[\begin{align*}
                     f_1(x) &amp;= \frac{2}{3} x \\
                     f_2(x) &amp;= \frac{2}{3} x + \frac{1}{3}
                 .\end{align*}\]</span></p>
-                <p><strong>Claim.</strong> <span class="math inline">\(F\)</span> is an IFS which does not satisfy the OSC.</p>
-                <p><em>Proof.</em> BWOC, suppose that the IFS did satisfy the OSC. Then there would exist a non-empty, bounded, open set <span class="math inline">\(U \subset \mathbb{R}\)</span> for which <span class="math inline">\(f_1(U) \cap f_2(U) = \emptyset\)</span> and <span class="math inline">\(U \supset f_1(U) \cup f_2(U)\)</span>. Observe that by <a href="#problem218">Problem 2.1.8</a>, <span class="math inline">\(\dim U \le 1\)</span>. However, for <span class="math inline">\(0 \le s \le 1\)</span>, <span class="math display">\[
+                <p><strong>Claim.</strong> <span
+                class="math inline">\(F\)</span> is an IFS which does
+                not satisfy the OSC.</p>
+                <p><em>Proof.</em> BWOC, suppose that the IFS did
+                satisfy the OSC. Then there would exist a non-empty,
+                bounded, open set <span class="math inline">\(U \subset
+                \mathbb{R}\)</span> for which <span
+                class="math inline">\(f_1(U) \cap f_2(U) =
+                \emptyset\)</span> and <span class="math inline">\(U
+                \supset f_1(U) \cup f_2(U)\)</span>. Observe that by <a
+                href="#problem218">Problem 2.1.8</a>, <span
+                class="math inline">\(\dim U \le 1\)</span>. However,
+                for <span class="math inline">\(0 \le s \le 1\)</span>,
+                <span class="math display">\[
                     \frac{4}{3} \le 2 \left( \frac{2}{3} \right)^s \le 2
-                ,\]</span> so by contrapositive, this IFS clearly cannot satisfy the OSC.</p>
+                ,\]</span> so by contrapositive, this IFS clearly cannot
+                satisfy the OSC.</p>
                 </div>
                 </details>
-                <p>This is roughly how far we got into the contest before we ran out of time and ideas. Perhaps in the future, I'll work through more of the mass distribution and Sierpinkski triangle sections, but that's a function of how much time and energy I have. I hope you enjoyed the window into our contest experience; I enjoyed writing up the solutions quite a bit.</p>
+                <p>This is roughly how far we got into the contest
+                before we ran out of time and ideas. Perhaps in the
+                future, I'll work through more of the mass distribution
+                and Sierpinkski triangle sections, but that's a function
+                of how much time and energy I have. I hope you enjoyed
+                the window into our contest experience; I enjoyed
+                writing up the solutions quite a bit.</p>
                 <p>Merry thanksgiving, everybody &gt;:)</p>
             </div>
         </div>

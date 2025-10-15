@@ -32,7 +32,9 @@
                 <div class="description">
                     <h2>Description</h2>
                     <div class="side-line">
-                        <p>Solving Yukicoder Problem 2664, a quick little graph and number theory problem, with the extra challenge of having to read the problem description in Japanese.</p>
+                        <p><p>Solving Yukicoder Problem 2664, a quick
+little graph and number theory problem, with the extra challenge of
+having to read the problem description in Japanese.</p></p>
                     </div>
                 </div>
 
@@ -40,8 +42,10 @@
                     <h2>Contents</h2>
                     <div class="side-line">
                         <ul>
-                        <li><a href="#problem">Problem</a></li>
-                        <li><a href="#solution">Solution</a></li>
+                        <li><a href="#problem"
+                        id="toc-problem">Problem</a></li>
+                        <li><a href="#solution"
+                        id="toc-solution">Solution</a></li>
                         </ul>
                         <!--
                         <ul>
@@ -70,27 +74,81 @@
                 <hr class="separator" />
                 <div class="info-holder">
                     <span class="info-value"><b>Author:</b> Rushil Surti</span>
-                    <span class="info-value"><b>Date:</b> April 1, 2024</span>
+                    <span class="info-value"><b>Date:</b> April 1,
+2024</span>
                     <span class="info-value"><b>Tags:</b>  <a href="/tags.html#yukicoder"><span class="info-tag">yukicoder</span></a>  <a href="/tags.html#graph-theory"><span class="info-tag">graph-theory</span></a>  <a href="/tags.html#dfs"><span class="info-tag">dfs</span></a>  <a href="/tags.html#number-theory"><span class="info-tag">number-theory</span></a> </span>
+                    <span class="info-value"><b>Edited:</b> October 15,
+2025</span>
                 </div>
 
                 <h2 id="problem">Problem</h2>
                 <div class="side-box">
-                <p><strong>Problem.</strong> Given integers <span class="math inline">\(n, m\)</span> determine whether or not there exists a sequence <span class="math inline">\(X_1, X_2, \ldots, X_n\)</span> such that each <span class="math inline">\(X_i\)</span> is greater than <span class="math inline">\(1\)</span> and for each given pair of indices <span class="math inline">\((a_1, b_1), (a_2, b_2), \ldots, (a_m, b_m)\)</span>, <span class="math inline">\(X_{a_i} + X_{b_i}\)</span> is prime.</p>
+                <p><strong>Problem.</strong> Given integers <span
+                class="math inline">\(n, m\)</span> determine whether or
+                not there exists a sequence <span
+                class="math inline">\(X_1, X_2, \ldots, X_n\)</span>
+                such that each <span class="math inline">\(X_i\)</span>
+                is greater than <span class="math inline">\(1\)</span>
+                and for each given pair of indices <span
+                class="math inline">\((a_1, b_1), (a_2, b_2), \ldots,
+                (a_m, b_m)\)</span>, <span class="math inline">\(X_{a_i}
+                + X_{b_i}\)</span> is prime.</p>
                 </div>
                 <h2 id="solution">Solution</h2>
-                <p>Obviously, create a graph with the vertices being each <span class="math inline">\(X_i\)</span> and the edges between them representing the given pairs. For an edge <span class="math inline">\((a_1, b_1)\)</span>, we can have its weight be given by <span class="math inline">\(X_{a_1} + X_{b_1}\)</span>, so we must determine whether it is possible to assign values to the vertices so that all edge weights are prime.</p>
-                <p>Observe that since each <span class="math inline">\(X_i\)</span> is greater than <span class="math inline">\(1\)</span>, the minimum value we can have for an edge weight is <span class="math inline">\(4\)</span>. This means that the only even prime, <span class="math inline">\(2\)</span> is ruled out. Thus, we have that for any pair <span class="math inline">\((a_i, b_i)\)</span> <span class="math display">\[
+                <p>Obviously, create a graph with the vertices being
+                each <span class="math inline">\(X_i\)</span> and the
+                edges between them representing the given pairs. For an
+                edge <span class="math inline">\((a_1, b_1)\)</span>, we
+                can have its weight be given by <span
+                class="math inline">\(X_{a_1} + X_{b_1}\)</span>, so we
+                must determine whether it is possible to assign values
+                to the vertices so that all edge weights are prime.</p>
+                <p>Observe that since each <span
+                class="math inline">\(X_i\)</span> is greater than <span
+                class="math inline">\(1\)</span>, the minimum value we
+                can have for an edge weight is <span
+                class="math inline">\(4\)</span>. This means that the
+                only even prime, <span class="math inline">\(2\)</span>
+                is ruled out. Thus, we have that for any pair <span
+                class="math inline">\((a_i, b_i)\)</span> <span
+                class="math display">\[
                 \begin{align*}
                     X_{a_i} + X_{b_i} &amp;\equiv 1 \pmod{2} \\
                     \implies X_{a_i} &amp;\equiv X_{b_i} + 1 \pmod{2}.
                 \end{align*}
-                \]</span> That is to say, adjacent vertices must always have opposite parity.</p>
-                <p>Supposing that we have such an arrangement that preserves this parity condition, it is trivial to see that it is always possible to construct an arrangement. We shall choose each even value to be <span class="math inline">\(2\)</span> and each odd value to be <span class="math inline">\(3\)</span>. Even if there were a distinctness condition, however, it's highly likely that we would be able to construct such a sequence regardless.</p>
-                <p>We shall now describe how to code this. Denote the graph generated by our definition above by <span class="math inline">\(G\)</span> and suppose this graph emits connected components <span class="math inline">\(G_1, G_2, \ldots, G_k\)</span>. For each component <span class="math inline">\(G_i\)</span> we may arbitrarily choose some vertex <span class="math inline">\(x_i\)</span> and run DFS on this vertex once (note we do not need to check both cases of <span class="math inline">\(x_i = 0, 1\)</span> due to symmetry) to check whether the component is two-colorable. Thus, our answer is given by <span class="math display">\[
+                \]</span> That is to say, adjacent vertices must always
+                have opposite parity.</p>
+                <p>Supposing that we have such an arrangement that
+                preserves this parity condition, it is trivial to see
+                that it is always possible to construct an arrangement.
+                We shall choose each even value to be <span
+                class="math inline">\(2\)</span> and each odd value to
+                be <span class="math inline">\(3\)</span>. Even if there
+                were a distinctness condition, however, it's highly
+                likely that we would be able to construct such a
+                sequence regardless.</p>
+                <p>We shall now describe how to code this. Denote the
+                graph generated by our definition above by <span
+                class="math inline">\(G\)</span> and suppose this graph
+                emits connected components <span
+                class="math inline">\(G_1, G_2, \ldots, G_k\)</span>.
+                For each component <span
+                class="math inline">\(G_i\)</span> we may arbitrarily
+                choose some vertex <span
+                class="math inline">\(x_i\)</span> and run DFS on this
+                vertex once (note we do not need to check both cases of
+                <span class="math inline">\(x_i = 0, 1\)</span> due to
+                symmetry) to check whether the component is
+                two-colorable. Thus, our answer is given by <span
+                class="math display">\[
                     \bigwedge_{i = 1}^k \textsf{dfs}(G_i)
-                ,\]</span> where <span class="math inline">\(\wedge\)</span> represents logical AND.</p>
-                <p>For the curious reader, this question is simply asking whether there exists a <a href="https://en.wikipedia.org/wiki/Graph_coloring">two-coloring</a> for the graph.</p>
+                ,\]</span> where <span
+                class="math inline">\(\wedge\)</span> represents logical
+                AND.</p>
+                <p>For the curious reader, this question is simply
+                asking whether there exists a
+                <a href="https://en.wikipedia.org/wiki/Graph_coloring">two-coloring</a>
+                for the graph.</p>
             </div>
         </div>
     </body>
