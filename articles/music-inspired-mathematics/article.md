@@ -274,9 +274,9 @@ reader.
 When I first started receiving private lessons in the viola some years ago, I
 told my private instructor that I liked mathematics. In response, he was
 delighted to tell me that there was a lot of math in music. At the time, I had
-no clue what he was talking about, so I unfortunately brushed him off. Years
-later, I am now writing an article about math in music, so I suppose he had the
-last laugh.
+no clue what he was talking about, so I unfortunately didn't think much about
+the comment. Years later, I am now writing an article about math in music, so I
+suppose he had the last laugh.
 
 Thank you for reading :D! Although some parts were inevitably rushed and
 scrapped, I still enjoyed writing this a lot and getting back into mathematical
