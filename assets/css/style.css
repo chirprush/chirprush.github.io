@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=Fira+Sans:ital,wght@0,300;0,400;1,300;1,400&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=Fira+Sans:ital,wght@0,300;0,400;1,300;1,400&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
 
 :root {
     --side-panel-bg: #eff4f5;
@@ -68,6 +70,18 @@ audio {
 
 .content {
     font-size: 14pt;
+}
+
+.content code {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 14px;
+
+    padding: 3px;
+    padding-left: 6px;
+    padding-right: 6px;
+
+    background-color: var(--side-panel-bg);
+    border-radius: 5px;
 }
 
 .content h1 {
@@ -239,7 +253,7 @@ ol > li::marker {
 }
 
 .code-container .code-body {
-    font-family: "Inconsolata", monospace;
+    font-family: "JetBrains Mono", monospace;
     font-size: 12pt;
 
     padding-left: 25px;

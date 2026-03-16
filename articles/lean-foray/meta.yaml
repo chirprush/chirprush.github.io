@@ -1,0 +1,11 @@
+---
+title: "A Foray Into Lean, Markov Chains, and Automated Theorem Proving"
+tags: ["markov-chains", "automated-theorem-proving", "linear-algebra", "lean", "functional-programming", "formalization", "pedagogy", "machine-learning"]
+publish-date: "March 4, 2026"
+description: |
+  It's been a while! (see the intro for a quick CMU brain-dump)
+  I've been working on formalizing (finite-state) Markov chains in Lean
+  <a href="https://github.com/chirprush/lean-markov-chains">here</a>. In this article,
+  I'll talk about the experience of working in Lean, advice for people
+  similarly starting, and some discussion on automatic theorem proving :D
+wip: false
