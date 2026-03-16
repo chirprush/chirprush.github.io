@@ -3,9 +3,9 @@ solve a problem like the following:
 
 <div class="black-box">
 **Problem.** Let \( a \in \R^d \), and \( C \subseteq \R^d \) be a non-empty,
-closed set. Prove that there exists some \( x_* \in C \) such that
+closed set. Prove that there exists some \( x^* \in C \) such that
 \[
-    |x_* - a| = \inf \{ |x-a| : x \in C \}
+    |x^* - a| = \inf \{ |x-a| : x \in C \}
 .\]
 </div>
 
