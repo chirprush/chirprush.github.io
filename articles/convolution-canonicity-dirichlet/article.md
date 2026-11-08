@@ -268,8 +268,8 @@ for some \( p_1, p_2, \ldots, p_k \) and \( e_1, e_2, \ldots, e_k \) such that
 Yay for finite abelian groups!
 
 Of course, we note for the reader that \( \mathbb{Z}_2 \times \mathbb{Z}_2
-\not\cong \mathbb{Z}_4 \), so this theorem does *not* give a unique factorization
-like we have for the naturals over the primes.
+\not\cong \mathbb{Z}_4 \), so just knowing the order of the group does not
+uniquely determine its factorization.
 
 As seen with the concrete cases above, the general tools we have (cyclic product
 factorization and prime power group order) are useful, but cannot possibly give

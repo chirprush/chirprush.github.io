@@ -776,9 +776,9 @@ Exists
 </div>
 
 Luckily, this transformation is uniform across all theorems, and so it won't
-affect efficacy the machine learning process much. That being said, it will
-probably affect performance in the sense of outputting ASTs of much greater
-height (in the graph-theoretic sense).
+affect the efficacy of the machine learning process much. That being said, it
+will probably affect performance in the sense of outputting ASTs of much greater
+depth.
 
 Over spring break, I coded this procedure up in Lean (see the file
 `Relevant.lean` in the Github repository). In addition, I tried to make the
